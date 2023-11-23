@@ -8,33 +8,39 @@ use Tightenco\Ziggy\Ziggy;
 
 class HandleInertiaRequests extends Middleware
 {
-    /**
-     * The root template that is loaded on the first page visit.
-     *
-     * @var string
-     */
     protected $rootView = 'app';
 
-    /**
-     * Determine the current asset version.
-     */
     public function version(Request $request): string|null
     {
         return parent::version($request);
     }
 
-    /**
-     * Define the props that are shared by default.
-     *
-     * @return array<string, mixed>
-     */
+
     public function share(Request $request): array
     {
+        $team = EnsureTeamMiddleware::team();
+
         return [
             ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
+            'team' => [
+                'id' => $team->id,
+                'color' => $team->color,
+                'avatar' => $team->avatar_url,
+                'industry' => $team->industry,
+                'currency' => $team->currency,
+                'locale' => app()->getLocale(),
+                'paypal' => !is_null($team->paypal),
+                'stripe' => !is_null($team->stripe),
+                'klarna' => !is_null($team->klarna),
+                'notch_pay' => !is_null($team->notchPay),
+                'terminal' => !is_null($team->terminal),
+                'transfer' => !is_null($team->transfer),
             ],
+            'cart' =>  [
+                'id' => EnsureTeamMiddleware::cartId(),
+            ],
+            'apiUrl' => config('system.api_url'),
+            'notchPayUrl' => config('system.notch_pay_url'),
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

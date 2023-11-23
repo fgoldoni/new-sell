@@ -1,3 +1,85 @@
+@import url('https://rsms.me/inter/inter.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[x-cloak] { display: none !important; }
+
+@layer components {
+    .btn-base {
+        @apply hover:scale-105 hover:shadow-2xl ease-in-out duration-150;
+    }
+    .btn-icon {
+        @apply w-5 h-5 group-hover:ml-1 transition-all ease-out duration-200;
+    }
+    .btn-title {
+        @apply cursor-pointer hover:ml-1 transition-all ease-out duration-200;
+    }
+    .btn-img {
+        @apply sm:translate-x-12 md:translate-x-0 rounded-2xl hover:scale-125 transition-all ease-out cursor-pointer duration-200;
+    }
+}
+
+.max-mobile-height {
+    height: calc(100vh - 20.625rem);
+}
+
+.animate-cube {
+    animation: cube 6s ease-in-out infinite;
+}
+
+.max-height {
+    height: calc(100vh - 20rem);
+}
+
+.max-mobile-product-height {
+    height: calc(100vh - 45.625rem);
+}
+
+[v-cloak] {display: none}
+
+.iti {
+    display: block !important;
+}
+
+.iti__selected-flag {
+    padding: 0 10px;
+}
+
+.btn-indigo {
+    @apply px-6 py-3 rounded bg-indigo-600 text-white text-sm leading-4 font-bold whitespace-nowrap hover:bg-orange-400 focus:bg-orange-400;
+}
+
+
+
+.btn-spinner,
+.btn-spinner:after {
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.btn-spinner {
+    font-size: 10px;
+    position: relative;
+    text-indent: -9999em;
+    border-top: 0.2em solid white;
+    border-right: 0.2em solid white;
+    border-bottom: 0.2em solid white;
+    border-left: 0.2em solid transparent;
+    transform: translateZ(0);
+    animation: spinning 1s infinite linear;
+}
+
+@keyframes spinning {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
