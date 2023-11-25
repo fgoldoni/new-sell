@@ -1,5 +1,6 @@
 <template>
-    <div class="min-h-full bg-white dark:bg-slate-800 text-gray-600 text-slate-500 dark:text-slate-400">
+    <div
+        class="min-h-full bg-white dark:bg-slate-800 text-gray-600 text-slate-500 dark:text-slate-400">
         <Disclosure as="nav"
                     :class="[scrolledFromTop ? 'fixed' : 'relative', 'w-full bg-' + $page.props.team.color + '-600 dark:bg-slate-800 z-40 transition-all ease-in duration-700 border-b border-gray-200']"
                     v-slot="{ open }"
@@ -58,8 +59,8 @@ import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
 import {useEventStore} from "@/stores/useEventStore";
 import {storeToRefs} from "pinia";
 
-const store = useEventStore()
-const { event, isLoading } = storeToRefs(store)
+const eventStore = useEventStore()
+const { event, isLoading } = storeToRefs(eventStore)
 const scrolledFromTop = ref(false)
 
 const user = {
@@ -83,7 +84,7 @@ onMounted(async () => {
     window.pageYOffset >= 50 ? scrolledFromTop.value = true : scrolledFromTop.value = false
 
     if (!isLoading.value) {
-        await store.load()
+        await eventStore.load()
     }
 })
 

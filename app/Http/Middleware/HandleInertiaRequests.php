@@ -24,9 +24,10 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'team' => [
                 'id' => $team->id,
+                'name' => $team->name,
                 'color' => $team->color,
                 'avatar' => $team->avatar_url,
-                'event_id' => $team->event_id,
+                'event' => $team->event,
                 'industry' => $team->industry,
                 'currency' => $team->currency,
                 'locale' => app()->getLocale(),
