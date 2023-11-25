@@ -2,6 +2,9 @@
 import { Head, Link } from '@inertiajs/vue3';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import HeroComponent from "@/Components/HeroComponent.vue";
+import {onMounted} from "vue";
+import {useEventStore} from "@/stores/useEventStore";
+import {storeToRefs} from "pinia";
 
 defineProps<{
     canLogin?: boolean;
@@ -9,6 +12,16 @@ defineProps<{
     laravelVersion: string;
     phpVersion: string;
 }>();
+
+const store = useEventStore()
+const { event, isLoading } = storeToRefs(store)
+
+onMounted(async () => {
+    debugger
+    if (!isLoading.value) {
+        await store.load()
+    }
+})
 </script>
 
 <template>
