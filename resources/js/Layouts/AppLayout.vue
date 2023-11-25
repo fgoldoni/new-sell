@@ -50,9 +50,17 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
 import { ShoppingBagIcon } from '@heroicons/vue/24/outline'
+import {ref, onMounted, onUnmounted} from 'vue'
+import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
+import {useEventStore} from "@/stores/useEventStore";
+import {storeToRefs} from "pinia";
+
+const store = useEventStore()
+const { event, isLoading } = storeToRefs(store)
+const scrolledFromTop = ref(false)
 
 const user = {
     name: 'Tom Cook',
@@ -60,23 +68,23 @@ const user = {
     imageUrl:
         'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
+
 const navigation = [
     { name: 'Tickets', href: '#', current: true },
     { name: 'Media & Pics', href: '#', current: false },
 ]
 
-import {ref, onMounted, onUnmounted, computed} from 'vue'
-import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
-import {Bars3Icon, BellIcon, XMarkIcon} from "@heroicons/vue/24/outline/index.js";
-
-const scrolledFromTop = ref(false)
-
-const onScroll = (event) => {
+const onScroll = () => {
     window.pageYOffset >= 50 ? scrolledFromTop.value = true : scrolledFromTop.value = false
 }
-onMounted(() => {
+
+onMounted(async () => {
     window.addEventListener('scroll', onScroll);
     window.pageYOffset >= 50 ? scrolledFromTop.value = true : scrolledFromTop.value = false
+
+    if (!isLoading.value) {
+        await store.load()
+    }
 })
 
 onUnmounted(() => {

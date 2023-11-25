@@ -52,6 +52,10 @@ class EnsureTeamMiddleware
                     return throw new Exception('The company (' . $subDomain . ') must be activated ', \JustSteveKing\StatusCode\Http::INTERNAL_SERVER_ERROR->value);
                 });
 
+                if (is_null($team->event_id)) {
+                    return throw new Exception('Event missing or not activated for: ' . $subDomain, \JustSteveKing\StatusCode\Http::INTERNAL_SERVER_ERROR->value);
+                }
+
                 session()->put('cart-' . $team->id, static::uniqueCode());
 
             } else {
