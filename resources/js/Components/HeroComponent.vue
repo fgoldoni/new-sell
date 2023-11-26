@@ -19,6 +19,8 @@
                 </div>
             </div>
             <HeroFeatureComponent></HeroFeatureComponent>
+            <EntriesComponent></EntriesComponent>
+            <PackagesComponent></PackagesComponent>
         </div>
     </div>
 </template>
@@ -30,6 +32,9 @@ import {useEventStore} from "@/stores/useEventStore";
 import {storeToRefs} from "pinia";
 import Countdown from "@/Components/Countdown.vue";
 import TypingEffect from "@/Components/TypingEffect.vue";
+import EntriesComponent from "@/Components/EntriesComponent.vue";
+import PackagesComponent from "@/Components/PackagesComponent.vue";
+import GaleriesComponent from "@/Components/GaleriesComponent.vue";
 const eventStore = useEventStore()
 const { event, isLoading } = storeToRefs(eventStore)
 
