@@ -2,7 +2,7 @@
     <div
         class="min-h-full bg-white dark:bg-slate-800 text-gray-600 text-slate-500 dark:text-slate-400">
         <Disclosure as="nav"
-                    :class="[scrolledFromTop ? 'fixed' : 'relative', 'w-full bg-' + $page.props.team.color + '-600 dark:bg-slate-800 z-40 transition-all ease-in duration-700 border-b border-gray-200']"
+                    :class="[scrolledFromTop ? 'fixed' : 'relative', 'w-full bg-' + $page.props.team.color + '-600 z-40 transition-all ease-in duration-700 border-b border-gray-200 dark:border-slate-700']"
                     v-slot="{ open }"
         >
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
