@@ -39,6 +39,7 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
+        "./node_modules/flowbite/**/*.js",
     ],
 
     safelist: [
@@ -63,5 +64,5 @@ export default {
         },
     },
 
-    plugins: [forms, typography, aspectRatio],
+    plugins: [forms, typography, aspectRatio, require('flowbite/plugin'), require("daisyui")],
 };

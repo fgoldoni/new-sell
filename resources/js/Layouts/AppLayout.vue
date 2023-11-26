@@ -28,13 +28,12 @@
                     </div>
                     <div class="ml-6 flex space-x-4 items-center">
                         <ThemeSwitcherTheme/>
-                        <button type="button"
-                                :class="[scrolledFromTop? 'scale-75' : 'scale-100', 'relative transform origin-left transition duration-700 rounded-md bg-' + $page.props.team.color + '-700 p-2 text-white shadow-sm hover:bg-' + $page.props.team.color + '-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-' + $page.props.team.color + '-600']"
-                        >
-                            <span class="absolute -inset-1.5" />
+                        <button
+                            type="button"
+                            :class="[scrolledFromTop? 'scale-80' : 'scale-100', 'text-white bg-' + $page.props.team.color + '-700 hover:bg-' + $page.props.team.color + '-800 focus:ring-4 focus:outline-none focus:ring-' + $page.props.team.color + '-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-' + $page.props.team.color + '-600 dark:hover:bg-' + $page.props.team.color + '-700 dark:focus:ring-' + $page.props.team.color + '-800']">
                             <ShoppingBagIcon
                                 class="h-5 w-5"
-                                :class="{'scale-100': !scrolledFromTop, 'scale-75': scrolledFromTop}"
+                                :class="{'scale-100': !scrolledFromTop, 'scale-80': scrolledFromTop}"
                                 aria-hidden="true" />
                         </button>
                     </div>

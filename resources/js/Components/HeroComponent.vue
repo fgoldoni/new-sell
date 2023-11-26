@@ -13,6 +13,7 @@
                 <p class="mt-4 text-gray-500">
                     {{ $page.props.team.event.description }}
                 </p>
+                <Countdown></Countdown>
             </div>
             <HeroFeatureComponent></HeroFeatureComponent>
         </div>
@@ -24,6 +25,7 @@ import HeroFeatureComponent from "@/Components/HeroFeatureComponent.vue";
 import {onMounted} from "vue";
 import {useEventStore} from "@/stores/useEventStore";
 import {storeToRefs} from "pinia";
+import Countdown from "@/Components/Countdown.vue";
 const eventStore = useEventStore()
 const { event, isLoading } = storeToRefs(eventStore)
 

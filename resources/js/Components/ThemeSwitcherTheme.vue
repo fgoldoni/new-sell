@@ -11,11 +11,9 @@ const toggleDark = useToggle(isDark);
     <button
         type="button"
         @click="toggleDark()"
-        class="rounded-full p-2 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
-        :class="{'hover:bg-slate-700': isDark, 'hover:bg-slate-200': !isDark}"
-    >
+        :class="['text-' + $page.props.team.color + '-700 border border-' + $page.props.team.color + '-700 hover:bg-' + $page.props.team.color + '-700 hover:text-white focus:outline-none font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-' + $page.props.team.color + '-500 dark:text-' + $page.props.team.color + '-500 dark:hover:text-white dark:hover:bg-' + $page.props.team.color + '-500']">
         <MoonIcon v-if="isDark" class="h-5 w-5 text-white" aria-hidden="true" />
-        <SunIcon v-else class="h-5 w-5 text-slate-800" aria-hidden="true" />
+        <SunIcon v-else class="h-5 w-5 text-white" aria-hidden="true" />
     </button>
 </template>
 

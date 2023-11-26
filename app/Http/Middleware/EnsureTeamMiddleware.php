@@ -16,6 +16,26 @@ class EnsureTeamMiddleware
         return 'cart-' . self::teamId();
     }
 
+    private static function location(Request $request): array
+    {
+        $location = [];
+
+        if ($position = Location::get($request->ip())) {
+            $location = [
+                'ip' => $position->ip,
+                'countryName' => $position->countryName,
+                'countryCode' => $position->countryCode,
+                'regionName' => $position->regionName,
+                'cityName' => $position->cityName,
+                'timezone' => $position->timezone,
+                'latitude' => $position->latitude,
+                'longitude' => $position->longitude,
+            ];
+        }
+
+        return $location;
+    }
+
     public function handle(Request $request, Closure $next)
     {
         try {
@@ -23,20 +43,7 @@ class EnsureTeamMiddleware
 
             if ($subDomain = self::getSubDomain()) {
                 $team = Cache::remember(static::getCacheKey($subDomain), now()->addDay() ,function () use ($subDomain, $request) {
-                    $location = [];
-
-                    if ($position = Location::get($request->ip())) {
-                        $location = [
-                            'ip' => $position->ip,
-                            'countryName' => $position->countryName,
-                            'countryCode' => $position->countryCode,
-                            'regionName' => $position->regionName,
-                            'cityName' => $position->cityName,
-                            'timezone' => $position->timezone,
-                            'latitude' => $position->latitude,
-                            'longitude' => $position->longitude,
-                        ];
-                    }
+                    $location = self::location($request);
 
                     $response = Http::acceptJson()->withHeaders(
                         [
@@ -76,6 +83,31 @@ class EnsureTeamMiddleware
         return "sell.". Str::slug($subDomain);
     }
 
+    public static function loadEvent($team, $request): void
+    {
+        try {
+            Cache::remember($team->event_id, now()->addDay() , static function () use ($team, $request) {
+                $location = self::location($request);
+
+                $response = Http::acceptJson()->withHeaders(
+                    [
+                        'x-ip' => $request->ip(),
+                        'x-location' => json_encode($location),
+                        'x-team-id' => $team->id,
+                    ]
+                )->get(config('system.api_url') . "/api/events/{$team->event_id}");
+
+                if ($response->ok()) {
+                    return $response->object()->data;
+                }
+
+                throw new Exception('Event missing or not activated for: ' . self::getSubDomain(), \JustSteveKing\StatusCode\Http::INTERNAL_SERVER_ERROR->value);
+            });
+        } catch (Exception $e) {
+            throw new Exception('Event missing or not activated for: ' . self::getSubDomain(), \JustSteveKing\StatusCode\Http::INTERNAL_SERVER_ERROR->value);
+        }
+    }
+
     public static function getSubDomain(): ?string
     {
         if (str_contains(url('/'), 'localhost') || str_contains(url('/'), '://sell-first.com')) {
@@ -94,6 +126,11 @@ class EnsureTeamMiddleware
     public static function team()
     {
         return Cache::get(self::getCacheKey(self::getSubDomain()));
+    }
+
+    public static function event()
+    {
+        return Cache::get(self::team()->event_id);
     }
 
     public static function teamId()

@@ -7,6 +7,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import 'flowbite';
+import {translations} from "@/Mixins/translations";
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
@@ -20,6 +22,7 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
+            .mixin(translations)
             .use(pinia)
             .mount(el);
     },
