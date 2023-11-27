@@ -27,6 +27,7 @@
         "@heroicons/vue": "^2.0.18",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@vueuse/core": "^10.6.1",
+        "@vueuse/motion": "^2.0.0",
         "cookie-es": "^1.0.0",
         "date-fns": "^2.30.0",
         "destr": "^2.0.2",
