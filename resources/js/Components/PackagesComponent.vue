@@ -1,81 +1,436 @@
 <template>
-
     <!-- Section 1 -->
-    <section  class="relative block w-full pt-20 pb-24 overflow-hidden leading-6 text-left text-indigo-900 bg-white bg-no-repeat bg-cover" data-tails-scripts="//unpkg.com/alpinejs">
-        <div class="w-full px-8 mx-auto leading-6 text-left xl:px-12 max-w-7xl">
-            <div class="flex flex-wrap justify-center -mx-4 text-center text-indigo-900">
-                <div class="relative w-full px-4 leading-6 text-indigo-900 xl:flex-grow-0 xl:flex-shrink-0 md:flex-grow-0 md:flex-shrink-0 lg:flex-grow-0 lg:flex-shrink-0">
-                    <h2 class="m-0 font-sans text-4xl font-bold text-center">
-                        {{ $page.props.team.name }} - Lounges
-                    </h2>
-                </div>
+    <section class="box-border py-8 leading-7 bg-slate-100 dark:bg-slate-700 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24">
+        <div  class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4">
+            <div class="flex flex-col items-center leading-7 text-center text-slate-900">
+                <h2 v-motion-fade class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl md:text-4xl">
+                    {{ $page.props.team.name }} - Pass
+                </h2>
             </div>
-            <div class="relative flex block w-full max-w-4xl mx-auto mt-16 text-indigo-900 select-none">
-                <!-- Start Pricing Plan -->
-                <div class="relative left-0 flex flex-col block float-left w-full h-full leading-6 text-left md:flex-row">
-                    <div class="relative flex items-stretch w-full max-w-md px-4 mx-auto leading-6 text-left md:w-1/2">
-                        <div class="absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 -mt-2 text-xs font-medium tracking-wide uppercase bg-green-400 rounded-full text-green-50">
-                            <svg class="w-4 h-4 mr-1 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                            </svg>Most Popular
-                        </div>
-                        <div class="relative pb-12 mb-16 overflow-hidden text-indigo-900 border-solid rounded-lg shadow-xl md:mb-0">
-
-                            <img src="https://cdn.devdojo.com/images/december2020/basic.jpeg" class="block w-auto -mx-px leading-6 text-left align-middle border-none">
-                            <div class="px-12 mt-12 leading-6 text-left">
-                                <div class="flex flex-wrap justify-between mb-5 text-xl text-indigo-900">
-                                    <div class="text-xl text-left">
-                                        Basic Plan <span x-text="billing"></span>
-                                    </div>
-                                    <div class="text-xl text-left">
-                                        $<span x-text="basic[billing]">100</span>
-                                    </div>
-                                </div>
-                                <div class="text-left text-gray-700">
-                                    With the basic plan you will gain access to all components and templates. You will also have access to all our tools.
-                                </div>
-                                <a href="#_" class="flex items-center justify-center w-full h-12 px-2 py-1 mt-8 text-base font-normal leading-normal text-center text-white no-underline bg-pink-500 border border-transparent border-solid rounded cursor-pointer select-none hover:bg-pink-600 focus:shadow-xs focus:no-underline">
-                                    Get Started for Free
-                                </a>
+            <div class="grid max-w-md mx-auto gap-8 mt-6 overflow-hidden leading-7 text-slate-900 md:max-w-lg lg:max-w-none sm:mt-10 lg:grid-cols-2">
+                <div :ref="setItemRef" class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group">
+                    <div :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`">
+                        {{ $page.props.team.currency.code }} 1000
+                    </div>
+                    <a href="#_" class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-96 hover:scale-110" style="background-image:url('https://cdn.devdojo.com/images/december2020/enterprise.jpeg')">
+                    </a>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Personen Vip Lounge Empore</a>
+                        <div class="flex items-center justify-between">
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">10</dt>
+                                    <dd>Personen</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 1000</dt>
+                                    <dd>Mindestverzehr</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 100</dt>
+                                    <dd>pro Person</dd>
+                                </dl>
                             </div>
                         </div>
                     </div>
-                    <div class="relative flex items-stretch w-full max-w-md px-4 mx-auto leading-6 text-left md:w-1/2">
-                        <div class="pb-12 mb-16 overflow-hidden text-indigo-900 rounded-lg shadow-xl md:mb-0">
-                            <img src="https://cdn.devdojo.com/images/december2020/enterprise.jpeg" class="block w-auto -mx-px leading-6 text-left align-middle border-none">
-                            <div class="px-12 mt-12 leading-6 text-left">
-                                <div class="flex flex-wrap justify-between mb-5 text-xl text-indigo-900">
-                                    <div class="text-xl text-left">
-                                        Pro Plan <span x-text="billing"></span>
-                                    </div>
-                                    <div class="text-xl text-left">
-                                        $<span x-text="pro[billing]"></span>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Items</a>
+                        <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                     </div>
                                 </div>
-                                <div class="text-left text-gray-700">
-                                    With the pro plan you will have access to everything in basic and you will also receive a monthly coaching call.
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
                                 </div>
-                                <a href="#_" class="flex items-center justify-center w-full h-12 px-2 py-1 mt-8 text-base font-normal text-center text-gray-900 no-underline align-middle bg-transparent border border-gray-300 border-solid rounded cursor-pointer select-none hover:bg-gray-50 focus:shadow-xs focus:no-underline">
-                                    Get Started for Free
-                                </a>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Pricing Plans -->
+                <div :ref="setItemRef" class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group">
+                    <div :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`">
+                        {{ $page.props.team.currency.code }} 1000
+                    </div>
+                    <a href="#_" class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-96 hover:scale-110" style="background-image:url('https://cdn.devdojo.com/images/december2020/enterprise.jpeg')">
+                    </a>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Personen Vip Lounge Empore</a>
+                        <div class="flex items-center justify-between">
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">10</dt>
+                                    <dd>Personen</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 1000</dt>
+                                    <dd>Mindestverzehr</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 100</dt>
+                                    <dd>pro Person</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Items</a>
+                        <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div :ref="setItemRef" class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group">
+                    <div :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`">
+                        {{ $page.props.team.currency.code }} 1000
+                    </div>
+                    <a href="#_" class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-96 hover:scale-110" style="background-image:url('https://cdn.devdojo.com/images/december2020/enterprise.jpeg')">
+                    </a>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Personen Vip Lounge Empore</a>
+                        <div class="flex items-center justify-between">
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">10</dt>
+                                    <dd>Personen</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 1000</dt>
+                                    <dd>Mindestverzehr</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 100</dt>
+                                    <dd>pro Person</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Items</a>
+                        <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div :ref="setItemRef" class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group">
+                    <div :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`">
+                        {{ $page.props.team.currency.code }} 1000
+                    </div>
+                    <a href="#_" class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-96 hover:scale-110" style="background-image:url('https://cdn.devdojo.com/images/december2020/enterprise.jpeg')">
+                    </a>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Personen Vip Lounge Empore</a>
+                        <div class="flex items-center justify-between">
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">10</dt>
+                                    <dd>Personen</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 1000</dt>
+                                    <dd>Mindestverzehr</dd>
+                                </dl>
+                            </div>
+                            <div class="">
+                                <dl>
+                                    <dt class="font-extrabold text-center">{{ $page.props.team.currency.code }} 100</dt>
+                                    <dd>pro Person</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`">
+                        <a href="#_" class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900">8 Items</a>
+                        <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tooltip" data-tip="hello">
+                                <div class="avatar indicator">
+                                    <span class="indicator-item badge badge-secondary">2</span>
+                                    <div class="w-16 rounded-full">
+                                        <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
-        <!-- End Max Width Container -->
     </section>
+
+
 
 </template>
 
 <script setup lang="ts">
+import {useMotion} from "@vueuse/motion";
+import {onMounted, ref} from "vue";
+
+const itemRefs = ref<Array<HTMLElement>>([]);
+const setItemRef = (el) => itemRefs.value.push(el);
+
+onMounted(() => {
+    itemRefs.value.forEach((el, index) => {
+        useMotion(el, {
+            initial: {
+                opacity: 0,
+                y: 100,
+            },
+            visibleOnce: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                    delay: 300 * index,
+                    duration: 700
+                },
+            },
+        });
+    })
+})
+
+
 
 </script>
-
-<style scoped>
-
-</style>
