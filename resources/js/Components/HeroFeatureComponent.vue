@@ -4,7 +4,7 @@
     <section class="py-12 sm:py-16">
         <div class="max-w-7xl mx-auto sm:text-center">
             <div class="">
-                <Tags></Tags>
+                <Tags v-if="$page.props.team.event?.tags.length"></Tags>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 my-12 sm:my-16">
                 <div v-for="item in items" :key="item" class="btn-base cursor-pointer rounded-lg py-10 flex flex-col items-center justify-center shadow-lg border border-slate-300 dark:border-slate-700">
