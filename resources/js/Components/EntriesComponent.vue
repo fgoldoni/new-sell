@@ -1,5 +1,5 @@
 <template>
-    <section class="box-border py-8 leading-7 bg-slate-100 dark:bg-slate-700 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24">
+    <section class="box-border py-8 leading-7 bg-slate-100 dark:bg-slate-900 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24">
         <div  class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4">
             <div class="flex flex-col items-center leading-7 text-center text-slate-900">
                 <h2 v-motion-fade class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl md:text-4xl">

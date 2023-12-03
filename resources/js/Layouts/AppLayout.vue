@@ -1,8 +1,8 @@
 <template>
     <div
-        class="min-h-full bg-white dark:bg-slate-800 text-gray-600 text-slate-500 dark:text-slate-400">
+        class="min-h-full bg-white dark:bg-slate-900 text-gray-600 text-slate-500 dark:text-slate-400">
         <Disclosure as="nav"
-                    :class="[scrolledFromTop ? 'fixed' : 'relative', 'w-full bg-' + $page.props.team.color + '-600 z-40 transition-all ease-in duration-700 border-b border-gray-200 dark:border-slate-700']"
+                    :class="[scrolledFromTop ? 'fixed' : 'relative', 'w-full bg-' + $page.props.team.color + '-600 dark:bg-slate-900 z-40 transition-all ease-in duration-700 border-b border-gray-200 dark:border-slate-700']"
                     v-slot="{ open }"
         >
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,11 +55,9 @@ import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIte
 import { ShoppingBagIcon } from '@heroicons/vue/24/outline'
 import {ref, onMounted, onUnmounted} from 'vue'
 import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
-import {useEventStore} from "@/stores/useEventStore";
-import {storeToRefs} from "pinia";
+import {useTicketsStore} from "@/stores/useTicketsStore";
 
-const eventStore = useEventStore()
-const { event, isLoading } = storeToRefs(eventStore)
+const ticketsStore = useTicketsStore()
 const scrolledFromTop = ref(false)
 
 const user = {
@@ -82,9 +80,7 @@ onMounted(async () => {
     window.addEventListener('scroll', onScroll);
     window.pageYOffset >= 50 ? scrolledFromTop.value = true : scrolledFromTop.value = false
 
-    if (!isLoading.value) {
-        await eventStore.load()
-    }
+    await ticketsStore.get()
 })
 
 onUnmounted(() => {

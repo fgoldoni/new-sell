@@ -9,6 +9,7 @@ export const $api = ofetch.create({
     async onRequest({options}) {
         const accessToken = useCookie('accessToken').value
         const teamId = usePage().props.team?.id
+        const eventId = usePage().props.team?.event?.id
         if (accessToken) {
             options.headers = {
                 ...options.headers,
@@ -19,6 +20,12 @@ export const $api = ofetch.create({
             options.headers = {
                 ...options.headers,
                 'x-team-id': `${teamId}`,
+            }
+        }
+        if (eventId) {
+            options.headers = {
+                ...options.headers,
+                'x-event-id': `${eventId}`,
             }
         }
     },

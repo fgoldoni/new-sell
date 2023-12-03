@@ -4,16 +4,16 @@ import {usePage} from "@inertiajs/vue3";
 import {useApi} from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 
-export const useEventStore = defineStore('event', () => {
+export const useTicketsStore = defineStore('tickets', () => {
     const api = useApi();
 
     const event = ref(null)
 
     const isLoading = computed(() => !!event.value)
 
-    const load = async () => {
+    const get = async () => {
         try {
-            await api.events.find(usePage().props.team?.event_id)
+            await api.tickets.get()
                 .then((response: any) => {
                     event.value = response.data
                 }).catch((error: any) => {
@@ -24,7 +24,7 @@ export const useEventStore = defineStore('event', () => {
         }
     }
 
-    return {event, isLoading, load}
+    return {get}
 },{
     persist: true,
 })

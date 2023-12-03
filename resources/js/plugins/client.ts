@@ -3,6 +3,7 @@ import {ApiServiceContainer} from "@/services/ApiServiceContainer";
 import ApplicationService from "@/services/ApplicationService";
 import AuthenticationService from "@/services/AuthenticationService";
 import EventsService from "@/services/EventsService";
+import TicketsService from "@/services/TicketsService";
 
 export const container = ()  => {
     const client: any = $api;
@@ -11,6 +12,7 @@ export const container = ()  => {
         application: new ApplicationService(client),
         authentication: new AuthenticationService(client),
         events: new EventsService(client),
+        tickets: new TicketsService(client),
     };
 
     return api as ApiServiceContainer;

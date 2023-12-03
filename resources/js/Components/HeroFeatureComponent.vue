@@ -4,7 +4,7 @@
     <section class="py-12 sm:py-16">
         <div class="max-w-7xl mx-auto sm:text-center">
             <div class="">
-                <Tags v-if="$page.props.team.event?.tags.length"></Tags>
+                <Tags v-if="$page.props.team.event?.tags?.length"></Tags>
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 my-12 sm:my-16">
                 <div v-for="item in items" :key="item" class="btn-base cursor-pointer rounded-lg py-10 flex flex-col items-center justify-center shadow-lg border border-slate-300 dark:border-slate-700">
@@ -13,7 +13,7 @@
                     <p class="mt-2 text-xl text-gray-500 uppercase">{{ item.title }}</p>
                 </div>
             </div>
-            <a href="javascript:;" @click="openModal = true" :class="`uppercase btn-base px-8 py-4 w-full text-center text-base font-medium inline-block rounded text-white hover:bg-${$page.props.team.color}-600 bg-${$page.props.team.color}-500`">
+            <a href="javascript:;" @click="openModal = true" :class="`uppercase btn-base px-8 py-4 w-full text-center text-base font-medium inline-block rounded text-white hover:bg-${$page.props.team.color}-700 bg-${$page.props.team.color}-900`">
                 Ajout de boissons
             </a>
             <Modal :show="openModal" @close="(value) => openModal = value">
