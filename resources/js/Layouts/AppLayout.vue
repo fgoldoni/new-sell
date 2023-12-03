@@ -101,29 +101,16 @@
 </template>
 
 <script setup lang="ts">
-import {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-} from "@headlessui/vue";
+import { Disclosure } from "@headlessui/vue";
 import { ShoppingBagIcon } from "@heroicons/vue/24/outline";
-import { ref, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
+import { storeToRefs } from "pinia";
 
 const ticketsStore = useTicketsStore();
+const { isLoading } = storeToRefs(ticketsStore);
 const scrolledFromTop = ref(false);
-
-const user = {
-    name: "Tom Cook",
-    email: "tom@example.com",
-    imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 
 const navigation = [
     { name: "Tickets", href: "#", current: true },
@@ -143,6 +130,10 @@ onMounted(async () => {
         : (scrolledFromTop.value = false);
 
     await ticketsStore.get();
+
+    if (!isLoading.value) {
+        await ticketsStore.get();
+    }
 });
 
 onUnmounted(() => {

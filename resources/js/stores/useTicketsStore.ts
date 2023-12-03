@@ -1,30 +1,51 @@
-import {defineStore} from "pinia";
-import {computed, ref} from "vue";
-import {usePage} from "@inertiajs/vue3";
-import {useApi} from "@/composable/useApi";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
+import { filter, orderBy } from "lodash";
 
-export const useTicketsStore = defineStore('tickets', () => {
-    const api = useApi();
+export const useTicketsStore = defineStore(
+    "tickets",
+    () => {
+        const api = useApi();
 
-    const event = ref(null)
+        const tickets = ref(null);
 
-    const isLoading = computed(() => !!event.value)
+        const entries = computed(() =>
+            orderBy(
+                filter(tickets.value, (t: any) => t.type === "entry"),
+                ["price"],
+                ["asc"],
+            ),
+        );
 
-    const get = async () => {
-        try {
-            await api.tickets.get()
-                .then((response: any) => {
-                    event.value = response.data
-                }).catch((error: any) => {
-                    throw new ApiError(error);
-                })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+        const packages = computed(() =>
+            filter(
+                tickets.value,
+                (t: any) => t.type === "package" || t.type === "credit",
+            ),
+        );
 
-    return {get}
-},{
-    persist: true,
-})
+        const isLoading = computed(() => !!tickets.value);
+
+        const get = async () => {
+            try {
+                await api.tickets
+                    .get()
+                    .then((response: any) => {
+                        tickets.value = response.data;
+                    })
+                    .catch((error: any) => {
+                        throw new ApiError(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        return { get, tickets, isLoading, entries, packages };
+    },
+    {
+        persist: true,
+    },
+);
