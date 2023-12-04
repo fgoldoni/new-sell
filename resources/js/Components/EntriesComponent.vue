@@ -22,7 +22,7 @@
                     v-for="entry in entries"
                     :key="entry.id"
                     :ref="setItemRef"
-                    class="box-border px-4 py-8 mb-6 text-center rounded-xl border-2 border-green-300 dark:border-green-500 lg:mb-0 sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10"
+                    :class="`box-border px-4 py-8 mb-6 text-center rounded-xl border-2 border-${$page.props.team.color}-300 dark:border-${$page.props.team.color}-500 lg:mb-0 sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10`"
                 >
                     <h3
                         class="m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-0 border-solid sm:text-3xl md:text-4xl"
@@ -37,7 +37,7 @@
                         class="flex items-center justify-center mt-6 leading-7 text-slate-900 dark:text-white border-0 border-solid sm:mt-8"
                     >
                         <p
-                            class="box-border m-0 text-6xl font-semibold leading-normal text-center border-0 border-slate-200"
+                            class="box-border m-0 text-4xl sm:text-5xl font-semibold leading-normal text-center border-0 border-slate-200"
                         >
                             {{ $page.props.team.currency.code }}
                             {{ entry.price }}

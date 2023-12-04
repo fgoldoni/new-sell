@@ -23,10 +23,15 @@
                     v-for="item in packages"
                     :key="item.id"
                     :ref="setItemRef"
-                    class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group border-2 border-green-500 shadow-2xl"
+                    :class="[
+                        item.quantity
+                            ? 'border-' + $page.props.team.color + '-500'
+                            : 'border-rose-500',
+                        'relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group border-2 shadow-2xl',
+                    ]"
                 >
                     <div
-                        :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`"
+                        :class="`btn-base cursor-pointer absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-white  hover:bg-${$page.props.team.color}-100 rounded text-${$page.props.team.color}-600`"
                     >
                         {{ $page.props.team.currency.code }} {{ item.price }}
                     </div>
@@ -37,13 +42,21 @@
                     >
                     </a>
                     <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700  dark:bg-slate-800 border-t-0 border-yellow-200 px-7`"
+                        :class="`relative z-20 w-full h-auto py-8 text-slate-900 dark:text-white border-t-0 border-yellow-200 px-7`"
                     >
                         <a
                             href="#_"
-                            class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
+                            :class="[
+                                item.quantity
+                                    ? 'bg-' + $page.props.team.color + '-900'
+                                    : 'bg-rose-900',
+                                'btn-base inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80',
+                            ]"
                         >
-                            {{ item.name }}
+                            <span v-if="item.quantity"
+                                >Noch frei, jetzt reservieren</span
+                            >
+                            <span v-else> Leider schon reserviert</span>
                         </a>
                         <div class="flex items-center justify-between">
                             <div class="">
@@ -74,13 +87,13 @@
                         </div>
                     </div>
                     <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700  dark:bg-slate-800 border-t-0 border-yellow-200 px-7`"
+                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-400  dark:bg-slate-900 border-t-0 border-yellow-200 px-7`"
                     >
                         <a
                             href="#_"
                             class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
                         >
-                            {{ item.products_sum_product_ticketquantity }} Items
+                            {{ item.name }}
                         </a>
                         <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
                             <div
