@@ -23,7 +23,7 @@
                     v-for="item in packages"
                     :key="item.id"
                     :ref="setItemRef"
-                    class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group"
+                    class="relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group border-2 border-green-500 shadow-2xl"
                 >
                     <div
                         :class="`btn-base absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-${$page.props.team.color}-900 rounded text-white`"
@@ -37,7 +37,7 @@
                     >
                     </a>
                     <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`"
+                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700  dark:bg-slate-800 border-t-0 border-yellow-200 px-7`"
                     >
                         <a
                             href="#_"
@@ -49,7 +49,7 @@
                             <div class="">
                                 <dl>
                                     <dt class="font-extrabold text-center">
-                                        10
+                                        {{ item.attendees }}
                                     </dt>
                                     <dd>Personen</dd>
                                 </dl>
@@ -74,108 +74,29 @@
                         </div>
                     </div>
                     <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700 border-t-0 border-yellow-200 px-7`"
+                        :class="`relative z-20 w-full h-auto py-8 text-white bg-${$page.props.team.color}-700  dark:bg-slate-800 border-t-0 border-yellow-200 px-7`"
                     >
                         <a
                             href="#_"
                             class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
-                            >8 Items</a
                         >
+                            {{ item.products_sum_product_ticketquantity }} Items
+                        </a>
                         <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-                            <div class="tooltip" data-tip="hello">
+                            <div
+                                v-for="product in item.products"
+                                :key="product.id"
+                                class="tooltip"
+                                :data-tip="product.name"
+                            >
                                 <div class="avatar indicator">
                                     <span
                                         class="indicator-item badge badge-secondary"
-                                        >2</span
                                     >
+                                        {{ product.quantity }}
+                                    </span>
                                     <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tooltip" data-tip="hello">
-                                <div class="avatar indicator">
-                                    <span
-                                        class="indicator-item badge badge-secondary"
-                                        >2</span
-                                    >
-                                    <div class="w-16 rounded-full">
-                                        <img
-                                            src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
+                                        <img :src="product.avatar_url" />
                                     </div>
                                 </div>
                             </div>
