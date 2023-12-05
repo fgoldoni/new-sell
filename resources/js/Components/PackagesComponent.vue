@@ -31,7 +31,7 @@
                     ]"
                 >
                     <div
-                        :class="`btn-base cursor-pointer absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 opacity-80 text-md sm:text-xl font-extrabold tracking-wide uppercase bg-white  hover:bg-${$page.props.team.color}-100 rounded text-${$page.props.team.color}-600`"
+                        :class="`btn-base cursor-pointer absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 text-md sm:text-2xl font-extrabold tracking-wide uppercase bg-white  hover:bg-${$page.props.team.color}-100 rounded text-slate-900`"
                     >
                         {{ $page.props.team.currency.code }} {{ item.price }}
                     </div>
@@ -42,44 +42,7 @@
                     >
                     </a>
                     <div
-                        :class="`relative z-20 w-full h-auto py-8 text-slate-900 dark:text-white border-t-0 border-yellow-200 px-7`"
-                    >
-                        <a
-                            href="#_"
-                            class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
-                        >
-                            {{ item.name }}
-                        </a>
-                        <div class="flex items-center justify-between">
-                            <div class="">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ item.attendees }}
-                                    </dt>
-                                    <dd>Personen</dd>
-                                </dl>
-                            </div>
-                            <div class="">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ $page.props.team.currency.code }}
-                                        1000
-                                    </dt>
-                                    <dd>Mindestverzehr</dd>
-                                </dl>
-                            </div>
-                            <div class="">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ $page.props.team.currency.code }} 100
-                                    </dt>
-                                    <dd>pro Person</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-400  dark:bg-slate-900 border-t-0 border-yellow-200 px-7`"
+                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-900 opacity-90 dark:text-white border-t-0 border-yellow-200 px-7`"
                     >
                         <a
                             href="#_"
@@ -92,11 +55,42 @@
                                 'inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white',
                             ]"
                         >
-                            <span v-if="item.quantity"
-                                >Noch frei, jetzt reservieren</span
-                            >
+                            <span v-if="item.quantity">
+                                {{ item.name }}
+                            </span>
                             <span v-else> Leider schon reserviert</span>
                         </a>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xl">
+                                <dl>
+                                    <dt class="font-extrabold text-center">
+                                        {{ item.attendees }}
+                                    </dt>
+                                    <dd>Personen</dd>
+                                </dl>
+                            </div>
+                            <div class="text-xl">
+                                <dl>
+                                    <dt class="font-extrabold text-center">
+                                        {{ $page.props.team.currency.code }}
+                                        1000
+                                    </dt>
+                                    <dd>Mindestverzehr</dd>
+                                </dl>
+                            </div>
+                            <div class="text-xl">
+                                <dl>
+                                    <dt class="font-extrabold text-center">
+                                        {{ $page.props.team.currency.code }} 100
+                                    </dt>
+                                    <dd>pro Person</dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-50  dark:bg-slate-900 border-t-0 border-yellow-200 px-7`"
+                    >
                         <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
                             <div
                                 v-for="product in item.products"

@@ -53,15 +53,20 @@
                             :ref="setItemRef"
                             :class="[
                                 item.quantity > 0
-                                    ? 'ring-green-900'
-                                    : 'ring-rose-900',
-                                `flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-2 sm:p-10`,
+                                    ? `ring-${$page.props.team.color}-500`
+                                    : 'ring-rose-500',
+                                `flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring sm:p-10`,
                             ]"
                         >
                             <div>
                                 <h3
                                     id="tier-hobby"
-                                    :class="`text-base font-semibold leading-7 text-${$page.props.team.color}-600 uppercase`"
+                                    :class="[
+                                        item.quantity > 0
+                                            ? `text-${$page.props.team.color}-600`
+                                            : 'text-rose-600',
+                                        `text-base font-semibold leading-7 uppercase`,
+                                    ]"
                                 >
                                     {{ item.name }}
                                 </h3>
@@ -150,8 +155,8 @@
                 </div>
             </div>
         </div>
-
-        <Modal :show="open" @close="(value) => (open = value)">
+        <Siderbar :show="open" @close="(value) => (open = value)"></Siderbar>
+        <Modal :show="false" @close="(value) => (open = value)">
             <div
                 class="overflow-hidden h-full flex flex-col divide-y divide-gray-100 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900"
             >
@@ -210,6 +215,7 @@ import { storeToRefs } from "pinia";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import Modal from "@/Components/BaseModal.vue";
 import Item from "@/Components/Tickets/Item.vue";
+import Siderbar from "@/Components/Siderbar.vue";
 
 const itemRefs = ref<Array<HTMLElement>>([]);
 
