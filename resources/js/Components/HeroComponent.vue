@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white dark:bg-slate-800">
+    <div class="bg-slate-50 dark:bg-slate-800">
         <div aria-hidden="true" class="relative">
             <img
                 :src="$page.props.team.event.avatar"

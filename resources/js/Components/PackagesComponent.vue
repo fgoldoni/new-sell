@@ -1,7 +1,7 @@
 <template>
     <!-- Section 1 -->
     <section
-        class="box-border py-8 leading-7 bg-slate-100 dark:bg-slate-900 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24"
+        class="box-border py-8 leading-7 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24"
     >
         <div
             class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4"
