@@ -10,6 +10,7 @@ export const useTicketsStore = defineStore(
         const api = useApi();
 
         const tickets = ref(null);
+        const ticket = ref(null);
 
         const entries = computed(() =>
             orderBy(
@@ -48,7 +49,7 @@ export const useTicketsStore = defineStore(
                 await api.tickets
                     .find(id)
                     .then((response: any) => {
-                        tickets.value = response.data;
+                        ticket.value = response.data;
                     })
                     .catch((error: any) => {
                         throw new ApiError(error);
@@ -58,7 +59,7 @@ export const useTicketsStore = defineStore(
             }
         };
 
-        return { get, find, tickets, isLoading, entries, packages };
+        return { get, find, tickets, ticket, isLoading, entries, packages };
     },
     {
         persist: true,

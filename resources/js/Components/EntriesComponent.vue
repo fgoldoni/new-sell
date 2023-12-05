@@ -170,9 +170,17 @@
                             <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                         </button>
                     </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-indigo-300">
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit aliquam ad hic recusandae soluta.
+                        </p>
+                    </div>
                 </div>
                 <div class="grow px-4 py-5 sm:p-6">
-                    <div class="relative mt-6 flex-1 px-4 sm:px-6">dhfdgh</div>
+                    <div class="relative mt-6 flex-1 px-4 sm:px-6">
+                        <Item></Item>
+                    </div>
                 </div>
                 <div class="flex flex-shrink-0 justify-end px-4 py-4">
                     <button
@@ -201,6 +209,7 @@ import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 import Modal from "@/Components/BaseModal.vue";
+import Item from "@/Components/Tickets/Item.vue";
 
 const itemRefs = ref<Array<HTMLElement>>([]);
 
