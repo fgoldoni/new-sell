@@ -1,7 +1,7 @@
 <template>
     <!-- Section 1 -->
     <section
-        class="box-border py-8 leading-7 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24"
+        class="box-border leading-7 border-0 border-slate-200 border-solid sm:py-2 md:py-16 lg:py-14"
     >
         <div
             class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4"
@@ -11,13 +11,13 @@
             >
                 <h2
                     v-motion-fade
-                    class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl md:text-4xl"
+                    class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl uppercase"
                 >
-                    {{ $page.props.team.name }} - Pass
+                    Packages & Lounges
                 </h2>
             </div>
             <div
-                class="grid max-w-md mx-auto gap-8 mt-6 overflow-hidden leading-7 text-slate-900 md:max-w-lg lg:max-w-none sm:mt-10 lg:grid-cols-2"
+                class="grid max-w-md mx-auto gap-8 mt-8 overflow-hidden leading-7 text-slate-900 md:max-w-lg lg:max-w-none sm:mt-16 lg:grid-cols-2"
             >
                 <div
                     v-for="item in packages"

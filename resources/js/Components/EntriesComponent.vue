@@ -10,7 +10,7 @@
                     {{ $page.props.team.event.name }}
                 </h2>
                 <p
-                    class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl uppercase"
+                    class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-4xl uppercase"
                 >
                     1 Person Pass
                 </p>
@@ -41,7 +41,7 @@
                 </svg>
             </div>
         </div>
-        <div class="flow-root bg-slate-50 dark:bg-slate-800 pb-24 sm:pb-32">
+        <div class="flow-root bg-slate-50 dark:bg-slate-800 pb-14 sm:pb-24">
             <div class="-mt-80">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">
                     <div
@@ -122,16 +122,16 @@
                         </div>
 
                         <div
-                            class="flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center"
+                            class="flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 dark:ring-gray-100/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center"
                         >
                             <div class="lg:min-w-0 lg:flex-1">
                                 <h3
-                                    class="text-lg font-semibold leading-8 tracking-tight text-indigo-600"
+                                    class="text-lg font-semibold leading-8 tracking-tight text-slate-900 dark:text-white"
                                 >
                                     Discounted
                                 </h3>
                                 <p
-                                    class="mt-1 text-base leading-7 text-gray-600"
+                                    class="mt-1 text-base leading-7 text-slate-500 dark:text-slate-400"
                                 >
                                     Dolor dolores repudiandae doloribus. Rerum
                                     sunt aut eum. Odit omnis non voluptatem sunt
@@ -140,7 +140,7 @@
                             </div>
                             <a
                                 href="#"
-                                class="rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                :class="`rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-${$page.props.team.color}-600 dark:text-white ring-1 ring-inset ring-${$page.props.team.color}-200 dark:ring-white hover:ring-${$page.props.team.color}-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600`"
                                 >Buy discounted license
                                 <span aria-hidden="true">&rarr;</span></a
                             >
