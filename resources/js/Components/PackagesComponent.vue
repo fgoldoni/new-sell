@@ -46,17 +46,9 @@
                     >
                         <a
                             href="#_"
-                            :class="[
-                                item.quantity
-                                    ? 'bg-' + $page.props.team.color + '-900'
-                                    : 'bg-rose-900',
-                                'btn-base inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80',
-                            ]"
+                            class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
                         >
-                            <span v-if="item.quantity"
-                                >Noch frei, jetzt reservieren</span
-                            >
-                            <span v-else> Leider schon reserviert</span>
+                            {{ item.name }}
                         </a>
                         <div class="flex items-center justify-between">
                             <div class="">
@@ -91,9 +83,19 @@
                     >
                         <a
                             href="#_"
-                            class="inline-block text-md font-extrabold absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white opacity-80 bg-slate-900"
+                            :class="[
+                                item.quantity
+                                    ? 'btn-base bg-' +
+                                      $page.props.team.color +
+                                      '-900'
+                                    : 'bg-rose-900',
+                                'inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white',
+                            ]"
                         >
-                            {{ item.name }}
+                            <span v-if="item.quantity"
+                                >Noch frei, jetzt reservieren</span
+                            >
+                            <span v-else> Leider schon reserviert</span>
                         </a>
                         <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
                             <div
