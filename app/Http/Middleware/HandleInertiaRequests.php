@@ -27,6 +27,7 @@ class HandleInertiaRequests extends Middleware
                 'name' => $team->name,
                 'color' => $team->color,
                 'avatar' => $team->avatar_url,
+                'phone' => $team->phone,
                 'event' => $team->event,
                 'industry' => $team->industry,
                 'currency' => $team->currency,

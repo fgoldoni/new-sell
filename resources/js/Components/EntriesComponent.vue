@@ -1,58 +1,186 @@
 <template>
-    <section
-        class="box-border py-8 leading-7 bg-slate-100 dark:bg-slate-900 border-0 border-slate-200 border-solid sm:py-12 md:py-16 lg:py-24"
-    >
+    <div :class="`isolate overflow-hidden bg-${$page.props.team.color}-900`">
         <div
-            class="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4"
+            class="mx-auto max-w-7xl px-6 pb-96 pt-24 text-center sm:pt-32 lg:px-8"
         >
-            <div
-                class="flex flex-col items-center leading-7 text-center text-slate-900"
-            >
-                <h2
-                    v-motion-fade
-                    class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl md:text-4xl"
+            <div class="mx-auto max-w-4xl">
+                <h2 class="text-base font-semibold leading-7 text-indigo-400">
+                    Pricing
+                </h2>
+                <p
+                    class="mt-2 text-4xl font-bold tracking-tight text-white sm:text-5xl"
                 >
                     {{ $page.props.team.name }} - Pass
-                </h2>
+                </p>
             </div>
-            <div
-                class="grid gap-4 max-w-md mx-auto mt-6 overflow-hidden leading-7 text-slate-900 md:max-w-lg lg:max-w-none sm:mt-10 lg:grid-cols-2"
-            >
-                <div
-                    v-for="entry in entries"
-                    :key="entry.id"
-                    :ref="setItemRef"
-                    :class="`box-border px-4 py-8 mb-6 text-center rounded-xl border-2 border-${$page.props.team.color}-300 dark:border-${$page.props.team.color}-500 lg:mb-0 sm:px-4 sm:py-8 md:px-8 md:py-12 lg:px-10`"
+            <div class="relative mt-6">
+                <p class="mx-auto max-w-2xl text-lg leading-8 text-white/60">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Velit numquam eligendi quos odit doloribus molestiae
+                    voluptatum.
+                </p>
+                <svg
+                    viewBox="0 0 1208 1024"
+                    class="absolute -top-10 left-1/2 -z-10 h-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:-top-12 md:-top-20 lg:-top-12 xl:top-0"
                 >
-                    <h3
-                        class="m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-0 border-solid sm:text-3xl md:text-4xl"
-                    >
-                        {{ entry.name }}
-                    </h3>
-                    <p
-                        class="mt-3 leading-7 text-slate-500 dark:text-slate-400 border-0 border-solid"
-                        v-html="entry.description"
-                    ></p>
-                    <div
-                        class="flex items-center justify-center mt-6 leading-7 text-slate-900 dark:text-white border-0 border-solid sm:mt-8"
-                    >
-                        <p
-                            class="box-border m-0 text-4xl sm:text-5xl font-semibold leading-normal text-center border-0 border-slate-200"
+                    <ellipse
+                        cx="604"
+                        cy="512"
+                        fill="url(#6d1bd035-0dd1-437e-93fa-59d316231eb0)"
+                        rx="604"
+                        ry="512"
+                    />
+                    <defs>
+                        <radialGradient
+                            id="6d1bd035-0dd1-437e-93fa-59d316231eb0"
                         >
-                            {{ $page.props.team.currency.code }}
-                            {{ entry.price }}
-                        </p>
-                    </div>
-
-                    <button
-                        :class="`btn-base uppercase inline-flex items-center justify-center w-full py-3 mt-6 font-sans text-sm leading-none text-center text-white no-underline bg-${$page.props.team.color}-600 border-b-4 border-${$page.props.team.color}-700 rounded cursor-pointer hover:text-white sm:text-base sm:mt-8 md:text-lg`"
+                            <stop stop-color="#7775D6" />
+                            <stop offset="1" stop-color="#E935C1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+        <div class="flow-root bg-white pb-24 sm:pb-32">
+            <div class="-mt-80">
+                <div class="mx-auto max-w-7xl px-6 lg:px-8">
+                    <div
+                        class="mx-auto grid max-w-md grid-cols-1 gap-8 lg:max-w-4xl lg:grid-cols-2"
                     >
-                        {{ entry.name }}
-                    </button>
+                        <div
+                            v-for="item in entries"
+                            :key="item.id"
+                            :ref="setItemRef"
+                            class="flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10"
+                        >
+                            <div>
+                                <h3
+                                    id="tier-hobby"
+                                    class="text-base font-semibold leading-7 text-indigo-600"
+                                >
+                                    {{ item.name }}
+                                </h3>
+                                <div class="mt-4 flex items-baseline gap-x-2">
+                                    <span
+                                        vclass="text-5xl font-bold tracking-tight text-gray-900"
+                                    >
+                                        {{ $page.props.team.currency.code }}
+                                        {{ item.price }}
+                                    </span>
+                                    <span
+                                        class="text-base font-semibold leading-7 text-gray-600"
+                                        >/month</span
+                                    >
+                                </div>
+                                <p
+                                    class="mt-6 text-base leading-7 text-gray-600"
+                                >
+                                    Modi dolorem expedita deleniti. Corporis
+                                    iste qui inventore pariatur adipisci vitae.
+                                </p>
+                                <ul
+                                    role="list"
+                                    class="mt-10 space-y-4 text-sm leading-6 text-gray-600"
+                                >
+                                    <li class="flex gap-x-3">
+                                        <svg
+                                            class="h-6 w-5 flex-none text-indigo-600"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        5 products
+                                    </li>
+                                    <li class="flex gap-x-3">
+                                        <svg
+                                            class="h-6 w-5 flex-none text-indigo-600"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        Up to 1,000 subscribers
+                                    </li>
+                                    <li class="flex gap-x-3">
+                                        <svg
+                                            class="h-6 w-5 flex-none text-indigo-600"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        Basic analytics
+                                    </li>
+                                    <li class="flex gap-x-3">
+                                        <svg
+                                            class="h-6 w-5 flex-none text-indigo-600"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                        48-hour support response time
+                                    </li>
+                                </ul>
+                            </div>
+                            <a
+                                href="#"
+                                aria-describedby="tier-hobby"
+                                class="mt-8 block rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >Get started today</a
+                            >
+                        </div>
+
+                        <div
+                            class="flex flex-col items-start gap-x-8 gap-y-6 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:gap-y-10 sm:p-10 lg:col-span-2 lg:flex-row lg:items-center"
+                        >
+                            <div class="lg:min-w-0 lg:flex-1">
+                                <h3
+                                    class="text-lg font-semibold leading-8 tracking-tight text-indigo-600"
+                                >
+                                    Discounted
+                                </h3>
+                                <p
+                                    class="mt-1 text-base leading-7 text-gray-600"
+                                >
+                                    Dolor dolores repudiandae doloribus. Rerum
+                                    sunt aut eum. Odit omnis non voluptatem sunt
+                                    eos nostrum.
+                                </p>
+                            </div>
+                            <a
+                                href="#"
+                                class="rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >Buy discounted license
+                                <span aria-hidden="true">&rarr;</span></a
+                            >
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script setup lang="ts">

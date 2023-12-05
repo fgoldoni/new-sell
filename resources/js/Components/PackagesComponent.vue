@@ -104,7 +104,7 @@
                             >
                                 <div class="avatar indicator">
                                     <span
-                                        class="indicator-item badge badge-secondary"
+                                        class="indicator-item badge badge-default"
                                     >
                                         {{ product.quantity }}
                                     </span>
