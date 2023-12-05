@@ -55,7 +55,7 @@
                                 item.quantity > 0
                                     ? `ring-${$page.props.team.color}-500`
                                     : 'ring-rose-500',
-                                `flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring sm:p-10`,
+                                `flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 sm:p-10`,
                             ]"
                         >
                             <div>
