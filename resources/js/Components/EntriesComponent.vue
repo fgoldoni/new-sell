@@ -103,7 +103,8 @@
                                 </ul>
                             </div>
                             <a
-                                href="#"
+                                href="javascript:;"
+                                @click="openModal(item.id)"
                                 aria-describedby="tier-hobby"
                                 :class="[
                                     item.quantity > 0
@@ -149,6 +150,47 @@
                 </div>
             </div>
         </div>
+
+        <Modal :show="open" @close="(value) => (open = value)">
+            <div
+                class="overflow-hidden h-full flex flex-col divide-y divide-gray-100 dark:divide-gray-800 ring-1 ring-gray-200 dark:ring-gray-800 shadow bg-white dark:bg-gray-900"
+            >
+                <div class="px-4 py-5 sm:px-6">
+                    <div class="flex items-center justify-between">
+                        <h3
+                            class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+                        >
+                            Modal
+                        </h3>
+                        <button
+                            type="button"
+                            @click="open = false"
+                            class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 inline-flex items-center -my-1"
+                        >
+                            <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+                        </button>
+                    </div>
+                </div>
+                <div class="grow px-4 py-5 sm:p-6">
+                    <div class="relative mt-6 flex-1 px-4 sm:px-6">dhfdgh</div>
+                </div>
+                <div class="flex flex-shrink-0 justify-end px-4 py-4">
+                    <button
+                        type="button"
+                        class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
+                        @click="open = false"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        class="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -157,12 +199,21 @@ import { useMotion } from "@vueuse/motion";
 import { onMounted, ref } from "vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
+import { XMarkIcon } from "@heroicons/vue/24/outline";
+import Modal from "@/Components/BaseModal.vue";
 
 const itemRefs = ref<Array<HTMLElement>>([]);
+
 const setItemRef = (el) => itemRefs.value.push(el);
+const open = ref(false);
 
 const ticketsStore = useTicketsStore();
 const { entries } = storeToRefs(ticketsStore);
+
+const openModal = async (value: string) => {
+    await ticketsStore.find(value);
+    open.value = true;
+};
 
 onMounted(() => {
     itemRefs.value.forEach((el, index) => {

@@ -43,7 +43,22 @@ export const useTicketsStore = defineStore(
             }
         };
 
-        return { get, tickets, isLoading, entries, packages };
+        const find = async (id: string) => {
+            try {
+                await api.tickets
+                    .find(id)
+                    .then((response: any) => {
+                        tickets.value = response.data;
+                    })
+                    .catch((error: any) => {
+                        throw new ApiError(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        return { get, find, tickets, isLoading, entries, packages };
     },
     {
         persist: true,

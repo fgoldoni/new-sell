@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Middleware\EnsureTeamMiddleware;
+use Artesaos\SEOTools\Facades\SEOMeta;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,22 +18,19 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+    SEOTools::setTitle(EnsureTeamMiddleware::team()?->name . ' - ' . EnsureTeamMiddleware::team()?->event?->artist, false);
+    SEOTools::setDescription(EnsureTeamMiddleware::team()?->event?->address);
+    SEOTools::opengraph()->setUrl(route('home'));
+    SEOMeta::addKeyword(EnsureTeamMiddleware::team()?->event?->tags);
+    SEOTools::setCanonical(route('home'));
+    SEOTools::opengraph()->addProperty('type', 'website');
+    SEOTools::opengraph()->addProperty('locale', app()->getLocale());
+    SEOTools::opengraph()->addImage(EnsureTeamMiddleware::team()->event->avatar, ['height' => 300, 'width' => 300]);
+    SEOTools::jsonLd()->addImage(EnsureTeamMiddleware::team()->event->avatar);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return Inertia::render('Welcome', []);
+})->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('tickets/{id}', [\App\Http\Controllers\TicketsController::class, 'show'])->name('tickets.show');
 
-require __DIR__.'/auth.php';
+
