@@ -3,14 +3,15 @@ import { computed, ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 import { filter, orderBy } from "lodash";
+import { Ticket } from "@/models/Ticket";
 
 export const useTicketsStore = defineStore(
     "tickets",
     () => {
         const api = useApi();
 
-        const tickets = ref(null);
-        const ticket = ref(null);
+        const tickets = ref<Ticket[] | null>(null);
+        const ticket = ref<Ticket | null>(null);
 
         const entries = computed(() =>
             orderBy(

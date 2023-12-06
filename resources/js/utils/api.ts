@@ -11,6 +11,7 @@ export const $api = ofetch.create({
         const teamId = usePage().props.team?.id;
         const eventId = usePage().props.team?.event?.id;
         const locale = usePage().props.team?.locale;
+        const cartId = usePage().props.cart?.id;
 
         if (accessToken) {
             options.headers = {
@@ -34,6 +35,12 @@ export const $api = ofetch.create({
             options.headers = {
                 ...options.headers,
                 "x-locale-id": `${locale}`,
+            };
+        }
+        if (cartId) {
+            options.headers = {
+                ...options.headers,
+                "x-cart-id": `${cartId}`,
             };
         }
     },
