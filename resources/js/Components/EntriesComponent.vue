@@ -93,8 +93,15 @@ import Siderbar from "@/Components/Siderbar.vue";
 import Entry from "@/Components/Entry.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useWizardStore } from "@/stores/useWizardStore";
 
 const { entries } = storeToRefs(useTicketsStore());
 const open = ref(false);
+
+const wizard = useWizardStore();
+
+onMounted(() => {
+    wizard.setComponent("Step1");
+});
 </script>
