@@ -54,7 +54,7 @@ const openModal = async (id: string) => {
             item.quantity > 0
                 ? `ring-${$page.props.team.color}-500`
                 : 'ring-rose-500',
-            `flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 sm:p-10`,
+            `flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 p-8 shadow-xl ring-1 sm:p-10`,
         ]"
     >
         <div>
@@ -62,7 +62,7 @@ const openModal = async (id: string) => {
                 id="tier-hobby"
                 :class="[
                     item.quantity > 0
-                        ? `text-${$page.props.team.color}-600`
+                        ? `text-${$page.props.team.color}-600 dark:text-${$page.props.team.color}-400`
                         : 'text-rose-600',
                     `text-base font-semibold leading-7 uppercase`,
                 ]"
@@ -70,13 +70,15 @@ const openModal = async (id: string) => {
                 {{ item.name }}
             </h3>
             <div class="mt-4 flex items-baseline gap-x-2">
-                <span class="text-5xl font-bold tracking-tight text-gray-900">
+                <span
+                    class="text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
+                >
                     {{ $page.props.team.currency.code }}
                     {{ item.price }}
                 </span>
             </div>
             <p
-                class="mt-6 text-base leading-7 text-gray-600"
+                class="mt-6 text-base leading-7 text-slate-500 dark:text-slate-400"
                 v-html="item.description"
             />
             <ul
