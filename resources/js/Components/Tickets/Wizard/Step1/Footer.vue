@@ -54,13 +54,18 @@
                         <h4
                             class="flex justify-between items-center w-full text-lg font-bold text-left space-x-2"
                         >
-                            <span class="">4 Pakete</span>
+                            <span>
+                                {{ cart.total_quantity }} {{ __("Pakete") }}
+                            </span>
                             <ChevronUpIcon
                                 :class="{ 'rotate-180 transform': open }"
                                 class="h-5 w-5 ui-open:rotate-180 ui-open:transform"
                             />
                         </h4>
-                        <p class="mt-1 w-full">460,00 € (inkl. MwSt.)</p>
+                        <p class="mt-1 w-full">
+                            {{ $page.props.team.currency.code }}
+                            {{ cart.total }}
+                        </p>
                     </div>
                 </PopoverButton>
             </div>
@@ -115,7 +120,7 @@
     </Popover>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
     Popover,
     PopoverButton,
@@ -126,20 +131,9 @@ import {
 } from "@headlessui/vue";
 
 import { ChevronUpIcon } from "@heroicons/vue/20/solid";
+import { useCartsStore } from "@/stores/useCartsStore.js";
+import { storeToRefs } from "pinia";
 
-const products = [
-    {
-        id: 1,
-        name: "Micro Backpack",
-        href: "#",
-        price: "$70.00",
-        color: "Moss",
-        size: "5L",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/checkout-page-04-product-01.jpg",
-        imageAlt:
-            "Moss green canvas compact backpack with double top zipper, zipper front pouch, and matching carry handle and backpack straps.",
-    },
-    // More products...
-];
+const cartsStore = useCartsStore();
+const { cart } = storeToRefs(cartsStore);
 </script>
