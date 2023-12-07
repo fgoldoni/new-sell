@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import Entries from "@/Components/Tickets/Wizard/Step1/Entries.vue";
 import Quantity from "@/Components/Quantity.vue";
-import { storeToRefs } from "pinia";
 import { useCartsStore } from "@/stores/useCartsStore";
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 
 const cartsStore = useCartsStore();
-const { cartItem } = storeToRefs(useCartsStore());
+const { update } = cartsStore;
+const { item } = storeToRefs(cartsStore);
+
+const quantity = computed(
+    () => cartsStore.findItem("ticket", item.value?.id).quantity,
+);
 </script>
 
 <template>
@@ -25,7 +31,11 @@ const { cartItem } = storeToRefs(useCartsStore());
                         class="block mb-1 text-xl font-medium text-gray-500 dark:text-white"
                         >Wie viele Personen seid ihr?</label
                     >
-                    <Quantity :model-value="cartItem?.quantity"></Quantity>
+                    <Quantity
+                        v-if="quantity"
+                        :model-value="quantity"
+                        @update:model-value="update"
+                    ></Quantity>
                 </form>
             </div>
         </div>

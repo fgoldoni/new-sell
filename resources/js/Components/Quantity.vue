@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
     modelValue: number;
 }>();
-const emit = defineEmits<{
+defineEmits<{
     "update:modelValue": [value: boolean];
 }>();
 </script>

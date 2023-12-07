@@ -12,9 +12,21 @@ export const useCartsStore = defineStore(
         const api = useApi();
 
         const cart = ref<Cart | null>(null);
-        const cartItem = ref<CartItem | null>(null);
-        const item = ref<Ticket>();
+        const item = ref<Ticket | null>(null);
 
+        const update = async (quantity: number) => {
+            if (!item.value?.quantity) return;
+            if (!quantity || quantity > item.value?.quantity) return;
+
+            let payload: CartPayload = {
+                id: item.value?.id,
+                model: item.value?.model,
+                quantity: quantity,
+                reset: true,
+            };
+
+            await store(payload);
+        };
         const store = async (payload: CartPayload) => {
             try {
                 await api.carts
@@ -32,15 +44,21 @@ export const useCartsStore = defineStore(
 
         const setItem = (value: Ticket): void => {
             item.value = value;
-            cartItem.value = findItem("ticket", item.value.id);
         };
-        const findItem = (prefix: string, id: string): CartItem =>
+        const findItem = (prefix: string, id?: string): CartItem =>
             find(
                 cart.value?.items,
                 (c: CartItem) => c.id === `${prefix}-${id}`,
             );
 
-        return { store, cart, item, setItem, cartItem, findItem, update };
+        return {
+            update,
+            store,
+            cart,
+            item,
+            setItem,
+            findItem,
+        };
     },
     {
         persist: true,

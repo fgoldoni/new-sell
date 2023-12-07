@@ -4,6 +4,8 @@ import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { CartPayload } from "@/types/carts";
+import { useApi } from "@/composable/useApi";
+import ApiError from "@/models/ApiError";
 
 interface Props {
     item: Ticket;
@@ -11,6 +13,7 @@ interface Props {
     modelValue: boolean;
 }
 
+const api = useApi();
 const props = defineProps<Props>();
 const emit = defineEmits<{
     "update:modelValue": [value: boolean];
@@ -42,9 +45,20 @@ useMotion(itemRef, {
 });
 
 const openModal = async (id: string) => {
-    await cartsStore.store(payload);
-    await cartsStore.setItem(props.item);
-    emit("update:modelValue", true);
+    try {
+        await api.tickets
+            .find(id)
+            .then(async (response: any) => {
+                cartsStore.setItem(response.data);
+                await cartsStore.store(payload);
+                emit("update:modelValue", true);
+            })
+            .catch((error: any) => {
+                throw new ApiError(error);
+            });
+    } catch (error) {
+        console.error(error);
+    }
 };
 </script>
 
