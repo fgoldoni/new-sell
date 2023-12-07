@@ -5,11 +5,12 @@
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
                 @close="close"
-                @previous="previous"
+                @previous="() => wizard.setComponent('Step1')"
                 :has-previous="true"
             ></Header>
-            <div class="container mx-auto sm:px-6 lg:px-8">
-                <div class="h-96">sdfs</div>
+            <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
+                <Stepper></Stepper>
+                <Body></Body>
             </div>
         </div>
 
@@ -19,10 +20,19 @@
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
 import Footer from "@/Components/Tickets/Wizard/Footer.vue";
+import { useMotion } from "@vueuse/motion";
+import { ref } from "vue";
+import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
+import Body from "@/Components/Tickets/Wizard/Step1/Body.vue";
+import { useWizardStore } from "@/stores/useWizardStore";
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
+
+const itemRef = ref<HTMLElement>();
+
+const wizard = useWizardStore();
 
 const close = () => {
     emit("close", false);
@@ -31,4 +41,19 @@ const close = () => {
 const previous = (e: any) => {
     emit("close", false);
 };
+
+useMotion(itemRef, {
+    initial: {
+        opacity: 0,
+        y: 100,
+    },
+    visibleOnce: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            delay: 700,
+            duration: 1000,
+        },
+    },
+});
 </script>
