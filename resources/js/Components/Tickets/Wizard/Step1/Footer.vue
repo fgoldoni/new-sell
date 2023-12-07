@@ -52,7 +52,7 @@
                     </div>
                     <div class="flex flex-col justify-end items-center">
                         <h4
-                            class="flex justify-between w-auto text-lg font-bold text-left space-x-2"
+                            class="flex justify-between items-center w-full text-lg font-bold text-left space-x-2"
                         >
                             <span class="">4 Pakete</span>
                             <ChevronUpIcon
@@ -60,7 +60,7 @@
                                 class="h-5 w-5 ui-open:rotate-180 ui-open:transform"
                             />
                         </h4>
-                        <p class="mt-1">460,00 € (inkl. MwSt.)</p>
+                        <p class="mt-1 w-full">460,00 € (inkl. MwSt.)</p>
                     </div>
                 </PopoverButton>
             </div>

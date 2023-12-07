@@ -4,6 +4,6 @@ export interface Ticket {
     model: string;
     name: string;
     price: string;
-    description?: string;
-    tags?: string[];
+    description: string | null;
+    tags: string[] | [];
 }

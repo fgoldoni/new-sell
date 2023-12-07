@@ -32,7 +32,7 @@
                             class="pointer-events-auto w-screen max-w-2xl"
                         >
                             <div
-                                class="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl"
+                                class="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
                             >
                                 <div
                                     class="flex min-h-0 flex-1 flex-col overflow-y-scroll"
@@ -40,7 +40,7 @@
                                     <Header
                                         @close="close"
                                         @previous="previous"
-                                        :has-previous="false"
+                                        :has-previous="true"
                                     ></Header>
                                     <div
                                         class="container mx-auto sm:px-6 lg:px-8"
