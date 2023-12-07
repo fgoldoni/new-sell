@@ -14,7 +14,7 @@
             <RadioGroupLabel class="sr-only"
                 >Choose a memory option
             </RadioGroupLabel>
-            <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
+            <div class="grid grid-cols-3 gap-4">
                 <RadioGroupOption
                     as="template"
                     v-for="option in entries"
@@ -25,11 +25,11 @@
                     <div
                         :class="[
                             active
-                                ? 'ring-2 ring-indigo-600 ring-offset-2'
+                                ? `ring-1 ring-${$page.props.team.color}-500 ring-offset-1`
                                 : '',
                             checked
-                                ? 'bg-indigo-600 text-white hover:bg-indigo-500'
-                                : 'ring-1 ring-inset ring-gray-300 bg-white text-gray-900 hover:bg-gray-50',
+                                ? `border-transparent bg-${$page.props.team.color}-600 text-white hover:bg-${$page.props.team.color}-700`
+                                : 'border-gray-200 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gray-50',
                             'flex cursor-pointer focus:outline-none items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1',
                         ]"
                     >

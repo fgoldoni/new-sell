@@ -25,7 +25,7 @@ const entry = computed(
         <div class="col-span-3">
             <div class="flex flex-col items-center justify-center space-y-2">
                 <h3
-                    class="text-xl font-bold text-gray-900 sm:text-2xl text-center"
+                    class="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl text-center"
                 >
                     Okay, los gehts...
                 </h3>
