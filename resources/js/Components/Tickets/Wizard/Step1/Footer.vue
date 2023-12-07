@@ -1,14 +1,14 @@
 <template>
     <Popover
-        class="flex flex-col-reverse text-sm font-medium text-gray-900"
+        class="flex flex-col-reverse text-sm font-medium text-slate-900 dark:text-white"
         v-slot="{ open }"
     >
-        <div class="relative z-10 border-t border-gray-200 bg-white">
+        <div class="relative z-10">
             <div class="w-full">
                 <div class="flex items-center flex-col">
                     <button
                         type="submit"
-                        class="w-full border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none"
+                        :class="`w-full bg-${$page.props.team.color}-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none`"
                     >
                         Continue
                     </button>
@@ -19,12 +19,12 @@
                     <div class="flex justify-start mr-auto">
                         <div class="mr-4 flex-shrink-0 self-end">
                             <svg
-                                class="h-14 w-14 bg-white text-gray-300"
+                                class="h-14 w-14"
                                 version="1.1"
                                 viewBox="0 0 100 100"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
-                                <g fill="text-gray-300">
+                                <g :fill="isDark ? '#fff' : '#020617'">
                                     <path
                                         d="m75 89.062v-28.211c11.332-0.89453 20.312-11.359 20.312-24.133 0-2.793-0.51953-15.527-1.6172-18.508-0.22656-0.61719-0.8125-1.0234-1.4688-1.0234h-7.1523l0.66406-3.4922 8.5039-2.8359-0.98828-2.9688-9.375 3.125 0.003906-0.003906c-0.53906 0.17969-0.93359 0.63281-1.043 1.1875l-0.94922 4.9883h-27.242c-0.65625 0-1.2422 0.40625-1.4688 1.0234-1.0977 2.9805-1.6172 15.715-1.6172 18.508 0 12.77 8.9805 23.238 20.312 24.133v28.211h-10.938l-3.125 6.25h31.25l-3.125-6.25zm9.375-37.5h-3.125v-3.125h3.125zm4.6875-9.375h-3.125v-3.125h3.125zm-4.5859-21.875h6.5391c0.63281 4.6641 1.0078 9.3594 1.125 14.062h-10.344zm-28.617 0h25.438l-2.6797 14.062h-23.883c0.11719-4.7031 0.49219-9.3984 1.125-14.062zm6.6406 21.875h-3.125v-3.125h3.125zm7.8125 9.375h-3.125v-3.125h3.125zm0-10.938h3.125v3.125h-3.125z"
                                     ></path>
@@ -96,7 +96,9 @@
                     leave-from="translate-y-0"
                     leave-to="translate-y-full"
                 >
-                    <PopoverPanel class="relative bg-white px-4 py-6 sm:px-6">
+                    <PopoverPanel
+                        class="relative bg-white dark:bg-slate-800 px-4 py-6 sm:px-6"
+                    >
                         <dl class="mx-auto max-w-lg space-y-6">
                             <div class="flex items-center justify-between">
                                 <dt class="text-gray-600">Subtotal</dt>
@@ -133,6 +135,9 @@ import {
 import { ChevronUpIcon } from "@heroicons/vue/20/solid";
 import { useCartsStore } from "@/stores/useCartsStore.js";
 import { storeToRefs } from "pinia";
+import { useDark } from "@vueuse/core";
+
+const isDark = useDark();
 
 const cartsStore = useCartsStore();
 const { cart } = storeToRefs(cartsStore);
