@@ -6,11 +6,15 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const cartsStore = useCartsStore();
-const { update } = cartsStore;
+const { update, updateEntry } = cartsStore;
 const { item } = storeToRefs(cartsStore);
 
 const quantity = computed(
     () => cartsStore.findItem("ticket", item.value?.id).quantity,
+);
+
+const entry = computed(
+    () => cartsStore.findItem("ticket", item.value?.id).attributes.entry,
 );
 </script>
 
@@ -40,7 +44,12 @@ const quantity = computed(
             </div>
         </div>
         <div class="col-span-3">
-            <Entries></Entries>
+            <Entries
+                v-if="item?.entries"
+                :entries="item?.entries"
+                :model-value="entry"
+                @update:model-value="updateEntry"
+            ></Entries>
         </div>
         <div class="col-span-3">
             <label

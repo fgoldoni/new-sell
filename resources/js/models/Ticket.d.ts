@@ -6,4 +6,5 @@ export interface Ticket {
     price: string;
     description: string | null;
     tags: string[] | [];
+    entries: string[] | [];
 }

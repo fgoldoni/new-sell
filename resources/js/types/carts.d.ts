@@ -7,6 +7,10 @@ export interface CartPayload {
     reset?: boolean;
 }
 
+export interface CartAttributes {
+    entry: string | null;
+}
+
 export interface CartItem {
     id: string;
     name: string;
@@ -15,7 +19,7 @@ export interface CartItem {
     price_sum: number;
     price_with_conditions: any;
     price_sum_with_conditions: any;
-    attributes: any;
+    attributes: CartAttributes;
 }
 
 export interface Cart {

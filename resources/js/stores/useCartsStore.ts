@@ -3,8 +3,8 @@ import { ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 import { Cart, CartItem, CartPayload } from "@/types/carts";
-import { find } from "lodash";
 import { Ticket } from "@/models/Ticket";
+import { find } from "lodash";
 
 export const useCartsStore = defineStore(
     "carts",
@@ -14,6 +14,19 @@ export const useCartsStore = defineStore(
         const cart = ref<Cart | null>(null);
         const item = ref<Ticket | null>(null);
 
+        const updateEntry = async (entry: string) => {
+            const cartItem = findItem("ticket", item.value?.id);
+
+            let payload: CartPayload = {
+                id: item.value?.id,
+                model: item.value?.model,
+                quantity: cartItem?.quantity,
+                entry: entry,
+                reset: true,
+            };
+
+            await store(payload);
+        };
         const update = async (quantity: number) => {
             if (!item.value?.quantity) return;
             if (!quantity || quantity > item.value?.quantity) return;
@@ -53,6 +66,7 @@ export const useCartsStore = defineStore(
 
         return {
             update,
+            updateEntry,
             store,
             cart,
             item,
