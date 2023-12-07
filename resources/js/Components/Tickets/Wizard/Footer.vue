@@ -8,6 +8,7 @@
                 <div class="flex items-center flex-col">
                     <button
                         type="submit"
+                        @click="emit('submitAction')"
                         :class="`w-full bg-${$page.props.team.color}-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none`"
                     >
                         Continue
@@ -141,4 +142,8 @@ const isDark = useDark();
 
 const cartsStore = useCartsStore();
 const { cart } = storeToRefs(cartsStore);
+
+const emit = defineEmits<{
+    submitAction: [id: any];
+}>();
 </script>

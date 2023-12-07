@@ -9,26 +9,20 @@
                 :has-previous="true"
             ></Header>
             <div class="container mx-auto sm:px-6 lg:px-8">
-                <Stepper></Stepper>
-                <Body></Body>
+                <div class="h-96">sdfs</div>
             </div>
         </div>
 
-        <Footer @submit-action="() => wizard.setComponent('Step2')"></Footer>
+        <Footer @submit-action="close"></Footer>
     </div>
 </template>
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
-import Body from "@/Components/Tickets/Wizard/Step1/Body.vue";
 import Footer from "@/Components/Tickets/Wizard/Footer.vue";
-import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
-import { useWizardStore } from "@/stores/useWizardStore";
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
-
-const wizard = useWizardStore();
 
 const close = () => {
     emit("close", false);
