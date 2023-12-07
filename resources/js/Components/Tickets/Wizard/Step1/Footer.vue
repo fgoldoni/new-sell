@@ -49,8 +49,8 @@
                             >
                                 <span class="">4 Pakete</span>
                                 <ChevronUpIcon
-                                    class="h-5 w-5"
-                                    aria-hidden="true"
+                                    :class="{ 'rotate-180 transform': open }"
+                                    class="h-5 w-5 ui-open:rotate-180 ui-open:transform"
                                 />
                             </h4>
                             <p class="mt-1">460,00 € (inkl. MwSt.)</p>

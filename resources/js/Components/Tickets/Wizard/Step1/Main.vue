@@ -49,6 +49,15 @@
                                         <Body></Body>
                                     </div>
                                 </div>
+                                <div class="flex items-center flex-col">
+                                    <button
+                                        type="submit"
+                                        class="w-full border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none"
+                                    >
+                                        Continue
+                                    </button>
+                                </div>
+
                                 <Footer></Footer>
                             </div>
                         </DialogPanel>
