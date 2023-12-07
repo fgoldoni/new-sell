@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
-import { Cart, CartPayload } from "@/types/carts";
+import { Cart, CartItem, CartPayload } from "@/types/carts";
+import { find } from "lodash";
+import { Ticket } from "@/models/Ticket";
 
 export const useCartsStore = defineStore(
     "carts",
@@ -10,6 +12,8 @@ export const useCartsStore = defineStore(
         const api = useApi();
 
         const cart = ref<Cart | null>(null);
+        const cartItem = ref<CartItem | null>(null);
+        const item = ref<Ticket>();
 
         const store = async (payload: CartPayload) => {
             try {
@@ -26,7 +30,17 @@ export const useCartsStore = defineStore(
             }
         };
 
-        return { store, cart };
+        const setItem = (value: Ticket): void => {
+            item.value = value;
+            cartItem.value = findItem("ticket", item.value.id);
+        };
+        const findItem = (prefix: string, id: string): CartItem =>
+            find(
+                cart.value?.items,
+                (c: CartItem) => c.id === `${prefix}-${id}`,
+            );
+
+        return { store, cart, item, setItem, cartItem, findItem, update };
     },
     {
         persist: true,

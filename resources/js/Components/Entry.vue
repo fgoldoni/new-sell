@@ -43,6 +43,7 @@ useMotion(itemRef, {
 
 const openModal = async (id: string) => {
     await cartsStore.store(payload);
+    await cartsStore.setItem(props.item);
     emit("update:modelValue", true);
 };
 </script>

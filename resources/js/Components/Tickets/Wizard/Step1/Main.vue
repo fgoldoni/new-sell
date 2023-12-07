@@ -6,7 +6,7 @@
             <Header @close="close" :has-previous="false"></Header>
             <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
                 <Stepper></Stepper>
-                <Body></Body>
+                <Body v-if="cartItem"></Body>
             </div>
         </div>
 
@@ -21,12 +21,15 @@ import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
+import { useCartsStore } from "@/stores/useCartsStore";
+import { storeToRefs } from "pinia";
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
 
 const wizard = useWizardStore();
+const { cartItem } = storeToRefs(useCartsStore());
 
 const close = () => {
     emit("close", false);
@@ -44,7 +47,7 @@ useMotion(itemRef, {
         y: 0,
         transition: {
             delay: 100,
-            duration: 700,
+            duration: 500,
         },
     },
 });
