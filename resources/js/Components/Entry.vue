@@ -22,7 +22,7 @@ const itemRef = ref<HTMLElement>();
 
 const cartsStore = useCartsStore();
 
-const payload: CartPayload = {
+let payload: CartPayload = {
     id: props.item.id,
     model: props.item.model,
     quantity: 1,
@@ -50,6 +50,16 @@ const openModal = async (id: string) => {
             .find(id)
             .then(async (response: any) => {
                 cartsStore.setItem(response.data);
+                const cartItem = cartsStore.findItem("ticket", id);
+
+                if (cartItem) {
+                    payload.quantity = cartItem.quantity;
+                    payload.entry = cartItem.attributes.entry;
+                    payload.message = cartItem.attributes.message;
+                } else {
+                    cartsStore.resetMessage();
+                }
+
                 await cartsStore.store(payload);
                 emit("update:modelValue", true);
             })

@@ -2,13 +2,15 @@ export interface CartPayload {
     id?: string;
     model?: string;
     entry?: string;
+    message?: string;
     product_id?: string;
     quantity?: number;
     reset?: boolean;
 }
 
 export interface CartAttributes {
-    entry: string | null;
+    entry?: string;
+    message?: string;
 }
 
 export interface CartItem {

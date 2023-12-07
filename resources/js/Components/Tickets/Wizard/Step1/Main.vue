@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <Footer @submit-action="() => wizard.setComponent('Step2')"></Footer>
+        <Footer @submit-action="nextAction"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -21,13 +21,20 @@ import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
+import { useCartsStore } from "@/stores/useCartsStore";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
+const cartsStore = useCartsStore();
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
+
+const nextAction = () => {
+    cartsStore.submitMessage();
+    wizard.setComponent("Step2");
+};
 
 useMotion(itemRef, {
     initial: {

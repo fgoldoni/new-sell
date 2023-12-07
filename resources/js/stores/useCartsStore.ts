@@ -13,6 +13,24 @@ export const useCartsStore = defineStore(
 
         const cart = ref<Cart | null>(null);
         const item = ref<Ticket | null>(null);
+        const message = ref<string | null>();
+
+        const updateMessage = (value: string) => (message.value = value);
+        const resetMessage = () => (message.value = null);
+        const submitMessage = async () => {
+            const cartItem = findItem("ticket", item.value?.id);
+
+            let payload: CartPayload = {
+                id: item.value?.id,
+                model: item.value?.model,
+                quantity: cartItem?.quantity,
+                message: message.value,
+                entry: cartItem?.attributes.entry,
+                reset: true,
+            };
+
+            await store(payload);
+        };
 
         const updateEntry = async (entry: string) => {
             const cartItem = findItem("ticket", item.value?.id);
@@ -22,6 +40,7 @@ export const useCartsStore = defineStore(
                 model: item.value?.model,
                 quantity: cartItem?.quantity,
                 entry: entry,
+                message: cartItem?.attributes.message,
                 reset: true,
             };
 
@@ -67,7 +86,11 @@ export const useCartsStore = defineStore(
         return {
             update,
             updateEntry,
+            updateMessage,
+            resetMessage,
+            submitMessage,
             store,
+            message,
             cart,
             item,
             setItem,

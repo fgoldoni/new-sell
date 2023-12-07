@@ -6,8 +6,8 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const cartsStore = useCartsStore();
-const { update, updateEntry } = cartsStore;
-const { item } = storeToRefs(cartsStore);
+const { update, updateEntry, updateMessage } = cartsStore;
+const { item, message } = storeToRefs(cartsStore);
 
 const quantity = computed(
     () => cartsStore.findItem("ticket", item.value?.id).quantity,
@@ -31,7 +31,6 @@ const entry = computed(
                 </h3>
                 <form class="max-w-xs mx-auto">
                     <label
-                        for="counter-input"
                         class="block mb-1 text-xl font-medium text-gray-500 dark:text-white"
                         >Wie viele Personen seid ihr?</label
                     >
@@ -59,11 +58,14 @@ const entry = computed(
             >
             <div class="mt-2">
                 <textarea
+                    :entries="item?.entries"
+                    :value="message"
+                    @input="(e) => updateMessage(e.target.value)"
                     id="description"
                     name="description"
                     placeholder="Hinweise für uns..."
                     rows="4"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    :class="`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-${$page.props.team.color}-500 focus:border-${$page.props.team.color}-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-${$page.props.team.color}-500 dark:focus:border-${$page.props.team.color}-500`"
                 />
             </div>
         </div>
