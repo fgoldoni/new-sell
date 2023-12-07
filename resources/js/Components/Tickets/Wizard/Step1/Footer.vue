@@ -3,12 +3,18 @@
         class="flex flex-col-reverse text-sm font-medium text-gray-900"
         v-slot="{ open }"
     >
-        <div
-            class="relative z-10 border-t border-gray-200 bg-white px-4 sm:px-6"
-        >
+        <div class="relative z-10 border-t border-gray-200 bg-white">
             <div class="w-full">
+                <div class="flex items-center flex-col">
+                    <button
+                        type="submit"
+                        class="w-full border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none"
+                    >
+                        Continue
+                    </button>
+                </div>
                 <PopoverButton
-                    class="flex w-full items-center py-6 font-medium"
+                    class="flex w-full items-center py-6 font-medium px-4 sm:px-6"
                 >
                     <div class="flex justify-start mr-auto">
                         <div class="mr-4 flex-shrink-0 self-end">
@@ -43,25 +49,19 @@
                                 </g>
                             </svg>
                         </div>
-                        <div class="flex flex-col self-end items-center">
-                            <h4
-                                class="flex items-center justify-between w-auto text-lg font-bold text-left space-x-2"
-                            >
-                                <span class="">4 Pakete</span>
-                                <ChevronUpIcon
-                                    :class="{ 'rotate-180 transform': open }"
-                                    class="h-5 w-5 ui-open:rotate-180 ui-open:transform"
-                                />
-                            </h4>
-                            <p class="mt-1">460,00 € (inkl. MwSt.)</p>
-                        </div>
                     </div>
-                    <button
-                        type="submit"
-                        class="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
-                        Save
-                    </button>
+                    <div class="flex flex-col justify-end items-center">
+                        <h4
+                            class="flex justify-between w-auto text-lg font-bold text-left space-x-2"
+                        >
+                            <span class="">4 Pakete</span>
+                            <ChevronUpIcon
+                                :class="{ 'rotate-180 transform': open }"
+                                class="h-5 w-5 ui-open:rotate-180 ui-open:transform"
+                            />
+                        </h4>
+                        <p class="mt-1">460,00 € (inkl. MwSt.)</p>
+                    </div>
                 </PopoverButton>
             </div>
         </div>
