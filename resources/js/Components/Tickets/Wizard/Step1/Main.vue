@@ -37,69 +37,11 @@
                                 <div
                                     class="flex min-h-0 flex-1 flex-col overflow-y-scroll"
                                 >
-                                    <div
-                                        :class="`bg-${$page.props.team.color}-700 dark:bg-slate-900 px-4 py-6 sm:px-6`"
-                                    >
-                                        <div
-                                            class="flex items-center justify-between"
-                                        >
-                                            <div
-                                                class="mr-3 flex h-7 items-center"
-                                            >
-                                                <button
-                                                    type="button"
-                                                    :class="`relative rounded-md text-${$page.props.team.color}-200 hover:text-white focus:outline-none`"
-                                                    @click="close"
-                                                >
-                                                    <span
-                                                        class="absolute -inset-2.5"
-                                                    />
-                                                    <span class="sr-only"
-                                                        >Close panel</span
-                                                    >
-                                                    <ArrowLongLeftIcon
-                                                        class="h-6 w-6"
-                                                        aria-hidden="true"
-                                                    />
-                                                </button>
-                                            </div>
-                                            <DialogTitle
-                                                class="text-base font-semibold leading-6 text-white uppercase"
-                                            >
-                                                {{
-                                                    $page.props.team.event.name
-                                                }}
-                                            </DialogTitle>
-                                            <div
-                                                class="ml-3 flex h-7 items-center"
-                                            >
-                                                <button
-                                                    type="button"
-                                                    :class="`relative rounded-md text-${$page.props.team.color}-200 hover:text-white focus:outline-none`"
-                                                    @click="close"
-                                                >
-                                                    <span
-                                                        class="absolute -inset-2.5"
-                                                    />
-                                                    <span class="sr-only"
-                                                        >Close panel</span
-                                                    >
-                                                    <XMarkIcon
-                                                        class="h-6 w-6"
-                                                        aria-hidden="true"
-                                                    />
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div class="mt-1 text-center">
-                                            <p class="text-sm text-indigo-300">
-                                                Lorem, ipsum dolor sit amet
-                                                consectetur adipisicing elit
-                                                aliquam ad hic recusandae
-                                                soluta.
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <Header
+                                        @close="close"
+                                        @previous="previous"
+                                        :has-previous="false"
+                                    ></Header>
                                     <div
                                         class="container mx-auto sm:px-6 lg:px-8"
                                     >
@@ -155,132 +97,10 @@
                                                 </li>
                                             </ol>
                                         </div>
-                                        <div class="flex mt-16">
-                                            <div class="mr-4 flex-shrink-0">
-                                                <svg
-                                                    class="h-16 w-16 border border-gray-300 bg-white text-gray-300"
-                                                    preserveAspectRatio="none"
-                                                    stroke="currentColor"
-                                                    fill="none"
-                                                    viewBox="0 0 200 200"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path
-                                                        vector-effect="non-scaling-stroke"
-                                                        stroke-width="1"
-                                                        d="M0 0l200 200M0 200L200 0"
-                                                    />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <h4 class="text-lg font-bold">
-                                                    Lorem ipsum
-                                                </h4>
-                                                <p class="mt-1">
-                                                    Repudiandae sint
-                                                    consequuntur vel. Amet ut
-                                                    nobis explicabo numquam
-                                                    expedita quia omnis
-                                                    voluptatem. Minus quidem
-                                                    ipsam quia iusto.
-                                                </p>
-
-                                                <div class="mt-6 flex">
-                                                    <div
-                                                        class="mr-4 flex-shrink-0"
-                                                    >
-                                                        <svg
-                                                            class="h-12 w-12 border border-gray-300 bg-white text-gray-300"
-                                                            preserveAspectRatio="none"
-                                                            stroke="currentColor"
-                                                            fill="none"
-                                                            viewBox="0 0 200 200"
-                                                            aria-hidden="true"
-                                                        >
-                                                            <path
-                                                                vector-effect="non-scaling-stroke"
-                                                                stroke-width="1"
-                                                                d="M0 0l200 200M0 200L200 0"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4
-                                                            class="text-lg font-bold"
-                                                        >
-                                                            Lorem ipsum
-                                                        </h4>
-                                                        <p class="mt-1">
-                                                            Repudiandae sint
-                                                            consequuntur vel.
-                                                            Amet ut nobis
-                                                            explicabo numquam
-                                                            expedita quia omnis
-                                                            voluptatem. Minus
-                                                            quidem ipsam quia
-                                                            iusto.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-6 flex">
-                                                    <div
-                                                        class="mr-4 flex-shrink-0"
-                                                    >
-                                                        <svg
-                                                            class="h-12 w-12 border border-gray-300 bg-white text-gray-300"
-                                                            preserveAspectRatio="none"
-                                                            stroke="currentColor"
-                                                            fill="none"
-                                                            viewBox="0 0 200 200"
-                                                            aria-hidden="true"
-                                                        >
-                                                            <path
-                                                                vector-effect="non-scaling-stroke"
-                                                                stroke-width="1"
-                                                                d="M0 0l200 200M0 200L200 0"
-                                                            />
-                                                        </svg>
-                                                    </div>
-                                                    <div>
-                                                        <h4
-                                                            class="text-lg font-bold"
-                                                        >
-                                                            Lorem ipsum
-                                                        </h4>
-                                                        <p class="mt-1">
-                                                            Repudiandae sint
-                                                            consequuntur vel.
-                                                            Amet ut nobis
-                                                            explicabo numquam
-                                                            expedita quia omnis
-                                                            voluptatem. Minus
-                                                            quidem ipsam quia
-                                                            iusto.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <Body></Body>
                                     </div>
                                 </div>
-
-                                <div
-                                    class="flex flex-shrink-0 justify-end px-4 py-4"
-                                >
-                                    <button
-                                        type="button"
-                                        class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
-                                        @click="close"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="ml-4 inline-flex justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
+                                <Footer></Footer>
                             </div>
                         </DialogPanel>
                     </TransitionChild>
@@ -290,20 +110,20 @@
     </Dialog>
 </template>
 <script setup lang="ts">
-import {
-    Dialog,
-    DialogPanel,
-    DialogTitle,
-    TransitionChild,
-} from "@headlessui/vue";
-
-import { ArrowLongLeftIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import { Dialog, DialogPanel, TransitionChild } from "@headlessui/vue";
+import Header from "@/Components/Tickets/Wizard/Header.vue";
+import Body from "@/Components/Tickets/Wizard/Step1/Body.vue";
+import Footer from "@/Components/Tickets/Wizard/Step1/Footer.vue";
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
 
 const close = () => {
+    emit("close", false);
+};
+
+const previous = (e: any) => {
     emit("close", false);
 };
 </script>
