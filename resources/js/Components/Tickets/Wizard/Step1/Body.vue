@@ -6,7 +6,7 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const cartsStore = useCartsStore();
-const { update, updateEntry, updateMessage } = cartsStore;
+const { updateQuantity, updateEntry, updateMessage } = cartsStore;
 const { item, message } = storeToRefs(cartsStore);
 
 const quantity = computed(
@@ -37,7 +37,7 @@ const entry = computed(
                     <Quantity
                         v-if="quantity"
                         :model-value="quantity"
-                        @update:model-value="update"
+                        @update:model-value="updateQuantity"
                     ></Quantity>
                 </form>
             </div>

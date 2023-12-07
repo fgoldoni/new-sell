@@ -46,6 +46,21 @@ export const useCartsStore = defineStore(
 
             await store(payload);
         };
+
+        const updateQuantity = async (quantity: number) => {
+            const cartItem = findItem("ticket", item.value?.id);
+
+            let payload: CartPayload = {
+                id: item.value?.id,
+                model: item.value?.model,
+                quantity: quantity,
+                entry: cartItem?.attributes.entry,
+                message: cartItem?.attributes.message,
+                reset: true,
+            };
+
+            await store(payload);
+        };
         const update = async (quantity: number) => {
             if (!item.value?.quantity) return;
             if (!quantity || quantity > item.value?.quantity) return;
@@ -86,6 +101,7 @@ export const useCartsStore = defineStore(
         return {
             update,
             updateEntry,
+            updateQuantity,
             updateMessage,
             resetMessage,
             submitMessage,
