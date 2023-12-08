@@ -3,9 +3,10 @@ import { Ticket } from "@/models/Ticket";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
-import { CartPayload } from "@/types/carts";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
+import { storeToRefs } from "pinia";
+import { useWizardStore } from "@/stores/useWizardStore";
 
 interface Props {
     item: Ticket;
@@ -20,14 +21,9 @@ const emit = defineEmits<{
 }>();
 const itemRef = ref<HTMLElement>();
 
+const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-
-let payload: CartPayload = {
-    id: props.item.id,
-    model: props.item.model,
-    quantity: 1,
-    reset: true,
-};
+const { payload } = storeToRefs(cartsStore);
 
 useMotion(itemRef, {
     initial: {
@@ -45,6 +41,7 @@ useMotion(itemRef, {
 });
 
 const openModal = async (id: string) => {
+    await wizard.setComponent("Step1");
     try {
         await api.tickets
             .find(id)
@@ -52,15 +49,32 @@ const openModal = async (id: string) => {
                 cartsStore.setItem(response.data);
                 const cartItem = cartsStore.findItem("ticket", id);
 
-                if (cartItem) {
-                    payload.quantity = cartItem.quantity;
-                    payload.entry = cartItem.attributes.entry;
-                    payload.message = cartItem.attributes.message;
-                } else {
-                    cartsStore.resetMessage();
+                if (
+                    payload.value.id !== id ||
+                    payload.value.model !== response.data.model
+                ) {
+                    cartsStore.updatePayload("id", id);
+                    cartsStore.updatePayload("quantity", 1);
+                    cartsStore.updatePayload("entry", "");
+                    cartsStore.updatePayload("model", response.data.model);
+                    cartsStore.updatePayload("message", "");
                 }
 
-                await cartsStore.store(payload);
+                if (cartItem && payload.value.id !== id) {
+                    cartsStore.updatePayload("id", id);
+                    cartsStore.updatePayload("quantity", cartItem.quantity);
+                    cartsStore.updatePayload(
+                        "entry",
+                        cartItem.attributes?.entry,
+                    );
+                    cartsStore.updatePayload(
+                        "message",
+                        cartItem.attributes?.message,
+                    );
+                    cartsStore.updatePayload("model", response.data.model);
+                }
+
+                await cartsStore.store(payload.value);
                 emit("update:modelValue", true);
             })
             .catch((error: any) => {

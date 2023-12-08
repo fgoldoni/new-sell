@@ -6,9 +6,9 @@ import Step2 from "@/Components/Tickets/Wizard/Step2/Main.vue";
 export const useWizardStore = defineStore(
     "wizard",
     () => {
-        const component = ref(null);
-        const previousComponent = ref(null);
-        const nextComponent = ref(null);
+        const component = ref<string | null>(null);
+        const previousComponent = ref<string | null>(null);
+        const nextComponent = ref<string | null>(null);
         const reset = () => {
             previousComponent.value = null;
             component.value = null;
@@ -23,7 +23,11 @@ export const useWizardStore = defineStore(
             nextComponent.value = value;
         };
 
-        const setComponent = (current, previous = null, next = null) => {
+        const setComponent = async (
+            current: string,
+            previous = null,
+            next = null,
+        ) => {
             if (component.value !== current) {
                 component.value = current;
             }

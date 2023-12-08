@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-    modelValue: number;
+    modelValue?: number;
 }>();
 defineEmits<{
-    "update:modelValue": [value: boolean];
+    "update:modelValue": [key: boolean, value: boolean];
 }>();
 </script>
 
@@ -36,7 +36,9 @@ defineEmits<{
             data-input-counter
             class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[4.5rem] text-center"
             :value="modelValue"
-            @input="$emit('update:modelValue', parseInt($event.target.value))"
+            @input="
+                $emit('update:modelValue', parseInt($event.target.value) - 1)
+            "
             required
         />
         <button

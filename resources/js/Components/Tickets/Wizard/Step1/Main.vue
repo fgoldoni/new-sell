@@ -3,7 +3,11 @@
         class="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
-            <Header @close="emit('close', false)" :has-previous="false" />
+            <Header
+                @close="emit('close', false)"
+                :has-previous="false"
+                :title="item.name"
+            />
             <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
                 <Stepper></Stepper>
                 <Body></Body>
@@ -22,17 +26,19 @@ import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
+import { storeToRefs } from "pinia";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
+const { payload, item } = storeToRefs(cartsStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
 
 const nextAction = () => {
-    cartsStore.submitMessage();
+    cartsStore.store(payload.value);
     wizard.setComponent("Step2");
 };
 

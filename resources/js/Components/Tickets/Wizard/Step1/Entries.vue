@@ -8,7 +8,9 @@
 
         <RadioGroup
             :default-value="modelValue"
-            @update:modelValue="(value) => $emit('update:modelValue', value)"
+            @update:modelValue="
+                (value) => $emit('update:modelValue', 'entry', value)
+            "
             class="mt-2"
         >
             <RadioGroupLabel class="sr-only"

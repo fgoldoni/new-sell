@@ -9,9 +9,13 @@
                     <button
                         type="submit"
                         @click="emit('submitAction')"
-                        :class="`w-full bg-${$page.props.team.color}-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none`"
+                        :class="`w-full bg-${$page.props.team.color}-600 px-4 py-2 text-sm flex items-center justify-center space-x-2 font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none`"
                     >
-                        Continue
+                        <span class="">{{ __("Continue") }}</span>
+                        <span class="text-rose-900 font-extrabold"
+                            >({{ $page.props.team.currency.code }}
+                            {{ cart.total }})
+                        </span>
                     </button>
                 </div>
                 <PopoverButton

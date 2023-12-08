@@ -2,20 +2,11 @@
 import Entries from "@/Components/Tickets/Wizard/Step1/Entries.vue";
 import Quantity from "@/Components/Quantity.vue";
 import { useCartsStore } from "@/stores/useCartsStore";
-import { computed } from "vue";
 import { storeToRefs } from "pinia";
 
 const cartsStore = useCartsStore();
-const { updateQuantity, updateEntry, updateMessage } = cartsStore;
-const { item, message } = storeToRefs(cartsStore);
-
-const quantity = computed(
-    () => cartsStore.findItem("ticket", item.value?.id).quantity,
-);
-
-const entry = computed(
-    () => cartsStore.findItem("ticket", item.value?.id).attributes.entry,
-);
+const { updatePayload, updateQuantity } = cartsStore;
+const { item, payload } = storeToRefs(cartsStore);
 </script>
 
 <template>
@@ -35,19 +26,17 @@ const entry = computed(
                         >Wie viele Personen seid ihr?</label
                     >
                     <Quantity
-                        v-if="quantity"
-                        :model-value="quantity"
+                        :model-value="payload?.quantity"
                         @update:model-value="updateQuantity"
                     ></Quantity>
                 </form>
             </div>
         </div>
-        <div class="col-span-3">
+        <div class="col-span-3" v-if="item?.entries">
             <Entries
-                v-if="item?.entries"
                 :entries="item?.entries"
-                :model-value="entry"
-                @update:model-value="updateEntry"
+                :model-value="payload?.entry"
+                @update:model-value="updatePayload"
             ></Entries>
         </div>
         <div class="col-span-3">
@@ -56,11 +45,11 @@ const entry = computed(
                 class="block text-xl font-medium leading-6 text-center text-gray-500"
                 >Hinweise</label
             >
-            <div class="mt-2">
+            <div class="mt-2 mb-8">
                 <textarea
                     :entries="item?.entries"
-                    :value="message"
-                    @input="(e) => updateMessage(e.target.value)"
+                    :value="payload?.message"
+                    @input="(e) => updatePayload('message', e.target.value)"
                     id="description"
                     name="description"
                     placeholder="Hinweise für uns..."

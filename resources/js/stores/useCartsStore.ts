@@ -13,67 +13,22 @@ export const useCartsStore = defineStore(
 
         const cart = ref<Cart | null>(null);
         const item = ref<Ticket | null>(null);
-        const message = ref<string | null>();
-
-        const updateMessage = (value: string) => (message.value = value);
-        const resetMessage = () => (message.value = null);
-        const submitMessage = async () => {
-            const cartItem = findItem("ticket", item.value?.id);
-
-            let payload: CartPayload = {
-                id: item.value?.id,
-                model: item.value?.model,
-                quantity: cartItem?.quantity,
-                message: message.value,
-                entry: cartItem?.attributes.entry,
-                reset: true,
-            };
-
-            await store(payload);
-        };
-
-        const updateEntry = async (entry: string) => {
-            const cartItem = findItem("ticket", item.value?.id);
-
-            let payload: CartPayload = {
-                id: item.value?.id,
-                model: item.value?.model,
-                quantity: cartItem?.quantity,
-                entry: entry,
-                message: cartItem?.attributes.message,
-                reset: true,
-            };
-
-            await store(payload);
-        };
+        let payload = ref<CartPayload>({
+            id: "",
+            model: "",
+            quantity: 1,
+            message: "",
+            entry: "",
+            reset: true,
+        });
 
         const updateQuantity = async (quantity: number) => {
-            const cartItem = findItem("ticket", item.value?.id);
-
-            let payload: CartPayload = {
-                id: item.value?.id,
-                model: item.value?.model,
-                quantity: quantity,
-                entry: cartItem?.attributes.entry,
-                message: cartItem?.attributes.message,
-                reset: true,
-            };
-
-            await store(payload);
+            updatePayload("quantity", quantity);
+            await store(payload.value);
         };
-        const update = async (quantity: number) => {
-            if (!item.value?.quantity) return;
-            if (!quantity || quantity > item.value?.quantity) return;
+        const updatePayload = (key: string, value?: string | number | null) =>
+            (payload.value[key] = value);
 
-            let payload: CartPayload = {
-                id: item.value?.id,
-                model: item.value?.model,
-                quantity: quantity,
-                reset: true,
-            };
-
-            await store(payload);
-        };
         const store = async (payload: CartPayload) => {
             try {
                 await api.carts
@@ -99,14 +54,10 @@ export const useCartsStore = defineStore(
             );
 
         return {
-            update,
-            updateEntry,
+            updatePayload,
             updateQuantity,
-            updateMessage,
-            resetMessage,
-            submitMessage,
             store,
-            message,
+            payload,
             cart,
             item,
             setItem,
