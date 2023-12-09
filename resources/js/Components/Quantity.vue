@@ -32,8 +32,6 @@ defineEmits<{
         </button>
         <input
             type="text"
-            id="counter-input"
-            data-input-counter
             class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[4.5rem] text-center"
             :value="modelValue"
             @input="

@@ -38,7 +38,7 @@ const emit = defineEmits<{
 }>();
 
 const nextAction = () => {
-    cartsStore.store(payload.value);
+    cartsStore.store({ ...{ reset: false }, ...payload.value });
     wizard.setComponent("Step2");
 };
 

@@ -8,4 +8,10 @@ export default class CartsService extends ApiServiceBase {
             body: payload,
         });
     }
+
+    async destroy(id: string): Promise<any> {
+        return await this.call<any>(`/carts/${id}`, {
+            method: "delete",
+        });
+    }
 }

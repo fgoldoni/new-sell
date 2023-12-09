@@ -48,6 +48,7 @@ const openModal = async (id: string) => {
             .then(async (response: any) => {
                 cartsStore.setItem(response.data);
                 const cartItem = cartsStore.findItem("ticket", id);
+                const reset = ref(false);
 
                 if (
                     payload.value.id !== id ||
@@ -56,6 +57,7 @@ const openModal = async (id: string) => {
                     cartsStore.updatePayload("id", id);
                     cartsStore.updatePayload("quantity", 1);
                     cartsStore.updatePayload("entry", "");
+                    reset.value = true;
                     cartsStore.updatePayload("model", response.data.model);
                     cartsStore.updatePayload("message", "");
                 }
@@ -74,7 +76,10 @@ const openModal = async (id: string) => {
                     cartsStore.updatePayload("model", response.data.model);
                 }
 
-                await cartsStore.store(payload.value);
+                await cartsStore.store({
+                    ...payload.value,
+                    ...{ reset: reset.value },
+                });
                 emit("update:modelValue", true);
             })
             .catch((error: any) => {

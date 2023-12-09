@@ -19,16 +19,34 @@ export const useCartsStore = defineStore(
             quantity: 1,
             message: "",
             entry: "",
-            reset: true,
+            reset: false,
         });
 
         const updateQuantity = async (quantity: number) => {
-            updatePayload("quantity", quantity);
-            await store(payload.value);
+            if (quantity > 0) {
+                updatePayload("quantity", quantity);
+                await store(payload.value);
+            }
         };
-        const updatePayload = (key: string, value?: string | number | null) =>
-            (payload.value[key] = value);
+        const updatePayload = (
+            key: string,
+            value?: string | number | null | boolean,
+        ) => (payload.value[key] = value);
 
+        const destroy = async (id: string) => {
+            try {
+                await api.carts
+                    .destroy(id)
+                    .then((response: any) => {
+                        cart.value = response.data as Cart;
+                    })
+                    .catch((error: any) => {
+                        throw new ApiError(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        };
         const store = async (payload: CartPayload) => {
             try {
                 await api.carts
@@ -57,6 +75,7 @@ export const useCartsStore = defineStore(
             updatePayload,
             updateQuantity,
             store,
+            destroy,
             payload,
             cart,
             item,

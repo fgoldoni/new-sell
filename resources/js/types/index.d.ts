@@ -24,6 +24,7 @@ export interface Collection {
 export interface Product {
     id: string;
     name: string;
+    model: string;
     quantity: string;
     price: string;
     avatar: string;
