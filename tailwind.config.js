@@ -1,10 +1,9 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-import typography from '@tailwindcss/typography';
-import aspectRatio from '@tailwindcss/aspect-ratio';
+import defaultTheme from "tailwindcss/defaultTheme";
+import forms from "@tailwindcss/forms";
+import typography from "@tailwindcss/typography";
+import aspectRatio from "@tailwindcss/aspect-ratio";
 
-const colors = require('tailwindcss/colors');
-
+const colors = require("tailwindcss/colors");
 
 const colorSaveList = [];
 const extendeColors = {};
@@ -12,11 +11,13 @@ const extendeColors = {};
 for (const key in colors) {
     extendeColors[key] = colors[key];
 
-    [100, 200, 300, 400, 500, 600, 700, 800, 900].forEach(colorValue => {
+    [100, 200, 300, 400, 500, 600, 700, 800, 900].forEach((colorValue) => {
         colorSaveList.push(`text-${key}-${colorValue}`);
+        colorSaveList.push(`dark:text-${key}-${colorValue}`);
         colorSaveList.push(`bg-${key}-${colorValue}`);
         colorSaveList.push(`hover:bg-${key}-${colorValue}`);
         colorSaveList.push(`group-hover:text-${key}-${colorValue}`);
+        colorSaveList.push(`dark:group-hover:text-${key}-${colorValue}`);
         colorSaveList.push(`group-hover:bg-${key}-${colorValue}`);
         colorSaveList.push(`hover:text-${key}-${colorValue}`);
         colorSaveList.push(`ring-${key}-${colorValue}`);
@@ -33,18 +34,16 @@ for (const key in colors) {
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
+    darkMode: "class",
     content: [
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-        './storage/framework/views/*.php',
-        './resources/views/**/*.blade.php',
-        './resources/js/**/*.vue',
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.vue",
         "./node_modules/flowbite/**/*.js",
     ],
 
-    safelist: [
-        ...colorSaveList
-    ],
+    safelist: [...colorSaveList],
 
     theme: {
         extend: {
@@ -59,10 +58,16 @@ export default {
                 info: colors.sky,
             },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
     },
 
-    plugins: [forms, typography, aspectRatio, require('flowbite/plugin'), require("daisyui")],
+    plugins: [
+        forms,
+        typography,
+        aspectRatio,
+        require("flowbite/plugin"),
+        require("daisyui"),
+    ],
 };

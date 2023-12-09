@@ -1,3 +1,5 @@
+import { Collection } from "@/types";
+
 export interface Ticket {
     id: string;
     quantity: number;
@@ -7,4 +9,5 @@ export interface Ticket {
     description: string | null;
     tags: string[] | [];
     entries: string[] | [];
+    collections: Collection[] | [];
 }
