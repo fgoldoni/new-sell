@@ -6,10 +6,69 @@
             <Header
                 @previous="() => wizard.setComponent('Step1')"
                 :has-previous="true"
-                :title="item.name"
+                :title="item?.name"
             ></Header>
             <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
-                <Stepper></Stepper>
+                <Stepper>
+                    <template v-slot:step-1>
+                        <li
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                        >
+                            <span
+                                :class="`flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500`"
+                            >
+                                <span
+                                    :class="`ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-${$page.props.team.color}-600 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-${$page.props.team.color}-500`"
+                                    aria-hidden="true"
+                                >
+                                    1
+                                </span>
+                            </span>
+                        </li>
+                    </template>
+                    <template v-slot:step-2>
+                        <li
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                        >
+                            <span
+                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                            >
+                                <span
+                                    class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"
+                                    aria-hidden="true"
+                                >
+                                    2
+                                </span>
+                            </span>
+                        </li>
+                    </template>
+                    <template v-slot:step-3>
+                        <li
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                        >
+                            <span
+                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                            >
+                                <span
+                                    class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"
+                                    aria-hidden="true"
+                                >
+                                    3
+                                </span>
+                            </span>
+                        </li>
+                    </template>
+                    <template v-slot:step-4>
+                        <li class="flex items-center">
+                            <span
+                                class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"
+                                aria-hidden="true"
+                            >
+                                4
+                            </span>
+                        </li>
+                    </template>
+                </Stepper>
                 <Body></Body>
             </div>
         </div>
