@@ -1,102 +1,245 @@
-<script setup lang="ts">
-import Entries from "@/Components/Tickets/Wizard/Step1/Entries.vue";
-</script>
-
 <template>
     <div
         class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8 w-full p-4 sm:p-0"
     >
         <div class="col-span-3">
-            <div class="flex flex-col items-center justify-center space-y-2">
-                <h3
-                    class="text-xl font-bold text-gray-900 sm:text-2xl text-center"
-                >
-                    Okay, los gehts...
-                </h3>
-                <form class="max-w-xs mx-auto">
-                    <label
-                        for="counter-input"
-                        class="block mb-1 text-xl font-medium text-gray-500 dark:text-white"
-                        >Wie viele Personen seid ihr?</label
-                    >
-                    <div class="relative flex items-center justify-center">
-                        <button
-                            type="button"
-                            id="decrement-button"
-                            data-input-counter-decrement="counter-input"
-                            class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-                        >
-                            <svg
-                                class="w-2.5 h-2.5 text-gray-900 dark:text-white"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 18 2"
+            <div class="flex h-full flex-col bg-white shadow-xl">
+                <div class="mt-6 border-b border-gray-200">
+                    <div class="px-6">
+                        <nav class="-mb-px flex space-x-6">
+                            <a
+                                v-for="tab in tabs"
+                                :key="tab.name"
+                                :href="tab.href"
+                                :class="[
+                                    tab.current
+                                        ? 'border-indigo-500 text-indigo-600'
+                                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
+                                    'whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium',
+                                ]"
+                                >{{ tab.name }}</a
                             >
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M1 1h16"
-                                />
-                            </svg>
-                        </button>
-                        <input
-                            type="text"
-                            id="counter-input"
-                            data-input-counter
-                            class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal focus:outline-none focus:ring-0 max-w-[2.5rem] text-center"
-                            placeholder=""
-                            value="12"
-                            required
-                        />
-                        <button
-                            type="button"
-                            id="increment-button"
-                            data-input-counter-increment="counter-input"
-                            class="flex-shrink-0 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-                        >
-                            <svg
-                                class="w-2.5 h-2.5 text-gray-900 dark:text-white"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 18 18"
-                            >
-                                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 1v16M1 9h16"
-                                />
-                            </svg>
-                        </button>
+                        </nav>
                     </div>
-                </form>
-            </div>
-        </div>
-        <div class="col-span-3">
-            <Entries></Entries>
-        </div>
-        <div class="col-span-3">
-            <label
-                for="description"
-                class="block text-xl font-medium leading-6 text-center text-gray-500"
-                >Hinweise</label
-            >
-            <div class="mt-2">
-                <textarea
-                    id="description"
-                    name="description"
-                    placeholder="Hinweise für uns..."
-                    rows="4"
-                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+                </div>
+                <ul
+                    role="list"
+                    class="overflow-auto h-72 relative divide-y divide-gray-200 h-72 overflow-y-auto"
+                >
+                    <li v-for="person in team" :key="person.handle">
+                        <div class="group relative flex items-center px-5 py-6">
+                            <a
+                                :href="person.href"
+                                class="-m-1 block flex-1 p-1"
+                            >
+                                <div
+                                    class="absolute inset-0 group-hover:bg-gray-50"
+                                    aria-hidden="true"
+                                />
+                                <div
+                                    class="relative flex min-w-0 flex-1 items-center"
+                                >
+                                    <span
+                                        class="relative inline-block flex-shrink-0"
+                                    >
+                                        <img
+                                            class="h-10 w-10 rounded-full"
+                                            :src="person.imageUrl"
+                                            alt=""
+                                        />
+                                        <span
+                                            :class="[
+                                                person.status === 'online'
+                                                    ? 'bg-green-400'
+                                                    : 'bg-gray-300',
+                                                'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white',
+                                            ]"
+                                            aria-hidden="true"
+                                        />
+                                    </span>
+                                    <div class="ml-4 truncate">
+                                        <p
+                                            class="truncate text-sm font-medium text-gray-900"
+                                        >
+                                            {{ person.name }}
+                                        </p>
+                                        <p
+                                            class="truncate text-sm text-gray-500"
+                                        >
+                                            {{ "@" + person.handle }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <Menu
+                                as="div"
+                                class="relative ml-2 inline-block flex-shrink-0 text-left"
+                            >
+                                <MenuButton
+                                    class="group relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                >
+                                    <span class="absolute -inset-1.5" />
+                                    <span class="sr-only"
+                                        >Open options menu</span
+                                    >
+                                    <span
+                                        class="flex h-full w-full items-center justify-center rounded-full"
+                                    >
+                                        <EllipsisVerticalIcon
+                                            class="h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                            aria-hidden="true"
+                                        />
+                                    </span>
+                                </MenuButton>
+                                <transition
+                                    enter-active-class="transition ease-out duration-100"
+                                    enter-from-class="transform opacity-0 scale-95"
+                                    enter-to-class="transform opacity-100 scale-100"
+                                    leave-active-class="transition ease-in duration-75"
+                                    leave-from-class="transform opacity-100 scale-100"
+                                    leave-to-class="transform opacity-0 scale-95"
+                                >
+                                    <MenuItems
+                                        class="absolute right-9 top-0 z-10 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    >
+                                        <div class="py-1">
+                                            <MenuItem v-slot="{ active }">
+                                                <a
+                                                    href="#"
+                                                    :class="[
+                                                        active
+                                                            ? 'bg-gray-100 text-gray-900'
+                                                            : 'text-gray-700',
+                                                        'block px-4 py-2 text-sm',
+                                                    ]"
+                                                    >View profile</a
+                                                >
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                                <a
+                                                    href="#"
+                                                    :class="[
+                                                        active
+                                                            ? 'bg-gray-100 text-gray-900'
+                                                            : 'text-gray-700',
+                                                        'block px-4 py-2 text-sm',
+                                                    ]"
+                                                    >Send message</a
+                                                >
+                                            </MenuItem>
+                                        </div>
+                                    </MenuItems>
+                                </transition>
+                            </Menu>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { ref } from "vue";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
+import { EllipsisVerticalIcon } from "@heroicons/vue/20/solid";
+
+const tabs = [
+    { name: "All", href: "#", current: true },
+    { name: "Online", href: "#", current: false },
+    { name: "Offline", href: "#", current: false },
+];
+const team = [
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    {
+        name: "Leslie Alexander",
+        handle: "lesliealexander",
+        href: "#",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+        status: "online",
+    },
+    // More people...
+];
+
+const open = ref(true);
+</script>

@@ -6,35 +6,37 @@
             </h2>
         </div>
 
-        <RadioGroup v-model="mem" class="mt-2">
+        <RadioGroup
+            :default-value="modelValue"
+            @update:modelValue="
+                (value) => $emit('update:modelValue', 'entry', value)
+            "
+            class="mt-2"
+        >
             <RadioGroupLabel class="sr-only"
                 >Choose a memory option
             </RadioGroupLabel>
-            <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
+            <div class="grid grid-cols-3 gap-4">
                 <RadioGroupOption
                     as="template"
-                    v-for="option in memoryOptions"
-                    :key="option.name"
+                    v-for="option in entries"
+                    :key="option"
                     :value="option"
-                    :disabled="!option.inStock"
                     v-slot="{ active, checked }"
                 >
                     <div
                         :class="[
-                            option.inStock
-                                ? 'cursor-pointer focus:outline-none'
-                                : 'cursor-not-allowed opacity-25',
                             active
-                                ? 'ring-2 ring-indigo-600 ring-offset-2'
+                                ? `ring-1 ring-${$page.props.team.color}-500 ring-offset-1`
                                 : '',
                             checked
-                                ? 'bg-indigo-600 text-white hover:bg-indigo-500'
-                                : 'ring-1 ring-inset ring-gray-300 bg-white text-gray-900 hover:bg-gray-50',
-                            'flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1',
+                                ? `border-transparent bg-${$page.props.team.color}-600 text-white hover:bg-${$page.props.team.color}-700`
+                                : 'border-gray-200 bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gray-50',
+                            'flex cursor-pointer focus:outline-none items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1',
                         ]"
                     >
                         <RadioGroupLabel as="span"
-                            >{{ option.name }}
+                            >{{ option }}
                         </RadioGroupLabel>
                     </div>
                 </RadioGroupOption>
@@ -43,18 +45,14 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from "@headlessui/vue";
 
-const memoryOptions = [
-    { name: "4 GB", inStock: true },
-    { name: "8 GB", inStock: true },
-    { name: "16 GB", inStock: true },
-    { name: "32 GB", inStock: true },
-    { name: "64 GB", inStock: true },
-    { name: "128 GB", inStock: false },
-];
-
-const mem = ref(memoryOptions[2]);
+defineProps<{
+    modelValue?: string;
+    entries: string[];
+}>();
+defineEmits<{
+    "update:modelValue": [value: boolean];
+}>();
 </script>
