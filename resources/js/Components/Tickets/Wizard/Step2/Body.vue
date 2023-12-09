@@ -66,7 +66,7 @@
                                     class="-m-1 block flex-1 p-1"
                                 >
                                     <div
-                                        class="absolute inset-0 group-hover:bg-slate-50 dark:group-hover:bg-slate-900"
+                                        class="absolute inset-0 group-hover:bg-slate-200 dark:group-hover:bg-slate-900"
                                         aria-hidden="true"
                                     />
                                     <div
