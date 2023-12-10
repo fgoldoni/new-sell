@@ -43,6 +43,14 @@
                         ></ProductCartItem>
                     </template>
                 </ul>
+                <p
+                    class="my-6 p-4 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-slate-900 dark:text-white"
+                >
+                    <span class="text-xl">Total</span>
+                    <span class="text-xl">
+                        {{ $page.props.team.currency.code }} {{ cart.total }}
+                    </span>
+                </p>
             </div>
         </div>
     </div>

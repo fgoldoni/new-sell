@@ -3,6 +3,7 @@ import { CartItem, CartPayload } from "@/types/carts";
 import { useCartsStore } from "@/stores/useCartsStore";
 import Quantity from "@/Components/Quantity.vue";
 import { computed } from "vue";
+import IncludeItem from "@/Components/Tickets/Wizard/Step3/IncludeItem.vue";
 
 interface Props {
     item: CartItem;
@@ -30,7 +31,7 @@ const update = async (value: number) => {
     };
 
     if (value === 0) {
-        await cartsStore.updatePayload("quantity", 0);
+        cartsStore.updatePayload("quantity", 0);
         await cartsStore.destroy(
             props.item.attributes.type + "-" + props.item.attributes.item.id,
         );
@@ -95,6 +96,22 @@ const update = async (value: number) => {
                     @update:model-value="update"
                 ></Quantity>
             </div>
+        </div>
+
+        <div
+            class="ml-4 p-2 space-y-2"
+            v-if="item.attributes?.products?.length"
+        >
+            <template
+                v-for="(product, index) in item.attributes.products"
+                :key="product.id"
+            >
+                <IncludeItem
+                    :item="product"
+                    :quantity="quantity"
+                    :index="index"
+                ></IncludeItem>
+            </template>
         </div>
     </li>
 </template>
