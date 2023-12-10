@@ -4,7 +4,7 @@
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
-                @previous="() => wizard.setComponent('Step1')"
+                @previous="() => wizard.setComponent('Step2')"
                 :has-previous="true"
                 :title="item?.name"
             ></Header>
@@ -31,10 +31,10 @@
                             class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
                         >
                             <span
-                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                                :class="`flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500`"
                             >
                                 <span
-                                    class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"
+                                    :class="`ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-${$page.props.team.color}-600 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-${$page.props.team.color}-500`"
                                     aria-hidden="true"
                                 >
                                     2
@@ -78,7 +78,7 @@
 </template>
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
-import Body from "@/Components/Tickets/Wizard/Step2/Body.vue";
+import Body from "@/Components/Tickets/Wizard/Step3/Body.vue";
 import Footer from "@/Components/Tickets/Wizard/Footer.vue";
 import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
@@ -95,11 +95,6 @@ const { payload, item } = storeToRefs(cartsStore);
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
-
-const nextAction = () => {
-    cartsStore.store({ ...{ reset: false }, ...payload.value });
-    wizard.setComponent("Step2");
-};
 
 useMotion(itemRef, {
     initial: {

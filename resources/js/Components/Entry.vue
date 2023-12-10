@@ -62,6 +62,10 @@ const openModal = async (id: string) => {
                     cartsStore.updatePayload("message", "");
                 }
 
+                if (payload.value?.quantity <= 0) {
+                    cartsStore.updatePayload("quantity", 1);
+                }
+
                 if (cartItem && payload.value.id !== id) {
                     cartsStore.updatePayload("id", id);
                     cartsStore.updatePayload("quantity", cartItem.quantity);

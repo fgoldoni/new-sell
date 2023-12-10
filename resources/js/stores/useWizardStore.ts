@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import Step1 from "@/Components/Tickets/Wizard/Step1/Main.vue";
 import Step2 from "@/Components/Tickets/Wizard/Step2/Main.vue";
+import Step3 from "@/Components/Tickets/Wizard/Step3/Main.vue";
 
 export const useWizardStore = defineStore(
     "wizard",
@@ -49,6 +50,9 @@ export const useWizardStore = defineStore(
                     break;
                 case "Step2":
                     value = Step2;
+                    break;
+                case "Step3":
+                    value = Step3;
                     break;
                 default:
                     value = null;

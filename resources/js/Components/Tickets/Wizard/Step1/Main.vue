@@ -97,7 +97,9 @@ const emit = defineEmits<{
 }>();
 
 const nextAction = () => {
-    cartsStore.store(payload.value);
+    if (payload.value?.quantity > 0) {
+        cartsStore.store(payload.value);
+    }
     wizard.setComponent("Step2");
 };
 

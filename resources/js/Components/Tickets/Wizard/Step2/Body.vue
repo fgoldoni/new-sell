@@ -41,7 +41,7 @@
                     <ul
                         v-if="currentTab?.id === collection.id"
                         role="list"
-                        class="overflow-auto h-72 relative divide-y divide-gray-200 h-72 overflow-y-auto"
+                        class="overflow-auto h-72 relative divide-y divide-slate-200 dark:divide-slate-600 h-72 overflow-y-auto"
                     >
                         <ProductCartItem
                             v-for="product in collection?.products"

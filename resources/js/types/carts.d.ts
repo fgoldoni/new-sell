@@ -11,6 +11,15 @@ export interface CartPayload {
 export interface CartAttributes {
     entry?: string;
     message?: string;
+    type: string;
+    item: Item;
+}
+
+export interface Item {
+    id: string;
+    name: string;
+    avatar_url: string;
+    model: string;
 }
 
 export interface CartItem {
