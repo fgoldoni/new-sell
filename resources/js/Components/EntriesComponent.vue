@@ -83,13 +83,17 @@
                 </div>
             </div>
         </div>
+        <component
+            v-bind="$page.props"
+            v-if="$root.modalComponent"
+            :is="$root.modalComponent"
+        />
 
-        <Siderbar :show="open" @close="(value) => (open = value)"></Siderbar>
+        <!--        <Siderbar :show="open" @close="(value) => (open = value)"></Siderbar>-->
     </div>
 </template>
 
 <script setup lang="ts">
-import Siderbar from "@/Components/Siderbar.vue";
 import Entry from "@/Components/Entry.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";

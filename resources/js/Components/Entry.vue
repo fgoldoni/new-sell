@@ -7,6 +7,7 @@ import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 import { storeToRefs } from "pinia";
 import { useWizardStore } from "@/stores/useWizardStore";
+import { router } from "@inertiajs/vue3";
 
 interface Props {
     item: Ticket;
@@ -84,7 +85,17 @@ const openModal = async (id: string) => {
                     ...payload.value,
                     ...{ reset: reset.value },
                 });
-                emit("update:modelValue", true);
+
+                return router.get(
+                    route("tickets.show", { id: id }),
+                    {},
+                    {
+                        preserveState: false,
+                        preserveScroll: true,
+                        replace: false,
+                    },
+                );
+                // emit("update:modelValue", true);
             })
             .catch((error: any) => {
                 throw new ApiError(error);

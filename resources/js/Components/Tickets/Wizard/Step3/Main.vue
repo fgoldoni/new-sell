@@ -4,6 +4,7 @@
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
+                @close="emit('close', false)"
                 @previous="() => wizard.setComponent('Step2')"
                 :has-previous="true"
                 :title="item?.name"
@@ -90,7 +91,7 @@ import { storeToRefs } from "pinia";
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { payload, item } = storeToRefs(cartsStore);
+const { item } = storeToRefs(cartsStore);
 
 const emit = defineEmits<{
     close: [value: boolean];

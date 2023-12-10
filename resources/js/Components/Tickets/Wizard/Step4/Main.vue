@@ -4,6 +4,7 @@
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
+                @close="emit('close', false)"
                 @previous="() => wizard.setComponent('Step3')"
                 :has-previous="true"
                 :title="item?.name"
@@ -73,7 +74,7 @@
             </div>
         </div>
 
-        <Footer @submit-action="() => wizard.setComponent('Step3')"></Footer>
+        <Footer @submit-action="() => wizard.setComponent('Step4')"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -90,16 +91,11 @@ import { storeToRefs } from "pinia";
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { payload, item } = storeToRefs(cartsStore);
+const { item } = storeToRefs(cartsStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
-
-const nextAction = () => {
-    cartsStore.store({ ...{ reset: false }, ...payload.value });
-    wizard.setComponent("Step2");
-};
 
 useMotion(itemRef, {
     initial: {
