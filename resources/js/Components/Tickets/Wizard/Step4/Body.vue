@@ -68,6 +68,12 @@
                             >
                                 {{ __("Email Confirmation") }}
                             </label>
+                            <p
+                                class="mt-2 text-xs text-slate-400 dark:text-slate-500"
+                            >
+                                Stelle sicher, dass deine E-Mail-Adresse korrekt
+                                ist.
+                            </p>
                         </div>
                     </div>
 
