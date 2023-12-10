@@ -3,6 +3,7 @@ import AuthenticationService from "@/services/AuthenticationService";
 import EventsService from "@/services/EventsService";
 import TicketsService from "@/services/TicketsService";
 import CartsService from "@/services/CartsService";
+import CountriesService from "@/services/CountriesService";
 
 export interface ApiServiceContainer {
     application: ApplicationService;
@@ -10,4 +11,5 @@ export interface ApiServiceContainer {
     events: EventsService;
     tickets: TicketsService;
     carts: CartsService;
+    countries: CountriesService;
 }

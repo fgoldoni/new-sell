@@ -70,11 +70,11 @@
                         </li>
                     </template>
                 </Stepper>
-                <Body></Body>
+                <Body :model-value="form" @update:model-value="update"></Body>
             </div>
         </div>
 
-        <Footer @submit-action="() => wizard.setComponent('Step4')"></Footer>
+        <Footer @submit-action="register"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -87,15 +87,60 @@ import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
+import { usePage } from "@inertiajs/vue3";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useApi } from "@/composable/useApi";
+import { Errors } from "@/plugins/errors";
+import ApiError from "@/models/ApiError";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { item } = storeToRefs(cartsStore);
+const authStore = useAuthStore();
+const { isAuthenticated, user } = storeToRefs(authStore);
+
+const api = useApi();
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
+
+const form = ref({
+    name: user.value?.name || "",
+    email: user.value?.email || "",
+    email_confirmation: user.value?.email || "",
+    country_id: user.value?.country_id,
+    phone: user.value?.phone || "",
+    locale: usePage().props.team.locale,
+    terms: true,
+    errors: new Errors(),
+    is_logged: isAuthenticated.value,
+    processing: false,
+    to: route("home"),
+});
+
+const register = async () => {
+    try {
+        await api.authentication.register(
+            form.value.name,
+            form.value.email,
+            form.value.email_confirmation,
+            form.value.phone,
+            form.value.country_id,
+            form.value.locale,
+            form.value.is_logged,
+            form.value.to,
+            form.value.terms,
+        );
+    } catch (error) {
+        form.value.errors.onFailed(error);
+        throw new ApiError(error);
+    }
+};
+const update = (key: any, value: any) => {
+    form.value[key] = value;
+};
 
 useMotion(itemRef, {
     initial: {

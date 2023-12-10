@@ -107,8 +107,11 @@ import { onMounted, onUnmounted, ref } from "vue";
 import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
+import { useCountriesStore } from "@/stores/useCountriesStore";
 
 const ticketsStore = useTicketsStore();
+const countriesStore = useCountriesStore();
+const { countries } = storeToRefs(countriesStore);
 const { isLoading } = storeToRefs(ticketsStore);
 const scrolledFromTop = ref(false);
 
@@ -133,6 +136,9 @@ onMounted(async () => {
 
     if (!isLoading.value) {
         await ticketsStore.get();
+    }
+    if (countries.value.length === 0) {
+        await countriesStore.get();
     }
 });
 

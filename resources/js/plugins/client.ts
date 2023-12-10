@@ -5,6 +5,7 @@ import AuthenticationService from "@/services/AuthenticationService";
 import EventsService from "@/services/EventsService";
 import TicketsService from "@/services/TicketsService";
 import CartsService from "@/services/CartsService";
+import CountriesService from "@/services/CountriesService";
 
 export const container = () => {
     const client: any = $api;
@@ -15,6 +16,7 @@ export const container = () => {
         events: new EventsService(client),
         tickets: new TicketsService(client),
         carts: new CartsService(client),
+        countries: new CountriesService(client),
     };
 
     return api as ApiServiceContainer;

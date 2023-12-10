@@ -2,7 +2,13 @@ export interface User {
     id: number;
     name: string;
     email: string;
-    email_verified_at: string;
+    country_id: string;
+    phone: string;
+}
+
+export interface Country {
+    id: number;
+    name: string;
 }
 
 export type PageProps<
