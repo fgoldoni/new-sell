@@ -14,4 +14,8 @@ export default class CartsService extends ApiServiceBase {
             method: "delete",
         });
     }
+
+    async get(): Promise<any> {
+        return await this.call<any>(`/carts`);
+    }
 }

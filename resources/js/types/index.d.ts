@@ -1,3 +1,5 @@
+import { CartItem } from "@/types/carts";
+
 export interface User {
     id: number;
     name: string;
@@ -7,8 +9,14 @@ export interface User {
 }
 
 export interface Order {
-    id: number;
-    name: string;
+    id: string;
+    items: CartItem[];
+    total_quantity: number;
+    sub_total: number;
+    price_sum: number;
+    total: number;
+    cart_sub_total_conditions: any;
+    cart_total_conditions: any;
 }
 
 export interface Country {

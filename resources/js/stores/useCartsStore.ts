@@ -22,6 +22,26 @@ export const useCartsStore = defineStore(
             entry: "",
             reset: false,
         });
+
+        const reset = async () => {
+            item.value = null;
+            await handle();
+        };
+
+        const handle = async () => {
+            try {
+                await api.carts
+                    .get()
+                    .then((response: any) => {
+                        cart.value = response.data as Cart;
+                    })
+                    .catch((error: any) => {
+                        throw new ApiError(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        };
         const paypalItems = () => {
             return cart.value?.items.map((item) => ({
                 name: item.name,
@@ -133,6 +153,7 @@ export const useCartsStore = defineStore(
             destroy,
             payload,
             cart,
+            reset,
             item,
             setItem,
             findItem,

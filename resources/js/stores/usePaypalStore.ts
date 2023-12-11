@@ -41,6 +41,8 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                     await ordersStore.store(
                         cart.value.id,
                         "paypal",
+                        capture.purchase_units[0].amount.currency_code,
+                        capture.purchase_units[0].amount.value,
                         capture.id,
                     );
 
