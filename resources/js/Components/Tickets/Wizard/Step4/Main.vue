@@ -237,9 +237,9 @@ import { Errors } from "@/plugins/errors";
 import ApiError from "@/models/ApiError";
 import Comboboxes from "@/Components/Comboboxes.vue";
 import { useCountriesStore } from "@/stores/useCountriesStore";
+import InputError from "@/Components/InputError.vue";
 import { setCookie } from "@/composable/useCookie";
 import { COOKIE_MAX_AGE_1_YEAR } from "@/utils/constants";
-import InputError from "@/Components/InputError.vue";
 
 const itemRef = ref<HTMLElement>();
 const submitRef = ref<HTMLElement>();
@@ -273,7 +273,7 @@ const form = reactive({
 const submit = async () => {
     try {
         await authStore
-            .register(
+            .post(
                 form.name,
                 form.email,
                 form.email_confirmation,
@@ -286,8 +286,9 @@ const submit = async () => {
             )
             .then(async (response: any) => {
                 setCookie("accessToken", response.token, COOKIE_MAX_AGE_1_YEAR);
-                await authStore.fetchUser();
-                wizard.setComponent("Step5");
+                authStore.setToken(response.token);
+                authStore.setAuth(response.user);
+                await wizard.setComponent("Step5");
             })
             .catch((error: any) => {
                 form.errors.onFailed(error);

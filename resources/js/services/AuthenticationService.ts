@@ -2,7 +2,7 @@ import { ApiServiceBase } from "@/services/ApiServiceBase";
 import { User } from "@/types";
 
 export default class AuthenticationService extends ApiServiceBase {
-    async register(
+    async post(
         name: string,
         email: string,
         email_confirmation: string,

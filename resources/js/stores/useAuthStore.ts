@@ -15,7 +15,10 @@ export const useAuthStore = defineStore(
             user.value = await api.authentication.user();
         };
 
-        const register = async (
+        const setToken = (bearerToken = null) => (token.value = bearerToken);
+        const setAuth = (auth: User) => (user.value = auth);
+
+        const post = async (
             name: string,
             email: string,
             email_confirmation: string,
@@ -26,7 +29,7 @@ export const useAuthStore = defineStore(
             to: string,
             terms: boolean,
         ): Promise<any> => {
-            return await api.authentication.register(
+            return await api.authentication.post(
                 name,
                 email,
                 email_confirmation,
@@ -41,9 +44,12 @@ export const useAuthStore = defineStore(
 
         return {
             user,
+            token,
             isAuthenticated,
-            register,
+            post,
             fetchUser,
+            setToken,
+            setAuth,
         };
     },
     {
