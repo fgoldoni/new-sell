@@ -17,7 +17,7 @@ export const usePaypalStore = defineStore("paypalStore", () => {
         });
     };
 
-    const setButtons = async (paypal, orders, cart) => {
+    const setButtons = async (paypal, purchaseUnits, cart) => {
         await paypal
             .Buttons({
                 style: {
@@ -30,20 +30,21 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                 },
                 // Sets up the transaction when a payment button is clicked
                 createOrder: (data, actions) => {
-                    return actions.order.create(orders);
+                    return actions.order.create(purchaseUnits);
                 },
                 // Finalize the transaction after payer approval
                 onApprove: async (data, actions) => {
                     await actions.order.capture();
 
-                    return router.get(
-                        route("payments.index", {
-                            order_id: cart.value.id,
-                            method: "paypal",
-                        }),
-                        {},
-                        { replace: true },
-                    );
+                    return router.get(route("orders.show", cart.value.id));
+                    // return router.get(
+                    //     route("payments.index", {
+                    //         order_id: cart.value.id,
+                    //         method: "paypal",
+                    //     }),
+                    //     {},
+                    //     { replace: true },
+                    // );
                 },
                 onError: (data, actions) => {
                     return (err) => {

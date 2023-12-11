@@ -104,7 +104,7 @@
                                         aria-hidden="true"
                                     >
                                         <div
-                                            class="w-full border-t border-gray-300 dark:border-gray-600"
+                                            class="w-full border-t border-gray-200 dark:border-gray-600"
                                         />
                                     </div>
                                     <div class="relative flex justify-center">
@@ -188,7 +188,7 @@ useMotion(itemRef, {
 onMounted(async () => {
     if (paypalStore.isNotEnable()) return;
 
-    const orders = cartsStore.paypalOrders();
+    const purchaseUnits = cartsStore.paypalPurchaseUnits();
 
     try {
         const paypal = await paypalStore.loadPaypal();
@@ -197,7 +197,11 @@ onMounted(async () => {
             try {
                 // await window.fbq("track", "InitiateCheckout");
 
-                await paypalStore.setButtons(paypal, orders, cart);
+                return await paypalStore.setButtons(
+                    paypal,
+                    purchaseUnits,
+                    cart,
+                );
             } catch (error) {
                 console.error("failed to render the PayPal Buttons", error);
             }

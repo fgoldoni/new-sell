@@ -45,7 +45,7 @@ export const useCartsStore = defineStore(
             return couponAmount;
         };
 
-        const paypalOrders = () => {
+        const paypalPurchaseUnits = () => {
             return {
                 purchase_units: [
                     {
@@ -126,7 +126,7 @@ export const useCartsStore = defineStore(
             );
 
         return {
-            paypalOrders,
+            paypalPurchaseUnits,
             updatePayload,
             updateQuantity,
             store,
