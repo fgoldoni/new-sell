@@ -23,7 +23,11 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const close = async (value: boolean) => {
+const close = (value: boolean) => {
+    setTimeout(() => {
+        wizard.setComponent("Step1");
+    }, 2000);
+
     return router.get(
         usePage().props.basePageRoute,
         {},
@@ -78,7 +82,7 @@ onMounted(async () => {
                         ...{ reset: reset.value },
                     });
 
-                    if (component.value !== "Step1") {
+                    if (component.value === null) {
                         await wizard.setComponent("Step1");
                     }
                 })
@@ -86,7 +90,7 @@ onMounted(async () => {
                     throw new ApiError(error);
                 });
         } else {
-            if (component.value !== "Step1") {
+            if (component.value === null) {
                 await wizard.setComponent("Step1");
             }
         }
