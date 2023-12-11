@@ -6,6 +6,11 @@ export interface User {
     phone: string;
 }
 
+export interface Order {
+    id: number;
+    name: string;
+}
+
 export interface Country {
     id: number;
     name: string;

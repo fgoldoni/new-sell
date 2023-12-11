@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { router, usePage } from "@inertiajs/vue3";
 import { loadScript } from "@paypal/paypal-js";
+import { useOrdersStore } from "@/stores/useOrdersStore";
 
 export const usePaypalStore = defineStore("paypalStore", () => {
+    const ordersStore = useOrdersStore();
     const isNotEnable = () => {
         return (
             !usePage().props.team.paypal ||
@@ -34,7 +36,13 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                 },
                 // Finalize the transaction after payer approval
                 onApprove: async (data, actions) => {
-                    await actions.order.capture();
+                    const capture = await actions.order.capture();
+
+                    await ordersStore.store(
+                        cart.value.id,
+                        "paypal",
+                        capture.id,
+                    );
 
                     return router.get(route("orders.show", cart.value.id));
                     // return router.get(
