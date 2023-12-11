@@ -9,6 +9,7 @@ export interface User {
 export interface Country {
     id: number;
     name: string;
+    emoji: string;
 }
 
 export type PageProps<

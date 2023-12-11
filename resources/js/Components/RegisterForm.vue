@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import PaymentMethod from "@/Components/PaymentMethod.vue";
 import Comboboxes from "@/Components/Comboboxes.vue";
+import { storeToRefs } from "pinia";
+import { useCountriesStore } from "@/stores/useCountriesStore";
+
+const countriesStore = useCountriesStore();
+const { countries } = storeToRefs(countriesStore);
 
 interface Props {
     modelValue: any;
@@ -14,7 +19,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <form class="w-full mt-8 p-4 space-y-8">
+    <form class="w-full my-8 p-4 space-y-8">
         <div class="relative z-0 w-full mb-5 group">
             <input
                 type="text"
@@ -116,14 +121,14 @@ const emit = defineEmits<{
                 {{ __("Phone") }}
             </label>
         </div>
-        <Comboboxes></Comboboxes>
+        <Comboboxes
+            :options="countries"
+            :model-value="modelValue?.country_id"
+            @update:model-value="
+                (key, value) => emit('update:modelValue', key, value)
+            "
+        ></Comboboxes>
         <PaymentMethod></PaymentMethod>
-        <button
-            type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-            Submit
-        </button>
     </form>
 </template>
 

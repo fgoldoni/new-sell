@@ -1,12 +1,7 @@
 import { ApiServiceBase } from "@/services/ApiServiceBase";
-import Application from "@/models/Application";
 import { User } from "@/types";
 
 export default class AuthenticationService extends ApiServiceBase {
-    async info(): Promise<Application> {
-        return await this.call<Application>("/");
-    }
-
     async register(
         name: string,
         email: string,
@@ -18,7 +13,6 @@ export default class AuthenticationService extends ApiServiceBase {
         to: string,
         terms: boolean,
     ): Promise<any> {
-        debugger;
         return await this.call<any>("/users", {
             method: "post",
             body: {
