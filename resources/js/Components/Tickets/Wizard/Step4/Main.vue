@@ -70,98 +70,197 @@
                         </li>
                     </template>
                 </Stepper>
-                <Body :model-value="form" @update:model-value="update"></Body>
+                <div
+                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8 w-full p-4 sm:p-0"
+                >
+                    <div class="col-span-3">
+                        <div
+                            class="flex h-full flex-col bg-slate-50 dark:bg-slate-800 shadow-xl"
+                        >
+                            <div
+                                class="border-b border-slate-200 dark:border-slate-600"
+                            >
+                                <div class="p-6">
+                                    <div
+                                        class="flex items-start justify-between"
+                                    >
+                                        <h2
+                                            class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
+                                        >
+                                            Was wollt ihr trinken?
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form
+                                class="w-full my-8 p-4 space-y-8"
+                                @submit.prevent="submit"
+                                @keydown="(value) => form.errors.clear(value)"
+                            >
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        v-model="form.name"
+                                        id="name"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=""
+                                        required
+                                    />
+                                    <label
+                                        for="name"
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                    >
+                                        {{ __("Name") }}
+                                    </label>
+                                    <InputError
+                                        :message="form.errors.get('name')"
+                                    />
+                                </div>
+
+                                <div class="grid md:grid-cols-2 md:gap-6">
+                                    <div class="relative z-0 w-full mb-5 group">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            v-model="form.email"
+                                            id="email"
+                                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                            placeholder=" "
+                                            required
+                                        />
+                                        <label
+                                            for="email"
+                                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                        >
+                                            {{ __("Email address") }}
+                                        </label>
+                                        <InputError
+                                            :message="form.errors.get('email')"
+                                        />
+                                    </div>
+                                    <div class="relative z-0 w-full mb-5 group">
+                                        <input
+                                            type="email"
+                                            name="email_confirmation"
+                                            v-model="form.email_confirmation"
+                                            id="email_confirmation"
+                                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                            placeholder=" "
+                                            required
+                                        />
+                                        <label
+                                            for="email_confirmation"
+                                            class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                                        >
+                                            {{ __("Email Confirmation") }}
+                                        </label>
+                                        <p
+                                            class="mt-2 text-xs text-slate-400 dark:text-slate-500"
+                                        >
+                                            Stelle sicher, dass deine
+                                            E-Mail-Adresse korrekt ist.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="relative z-0 w-full mb-5 group">
+                                    <span
+                                        class="absolute start-0 bottom-3 text-gray-500 dark:text-gray-400"
+                                    >
+                                        <svg
+                                            class="w-4 h-4 rtl:rotate-[270deg]"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="currentColor"
+                                            viewBox="0 0 19 18"
+                                        >
+                                            <path
+                                                d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z"
+                                            />
+                                        </svg>
+                                    </span>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        id="phone"
+                                        v-model="form.phone"
+                                        class="block py-2.5 ps-6 pe-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" "
+                                    />
+                                    <label
+                                        for="phone"
+                                        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:start-6 peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto"
+                                    >
+                                        {{ __("Phone") }}
+                                    </label>
+                                </div>
+                                <InputError
+                                    :message="form.errors.get('phone')"
+                                />
+                                <Comboboxes
+                                    :options="countries"
+                                    v-model="form.country_id"
+                                ></Comboboxes>
+                                <InputError
+                                    :message="form.errors.get('country_id')"
+                                />
+                                <PaymentMethod></PaymentMethod>
+                                <button
+                                    ref="submitRef"
+                                    type="submit"
+                                    class="hidden"
+                                />
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div
-            id="toast-default"
-            class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-            role="alert"
-        >
-            <div
-                class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-blue-500 bg-blue-100 rounded-lg dark:bg-blue-800 dark:text-blue-200"
-            >
-                <svg
-                    class="w-4 h-4"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 18 20"
-                >
-                    <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15.147 15.085a7.159 7.159 0 0 1-6.189 3.307A6.713 6.713 0 0 1 3.1 15.444c-2.679-4.513.287-8.737.888-9.548A4.373 4.373 0 0 0 5 1.608c1.287.953 6.445 3.218 5.537 10.5 1.5-1.122 2.706-3.01 2.853-6.14 1.433 1.049 3.993 5.395 1.757 9.117Z"
-                    />
-                </svg>
-                <span class="sr-only">Fire icon</span>
-            </div>
-            <div class="ms-3 text-sm font-normal">Set yourself free.</div>
-            <button
-                type="button"
-                class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-                data-dismiss-target="#toast-default"
-                aria-label="Close"
-            >
-                <span class="sr-only">Close</span>
-                <svg
-                    class="w-3 h-3"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 14 14"
-                >
-                    <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                    />
-                </svg>
-            </button>
-        </div>
-
-        <Footer @submit-action="register"></Footer>
+        <Footer @submit-action="submitAction"></Footer>
     </div>
 </template>
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
-import Body from "@/Components/Tickets/Wizard/Step4/Body.vue";
 import Footer from "@/Components/Tickets/Wizard/Footer.vue";
 import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
 import { usePage } from "@inertiajs/vue3";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { useApi } from "@/composable/useApi";
 import { Errors } from "@/plugins/errors";
 import ApiError from "@/models/ApiError";
+import PaymentMethod from "@/Components/PaymentMethod.vue";
+import Comboboxes from "@/Components/Comboboxes.vue";
+import { useCountriesStore } from "@/stores/useCountriesStore";
+import { setCookie } from "@/composable/useCookie";
+import { COOKIE_MAX_AGE_1_YEAR } from "@/utils/constants";
+import InputError from "@/Components/InputError.vue";
 
 const itemRef = ref<HTMLElement>();
+const submitRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { item } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
 const { isAuthenticated, user } = storeToRefs(authStore);
-
-const api = useApi();
+const countriesStore = useCountriesStore();
+const { countries } = storeToRefs(countriesStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
 
-const form = ref({
+const form = reactive({
     name: user.value?.name || "",
     email: user.value?.email || "",
     email_confirmation: user.value?.email || "",
-    country_id: user.value?.country_id,
+    country_id: user.value?.country_id || 149,
     phone: user.value?.phone || "",
     locale: usePage().props.team.locale,
     terms: true,
@@ -171,25 +270,39 @@ const form = ref({
     to: route("home"),
 });
 
-const register = async () => {
+const submit = async () => {
     try {
-        await api.authentication.register(
-            form.value.name,
-            form.value.email,
-            form.value.email_confirmation,
-            form.value.phone,
-            form.value.country_id,
-            form.value.locale,
-            form.value.is_logged,
-            form.value.to,
-            form.value.terms,
-        );
+        await authStore
+            .register(
+                form.name,
+                form.email,
+                form.email_confirmation,
+                form.phone,
+                form.country_id,
+                form.locale,
+                form.is_logged,
+                form.to,
+                form.terms,
+            )
+            .then(async (response: any) => {
+                await setCookie(
+                    "accessToken",
+                    response.token,
+                    COOKIE_MAX_AGE_1_YEAR,
+                );
+                await authStore.fetchUser();
+            })
+            .catch((error: any) => {
+                form.errors.onFailed(error);
+                throw new ApiError(error);
+            });
     } catch (error) {
         throw new ApiError(error);
     }
 };
-const update = (key: any, value: any) => {
-    form.value[key] = value;
+
+const submitAction = () => {
+    submitRef.value?.click();
 };
 
 useMotion(itemRef, {

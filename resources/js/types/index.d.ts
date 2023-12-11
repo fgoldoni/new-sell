@@ -2,7 +2,7 @@ export interface User {
     id: number;
     name: string;
     email: string;
-    country_id: string;
+    country_id: number;
     phone: string;
 }
 

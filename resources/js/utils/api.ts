@@ -2,6 +2,9 @@ import { ofetch } from "ofetch";
 import { useCookie } from "@/composable/useCookie";
 import { usePage } from "@inertiajs/vue3";
 import { API_BASE_URL } from "@/utils/constants";
+import ApiError from "@/models/ApiError";
+
+const VALIDATION_ERROR_STATUS = 422;
 
 export const $api = ofetch.create({
     baseURL: API_BASE_URL || "/api",
@@ -42,6 +45,11 @@ export const $api = ofetch.create({
                 ...options.headers,
                 "x-cart-id": `${cartId}`,
             };
+        }
+    },
+    async onResponseError({ response }) {
+        if (response.status === VALIDATION_ERROR_STATUS) {
+            throw new ApiError(response._data);
         }
     },
 });

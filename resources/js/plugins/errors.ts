@@ -51,48 +51,44 @@ export class Errors {
     }
 
     onFailed(error) {
-        if (
-            error.response !== undefined &&
-            error.response.hasOwnProperty("data") &&
-            error.response.data.hasOwnProperty("errors")
-        ) {
-            this.record(error.response.data.errors);
-            if (error.response.data.hasOwnProperty("message")) {
-                ElNotification({
-                    title: "Erreur",
-                    message: error.response.data.message,
-                    type: "error",
-                });
+        if (error !== undefined && error.hasOwnProperty("errors")) {
+            this.record(error.errors);
+            if (error.hasOwnProperty("message")) {
+                // ElNotification({
+                //     title: "Erreur",
+                //     message: error.message,
+                //     type: "error",
+                // });
             } else {
-                ElNotification({
-                    title: "Erreur",
-                    dangerouslyUseHTMLString: true,
-                    message: this.getErrors(this.errors.errors),
-                    type: "error",
-                });
+                // ElNotification({
+                //     title: "Erreur",
+                //     dangerouslyUseHTMLString: true,
+                //     message: this.getErrors(this.errors.errors),
+                //     type: "error",
+                // });
             }
         } else if (
-            error.response !== undefined &&
-            error.response.hasOwnProperty("data") &&
-            error.response.data.hasOwnProperty("message")
+            error !== undefined &&
+            error.hasOwnProperty("data") &&
+            error.hasOwnProperty("message")
         ) {
-            ElNotification({
-                title: "Erreur",
-                message: error.response.data.message,
-                type: "error",
-            });
+            // ElNotification({
+            //     title: "Erreur",
+            //     message: error.message,
+            //     type: "error",
+            // });
         } else if (error.hasOwnProperty("message")) {
-            ElNotification({
-                title: "Erreur",
-                message: error.message,
-                type: "error",
-            });
+            // ElNotification({
+            //     title: "Erreur",
+            //     message: error.message,
+            //     type: "error",
+            // });
         } else {
-            ElNotification({
-                title: "Erreur",
-                message: "Service not answer, Please contact your Support",
-                type: "error",
-            });
+            // ElNotification({
+            //     title: "Erreur",
+            //     message: "Service not answer, Please contact your Support",
+            //     type: "error",
+            // });
             console.log(error);
         }
     }

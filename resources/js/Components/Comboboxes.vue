@@ -17,7 +17,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-    "update:modelValue": [key: any, value: any];
+    "update:modelValue": [value: number];
 }>();
 
 const query = ref("");
@@ -44,9 +44,7 @@ const selectedValue = computed(() => {
     <Combobox
         as="div"
         :model-value="selectedValue"
-        @update:modelValue="
-            (value) => emit('update:modelValue', 'country_id', value?.id)
-        "
+        @update:modelValue="(value) => emit('update:modelValue', value?.id)"
     >
         <div class="relative mt-2">
             <ComboboxInput

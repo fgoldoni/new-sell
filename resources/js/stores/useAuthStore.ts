@@ -8,7 +8,7 @@ export const useAuthStore = defineStore(
     () => {
         const api = useApi();
         const user = ref<User | null>(null);
-        const isAuthenticated = computed(() => !!user);
+        const isAuthenticated = computed(() => !!user.value);
         const token = ref<string | null>(null);
 
         const fetchUser = async (): Promise<any> => {
@@ -18,24 +18,32 @@ export const useAuthStore = defineStore(
         const register = async (
             name: string,
             email: string,
-            password: string,
-            password_confirmation: string,
+            email_confirmation: string,
+            phone: string,
+            country_id: number,
+            locale: string,
+            is_logged: boolean,
+            to: string,
+            terms: boolean,
         ): Promise<any> => {
-            await api.authentication.register(
+            return await api.authentication.register(
                 name,
                 email,
-                password,
-                password_confirmation,
+                email_confirmation,
+                phone,
+                country_id,
+                locale,
+                is_logged,
+                to,
+                terms,
             );
-            await fetchUser();
-
-            await router.push(config.public.homeUrl);
         };
 
         return {
             user,
             isAuthenticated,
             register,
+            fetchUser,
         };
     },
     {
