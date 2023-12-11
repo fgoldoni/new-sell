@@ -5,15 +5,16 @@
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
                 @close="emit('close', false)"
-                @previous="() => wizard.setComponent('Step3')"
-                :has-previous="true"
+                :has-previous="false"
                 title="Success"
             ></Header>
+            <Body></Body>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
+import Body from "@/Components/Tickets/Wizard/Step6/Body.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
