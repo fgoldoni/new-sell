@@ -1,9 +1,8 @@
 <template>
-    <RadioGroup v-model="selectedMailingLists">
-        <RadioGroupLabel class="text-xl font-semibold leading-6 text-slate-500"
-            >Wie möchtest du zahlen?
-        </RadioGroupLabel>
-
+    <RadioGroup
+        :model-value="selectedMailingLists"
+        @update:modelValue="(value) => emit('update:modelValue', value?.id)"
+    >
         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <RadioGroupOption
                 as="template"
@@ -66,8 +65,8 @@
     </RadioGroup>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import {
     RadioGroup,
     RadioGroupDescription,
@@ -76,19 +75,29 @@ import {
 } from "@headlessui/vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 
+interface Props {
+    modelValue?: string;
+}
+
+const props = defineProps<Props>();
+
+const emit = defineEmits<{
+    "update:modelValue": [value: string];
+}>();
+
 const mailingLists = [
     {
-        id: 1,
+        id: "paypal",
         title: "Paypal",
         images: ["/images/payments/paypal.png"],
     },
     {
-        id: 2,
+        id: "sofort",
         title: "Sofort",
         images: ["/images/payments/sofort.png"],
     },
     {
-        id: 3,
+        id: "card",
         title: "Credit/Debit/ATM Card",
         images: [
             "/images/payments/visa.png",
@@ -97,11 +106,17 @@ const mailingLists = [
         ],
     },
     {
-        id: 4,
+        id: "klarna",
         title: "Klarna",
         images: ["/images/payments/klarna.svg"],
     },
 ];
 
-const selectedMailingLists = ref(mailingLists[0]);
+const selectedMailingLists = computed(() => {
+    if (props.modelValue) {
+        const found = mailingLists.find((c) => c.id === props.modelValue);
+        return found;
+    }
+    return null;
+});
 </script>

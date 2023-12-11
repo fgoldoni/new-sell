@@ -188,6 +188,7 @@
                                         v-model="form.phone"
                                         class="block py-2.5 ps-6 pe-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" "
+                                        required
                                     />
                                     <label
                                         for="phone"
@@ -206,7 +207,6 @@
                                 <InputError
                                     :message="form.errors.get('country_id')"
                                 />
-                                <PaymentMethod></PaymentMethod>
                                 <button
                                     ref="submitRef"
                                     type="submit"
@@ -235,7 +235,6 @@ import { usePage } from "@inertiajs/vue3";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { Errors } from "@/plugins/errors";
 import ApiError from "@/models/ApiError";
-import PaymentMethod from "@/Components/PaymentMethod.vue";
 import Comboboxes from "@/Components/Comboboxes.vue";
 import { useCountriesStore } from "@/stores/useCountriesStore";
 import { setCookie } from "@/composable/useCookie";
@@ -267,6 +266,7 @@ const form = reactive({
     errors: new Errors(),
     is_logged: isAuthenticated.value,
     processing: false,
+    payment: null,
     to: route("home"),
 });
 
@@ -285,12 +285,9 @@ const submit = async () => {
                 form.terms,
             )
             .then(async (response: any) => {
-                await setCookie(
-                    "accessToken",
-                    response.token,
-                    COOKIE_MAX_AGE_1_YEAR,
-                );
+                setCookie("accessToken", response.token, COOKIE_MAX_AGE_1_YEAR);
                 await authStore.fetchUser();
+                wizard.setComponent("Step5");
             })
             .catch((error: any) => {
                 form.errors.onFailed(error);

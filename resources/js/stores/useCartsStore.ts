@@ -5,6 +5,7 @@ import ApiError from "@/models/ApiError";
 import { Cart, CartItem, CartPayload } from "@/types/carts";
 import { Ticket } from "@/models/Ticket";
 import { find } from "lodash";
+import { usePage } from "@inertiajs/vue3";
 
 export const useCartsStore = defineStore(
     "carts",
@@ -21,6 +22,55 @@ export const useCartsStore = defineStore(
             entry: "",
             reset: false,
         });
+        const paypalItems = () => {
+            return cart.value?.items.map((item) => ({
+                name: item.name,
+                quantity: item.quantity,
+                unit_amount: {
+                    value: item.price_with_conditions,
+                    currency_code: usePage().props.team.currency.code,
+                },
+            }));
+        };
+
+        const paypalCoupon = () => {
+            let couponAmount = 0;
+
+            for (const [key, value] of Object.entries(
+                cart.value?.cart_total_conditions,
+            )) {
+                couponAmount += value.amount;
+            }
+
+            return couponAmount;
+        };
+
+        const paypalOrders = () => {
+            return {
+                purchase_units: [
+                    {
+                        description: "description",
+                        items: paypalItems(),
+                        amount: {
+                            value: cart.value?.total,
+                            currency_code: usePage().props.team.currency.code,
+                            breakdown: {
+                                item_total: {
+                                    value: cart.value?.sub_total,
+                                    currency_code:
+                                        usePage().props.team.currency.code,
+                                },
+                                discount: {
+                                    currency_code:
+                                        usePage().props.team.currency.code,
+                                    value: `${paypalCoupon()}`,
+                                },
+                            },
+                        },
+                    },
+                ],
+            };
+        };
 
         const updateQuantity = async (quantity: number) => {
             if (quantity <= 0) {
@@ -76,6 +126,7 @@ export const useCartsStore = defineStore(
             );
 
         return {
+            paypalOrders,
             updatePayload,
             updateQuantity,
             store,

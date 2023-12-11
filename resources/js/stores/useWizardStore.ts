@@ -4,6 +4,7 @@ import Step1 from "@/Components/Tickets/Wizard/Step1/Main.vue";
 import Step2 from "@/Components/Tickets/Wizard/Step2/Main.vue";
 import Step3 from "@/Components/Tickets/Wizard/Step3/Main.vue";
 import Step4 from "@/Components/Tickets/Wizard/Step4/Main.vue";
+import Step5 from "@/Components/Tickets/Wizard/Step5/Main.vue";
 
 export const useWizardStore = defineStore(
     "wizard",
@@ -57,6 +58,9 @@ export const useWizardStore = defineStore(
                     break;
                 case "Step4":
                     value = Step4;
+                    break;
+                case "Step5":
+                    value = Step5;
                     break;
                 default:
                     value = null;

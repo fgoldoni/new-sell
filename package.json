@@ -29,6 +29,7 @@
     "dependencies": {
         "@headlessui/vue": "^1.7.16",
         "@heroicons/vue": "^2.0.18",
+        "@paypal/paypal-js": "^7.1.1",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@vueuse/core": "^10.6.1",
         "@vueuse/motion": "^2.0.0",
