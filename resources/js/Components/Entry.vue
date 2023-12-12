@@ -33,12 +33,13 @@ useMotion(itemRef, {
 
 <template>
     <div
+        @click="emit('open', item.id)"
         ref="itemRef"
         :class="[
             item.quantity > 0
                 ? `ring-${$page.props.team.color}-500`
                 : 'ring-rose-500',
-            `flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 p-8 shadow-xl ring-1 sm:p-10`,
+            `cursor-pointer flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 p-8 shadow-xl ring-1 sm:p-10`,
         ]"
     >
         <div>

@@ -80,7 +80,7 @@
                     </div>
                     <svg
                         v-if="processing"
-                        class="animate-spin h-10 w-10 inline-flex text-green-900"
+                        :class="`animate-spin h-10 w-10 inline-flex text-${$page.props.team.color}-900`"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
