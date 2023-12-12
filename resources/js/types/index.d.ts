@@ -20,6 +20,7 @@ export interface Order {
     event: any;
     team: any;
     user: any;
+    qr_code: string;
 }
 
 export interface Country {

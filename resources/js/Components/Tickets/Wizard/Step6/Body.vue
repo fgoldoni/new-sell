@@ -16,11 +16,10 @@
                         <div
                             class="inline-flex overflow-hidden rounded-lg border-4 border-white"
                         >
-                            <img
+                            <div
                                 class="h-24 w-24 flex-shrink-0 sm:h-40 sm:w-40 lg:h-48 lg:w-48"
-                                src="https://images.unsplash.com/photo-1501031170107-cfd33f0cbdcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
-                                alt=""
-                            />
+                                v-html="order.qr_code"
+                            ></div>
                         </div>
                     </div>
                 </div>
@@ -30,7 +29,7 @@
                             <h3
                                 class="text-xl font-bold text-gray-900 sm:text-2xl"
                             >
-                                {{ order.user.name }}
+                                {{ order.event.name }}
                             </h3>
                             <span
                                 class="ml-2.5 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-green-400"
@@ -39,7 +38,7 @@
                             </span>
                         </div>
                         <p class="text-sm text-gray-500">
-                            {{ order.user.email }}
+                            {{ order.event.address }}
                         </p>
                     </div>
                     <div
@@ -49,13 +48,13 @@
                             type="button"
                             class="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
                         >
-                            Download
+                            {{ order.team.email }}
                         </button>
                         <button
                             type="button"
                             class="inline-flex w-full flex-1 items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
                         >
-                            Call
+                            {{ order.team.phone }}
                         </button>
                         <div class="ml-3 inline-flex sm:ml-0">
                             <Menu
@@ -121,20 +120,17 @@
         </div>
         <div class="px-4 py-5 sm:px-0 sm:py-0">
             <dl class="space-y-8 sm:space-y-0 sm:divide-y sm:divide-gray-200">
-                <div class="sm:flex sm:px-6 sm:py-5">
+                <div class="sm:px-6 sm:py-5">
                     <dt
-                        class="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0 lg:w-48"
+                        class="text-sm font-medium text-gray-500 sm:w-60 sm:flex-shrink-0"
                     >
-                        Bio
+                        Dear Goldoni Bogning Fouotsa!
                     </dt>
-                    <dd
-                        class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0"
-                    >
+                    <dd class="mt-4 text-sm text-gray-900 sm:col-span-2">
                         <p>
-                            Enim feugiat ut ipsum, neque ut. Tristique mi id
-                            elementum praesent. Gravida in tempus feugiat netus
-                            enim aliquet a, quam scelerisque. Dictumst in
-                            convallis nec in bibendum aenean arcu.
+                            Thank you for your reservation and your trust. We
+                            are glad that you have found something suitable with
+                            us.
                         </p>
                     </dd>
                 </div>

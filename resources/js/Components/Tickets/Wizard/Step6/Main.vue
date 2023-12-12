@@ -6,8 +6,8 @@
             <Header
                 @close="emit('close', false)"
                 :has-previous="false"
-                :title="order.event.name"
-                :description="order.event.address"
+                :title="order.user.name"
+                :description="order.team.currency + ' ' + order.total"
             ></Header>
             <Body ref="itemRef"></Body>
         </div>
