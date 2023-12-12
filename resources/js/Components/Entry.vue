@@ -2,29 +2,18 @@
 import { Ticket } from "@/models/Ticket";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
-import { useCartsStore } from "@/stores/useCartsStore";
-import { useApi } from "@/composable/useApi";
-import ApiError from "@/models/ApiError";
-import { storeToRefs } from "pinia";
-import { useWizardStore } from "@/stores/useWizardStore";
-import { router } from "@inertiajs/vue3";
 
 interface Props {
     item: Ticket;
     index: number;
-    modelValue: boolean;
+    processing: string | null;
 }
 
-const api = useApi();
 const props = defineProps<Props>();
 const emit = defineEmits<{
-    "update:modelValue": [value: boolean];
+    open: [value: string];
 }>();
 const itemRef = ref<HTMLElement>();
-
-const wizard = useWizardStore();
-const cartsStore = useCartsStore();
-const { payload } = storeToRefs(cartsStore);
 
 useMotion(itemRef, {
     initial: {
@@ -40,70 +29,6 @@ useMotion(itemRef, {
         },
     },
 });
-
-const openModal = async (id: string) => {
-    await wizard.setComponent("Step1");
-    try {
-        await api.tickets
-            .find(id)
-            .then(async (response: any) => {
-                cartsStore.setItem(response.data);
-                const cartItem = cartsStore.findItem("ticket", id);
-                const reset = ref(false);
-
-                if (
-                    payload.value.id !== id ||
-                    payload.value.model !== response.data.model
-                ) {
-                    cartsStore.updatePayload("id", id);
-                    cartsStore.updatePayload("quantity", 1);
-                    cartsStore.updatePayload("entry", "");
-                    reset.value = true;
-                    cartsStore.updatePayload("model", response.data.model);
-                    cartsStore.updatePayload("message", "");
-                }
-
-                if (payload.value?.quantity <= 0) {
-                    cartsStore.updatePayload("quantity", 1);
-                }
-
-                if (cartItem && payload.value.id !== id) {
-                    cartsStore.updatePayload("id", id);
-                    cartsStore.updatePayload("quantity", cartItem.quantity);
-                    cartsStore.updatePayload(
-                        "entry",
-                        cartItem.attributes?.entry,
-                    );
-                    cartsStore.updatePayload(
-                        "message",
-                        cartItem.attributes?.message,
-                    );
-                    cartsStore.updatePayload("model", response.data.model);
-                }
-
-                await cartsStore.store({
-                    ...payload.value,
-                    ...{ reset: reset.value },
-                });
-
-                return router.get(
-                    route("tickets.show", { id: id }),
-                    {},
-                    {
-                        preserveState: false,
-                        preserveScroll: true,
-                        replace: false,
-                    },
-                );
-                // emit("update:modelValue", true);
-            })
-            .catch((error: any) => {
-                throw new ApiError(error);
-            });
-    } catch (error) {
-        console.error(error);
-    }
-};
 </script>
 
 <template>
@@ -161,9 +86,8 @@ const openModal = async (id: string) => {
                 </li>
             </ul>
         </div>
-        <a
-            href="javascript:;"
-            @click="openModal(item.id)"
+        <button
+            @click="emit('open', item.id)"
             aria-describedby="tier-hobby"
             :class="[
                 item.quantity > 0
@@ -172,13 +96,35 @@ const openModal = async (id: string) => {
                 `mt-8 block uppercase rounded-md px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600`,
             ]"
         >
-            <span v-if="item.quantity > 0">
+            <span v-if="processing === item.id">
+                <svg
+                    class="animate-spin h-5 w-5 inline-flex text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                    ></circle>
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                </svg>
+            </span>
+            <span v-else-if="item.quantity > 0">
                 {{ __("Noch frei, jetzt reservieren") }}
             </span>
             <span v-else>
                 {{ __("Leider schon reserviert") }}
             </span>
-        </a>
+        </button>
     </div>
 </template>
 

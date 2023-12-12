@@ -52,7 +52,8 @@
                             :key="item.id"
                             :index="index"
                             :item="item"
-                            v-model="open"
+                            :processing="processing"
+                            @open="open"
                         ></Entry>
 
                         <div
@@ -88,8 +89,6 @@
             v-if="$root.modalComponent"
             :is="$root.modalComponent"
         />
-
-        <!--        <Siderbar :show="open" @close="(value) => (open = value)"></Siderbar>-->
     </div>
 </template>
 
@@ -98,7 +97,86 @@ import Entry from "@/Components/Entry.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import ApiError from "@/models/ApiError";
+import { useApi } from "@/composable/useApi";
+import { useWizardStore } from "@/stores/useWizardStore";
+import { useCartsStore } from "@/stores/useCartsStore";
+import { router } from "@inertiajs/vue3";
 
 const { entries } = storeToRefs(useTicketsStore());
-const open = ref(false);
+
+const api = useApi();
+const processing = ref<string | null>(null);
+
+const wizard = useWizardStore();
+const cartsStore = useCartsStore();
+const { payload } = storeToRefs(cartsStore);
+
+const open = async (id: string) => {
+    await wizard.setComponent("Step1");
+    try {
+        processing.value = id;
+
+        await api.tickets
+            .find(id)
+            .then(async (response: any) => {
+                cartsStore.setItem(response.data);
+                const cartItem = cartsStore.findItem("ticket", id);
+                const reset = ref(false);
+
+                if (
+                    payload.value.id !== id ||
+                    payload.value.model !== response.data.model
+                ) {
+                    cartsStore.updatePayload("id", id);
+                    cartsStore.updatePayload("quantity", 1);
+                    cartsStore.updatePayload("entry", "");
+                    reset.value = true;
+                    cartsStore.updatePayload("model", response.data.model);
+                    cartsStore.updatePayload("message", "");
+                }
+
+                if (payload.value && payload.value.quantity <= 0) {
+                    cartsStore.updatePayload("quantity", 1);
+                }
+
+                if (cartItem && payload.value.id !== id) {
+                    cartsStore.updatePayload("id", id);
+                    cartsStore.updatePayload("quantity", cartItem.quantity);
+                    cartsStore.updatePayload(
+                        "entry",
+                        cartItem.attributes?.entry,
+                    );
+                    cartsStore.updatePayload(
+                        "message",
+                        cartItem.attributes?.message,
+                    );
+                    cartsStore.updatePayload("model", response.data.model);
+                }
+
+                await cartsStore.store({
+                    ...payload.value,
+                    ...{ reset: reset.value },
+                });
+
+                return router.get(
+                    route("tickets.show", { id: id }),
+                    {},
+                    {
+                        preserveState: false,
+                        preserveScroll: true,
+                        replace: false,
+                    },
+                );
+            })
+            .catch((error: any) => {
+                throw new ApiError(error);
+            })
+            .finally(() => {
+                processing.value = null;
+            });
+    } catch (error) {
+        console.error(error);
+    }
+};
 </script>

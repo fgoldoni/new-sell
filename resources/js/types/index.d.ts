@@ -17,6 +17,9 @@ export interface Order {
     total: number;
     cart_sub_total_conditions: any;
     cart_total_conditions: any;
+    event: any;
+    team: any;
+    user: any;
 }
 
 export interface Country {
