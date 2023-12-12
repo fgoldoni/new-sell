@@ -73,7 +73,7 @@
             </div>
         </div>
 
-        <Footer @submit-action="nextAction"></Footer>
+        <Footer @submit-action="nextAction" :processing="processing"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -90,17 +90,17 @@ import { storeToRefs } from "pinia";
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { payload, item } = storeToRefs(cartsStore);
+const { payload, item, processing } = storeToRefs(cartsStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
 
-const nextAction = () => {
-    if (payload.value?.quantity > 0) {
-        cartsStore.store(payload.value);
+const nextAction = async () => {
+    if (payload.value.quantity && payload.value.quantity > 0) {
+        await cartsStore.store(payload.value);
     }
-    wizard.setComponent("Step2");
+    await wizard.setComponent("Step2");
 };
 
 useMotion(itemRef, {

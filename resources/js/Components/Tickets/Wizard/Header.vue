@@ -8,7 +8,7 @@ import { usePage } from "@inertiajs/vue3";
 
 interface Props {
     title?: string;
-    description?: number;
+    description?: string;
     hasPrevious?: boolean;
 }
 
@@ -63,7 +63,7 @@ const previous = () => {
             </div>
         </div>
         <div class="mt-1 text-center">
-            <p class="text-sm text-slate-900 dark:text-white uppercase">
+            <p class="text-md text-slate-500 dark:text-white">
                 {{
                     description ||
                     format(

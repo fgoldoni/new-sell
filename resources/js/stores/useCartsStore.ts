@@ -14,6 +14,8 @@ export const useCartsStore = defineStore(
 
         const cart = ref<Cart | null>(null);
         const item = ref<Ticket | null>(null);
+        const processing = ref<boolean>(false);
+
         let payload = ref<CartPayload>({
             id: "",
             model: "",
@@ -25,6 +27,14 @@ export const useCartsStore = defineStore(
 
         const reset = async () => {
             item.value = null;
+            payload.value = {
+                id: "",
+                model: "",
+                quantity: 1,
+                message: "",
+                entry: "",
+                reset: false,
+            };
             await handle();
         };
 
@@ -123,6 +133,7 @@ export const useCartsStore = defineStore(
         };
         const store = async (payload: CartPayload) => {
             try {
+                processing.value = true;
                 await api.carts
                     .store(payload)
                     .then((response: any) => {
@@ -130,6 +141,9 @@ export const useCartsStore = defineStore(
                     })
                     .catch((error: any) => {
                         throw new ApiError(error);
+                    })
+                    .finally(async () => {
+                        processing.value = false;
                     });
             } catch (error) {
                 console.error(error);
@@ -146,6 +160,7 @@ export const useCartsStore = defineStore(
             );
 
         return {
+            processing,
             paypalPurchaseUnits,
             updatePayload,
             updateQuantity,

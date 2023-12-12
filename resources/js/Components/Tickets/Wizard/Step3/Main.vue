@@ -74,7 +74,10 @@
             </div>
         </div>
 
-        <Footer @submit-action="() => wizard.setComponent('Step4')"></Footer>
+        <Footer
+            @submit-action="() => wizard.setComponent('Step4')"
+            :processing="processing"
+        ></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -91,7 +94,7 @@ import { storeToRefs } from "pinia";
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { item } = storeToRefs(cartsStore);
+const { item, processing } = storeToRefs(cartsStore);
 
 const emit = defineEmits<{
     close: [value: boolean];

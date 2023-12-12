@@ -2,9 +2,11 @@ import { defineStore } from "pinia";
 import { router, usePage } from "@inertiajs/vue3";
 import { loadScript } from "@paypal/paypal-js";
 import { useOrdersStore } from "@/stores/useOrdersStore";
+import { useWizardStore } from "@/stores/useWizardStore";
 
 export const usePaypalStore = defineStore("paypalStore", () => {
     const ordersStore = useOrdersStore();
+    const wizard = useWizardStore();
     const isNotEnable = () => {
         return (
             !usePage().props.team.paypal ||
@@ -46,15 +48,9 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                         capture.id,
                     );
 
+                    wizard.reset();
+
                     return router.get(route("orders.show", cart.value.id));
-                    // return router.get(
-                    //     route("payments.index", {
-                    //         order_id: cart.value.id,
-                    //         method: "paypal",
-                    //     }),
-                    //     {},
-                    //     { replace: true },
-                    // );
                 },
                 onError: (data, actions) => {
                     return (err) => {

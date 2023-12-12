@@ -11,11 +11,34 @@
                         @click="emit('submitAction')"
                         :class="`w-full bg-${$page.props.team.color}-600 px-4 py-2 text-sm flex items-center justify-center space-x-2 font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none`"
                     >
-                        <span class="">{{ __("Continue") }}</span>
-                        <span class="text-rose-900 font-extrabold"
-                            >({{ $page.props.team.currency.code }}
-                            {{ cart.total }})
-                        </span>
+                        <svg
+                            v-if="processing"
+                            class="animate-spin h-5 w-5 inline-flex text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                            ></circle>
+                            <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                        </svg>
+                        <div class="btn-base text-slate-100 uppercase" v-else>
+                            <span class="">{{ __("Continue") }}</span>
+                            <span class="ml-2 text-slate-300 font-extrabold"
+                                >({{ $page.props.team.currency.code }}
+                                {{ cart.total }})
+                            </span>
+                        </div>
                     </button>
                 </div>
                 <PopoverButton
@@ -55,7 +78,28 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-end items-center">
+                    <svg
+                        v-if="processing"
+                        class="animate-spin h-10 w-10 inline-flex text-green-900"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"
+                        ></circle>
+                        <path
+                            class="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                    </svg>
+                    <div v-else class="flex flex-col justify-end items-center">
                         <h4
                             class="flex justify-between items-center w-full text-lg font-bold text-left space-x-2"
                         >
@@ -147,7 +191,13 @@ const isDark = useDark();
 const cartsStore = useCartsStore();
 const { cart } = storeToRefs(cartsStore);
 
+interface Props {
+    processing?: boolean;
+}
+
+defineProps<Props>();
+
 const emit = defineEmits<{
-    submitAction: [id: any];
+    submitAction: any;
 }>();
 </script>

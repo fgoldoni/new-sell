@@ -15,7 +15,7 @@ interface Props {
     id?: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const close = (value: boolean) => {
     setTimeout(() => {

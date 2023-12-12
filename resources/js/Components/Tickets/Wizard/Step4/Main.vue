@@ -219,7 +219,7 @@
             </div>
         </div>
 
-        <Footer @submit-action="submitAction"></Footer>
+        <Footer @submit-action="submitAction" :processing="processing"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -242,6 +242,7 @@ import { setCookie } from "@/composable/useCookie";
 import { COOKIE_MAX_AGE_1_YEAR } from "@/utils/constants";
 
 const itemRef = ref<HTMLElement>();
+const processing = ref<boolean>(false);
 const submitRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
@@ -272,6 +273,7 @@ const form = reactive({
 
 const submit = async () => {
     try {
+        processing.value = true;
         await authStore
             .post(
                 form.name,
@@ -293,6 +295,9 @@ const submit = async () => {
             .catch((error: any) => {
                 form.errors.onFailed(error);
                 throw new ApiError(error);
+            })
+            .finally(() => {
+                processing.value = false;
             });
     } catch (error) {
         throw new ApiError(error);

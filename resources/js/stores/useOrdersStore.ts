@@ -25,7 +25,6 @@ export const useOrdersStore = defineStore(
             await api.orders
                 .store(id, mode, currency, total, reference)
                 .then(async (response: any) => {
-                    debugger;
                     order.value = response.data as Order;
                 })
                 .catch((error: any) => {

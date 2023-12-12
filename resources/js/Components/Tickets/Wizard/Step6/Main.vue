@@ -6,7 +6,8 @@
             <Header
                 @close="emit('close', false)"
                 :has-previous="false"
-                title="Success"
+                :title="order.event.name"
+                :description="order.event.address"
             ></Header>
             <Body ref="itemRef"></Body>
         </div>
@@ -15,12 +16,14 @@
 <script setup lang="ts">
 import Header from "@/Components/Tickets/Wizard/Header.vue";
 import Body from "@/Components/Tickets/Wizard/Step6/Body.vue";
-import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
+import { useOrdersStore } from "@/stores/useOrdersStore";
+import { storeToRefs } from "pinia";
 
 const itemRef = ref<HTMLElement>();
-const wizard = useWizardStore();
+const ordersStore = useOrdersStore();
+const { order } = storeToRefs(ordersStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
