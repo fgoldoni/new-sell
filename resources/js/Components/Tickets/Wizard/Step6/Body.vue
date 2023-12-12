@@ -48,7 +48,7 @@
                             type="button"
                             class="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
                         >
-                            {{ order.team.email }}
+                            {{ __("Download") }}
                         </button>
                         <button
                             type="button"
@@ -126,7 +126,9 @@
                     >
                         Dear Goldoni Bogning Fouotsa!
                     </dt>
-                    <dd class="mt-4 text-sm text-gray-900 sm:col-span-2">
+                    <dd
+                        class="mt-4 text-sm text-slate-500 dark:text-slate-400 sm:col-span-2"
+                    >
                         <p>
                             Thank you for your reservation and your trust. We
                             are glad that you have found something suitable with
@@ -134,41 +136,67 @@
                         </p>
                     </dd>
                 </div>
-                <div class="sm:flex sm:px-6 sm:py-5">
-                    <dt
-                        class="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0 lg:w-48"
-                    >
-                        Location
-                    </dt>
-                    <dd
-                        class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0"
-                    >
-                        New York, NY, USA
-                    </dd>
-                </div>
-                <div class="sm:flex sm:px-6 sm:py-5">
-                    <dt
-                        class="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0 lg:w-48"
-                    >
-                        Website
-                    </dt>
-                    <dd
-                        class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0"
-                    >
-                        ashleyporter.com
-                    </dd>
-                </div>
-                <div class="sm:flex sm:px-6 sm:py-5">
-                    <dt
-                        class="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0 lg:w-48"
-                    >
-                        Birthday
-                    </dt>
-                    <dd
-                        class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:ml-6 sm:mt-0"
-                    >
-                        <time datetime="1982-06-23">June 23, 1982</time>
-                    </dd>
+                <div
+                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8 w-full p-4 sm:p-0"
+                >
+                    <div class="col-span-3">
+                        <div
+                            class="flex h-full flex-col bg-slate-50 dark:bg-slate-800 shadow-xl"
+                        >
+                            <div
+                                class="border-b border-slate-200 dark:border-slate-600"
+                            >
+                                <div class="p-6">
+                                    <div
+                                        class="flex items-start justify-between"
+                                    >
+                                        <h2
+                                            class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
+                                        >
+                                            Deine Bestellung:
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul
+                                role="list"
+                                class="overflow-auto h-72 relative divide-y divide-slate-200 dark:divide-slate-600 h-72 overflow-y-auto"
+                            >
+                                <template
+                                    v-for="(item, key, index) in order?.items"
+                                    :key="item.id"
+                                >
+                                    <TicketOrderItem
+                                        :item="item"
+                                        v-if="item.attributes.type === 'ticket'"
+                                        :index="index"
+                                    ></TicketOrderItem>
+                                </template>
+
+                                <template
+                                    v-for="(item, key, index) in order?.items"
+                                    :key="item.id"
+                                >
+                                    <ProductOrderItem
+                                        :item="item"
+                                        v-if="
+                                            item.attributes.type === 'product'
+                                        "
+                                        :index="index"
+                                    ></ProductOrderItem>
+                                </template>
+                            </ul>
+                            <p
+                                class="my-6 p-4 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-slate-900 dark:text-white"
+                            >
+                                <span class="text-xl">Total</span>
+                                <span class="text-xl">
+                                    {{ order.team.currency }}
+                                    {{ order.total }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </dl>
         </div>
@@ -180,6 +208,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { EllipsisVerticalIcon } from "@heroicons/vue/20/solid";
 import { useOrdersStore } from "@/stores/useOrdersStore";
 import { storeToRefs } from "pinia";
+import TicketOrderItem from "@/Components/Tickets/Orders/TicketOrderItem.vue";
+import ProductOrderItem from "@/Components/Tickets/Orders/ProductOrderItem.vue";
 
 const ordersStore = useOrdersStore();
 const { order } = storeToRefs(ordersStore);
