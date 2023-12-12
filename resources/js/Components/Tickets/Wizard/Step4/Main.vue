@@ -87,7 +87,7 @@
                                         <h2
                                             class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
                                         >
-                                            Was wollt ihr trinken?
+                                            Kontaktinfos:
                                         </h2>
                                     </div>
                                 </div>

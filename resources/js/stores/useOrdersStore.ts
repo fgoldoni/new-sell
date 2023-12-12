@@ -7,7 +7,7 @@ import { useCartsStore } from "@/stores/useCartsStore";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 
 export const useOrdersStore = defineStore(
-    "ordersStore",
+    "orders",
     () => {
         const cartsStore = useCartsStore();
         const ticketsStore = useTicketsStore();
@@ -25,6 +25,7 @@ export const useOrdersStore = defineStore(
             await api.orders
                 .store(id, mode, currency, total, reference)
                 .then(async (response: any) => {
+                    debugger;
                     order.value = response.data as Order;
                 })
                 .catch((error: any) => {

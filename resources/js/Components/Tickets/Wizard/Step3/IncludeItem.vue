@@ -43,9 +43,10 @@ const rest = computed(() => {
             />
             <span
                 v-if="rest > 0"
-                class="z-30 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-500"
+                class="z-30 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700"
             >
-                <span class="text-sm font-medium leading-none text-white"
+                <span
+                    class="text-sm font-medium leading-none text-slate-500 dark:text-slate-300"
                     >+{{ rest }}</span
                 >
             </span>

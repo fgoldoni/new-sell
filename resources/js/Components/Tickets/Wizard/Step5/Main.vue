@@ -5,7 +5,7 @@
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
                 @close="emit('close', false)"
-                @previous="() => wizard.setComponent('Step3')"
+                @previous="() => wizard.setComponent('Step4')"
                 :has-previous="true"
                 :title="item?.name"
             ></Header>

@@ -8,7 +8,7 @@
                 :has-previous="false"
                 title="Success"
             ></Header>
-            <Body></Body>
+            <Body ref="itemRef"></Body>
         </div>
     </div>
 </template>
@@ -35,8 +35,8 @@ useMotion(itemRef, {
         opacity: 1,
         y: 0,
         transition: {
-            delay: 100,
-            duration: 500,
+            delay: 500,
+            duration: 2000,
         },
     },
 });

@@ -1,7 +1,13 @@
 <template>
     <div class="divide-y divide-gray-200">
         <div class="pb-6">
-            <div class="h-24 bg-indigo-700 sm:h-20 lg:h-28" />
+            <div
+                class="h-36 bg-indigo-700 sm:h-36 lg:h-40"
+                :style="`
+                    background-image: url(&quot;${order.event.avatar}&quot;);
+                    background-position: center -80px;
+                `"
+            />
             <div
                 class="-mt-12 flow-root px-4 sm:-mt-8 sm:flex sm:items-end sm:px-6 lg:-mt-16"
             >
@@ -24,7 +30,7 @@
                             <h3
                                 class="text-xl font-bold text-gray-900 sm:text-2xl"
                             >
-                                Ashley Porter
+                                {{ order.user.name }}
                             </h3>
                             <span
                                 class="ml-2.5 inline-block h-2 w-2 flex-shrink-0 rounded-full bg-green-400"
@@ -32,7 +38,9 @@
                                 <span class="sr-only">Online</span>
                             </span>
                         </div>
-                        <p class="text-sm text-gray-500">@ashleyporter</p>
+                        <p class="text-sm text-gray-500">
+                            {{ order.user.email }}
+                        </p>
                     </div>
                     <div
                         class="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0"
@@ -41,7 +49,7 @@
                             type="button"
                             class="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
                         >
-                            Message
+                            Download
                         </button>
                         <button
                             type="button"
@@ -172,9 +180,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 import { EllipsisVerticalIcon } from "@heroicons/vue/20/solid";
+import { useOrdersStore } from "@/stores/useOrdersStore";
+import { storeToRefs } from "pinia";
 
-const open = ref(true);
+const ordersStore = useOrdersStore();
+const { order } = storeToRefs(ordersStore);
 </script>
