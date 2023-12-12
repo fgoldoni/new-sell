@@ -7,7 +7,7 @@
                 @close="emit('close', false)"
                 :has-previous="false"
                 :title="order.user.name"
-                :description="order.team.currency + ' ' + order.total"
+                :description="order.event.name"
             ></Header>
             <Body ref="itemRef"></Body>
         </div>

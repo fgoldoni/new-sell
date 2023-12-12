@@ -14,8 +14,8 @@ const props = defineProps<Props>();
 const limit = computed(() => {
     let total = props.item?.quantity * props.quantity;
 
-    if (total > 4) {
-        return 4;
+    if (total > 2) {
+        return 2;
     } else {
         return total;
     }

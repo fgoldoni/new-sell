@@ -1,41 +1,12 @@
 <script setup lang="ts">
-import { CartItem, CartPayload } from "@/types/carts";
-import { useCartsStore } from "@/stores/useCartsStore";
-import { computed } from "vue";
+import { CartItem } from "@/types/carts";
 
 interface Props {
     item: CartItem;
     index: number;
 }
 
-const props = defineProps<Props>();
-
-const cartsStore = useCartsStore();
-
-const quantity = computed(
-    () =>
-        cartsStore.findItem(
-            props.item.attributes.type,
-            props.item.attributes.item.id,
-        )?.quantity || 0,
-);
-
-const update = async (value: number) => {
-    let payload: CartPayload = {
-        id: props.item.attributes.item.id,
-        model: props.item.attributes.item.model,
-        quantity: value,
-        reset: false,
-    };
-
-    if (value === 0) {
-        cartsStore.updatePayload("quantity", 0);
-        await cartsStore.destroy(
-            props.item.attributes.type + "-" + props.item.attributes.item.id,
-        );
-    }
-    if (value > 0) return await cartsStore.store(payload);
-};
+defineProps<Props>();
 </script>
 
 <template>
