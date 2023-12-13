@@ -1,5 +1,5 @@
 <template>
-    <div class="divide-y divide-gray-200">
+    <div class="divide-y sm:divide-slate-200 sm:dark:divide-slate-600">
         <div class="pb-6">
             <div
                 class="h-36 bg-indigo-700 sm:h-36 lg:h-40"
@@ -27,7 +27,7 @@
                     <div>
                         <div class="flex items-center">
                             <h3
-                                class="text-xl font-bold text-gray-900 sm:text-2xl"
+                                class="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl"
                             >
                                 {{ order.team.currency + " " + order.total }}
                             </h3>
@@ -36,18 +36,10 @@
                             {{ order.event.address }}
                         </p>
                     </div>
-                    <div
-                        class="mt-5 flex flex-wrap space-y-3 sm:space-x-3 sm:space-y-0"
-                    >
+                    <div class="mt-5 flex flex-wrap space-y-0 sm:space-x-3">
                         <button
                             type="button"
-                            class="inline-flex w-full flex-shrink-0 items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:flex-1"
-                        >
-                            {{ __("Download") }}
-                        </button>
-                        <button
-                            type="button"
-                            class="inline-flex w-full flex-1 items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            :class="`inline-flex w-full flex-1 items-center justify-center rounded-md bg-${$page.props.team.color}-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-${$page.props.team.color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600 sm:flex-1`"
                         >
                             {{ order.team.phone }}
                         </button>
@@ -114,7 +106,9 @@
             </div>
         </div>
         <div class="px-4 py-5 sm:px-0 sm:py-0">
-            <dl class="space-y-8 sm:space-y-0 sm:divide-y sm:divide-gray-200">
+            <dl
+                :class="`space-y-8 sm:space-y-0 sm:divide-y sm:divide-slate-200 sm:dark:divide-slate-600`"
+            >
                 <div class="sm:px-6 sm:py-5">
                     <dt
                         class="text-sm font-medium text-gray-500 sm:w-60 sm:flex-shrink-0"
@@ -157,7 +151,7 @@
                             </div>
                             <ul
                                 role="list"
-                                class="overflow-auto h-72 relative divide-y divide-slate-200 dark:divide-slate-600 h-72 overflow-y-auto"
+                                class="overflow-auto h-64 relative divide-y divide-slate-200 dark:divide-slate-600 overflow-y-auto"
                             >
                                 <template
                                     v-for="(item, key, index) in order?.items"
@@ -184,7 +178,7 @@
                                 </template>
                             </ul>
                             <p
-                                class="my-6 p-4 flex items-center justify-between border-t border-gray-200 pt-6 text-sm font-medium text-slate-900 dark:text-white"
+                                class="my-6 p-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-600 pt-6 text-sm font-medium text-slate-900 dark:text-white"
                             >
                                 <span class="text-xl">Total</span>
                                 <span class="text-xl">

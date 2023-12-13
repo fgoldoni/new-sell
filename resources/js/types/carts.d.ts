@@ -32,6 +32,7 @@ export interface Item {
     name: string;
     avatar_url: string;
     model: string;
+    attendees: number;
 }
 
 export interface CartItem {

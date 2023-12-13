@@ -46,6 +46,11 @@ defineProps<Props>();
                     </div>
                 </div>
             </a>
+            <div
+                :class="`relative ml-2 inline-block flex-shrink-0 text-left text-${$page.props.team.color}-500 dark:text-${$page.props.team.color}-400`"
+            >
+                {{ item.quantity }} * {{ item.attributes.item.attendees }} PL.
+            </div>
         </div>
 
         <div

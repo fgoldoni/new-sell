@@ -42,7 +42,7 @@ const rest = computed(() => {
             />
             <span
                 v-if="rest > 0"
-                class="z-30 inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700"
+                class="z-30 inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700"
             >
                 <span
                     class="text-sm font-medium leading-none text-slate-500 dark:text-slate-300"
@@ -51,7 +51,7 @@ const rest = computed(() => {
             </span>
         </div>
         <div class="text-slate-500 text-xs uppercase ml-4 flex-1 truncate">
-            {{ item.quantity * quantity }} *
+            {{ quantity }} * {{ item.quantity }}
             {{ item.name }}
         </div>
     </div>

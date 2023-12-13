@@ -63,12 +63,12 @@ const previous = () => {
             </div>
         </div>
         <div class="mt-1 text-center">
-            <p class="text-md text-slate-500 dark:text-white">
+            <p class="text-md text-slate-500 dark:text-white uppercase">
                 {{
                     description ||
                     format(
                         parseISO($page.props.team.event?.start),
-                        "EEEE, dd. MMMM yyyy  H:mm",
+                        "EEEE dd. MMMM yyyy  H:mm",
                         { locale: locale() },
                     )
                 }}
