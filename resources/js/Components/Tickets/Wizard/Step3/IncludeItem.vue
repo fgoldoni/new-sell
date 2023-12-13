@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { CartProduct } from "@/types/carts";
 import { computed } from "vue";
-import { truncate } from "lodash";
 
 interface Props {
     item: CartProduct;
@@ -24,8 +23,8 @@ const limit = computed(() => {
 const rest = computed(() => {
     let total = props.item?.quantity * props.quantity;
 
-    if (total > 4) {
-        return total - 4;
+    if (total > 2) {
+        return total - 2;
     } else {
         return 0;
     }
@@ -36,14 +35,14 @@ const rest = computed(() => {
     <div class="flex items-center justify-between">
         <div class="isolate flex -space-x-1">
             <img
-                v-for="q in limit"
-                class="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                v-for="l in limit"
+                class="relative z-30 inline-block h-6 w-6 rounded-full ring-2 ring-white"
                 :src="item.avatar_url"
                 :alt="item.name"
             />
             <span
                 v-if="rest > 0"
-                class="z-30 inline-flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700"
+                class="z-30 inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700"
             >
                 <span
                     class="text-sm font-medium leading-none text-slate-500 dark:text-slate-300"
@@ -51,13 +50,9 @@ const rest = computed(() => {
                 >
             </span>
         </div>
-        <div class="text-slate-500">
+        <div class="text-slate-500 text-xs uppercase ml-4 flex-1 truncate">
             {{ item.quantity * quantity }} *
-            {{
-                truncate(item.name, {
-                    length: 24,
-                })
-            }}
+            {{ item.name }}
         </div>
     </div>
 </template>
