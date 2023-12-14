@@ -19,7 +19,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $team = EnsureTeamMiddleware::team();
-        
+
         return [
             ...parent::share($request),
             'team' => [
@@ -30,6 +30,7 @@ class HandleInertiaRequests extends Middleware
                 'phone' => $team->phone,
                 'event' => $team->event,
                 'industry' => $team->industry,
+                'country_id' => $team->country_id,
                 'currency' => $team->currency,
                 'locale' => app()->getLocale(),
                 'paypal' => !is_null($team->paypal) ? base64_decode($team->paypal->paypal_id) : null,

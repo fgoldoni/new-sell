@@ -260,7 +260,7 @@ const form = reactive({
     name: user.value?.name || "",
     email: user.value?.email || "",
     email_confirmation: user.value?.email || "",
-    country_id: user.value?.country_id || 149,
+    country_id: user.value?.country_id || usePage().props.team.country_id,
     phone: user.value?.phone || "",
     locale: usePage().props.team.locale,
     terms: true,
