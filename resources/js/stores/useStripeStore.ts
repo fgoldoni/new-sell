@@ -2,12 +2,13 @@ import { defineStore } from "pinia";
 import { usePage } from "@inertiajs/vue3";
 import Stripe from "stripe";
 import { upperCase } from "lodash";
+import { Cart, CartItem } from "@/types/carts";
 
-export const stripeStore = defineStore("stripeStore", () => {
-    const session = async (carts, method = ["card"]) => {
-        const stripe = new Stripe(usePage().props.stripe);
+export const useStripeStore = defineStore("stripeStore", () => {
+    const session = async (cart: Cart, method: string[] = ["card"]) => {
+        const stripe = new Stripe(usePage().props.team.stripe);
 
-        const items = carts.value?.items.map((item) => ({
+        const items = cart?.items.map((item: CartItem) => ({
             quantity: item.quantity,
             price_data: {
                 currency: usePage().props.team.currency.code,
@@ -20,9 +21,7 @@ export const stripeStore = defineStore("stripeStore", () => {
 
         const discounts = [];
 
-        for (const [key, value] of Object.entries(
-            carts.value.cart_total_conditions,
-        )) {
+        for (const [key, value] of Object.entries(cart.cart_total_conditions)) {
             discounts.push({
                 coupon: key,
             });
@@ -33,12 +32,10 @@ export const stripeStore = defineStore("stripeStore", () => {
             mode: "payment",
             discounts: discounts,
             line_items: items,
-            success_url: `${route(
-                "payments.index",
-            )}?session_id={CHECKOUT_SESSION_ID}&order_id=${
-                carts.value.id
-            }&method=${method[0]}`,
-            cancel_url: route("payments.cancel"),
+            success_url: `${route("orders.card", {
+                id: cart.id,
+            })}?reference={CHECKOUT_SESSION_ID}&mode=${method[0]}`,
+            cancel_url: route("home"),
         });
     };
 

@@ -76,7 +76,7 @@ import {
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 
 interface Props {
-    modelValue?: string;
+    modelValue: string | null;
 }
 
 const props = defineProps<Props>();

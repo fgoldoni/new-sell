@@ -1,10 +1,7 @@
-<template>
-    <Siderbar :show="true" @close="close" v-if="order"></Siderbar>
-</template>
+<template></template>
 <script setup lang="ts">
 import { router, usePage } from "@inertiajs/vue3";
 import { onMounted } from "vue";
-import Siderbar from "@/Components/Siderbar.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { useOrdersStore } from "@/stores/useOrdersStore";
@@ -14,6 +11,7 @@ const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const ordersStore = useOrdersStore();
 const { order } = storeToRefs(ordersStore);
+const { cart } = storeToRefs(cartsStore);
 
 interface Props {
     id: string;
@@ -21,22 +19,28 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const close = (value: boolean) => {
-    setTimeout(() => {
-        wizard.setComponent("Step1");
-    }, 2000);
-
-    return router.get(
-        usePage().props.basePageRoute,
-        {},
-        { replace: true, preserveState: true, preserveScroll: true },
-    );
-};
 onMounted(async () => {
     try {
-        if (order.value?.id === props.id) {
+        if (cart.value?.id === props.id) {
+            await ordersStore.store(
+                props.id,
+                route().params.mode,
+                usePage().props.team.currency.code,
+                String(cart.value.total),
+                route().params.reference,
+            );
+
+            wizard.reset();
+
             await cartsStore.reset();
-            return await wizard.setComponent("Step6");
+
+            await wizard.setComponent("Step6");
+
+            return router.get(
+                route("orders.success", cart.value.id),
+                {},
+                { replace: true },
+            );
         }
 
         await wizard.setComponent("Step1");

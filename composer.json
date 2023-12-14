@@ -12,6 +12,7 @@
         "juststeveking/http-status-code": "^3.0",
         "laravel/framework": "^10.33",
         "laravel/sanctum": "^3.2",
+        "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
         "stevebauman/location": "^7.0",
         "tightenco/ziggy": "^1.0"

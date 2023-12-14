@@ -145,14 +145,16 @@ import { Errors } from "@/plugins/errors";
 import PaymentMethod from "@/Components/PaymentMethod.vue";
 import { usePaypalStore } from "@/stores/usePaypalStore";
 import { PlusIcon } from "@heroicons/vue/20/solid";
+import { useStripeStore } from "@/stores/useStripeStore";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { item, cart } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
-const { isAuthenticated, user } = storeToRefs(authStore);
+const { isAuthenticated } = storeToRefs(authStore);
 const paypalStore = usePaypalStore();
+const stripeStore = useStripeStore();
 
 const emit = defineEmits<{
     close: [value: boolean];
@@ -167,7 +169,22 @@ const form = reactive({
 });
 
 const submitAction = () => {
-    debugger;
+    if (!form.payment) return;
+
+    console.log(form.payment);
+
+    switch (form.payment) {
+        case "card":
+            onStripe();
+            break;
+        case "Mangoes":
+        case "Papayas":
+            console.log("Mangoes and papayas are $2.79 a pound.");
+            // Expected output: "Mangoes and papayas are $2.79 a pound."
+            break;
+        default:
+            console.log(`Sorry, we are out of ${expr}.`);
+    }
 };
 
 useMotion(itemRef, {
@@ -211,4 +228,80 @@ onMounted(async () => {
         console.error("failed to load the PayPal JS SDK script", error);
     }
 });
+
+const onStripe = async () => {
+    try {
+        const session = await stripeStore.session(cart.value);
+
+        // await window.fbq("track", "InitiateCheckout");
+
+        return window.location.replace(session.url);
+    } catch (error) {
+        console.log(error);
+    } finally {
+    }
+};
+
+const onSofort = async () => {
+    try {
+        const session = await stripeStore.session(cart.value, ["sofort"]);
+
+        // await window.fbq("track", "InitiateCheckout");
+
+        return window.location.replace(session.url);
+    } catch (error) {
+        console.log(error);
+    } finally {
+    }
+};
+
+const onKlarna = async () => {
+    try {
+        const session = await stripeStore.session(cart.value, ["klarna"]);
+
+        await window.fbq("track", "InitiateCheckout");
+
+        return window.location.replace(session.url);
+    } catch (error) {
+        errors.onFailed(error);
+        console.log(error);
+    } finally {
+    }
+};
+
+const onNotchPay = async () => {
+    try {
+        if (!isAuthenticated.value) return;
+
+        await useNotchPay
+            .initialize(cart.value, user)
+            .then(async (response) => {
+                await window.fbq("track", "InitiateCheckout");
+
+                return window.location.replace(response.authorization_url);
+            })
+            .catch((err) => {
+                throw err;
+            });
+    } catch (error) {
+        errors.onFailed(error);
+        console.error(error);
+    } finally {
+    }
+};
+
+const stripeTerminal = async () => {
+    try {
+        if (!isAuthenticated.value) return;
+
+        const terminal = await stripeStoreTerminal.stripeTerminal();
+        await stripeStoreTerminal.connectReaderHandler(true);
+        await stripeStoreTerminal.setSimulatorConfiguration();
+        console.log(terminal);
+    } catch (error) {
+        errors.onFailed(error);
+        console.error(error);
+    } finally {
+    }
+};
 </script>
