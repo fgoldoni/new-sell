@@ -50,7 +50,11 @@ export const usePaypalStore = defineStore("paypalStore", () => {
 
                     wizard.reset();
 
-                    return router.get(route("orders.show", cart.value.id));
+                    return router.get(
+                        route("orders.success", cart.value.id),
+                        {},
+                        { replace: true },
+                    );
                 },
                 onError: (data, actions) => {
                     return (err) => {

@@ -37,12 +37,12 @@
                         </p>
                     </div>
                     <div class="mt-5 flex flex-wrap space-y-0 sm:space-x-3">
-                        <button
-                            type="button"
-                            :class="`inline-flex w-full flex-1 items-center justify-center rounded-md bg-${$page.props.team.color}-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-${$page.props.team.color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600 sm:flex-1`"
+                        <a
+                            :href="`tel: ${order.team.phone}`"
+                            :class="`btn-base inline-flex w-full flex-1 items-center justify-center rounded-md bg-${$page.props.team.color}-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-${$page.props.team.color}-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600 sm:flex-1`"
                         >
                             {{ order.team.phone }}
-                        </button>
+                        </a>
                         <div class="ml-3 inline-flex sm:ml-0">
                             <Menu
                                 as="div"
@@ -138,7 +138,7 @@
                                         class="flex items-start justify-between"
                                     >
                                         <h2
-                                            class="text-sm font-semibold leading-6 text-slate-500 dark:text-white"
+                                            class="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400"
                                         >
                                             Deine Bestellung:
                                             <span class="uppercase">

@@ -33,5 +33,6 @@ Route::get('/', function () {
 
 Route::get('tickets/{id}', [\App\Http\Controllers\TicketsController::class, 'show'])->name('tickets.show');
 Route::get('orders/{id}', [\App\Http\Controllers\OrdersController::class, 'show'])->name('orders.show');
+Route::get('orders/success/{id}', [\App\Http\Controllers\OrdersController::class, 'success'])->name('orders.success');
 
 
