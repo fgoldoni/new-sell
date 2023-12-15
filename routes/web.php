@@ -38,5 +38,6 @@ Route::get('orders/success/{id}', [\App\Http\Controllers\OrdersController::class
 Route::get('orders/card/{id}', [\App\Http\Controllers\OrdersController::class, 'card'])->name('orders.card');
 Route::get('orders/notch-pay/{id}', [\App\Http\Controllers\OrdersController::class, 'notchPay'])->name('orders.notch-pay');
 Route::get('orders/paypal/{id}', [\App\Http\Controllers\OrdersController::class, 'paypal'])->name('orders.paypal');
+Route::post('stripe/terminal/connection', [\App\Http\Controllers\StripeTerminalController::class, 'connection'])->name('stripe.terminal.connection');
 
 

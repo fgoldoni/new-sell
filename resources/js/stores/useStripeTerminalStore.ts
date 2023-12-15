@@ -1,30 +1,26 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { loadStripeTerminal } from "@stripe/terminal-js";
+import { useApi } from "@/composable/useApi";
+import ApiError from "@/models/ApiError";
+import { FetchError } from "ofetch";
 
 export const useStripeTerminalStore = defineStore("stripeTerminalStore", () => {
     const processing = ref(false);
     const secret = ref(null);
     const terminal = ref(null);
+    const api = useApi();
     const connection = async () => {
         processing.value = true;
 
-        await axios
-            .post(
-                route("stripe.terminal.connection"),
-                {},
-                {
-                    withCredentials: true,
-                    headers: {
-                        Accept: "application/json",
-                    },
-                },
-            )
-            .then((response) => {
-                secret.value = response.data.data.secret;
+        await api.terminal
+            .connection()
+            .then((response: any) => {
+                secret.value = response.data.secret;
             })
-            .catch((err) => {
-                throw err;
+            .catch((error: FetchError) => {
+                console.log(error);
+                throw new ApiError(error);
             })
             .finally(() => (processing.value = false));
 

@@ -1,7 +1,11 @@
 import { ofetch } from "ofetch";
 import { useCookie } from "@/composable/useCookie";
 import { usePage } from "@inertiajs/vue3";
-import { API_BASE_URL } from "@/utils/constants";
+import {
+    API_BASE_URL,
+    CSRFCOOKIENAME,
+    CSRFHEADERNAME,
+} from "@/utils/constants";
 import ApiError from "@/models/ApiError";
 
 const VALIDATION_ERROR_STATUS = 422;
@@ -15,6 +19,15 @@ export const $api = ofetch.create({
         const eventId = usePage().props.team?.event?.id;
         const locale = usePage().props.team?.locale;
         const cartId = usePage().props.cart?.id;
+
+        const csrfToken = useCookie(CSRFCOOKIENAME).value;
+
+        if (csrfToken) {
+            options.headers = {
+                ...options.headers,
+                ...(csrfToken && { [CSRFHEADERNAME]: csrfToken }),
+            };
+        }
 
         if (accessToken && !options.headers?.hasOwnProperty("Authorization")) {
             options.headers = {

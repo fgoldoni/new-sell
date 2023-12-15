@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\EnsureTeamMiddleware;
-use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\TicketRequest;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;

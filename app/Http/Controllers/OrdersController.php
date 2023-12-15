@@ -10,10 +10,8 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-
 class OrdersController extends Controller
 {
-
     public function show(OrderRequest $request, string $id)
     {
         SEOTools::setTitle(

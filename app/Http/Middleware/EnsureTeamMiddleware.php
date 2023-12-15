@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -42,7 +43,7 @@ class EnsureTeamMiddleware
             Cache::flush();
 
             if ($subDomain = self::getSubDomain()) {
-                $team = Cache::remember(static::getCacheKey($subDomain), now()->addDay() ,function () use ($subDomain, $request) {
+                $team = Cache::remember(static::getCacheKey($subDomain), now()->addDay(), function () use ($subDomain, $request) {
                     $location = self::location($request);
 
                     $response = Http::acceptJson()->withHeaders(
@@ -86,7 +87,7 @@ class EnsureTeamMiddleware
     public static function loadEvent($team, $request): void
     {
         try {
-            Cache::remember($team->event_id, now()->addDay() , static function () use ($team, $request) {
+            Cache::remember($team->event_id, now()->addDay(), static function () use ($team, $request) {
                 $location = self::location($request);
 
                 $response = Http::acceptJson()->withHeaders(
@@ -145,7 +146,7 @@ class EnsureTeamMiddleware
 
     public static function cartId()
     {
-        if (! session()->has(self::cartKey())) {
+        if (!session()->has(self::cartKey())) {
             session()->put(self::cartKey(), static::uniqueCode());
         }
 

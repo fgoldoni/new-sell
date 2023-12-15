@@ -94,11 +94,15 @@
                             </div>
                             <div class="w-full my-8 p-4 space-y-8">
                                 <div
+                                    v-if="$page.props.team.paypal"
                                     id="paypal-button"
                                     ref="paypalRef"
                                     class="invisible"
                                 ></div>
-                                <div class="relative">
+                                <div
+                                    v-if="$page.props.team.paypal"
+                                    class="relative"
+                                >
                                     <div
                                         class="absolute inset-0 flex items-center"
                                         aria-hidden="true"
@@ -120,6 +124,7 @@
                                 </div>
                                 <PaymentMethod
                                     v-model="form.payment"
+                                    :paiements="paiements"
                                 ></PaymentMethod>
                             </div>
                         </div>
@@ -146,11 +151,12 @@ import PaymentMethod from "@/Components/PaymentMethod.vue";
 import { usePaypalStore } from "@/stores/usePaypalStore";
 import { PlusIcon } from "@heroicons/vue/20/solid";
 import { usePayment } from "@/composable/usePayment";
+import ApiError from "@/models/ApiError";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { item, cart } = storeToRefs(cartsStore);
+const { item, cart, paiements } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
 const { isAuthenticated } = storeToRefs(authStore);
 const paypalStore = usePaypalStore();
@@ -165,7 +171,7 @@ const form = reactive({
     errors: new Errors(),
     is_logged: isAuthenticated.value,
     processing: false,
-    payment: null,
+    payment: "card",
     to: route("home"),
 });
 
@@ -184,6 +190,9 @@ const submitAction = () => {
             break;
         case "notchPay":
             payment.onNotchPay(cart.value);
+            break;
+        case "terminal":
+            payment.onStripeTerminal(cart.value);
             break;
         default:
             console.log(`Sorry, we are out of ${form.payment}.`);
@@ -224,11 +233,13 @@ onMounted(async () => {
                 );
             } catch (error) {
                 console.error("failed to render the PayPal Buttons", error);
+                throw new ApiError(error);
             }
         }
     } catch (error) {
         form.errors.onFailed(error);
         console.error("failed to load the PayPal JS SDK script", error);
+        throw new ApiError(error);
     }
 });
 </script>

@@ -6,6 +6,7 @@ import CartsService from "@/services/CartsService";
 import CountriesService from "@/services/CountriesService";
 import OrdersService from "@/services/OrdersService";
 import NotchPayService from "@/services/NotchPayService";
+import TerminalService from "@/services/TerminalService";
 
 export interface ApiServiceContainer {
     application: ApplicationService;
@@ -16,4 +17,5 @@ export interface ApiServiceContainer {
     countries: CountriesService;
     orders: OrdersService;
     notchPay: NotchPayService;
+    terminal: TerminalService;
 }

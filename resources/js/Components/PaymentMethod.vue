@@ -1,14 +1,14 @@
 <template>
     <RadioGroup
-        :model-value="selectedMailingLists"
+        :model-value="selectedValue"
         @update:modelValue="(value) => emit('update:modelValue', value?.id)"
     >
         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <RadioGroupOption
                 as="template"
-                v-for="mailingList in mailingLists"
-                :key="mailingList.id"
-                :value="mailingList"
+                v-for="paiement in paiements"
+                :key="paiement.id"
+                :value="paiement"
                 v-slot="{ active, checked }"
             >
                 <div
@@ -16,7 +16,7 @@
                         active
                             ? `border-${$page.props.team.color}-600 ring-1 ring-${$page.props.team.color}-600`
                             : 'border-slate-200 dark:border-slate-600',
-                        'relative flex cursor-pointer rounded-lg border bg-white dark:bg-slate-900 p-4 shadow-sm focus:outline-none',
+                        'btn-title relative flex cursor-pointer rounded-lg border bg-white dark:bg-slate-900 p-4 shadow-sm focus:outline-none',
                     ]"
                 >
                     <span class="flex flex-1">
@@ -24,17 +24,17 @@
                             <RadioGroupLabel
                                 as="span"
                                 class="block text-md font-medium text-slate-500 dark:text-slate-400"
-                                >{{ mailingList.title }}</RadioGroupLabel
+                                >{{ paiement.title }}</RadioGroupLabel
                             >
                             <RadioGroupDescription
                                 as="div"
                                 class="mt-6 flex space-x-2 items-center"
                             >
                                 <img
-                                    v-for="image in mailingList.images"
+                                    v-for="image in paiement.images"
                                     :key="image"
                                     :src="image"
-                                    :alt="mailingList.title"
+                                    :alt="paiement.title"
                                     :class="[
                                         `h-8 w-auto text-${$page.props.team.color}-600`,
                                     ]"
@@ -77,6 +77,7 @@ import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 
 interface Props {
     modelValue: string | null;
+    paiements: Array<any> | [];
 }
 
 const props = defineProps<Props>();
@@ -85,40 +86,9 @@ const emit = defineEmits<{
     "update:modelValue": [value: string];
 }>();
 
-const mailingLists = [
-    {
-        id: "card",
-        title: "Credit/Debit/ATM Card",
-        images: [
-            "/images/payments/visa.png",
-            "/images/payments/master.png",
-            "/images/payments/ae.png",
-        ],
-    },
-    {
-        id: "sofort",
-        title: "Sofort",
-        images: ["/images/payments/sofort.png"],
-    },
-    {
-        id: "klarna",
-        title: "Klarna",
-        images: ["/images/payments/klarna.svg"],
-    },
-    {
-        id: "notchPay",
-        title: "Orange | MTN",
-        images: [
-            "/images/payments/cm.orange.png",
-            "/images/payments/cm.mtn.png",
-        ],
-    },
-];
-
-const selectedMailingLists = computed(() => {
+const selectedValue = computed(() => {
     if (props.modelValue) {
-        const found = mailingLists.find((c) => c.id === props.modelValue);
-        return found;
+        return props.paiements.find((c) => c.id === props.modelValue);
     }
     return null;
 });

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 import { Cart, CartItem, CartPayload } from "@/types/carts";
@@ -15,6 +15,58 @@ export const useCartsStore = defineStore(
         const cart = ref<Cart | null>(null);
         const item = ref<Ticket | null>(null);
         const processing = ref<boolean>(false);
+        const paiements = computed(() => {
+            let data = [];
+
+            if (usePage().props.team.stripe) {
+                data.push({
+                    id: "card",
+                    title: "Credit/Debit/ATM Card",
+                    images: [
+                        "/images/payments/visa.png",
+                        "/images/payments/master.png",
+                        "/images/payments/ae.png",
+                    ],
+                });
+            }
+
+            if (usePage().props.team.sofort) {
+                data.push({
+                    id: "sofort",
+                    title: "Sofort",
+                    images: ["/images/payments/sofort.png"],
+                });
+            }
+
+            if (usePage().props.team.klarna) {
+                data.push({
+                    id: "klarna",
+                    title: "Klarna",
+                    images: ["/images/payments/klarna.svg"],
+                });
+            }
+
+            if (usePage().props.team.notch_pay) {
+                data.push({
+                    id: "notchPay",
+                    title: "Orange | MTN",
+                    images: [
+                        "/images/payments/cm.orange.png",
+                        "/images/payments/cm.mtn.png",
+                    ],
+                });
+            }
+
+            if (usePage().props.team.terminal) {
+                data.push({
+                    id: "terminal",
+                    title: "Terminal",
+                    images: ["/images/payments/terminal.png"],
+                });
+            }
+
+            return data;
+        });
 
         let payload = ref<CartPayload>({
             id: "",
@@ -168,6 +220,7 @@ export const useCartsStore = defineStore(
             destroy,
             payload,
             cart,
+            paiements,
             reset,
             item,
             setItem,

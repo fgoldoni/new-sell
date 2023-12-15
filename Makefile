@@ -81,9 +81,7 @@ test: ## phpunit test
 	./vendor/bin/pest --debug
 
 pint: ## phpunit test
-	 ./vendor/bin/pint modules -v
 	 ./vendor/bin/pint app -v
-	 ./vendor/bin/pint core -v
 
 optimize: install ## optimize
 		$(PHP) artisan cache:clear & $(PHP) artisan config:clear & $(PHP) artisan route:clear & $(PHP) artisan view:clear
