@@ -87,16 +87,6 @@ const emit = defineEmits<{
 
 const mailingLists = [
     {
-        id: "paypal",
-        title: "Paypal",
-        images: ["/images/payments/paypal.png"],
-    },
-    {
-        id: "sofort",
-        title: "Sofort",
-        images: ["/images/payments/sofort.png"],
-    },
-    {
         id: "card",
         title: "Credit/Debit/ATM Card",
         images: [
@@ -106,9 +96,22 @@ const mailingLists = [
         ],
     },
     {
+        id: "sofort",
+        title: "Sofort",
+        images: ["/images/payments/sofort.png"],
+    },
+    {
         id: "klarna",
         title: "Klarna",
         images: ["/images/payments/klarna.svg"],
+    },
+    {
+        id: "notchPay",
+        title: "Orange | MTN",
+        images: [
+            "/images/payments/cm.orange.png",
+            "/images/payments/cm.mtn.png",
+        ],
     },
 ];
 

@@ -182,7 +182,7 @@ const submitAction = () => {
         case "sofort":
             payment.onSofort(cart.value);
             break;
-        case "paypal":
+        case "notchPay":
             payment.onNotchPay(cart.value);
             break;
         default:

@@ -20,7 +20,10 @@ const props = defineProps<Props>();
 
 onMounted(async () => {
     try {
-        if (cart.value?.id === props.id) {
+        if (
+            cart.value?.id === props.id &&
+            route().params.status === "complete"
+        ) {
             await ordersStore.store(
                 props.id,
                 "notchpay",
