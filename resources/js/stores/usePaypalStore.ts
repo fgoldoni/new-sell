@@ -40,20 +40,17 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                 onApprove: async (data, actions) => {
                     const capture = await actions.order.capture();
 
-                    await ordersStore.store(
-                        cart.value.id,
-                        "paypal",
-                        capture.purchase_units[0].amount.currency_code,
-                        capture.purchase_units[0].amount.value,
-                        capture.id,
-                        capture.status,
-                    );
-
-                    wizard.reset();
-
                     return router.get(
-                        route("orders.success", cart.value.id),
-                        {},
+                        route("orders.paypal", cart.value.id),
+                        {
+                            id: cart.value.id,
+                            mode: "paypal",
+                            currency:
+                                capture.purchase_units[0].amount.currency_code,
+                            total: capture.purchase_units[0].amount.value,
+                            reference: capture.id,
+                            status: capture.status,
+                        },
                         { replace: true },
                     );
                 },

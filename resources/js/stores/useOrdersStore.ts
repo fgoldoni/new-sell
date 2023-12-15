@@ -15,6 +15,8 @@ export const useOrdersStore = defineStore(
         const order = ref<Order>();
         const orders = ref<Order[]>();
 
+        const reset = async () => (order.value = null);
+
         const store = async (
             id: string,
             mode: string,
@@ -36,6 +38,7 @@ export const useOrdersStore = defineStore(
         return {
             order,
             orders,
+            reset,
             store,
         };
     },

@@ -28,7 +28,7 @@ export const useWizardStore = defineStore(
         };
 
         const setComponent = async (
-            current: string,
+            current: string | null,
             previous = null,
             next = null,
         ) => {

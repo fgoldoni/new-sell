@@ -14,7 +14,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { router, usePage } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
@@ -34,15 +34,12 @@ const props = defineProps<Props>();
 
 onMounted(async () => {
     try {
-        if (
-            cart.value?.id === props.id &&
-            route().params.status === "complete"
-        ) {
+        if (cart.value?.id === props.id) {
             await ordersStore.store(
                 props.id,
-                "notchpay",
-                usePage().props.team.currency.code,
-                String(cart.value.total),
+                route().params.mode,
+                route().params.currency,
+                route().params.total,
                 route().params.reference,
                 route().params.status,
             );
@@ -58,9 +55,12 @@ onMounted(async () => {
             );
         }
 
-        return router.get(route("orders.cancel"), {}, { replace: true });
+        await wizard.setComponent(null);
+        return router.get(route("home"), {}, { replace: true });
     } catch (error) {
         console.error(error);
+        await wizard.setComponent(null);
+        return router.get(route("home"), {}, { replace: true });
     }
 });
 </script>

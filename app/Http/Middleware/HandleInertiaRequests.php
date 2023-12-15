@@ -19,6 +19,7 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         $team = EnsureTeamMiddleware::team();
+        EnsureTeamMiddleware::regenerateCartId();
 
         return [
             ...parent::share($request),

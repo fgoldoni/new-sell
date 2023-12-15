@@ -13,13 +13,7 @@ import { storeToRefs } from "pinia";
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const ordersStore = useOrdersStore();
-const { order } = storeToRefs(ordersStore);
-
-interface Props {
-    id: string;
-}
-
-const props = defineProps<Props>();
+const { item } = storeToRefs(cartsStore);
 
 const close = (value: boolean) => {
     setTimeout(() => {
@@ -34,10 +28,10 @@ const close = (value: boolean) => {
 };
 onMounted(async () => {
     try {
-        await cartsStore.reset();
+        await ordersStore.reset();
 
-        if (order.value?.id === props.id) {
-            await wizard.setComponent("Step6");
+        if (item.value?.id) {
+            await wizard.setComponent("Step5");
 
             return;
         }

@@ -35,7 +35,7 @@ export const useStripeStore = defineStore("stripeStore", () => {
             success_url: `${route("orders.card", {
                 id: cart.id,
             })}?reference={CHECKOUT_SESSION_ID}&mode=${method[0]}`,
-            cancel_url: route("home"),
+            cancel_url: route("orders.cancel"),
         });
     };
 

@@ -6,6 +6,7 @@ use App\Http\Middleware\EnsureTeamMiddleware;
 use App\Http\Requests\OrderRequest;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -109,5 +110,39 @@ class OrdersController extends Controller
         );
 
         return Inertia::render('Welcome', ['id' => $id]);
+    }
+
+    public function paypal(OrderRequest $request, string $id): Response
+    {
+        Inertia::modal([
+            'module' => 'Orders',
+            'component' => 'Paypal',
+        ]);
+
+        Inertia::basePageRoute(
+            route(
+                'home',
+                $request->all()
+            )
+        );
+
+        return Inertia::render('Welcome', ['id' => $id]);
+    }
+
+    public function cancel(Request $request): Response
+    {
+        Inertia::modal([
+            'module' => 'Orders',
+            'component' => 'Cancel',
+        ]);
+
+        Inertia::basePageRoute(
+            route(
+                'home',
+                $request->all()
+            )
+        );
+
+        return Inertia::render('Welcome');
     }
 }
