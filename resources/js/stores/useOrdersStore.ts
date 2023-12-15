@@ -20,10 +20,11 @@ export const useOrdersStore = defineStore(
             mode: string,
             currency: string,
             total: string,
-            reference?: string,
+            reference: string,
+            status: string,
         ): Promise<any> => {
             await api.orders
-                .store(id, mode, currency, total, reference)
+                .store(id, mode, currency, total, reference, status)
                 .then(async (response: any) => {
                     order.value = response.data as Order;
                 })

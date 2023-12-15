@@ -46,6 +46,7 @@ export const usePaypalStore = defineStore("paypalStore", () => {
                         capture.purchase_units[0].amount.currency_code,
                         capture.purchase_units[0].amount.value,
                         capture.id,
+                        capture.status,
                     );
 
                     wizard.reset();

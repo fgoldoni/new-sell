@@ -28,6 +28,7 @@ onMounted(async () => {
                 usePage().props.team.currency.code,
                 String(cart.value.total),
                 route().params.reference,
+                "completed",
             );
 
             wizard.reset();

@@ -6,7 +6,8 @@ export default class OrdersService extends ApiServiceBase {
         mode: string,
         currency: string,
         total: string,
-        reference?: string,
+        reference: string,
+        status: string,
     ): Promise<any> {
         return await this.call<any>(`/orders`, {
             method: "post",
@@ -16,6 +17,7 @@ export default class OrdersService extends ApiServiceBase {
                 currency: currency,
                 total: total,
                 reference: reference,
+                status: status,
             },
         });
     }
