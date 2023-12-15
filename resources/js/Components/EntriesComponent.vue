@@ -102,6 +102,7 @@ import { useApi } from "@/composable/useApi";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { router } from "@inertiajs/vue3";
+import { Ticket } from "@/models/Ticket";
 
 const { entries } = storeToRefs(useTicketsStore());
 
@@ -112,22 +113,24 @@ const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { payload } = storeToRefs(cartsStore);
 
-const open = async (id: string) => {
-    await wizard.setComponent("Step1");
+const open = async (item: Ticket) => {
+    if (item.quantity <= 0) return;
+
     try {
-        processing.value = id;
+        processing.value = item.id;
 
         await api.tickets
-            .find(id)
+            .find(item.id)
             .then(async (response: any) => {
+                await wizard.setComponent("Step1");
                 cartsStore.setItem(response.data);
                 const reset = ref(false);
 
                 if (
-                    payload.value.id !== id ||
+                    payload.value.id !== item.id ||
                     payload.value.model !== response.data.model
                 ) {
-                    cartsStore.updatePayload("id", id);
+                    cartsStore.updatePayload("id", item.id);
                     cartsStore.updatePayload("quantity", 1);
                     cartsStore.updatePayload("entry", "");
                     reset.value = true;
@@ -145,7 +148,7 @@ const open = async (id: string) => {
                 });
 
                 return router.get(
-                    route("tickets.show", { id: id }),
+                    route("tickets.show", { id: item.id }),
                     {},
                     {
                         preserveState: false,

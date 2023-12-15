@@ -33,7 +33,7 @@ useMotion(itemRef, {
 
 <template>
     <div
-        @click="emit('open', item.id)"
+        @click="emit('open', item)"
         ref="itemRef"
         :class="[
             item.quantity > 0
@@ -88,7 +88,6 @@ useMotion(itemRef, {
             </ul>
         </div>
         <button
-            @click="emit('open', item.id)"
             aria-describedby="tier-hobby"
             :class="[
                 item.quantity > 0
