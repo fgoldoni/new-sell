@@ -5,6 +5,7 @@ import TicketsService from "@/services/TicketsService";
 import CartsService from "@/services/CartsService";
 import CountriesService from "@/services/CountriesService";
 import OrdersService from "@/services/OrdersService";
+import NotchPayService from "@/services/NotchPayService";
 
 export interface ApiServiceContainer {
     application: ApplicationService;
@@ -14,4 +15,5 @@ export interface ApiServiceContainer {
     carts: CartsService;
     countries: CountriesService;
     orders: OrdersService;
+    notchPay: NotchPayService;
 }

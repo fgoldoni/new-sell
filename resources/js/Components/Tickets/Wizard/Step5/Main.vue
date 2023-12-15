@@ -145,7 +145,7 @@ import { Errors } from "@/plugins/errors";
 import PaymentMethod from "@/Components/PaymentMethod.vue";
 import { usePaypalStore } from "@/stores/usePaypalStore";
 import { PlusIcon } from "@heroicons/vue/20/solid";
-import { useStripeStore } from "@/stores/useStripeStore";
+import { usePayment } from "@/composable/usePayment";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
@@ -154,14 +154,8 @@ const { item, cart } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
 const { isAuthenticated } = storeToRefs(authStore);
 const paypalStore = usePaypalStore();
-const stripeStore = useStripeStore();
 
-const enum Mode {
-    CARD = "card",
-    KLARNA = "klarna",
-    SOFORT = "sofort",
-    PAYPAL = "paypal",
-}
+const payment = usePayment();
 
 const emit = defineEmits<{
     close: [value: boolean];
@@ -180,16 +174,19 @@ const submitAction = () => {
 
     switch (form.payment) {
         case "card":
-            onStripe();
+            payment.onStripe(cart.value);
             break;
         case "klarna":
-            onKlarna();
+            payment.onKlarna(cart.value);
             break;
         case "sofort":
-            onSofort();
+            payment.onSofort(cart.value);
+            break;
+        case "paypal":
+            payment.onNotchPay(cart.value);
             break;
         default:
-            console.log(`Sorry, we are out of ${expr}.`);
+            console.log(`Sorry, we are out of ${form.payment}.`);
     }
 };
 
@@ -234,79 +231,4 @@ onMounted(async () => {
         console.error("failed to load the PayPal JS SDK script", error);
     }
 });
-
-const onStripe = async () => {
-    try {
-        const session = await stripeStore.session(cart.value, [Mode.CARD]);
-
-        // await window.fbq("track", "InitiateCheckout");
-
-        return window.location.replace(session.url);
-    } catch (error) {
-        console.log(error);
-    } finally {
-    }
-};
-
-const onSofort = async () => {
-    try {
-        const session = await stripeStore.session(cart.value, [Mode.SOFORT]);
-
-        // await window.fbq("track", "InitiateCheckout");
-
-        return window.location.replace(session.url);
-    } catch (error) {
-        console.log(error);
-    } finally {
-    }
-};
-
-const onKlarna = async () => {
-    try {
-        const session = await stripeStore.session(cart.value, [Mode.KLARNA]);
-
-        // await window.fbq("track", "InitiateCheckout");
-
-        return window.location.replace(session.url);
-    } catch (error) {
-        console.log(error);
-    } finally {
-    }
-};
-
-const onNotchPay = async () => {
-    try {
-        if (!isAuthenticated.value) return;
-
-        await useNotchPay
-            .initialize(cart.value, user)
-            .then(async (response) => {
-                // await window.fbq("track", "InitiateCheckout");
-
-                return window.location.replace(response.authorization_url);
-            })
-            .catch((err) => {
-                throw err;
-            });
-    } catch (error) {
-        errors.onFailed(error);
-        console.error(error);
-    } finally {
-    }
-};
-
-const stripeTerminal = async () => {
-    try {
-        if (!isAuthenticated.value) return;
-
-        const terminal = await stripeStoreTerminal.stripeTerminal();
-        await stripeStoreTerminal.connectReaderHandler(true);
-        await stripeStoreTerminal.setSimulatorConfiguration();
-        console.log(terminal);
-    } catch (error) {
-        errors.onFailed(error);
-        console.error(error);
-    } finally {
-    }
-};
 </script>

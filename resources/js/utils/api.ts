@@ -16,7 +16,7 @@ export const $api = ofetch.create({
         const locale = usePage().props.team?.locale;
         const cartId = usePage().props.cart?.id;
 
-        if (accessToken) {
+        if (accessToken && !options.headers?.hasOwnProperty("Authorization")) {
             options.headers = {
                 ...options.headers,
                 Authorization: `Bearer ${accessToken}`,

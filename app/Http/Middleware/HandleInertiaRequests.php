@@ -37,6 +37,7 @@ class HandleInertiaRequests extends Middleware
                 'stripe' => !is_null($team->stripe) ? base64_decode($team->stripe->stripe_secret) : null,
                 'sofort' => !is_null($team->sofort) ? base64_decode($team->sofort->sofort_secret) : null,
                 'terminal' => !is_null($team->terminal) ? base64_decode($team->terminal->sofort_secret) : null,
+                'notch_pay' => !is_null($team->notchPay) ? base64_decode($team->notchPay->notch_pay_id) : null,
                 'transfer' => !is_null($team->transfer),
             ],
             'cart' =>  [
