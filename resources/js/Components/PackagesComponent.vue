@@ -95,17 +95,15 @@
                             <div
                                 v-for="product in item.products"
                                 :key="product.id"
-                                class="tooltip"
-                                :data-tip="product.name"
                             >
-                                <div class="avatar indicator">
+                                <div class="avatar indicator cursor-pointer">
                                     <span
                                         class="indicator-item badge badge-default"
                                     >
                                         {{ product.quantity }}
                                     </span>
-                                    <div class="w-16 rounded-full">
-                                        <img :src="product.avatar_url" />
+                                    <div class="w-16 rounded-full btn-title">
+                                        <img :src="product.avatar" />
                                     </div>
                                 </div>
                             </div>

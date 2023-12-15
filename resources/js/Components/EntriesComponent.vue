@@ -122,6 +122,7 @@ const open = async (item: Ticket) => {
         await api.tickets
             .find(item.id)
             .then(async (response: any) => {
+                if (response.data.quantity <= 0) return;
                 await wizard.setComponent("Step1");
                 cartsStore.setItem(response.data);
                 const reset = ref(false);
