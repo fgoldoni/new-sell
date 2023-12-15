@@ -1,5 +1,7 @@
 <template>
-    <div class="divide-y sm:divide-slate-200 sm:dark:divide-slate-600">
+    <div
+        class="divide-y mb-24 sm:mb-32 sm:divide-slate-200 sm:dark:divide-slate-600"
+    >
         <div class="pb-6">
             <div
                 class="h-36 bg-indigo-700 sm:h-36 lg:h-40"
@@ -177,15 +179,6 @@
                                     ></ProductOrderItem>
                                 </template>
                             </ul>
-                            <p
-                                class="my-6 p-4 flex items-center justify-between border-t border-slate-200 dark:border-slate-600 pt-6 text-sm font-medium text-slate-900 dark:text-white"
-                            >
-                                <span class="text-xl">Total</span>
-                                <span class="text-xl">
-                                    {{ order.team.currency }}
-                                    {{ order.total }}
-                                </span>
-                            </p>
                         </div>
                     </div>
                 </div>

@@ -177,6 +177,9 @@ const submitAction = () => {
         case "card":
             onStripe();
             break;
+        case "klarna":
+            onKlarna();
+            break;
         case "Mangoes":
         case "Papayas":
             console.log("Mangoes and papayas are $2.79 a pound.");
@@ -259,11 +262,10 @@ const onKlarna = async () => {
     try {
         const session = await stripeStore.session(cart.value, ["klarna"]);
 
-        await window.fbq("track", "InitiateCheckout");
+        // await window.fbq("track", "InitiateCheckout");
 
         return window.location.replace(session.url);
     } catch (error) {
-        errors.onFailed(error);
         console.log(error);
     } finally {
     }
@@ -276,7 +278,7 @@ const onNotchPay = async () => {
         await useNotchPay
             .initialize(cart.value, user)
             .then(async (response) => {
-                await window.fbq("track", "InitiateCheckout");
+                // await window.fbq("track", "InitiateCheckout");
 
                 return window.location.replace(response.authorization_url);
             })

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
+        class="relative flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
@@ -9,6 +9,24 @@
                 :title="order.user.name"
             ></Header>
             <Body ref="itemRef"></Body>
+            <div
+                :class="`absolute bottom-0 bg-${$page.props.team.color}-900 shadow-2xl flex w-full items-center justify-between px-4 py-8`"
+            >
+                <div class="text-xl text-white font-extrabold">
+                    Total
+                    <span class="text-slate-200 uppercase"
+                        >({{ order.mode }})</span
+                    >
+                </div>
+                <div class="flex flex-col">
+                    <div class="text-slate-200 font-extrabold">
+                        {{ order.currency }} {{ order.total }}
+                    </div>
+                    <div class="text-slate-200">
+                        {{ __("Entry:") }} {{ order.entry }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>

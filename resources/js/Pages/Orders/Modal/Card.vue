@@ -32,8 +32,6 @@ onMounted(async () => {
 
             wizard.reset();
 
-            await cartsStore.reset();
-
             await wizard.setComponent("Step6");
 
             return router.get(

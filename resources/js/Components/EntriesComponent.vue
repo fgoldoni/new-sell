@@ -121,7 +121,6 @@ const open = async (id: string) => {
             .find(id)
             .then(async (response: any) => {
                 cartsStore.setItem(response.data);
-                const cartItem = cartsStore.findItem("ticket", id);
                 const reset = ref(false);
 
                 if (
@@ -136,22 +135,8 @@ const open = async (id: string) => {
                     cartsStore.updatePayload("message", "");
                 }
 
-                if (payload.value && payload.value.quantity <= 0) {
+                if (payload.value?.quantity <= 0) {
                     cartsStore.updatePayload("quantity", 1);
-                }
-
-                if (cartItem && payload.value.id !== id) {
-                    cartsStore.updatePayload("id", id);
-                    cartsStore.updatePayload("quantity", cartItem.quantity);
-                    cartsStore.updatePayload(
-                        "entry",
-                        cartItem.attributes?.entry,
-                    );
-                    cartsStore.updatePayload(
-                        "message",
-                        cartItem.attributes?.message,
-                    );
-                    cartsStore.updatePayload("model", response.data.model);
                 }
 
                 await cartsStore.store({
