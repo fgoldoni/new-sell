@@ -56,3 +56,10 @@ export interface Cart {
     cart_sub_total_conditions: any;
     cart_total_conditions: any;
 }
+
+export const enum Mode {
+    CARD = "card",
+    KLARNA = "klarna",
+    SOFORT = "sofort",
+    PAYPAL = "paypal",
+}

@@ -33,7 +33,7 @@
                             ></path>
                         </svg>
                         <div class="btn-base text-slate-100 uppercase" v-else>
-                            <span class="">{{ __("Continue") }}</span>
+                            <span class="">{{ label || __("Continue") }}</span>
                             <span class="ml-2 text-slate-300 font-extrabold"
                                 >({{ $page.props.team.currency.code }}
                                 {{ cart.total }})
@@ -193,6 +193,7 @@ const { cart } = storeToRefs(cartsStore);
 
 interface Props {
     processing?: boolean;
+    label?: string;
 }
 
 defineProps<Props>();

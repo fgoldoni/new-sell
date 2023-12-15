@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <Footer @submit-action="submitAction"></Footer>
+        <Footer @submit-action="submitAction" :label="__('Pay')"></Footer>
     </div>
 </template>
 <script setup lang="ts">
@@ -156,6 +156,13 @@ const { isAuthenticated } = storeToRefs(authStore);
 const paypalStore = usePaypalStore();
 const stripeStore = useStripeStore();
 
+const enum Mode {
+    CARD = "card",
+    KLARNA = "klarna",
+    SOFORT = "sofort",
+    PAYPAL = "paypal",
+}
+
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
@@ -171,8 +178,6 @@ const form = reactive({
 const submitAction = () => {
     if (!form.payment) return;
 
-    console.log(form.payment);
-
     switch (form.payment) {
         case "card":
             onStripe();
@@ -180,10 +185,8 @@ const submitAction = () => {
         case "klarna":
             onKlarna();
             break;
-        case "Mangoes":
-        case "Papayas":
-            console.log("Mangoes and papayas are $2.79 a pound.");
-            // Expected output: "Mangoes and papayas are $2.79 a pound."
+        case "sofort":
+            onSofort();
             break;
         default:
             console.log(`Sorry, we are out of ${expr}.`);
@@ -234,7 +237,7 @@ onMounted(async () => {
 
 const onStripe = async () => {
     try {
-        const session = await stripeStore.session(cart.value);
+        const session = await stripeStore.session(cart.value, [Mode.CARD]);
 
         // await window.fbq("track", "InitiateCheckout");
 
@@ -247,7 +250,7 @@ const onStripe = async () => {
 
 const onSofort = async () => {
     try {
-        const session = await stripeStore.session(cart.value, ["sofort"]);
+        const session = await stripeStore.session(cart.value, [Mode.SOFORT]);
 
         // await window.fbq("track", "InitiateCheckout");
 
@@ -260,7 +263,7 @@ const onSofort = async () => {
 
 const onKlarna = async () => {
     try {
-        const session = await stripeStore.session(cart.value, ["klarna"]);
+        const session = await stripeStore.session(cart.value, [Mode.KLARNA]);
 
         // await window.fbq("track", "InitiateCheckout");
 

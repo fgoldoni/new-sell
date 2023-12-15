@@ -34,8 +34,9 @@ class HandleInertiaRequests extends Middleware
                 'currency' => $team->currency,
                 'locale' => app()->getLocale(),
                 'paypal' => !is_null($team->paypal) ? base64_decode($team->paypal->paypal_id) : null,
-                'stripe' => $team->stripe ? base64_decode($team->stripe->stripe_secret) : null,
-                'sofort' => $team->sofort ? base64_decode($team->sofort->stripe_secret) : null,
+                'stripe' => !is_null($team->stripe) ? base64_decode($team->stripe->stripe_secret) : null,
+                'sofort' => !is_null($team->sofort) ? base64_decode($team->sofort->sofort_secret) : null,
+                'terminal' => !is_null($team->terminal) ? base64_decode($team->terminal->sofort_secret) : null,
                 'transfer' => !is_null($team->transfer),
             ],
             'cart' =>  [

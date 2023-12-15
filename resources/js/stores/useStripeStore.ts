@@ -2,10 +2,10 @@ import { defineStore } from "pinia";
 import { usePage } from "@inertiajs/vue3";
 import Stripe from "stripe";
 import { upperCase } from "lodash";
-import { Cart, CartItem } from "@/types/carts";
+import { Cart, CartItem, Mode } from "@/types/carts";
 
 export const useStripeStore = defineStore("stripeStore", () => {
-    const session = async (cart: Cart, method: string[] = ["card"]) => {
+    const session = async (cart: Cart, method: Mode[]) => {
         const stripe = new Stripe(usePage().props.team.stripe);
 
         const items = cart?.items.map((item: CartItem) => ({

@@ -18,11 +18,11 @@
                         >({{ order.mode }})</span
                     >
                 </div>
-                <div class="flex flex-col">
+                <div class="flex flex-col pr-0 sm:pr-2">
                     <div class="text-slate-200 font-extrabold">
                         {{ order.currency }} {{ order.total }}
                     </div>
-                    <div class="text-slate-200">
+                    <div class="text-slate-200" v-if="order.entry">
                         {{ __("Entry:") }} {{ order.entry }}
                     </div>
                 </div>
