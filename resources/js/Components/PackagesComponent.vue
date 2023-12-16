@@ -19,130 +19,93 @@
             <div
                 class="grid max-w-md mx-auto gap-8 mt-8 overflow-hidden leading-7 text-slate-900 md:max-w-lg lg:max-w-none sm:mt-16 lg:grid-cols-2"
             >
-                <div
-                    v-for="item in packages"
+                <Package
+                    v-for="(item, index) in packages"
                     :key="item.id"
-                    :ref="setItemRef"
-                    :class="[
-                        item.quantity
-                            ? 'border-' + $page.props.team.color + '-500'
-                            : 'border-rose-500',
-                        'relative flex flex-col items-start justify-end h-full overflow-hidden rounded-xl group border-2 shadow-2xl',
-                    ]"
-                >
-                    <div
-                        :class="`btn-base cursor-pointer absolute top-0 left-0 z-10 flex px-3 py-2 ml-8 mt-6 text-md sm:text-2xl font-extrabold tracking-wide uppercase bg-white  hover:bg-${$page.props.team.color}-100 rounded text-slate-900`"
-                    >
-                        {{ $page.props.team.currency.code }} {{ item.price }}
-                    </div>
-                    <a
-                        href="#_"
-                        class="block w-full transition duration-300 ease-in-out transform bg-center bg-cover h-96 hover:scale-110"
-                        :style="`background-image: url(${item.avatar_url})`"
-                    >
-                    </a>
-                    <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-900 opacity-90 dark:text-white border-t-0 border-yellow-200 px-7`"
-                    >
-                        <a
-                            href="#_"
-                            :class="[
-                                item.quantity
-                                    ? 'btn-base bg-' +
-                                      $page.props.team.color +
-                                      '-900'
-                                    : 'bg-rose-900',
-                                'inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white',
-                            ]"
-                        >
-                            <span v-if="item.quantity">
-                                {{ item.name }}
-                            </span>
-                            <span v-else> Leider schon reserviert</span>
-                        </a>
-                        <div class="flex items-center justify-between">
-                            <div class="text-xl">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ item.attendees }}
-                                    </dt>
-                                    <dd>Personen</dd>
-                                </dl>
-                            </div>
-                            <div class="text-xl">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ $page.props.team.currency.code }}
-                                        1000
-                                    </dt>
-                                    <dd>Mindestverzehr</dd>
-                                </dl>
-                            </div>
-                            <div class="text-xl">
-                                <dl>
-                                    <dt class="font-extrabold text-center">
-                                        {{ $page.props.team.currency.code }} 100
-                                    </dt>
-                                    <dd>pro Person</dd>
-                                </dl>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        :class="`relative z-20 w-full h-auto py-8 text-white bg-slate-50  dark:bg-slate-900 border-t-0 border-yellow-200 px-7`"
-                    >
-                        <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
-                            <div
-                                v-for="product in item.products"
-                                :key="product.id"
-                            >
-                                <div class="avatar indicator cursor-pointer">
-                                    <span
-                                        class="indicator-item badge badge-default"
-                                    >
-                                        {{ product.quantity }}
-                                    </span>
-                                    <div class="w-16 rounded-full btn-title">
-                                        <img :src="product.avatar" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    :index="index"
+                    :item="item"
+                    :processing="processing"
+                    @open="open"
+                ></Package>
             </div>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import { useMotion } from "@vueuse/motion";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
+import Package from "@/Components/Package.vue";
+import { Ticket } from "@/models/Ticket";
+import { router } from "@inertiajs/vue3";
+import ApiError from "@/models/ApiError";
+import { useApi } from "@/composable/useApi";
+import { useCartsStore } from "@/stores/useCartsStore";
+import { useWizardStore } from "@/stores/useWizardStore";
 
-const itemRefs = ref<Array<HTMLElement>>([]);
-const setItemRef = (el) => itemRefs.value.push(el);
+const processing = ref<string | null>(null);
 
 const ticketsStore = useTicketsStore();
 const { packages } = storeToRefs(ticketsStore);
+const api = useApi();
+const cartsStore = useCartsStore();
+const wizard = useWizardStore();
+const { payload } = storeToRefs(cartsStore);
 
-onMounted(() => {
-    itemRefs.value.forEach((el, index) => {
-        useMotion(el, {
-            initial: {
-                opacity: 0,
-                y: 100,
-            },
-            visibleOnce: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                    delay: 300 * index,
-                    duration: 700,
-                },
-            },
-        });
-    });
-});
+const open = async (item: Ticket) => {
+    if (item.quantity <= 0) return;
+
+    try {
+        processing.value = item.id;
+
+        await api.tickets
+            .find(item.id)
+            .then(async (response: any) => {
+                if (response.data.quantity <= 0) return;
+                await wizard.setComponent("Step1");
+                cartsStore.setItem(response.data);
+                const reset = ref(false);
+
+                if (
+                    payload.value.id !== item.id ||
+                    payload.value.model !== response.data.model
+                ) {
+                    cartsStore.updatePayload("id", item.id);
+                    cartsStore.updatePayload("quantity", 1);
+                    cartsStore.updatePayload("entry", "");
+                    reset.value = true;
+                    cartsStore.updatePayload("model", response.data.model);
+                    cartsStore.updatePayload("message", "");
+                }
+
+                if (payload.value?.quantity <= 0) {
+                    cartsStore.updatePayload("quantity", 1);
+                }
+
+                await cartsStore.store({
+                    ...payload.value,
+                    ...{ reset: reset.value },
+                });
+
+                return router.get(
+                    route("tickets.show", { id: item.id }),
+                    {},
+                    {
+                        preserveState: false,
+                        preserveScroll: true,
+                        replace: false,
+                    },
+                );
+            })
+            .catch((error: any) => {
+                throw new ApiError(error);
+            })
+            .finally(() => {
+                processing.value = null;
+            });
+    } catch (error) {
+        console.error(error);
+    }
+};
 </script>

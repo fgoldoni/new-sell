@@ -11,7 +11,7 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits<{
-    open: [value: string];
+    open: [value: Ticket];
 }>();
 const itemRef = ref<HTMLElement>();
 

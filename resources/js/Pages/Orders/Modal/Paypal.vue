@@ -41,7 +41,7 @@ onMounted(async () => {
                 route().params.currency,
                 route().params.total,
                 route().params.reference,
-                route().params.status,
+                route().params.status.toLowerCase(),
             );
 
             wizard.reset();
