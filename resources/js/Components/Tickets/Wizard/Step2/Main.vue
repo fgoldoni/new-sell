@@ -6,7 +6,7 @@
             <Header
                 @close="emit('close', false)"
                 @previous="() => wizard.setComponent('Step1')"
-                :has-previous="true"
+                :has-previous="item ? true : false"
                 :title="item?.name"
             ></Header>
             <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
@@ -70,7 +70,7 @@
                         </li>
                     </template>
                 </Stepper>
-                <Body></Body>
+                <Body :collections="collections"></Body>
             </div>
         </div>
 
@@ -87,18 +87,28 @@ import Footer from "@/Components/Tickets/Wizard/Footer.vue";
 import Stepper from "@/Components/Tickets/Wizard/Stepper.vue";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useMotion } from "@vueuse/motion";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
+import { useEventStore } from "@/stores/useEventStore";
 
 const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
+const eventStore = useEventStore();
 const cartsStore = useCartsStore();
 const { item, processing } = storeToRefs(cartsStore);
+const { event } = storeToRefs(eventStore);
 
 const emit = defineEmits<{
     close: [value: boolean];
 }>();
+
+const collections = computed(() => {
+    if (item.value?.collections.length) return item.value?.collections;
+    if (event.value?.collections.length) return event.value?.collections;
+
+    return [];
+});
 
 useMotion(itemRef, {
     initial: {

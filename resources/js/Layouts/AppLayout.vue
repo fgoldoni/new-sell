@@ -108,11 +108,14 @@ import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
 import { useCountriesStore } from "@/stores/useCountriesStore";
+import { useEventStore } from "@/stores/useEventStore";
 
 const ticketsStore = useTicketsStore();
+const eventStore = useEventStore();
 const countriesStore = useCountriesStore();
 const { countries } = storeToRefs(countriesStore);
 const { isLoading } = storeToRefs(ticketsStore);
+const { isLoading: isEventLoading } = storeToRefs(eventStore);
 const scrolledFromTop = ref(false);
 
 const navigation = [
@@ -136,6 +139,9 @@ onMounted(async () => {
 
     if (!isLoading.value) {
         await ticketsStore.get();
+    }
+    if (!isEventLoading.value) {
+        await eventStore.get();
     }
     if (countries.value.length === 0) {
         await countriesStore.get();

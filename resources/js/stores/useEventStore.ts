@@ -1,30 +1,37 @@
-import {defineStore} from "pinia";
-import {computed, ref} from "vue";
-import {usePage} from "@inertiajs/vue3";
-import {useApi} from "@/composable/useApi";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
+import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
+import { Event } from "@/models/Ticket";
 
-export const useEventStore = defineStore('event', () => {
-    const api = useApi();
+export const useEventStore = defineStore(
+    "event",
+    () => {
+        const api = useApi();
 
-    const event = ref(null)
+        const event = ref<Event | null>(null);
 
-    const isLoading = computed(() => !!event.value)
+        const isLoading = computed(() => !!event.value);
 
-    const load = async () => {
-        try {
-            await api.events.find(usePage().props.team?.event_id)
-                .then((response: any) => {
-                    event.value = response.data
-                }).catch((error: any) => {
-                    throw new ApiError(error);
-                })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+        const get = async () => {
+            try {
+                await api.events
+                    .get(usePage().props.team?.event?.id)
+                    .then((response: any) => {
+                        event.value = response.data as Event;
+                    })
+                    .catch((error: any) => {
+                        throw new ApiError(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    return {event, isLoading, load}
-},{
-    persist: true,
-})
+        return { event, isLoading, get };
+    },
+    {
+        persist: true,
+    },
+);

@@ -19,7 +19,7 @@
                     <div class="px-6">
                         <nav class="-mb-px flex space-x-6">
                             <a
-                                v-for="collection in item.collections"
+                                v-for="collection in collections"
                                 :key="collection.id"
                                 @click="currentTab = collection"
                                 href="javascript:;"
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <template
-                    v-for="(collection, index) in item?.collections"
+                    v-for="(collection, index) in collections"
                     :key="collection.id"
                 >
                     <ul
@@ -65,5 +65,11 @@ import ProductCartItem from "@/Components/ProductCartItem.vue";
 const cartsStore = useCartsStore();
 const { item } = storeToRefs(cartsStore);
 
-const currentTab = ref(item.value?.collections[0]);
+interface Props {
+    collections: any;
+}
+
+const props = defineProps<Props>();
+
+const currentTab = ref(props.collections[0]);
 </script>

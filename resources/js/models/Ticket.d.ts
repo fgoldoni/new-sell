@@ -11,3 +11,11 @@ export interface Ticket {
     entries: string[] | [];
     collections: Collection[] | [];
 }
+
+export interface Event {
+    id: string;
+    name: string;
+    description: string | null;
+    tags: string[] | [];
+    collections: Collection[] | [];
+}
