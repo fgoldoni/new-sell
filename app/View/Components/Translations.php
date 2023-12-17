@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Http;
 use Illuminate\View\Component;
 
 class Translations extends Component
@@ -27,9 +28,20 @@ class Translations extends Component
     {
         $locale = App::getLocale();
 
-        $translations = Cache::rememberForever("translations_$locale", function () use ($locale) {
+        Cache::flush();
+
+        $db = Http::acceptJson()->withHeaders(
+            [
+                'x-locale-id' => 'en'
+            ]
+        )->get(config('system.api_url') . "/api/languages")->json();
+
+
+
+        $translations = Cache::rememberForever("translations_$locale", function () use ($locale, $db) {
             $phpTranslations = [];
             $jsonTranslations = [];
+            $dbTranslations = [];
 
             if (File::exists(lang_path("$locale"))) {
                 $phpTranslations = collect(File::allFiles(lang_path("$locale")))
@@ -40,7 +52,11 @@ class Translations extends Component
                 $jsonTranslations = json_decode(File::get(lang_path("$locale.json")), true, 512, JSON_THROW_ON_ERROR);
             }
 
-            return array_merge($phpTranslations, $jsonTranslations);
+            if ($db['data']) {
+                $dbTranslations = collect($db['data'])->flatMap(fn ($line) => Arr::dot($line))->toArray();
+            }
+
+            return array_merge($phpTranslations, $jsonTranslations, $dbTranslations);
         });
 
         return view('components.translations', [

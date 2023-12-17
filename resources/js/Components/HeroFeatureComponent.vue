@@ -30,7 +30,7 @@
                 :href="route('tickets.show', { id: 'id' })"
                 :class="`uppercase btn-base px-8 py-4 w-full border-2 border-${$page.props.team.color}-500 dark:border-${$page.props.team.color}-200 text-center text-base font-medium inline-block rounded text-slate-900 dark:text-white`"
             >
-                Ajout de boissons
+                {{ __("labels.add_drinks") }}
             </Link>
         </div>
     </section>
