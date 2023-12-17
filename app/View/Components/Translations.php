@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Http\Middleware\EnsureTeamMiddleware;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
@@ -28,20 +29,18 @@ class Translations extends Component
     {
         $locale = App::getLocale();
 
-        Cache::flush();
-
-        $db = Http::acceptJson()->withHeaders(
-            [
-                'x-locale-id' => 'en'
-            ]
-        )->get(config('system.api_url') . "/api/languages")->json();
-
-
-
-        $translations = Cache::rememberForever("translations_$locale", function () use ($locale, $db) {
+        $translations = Cache::rememberForever("translations_$locale", function () use ($locale) {
             $phpTranslations = [];
             $jsonTranslations = [];
             $dbTranslations = [];
+
+            $db = Http::acceptJson()->withHeaders(
+                [
+                    'x-team-id' => EnsureTeamMiddleware::teamId(),
+                    'x-event-id' => EnsureTeamMiddleware::team()->event?->id,
+                    'x-locale-id' => app()->getLocale()
+                ]
+            )->get(config('system.api_url') . "/api/languages")->json();
 
             if (File::exists(lang_path("$locale"))) {
                 $phpTranslations = collect(File::allFiles(lang_path("$locale")))

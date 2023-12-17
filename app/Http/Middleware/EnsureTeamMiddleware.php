@@ -136,7 +136,7 @@ class EnsureTeamMiddleware
 
     public static function teamId()
     {
-        return self::team()->id;
+        return self::team()?->id;
     }
 
     private static function uniqueCode(): string

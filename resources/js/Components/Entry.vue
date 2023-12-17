@@ -118,10 +118,10 @@ useMotion(itemRef, {
                 ></path>
             </svg>
             <span v-else-if="item.quantity > 0">
-                {{ __("Noch frei, jetzt reservieren") }}
+                {{ __("labels.action.book") }}
             </span>
             <span v-else>
-                {{ __("Leider schon reserviert") }}
+                {{ __("labels.action.sold") }}
             </span>
         </button>
     </div>
