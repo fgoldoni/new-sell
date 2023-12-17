@@ -171,7 +171,7 @@ const form = reactive({
     errors: new Errors(),
     is_logged: isAuthenticated.value,
     processing: false,
-    payment: paiements.value[0].id,
+    payment: paiements.value[0]?.id,
     to: route("home"),
 });
 
