@@ -87,7 +87,7 @@
                                         <h2
                                             class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
                                         >
-                                            Wie möchtest du zahlen?
+                                            {{ __("wizard.step_5.title") }}
                                         </h2>
                                     </div>
                                 </div>
@@ -133,7 +133,10 @@
             </div>
         </div>
 
-        <Footer @submit-action="submitAction" :label="__('Pay')"></Footer>
+        <Footer
+            @submit-action="submitAction"
+            :label="__('wizard.step_5.continue')"
+        ></Footer>
     </div>
 </template>
 <script setup lang="ts">

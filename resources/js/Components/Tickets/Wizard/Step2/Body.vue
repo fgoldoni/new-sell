@@ -12,7 +12,7 @@
                             <h2
                                 class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
                             >
-                                Was wollt ihr trinken?
+                                {{ __("wizard.step_2.title") }}
                             </h2>
                         </div>
                     </div>

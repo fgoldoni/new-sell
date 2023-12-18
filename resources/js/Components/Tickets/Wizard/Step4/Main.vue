@@ -87,7 +87,7 @@
                                         <h2
                                             class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
                                         >
-                                            Kontaktinfos:
+                                            {{ __("wizard.step_4.title") }}
                                         </h2>
                                     </div>
                                 </div>

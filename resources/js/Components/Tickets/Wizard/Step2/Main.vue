@@ -77,6 +77,7 @@
         <Footer
             @submit-action="() => wizard.setComponent('Step3')"
             :processing="processing"
+            :label="__('wizard.step_2.continue')"
         ></Footer>
     </div>
 </template>

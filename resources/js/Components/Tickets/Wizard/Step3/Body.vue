@@ -12,7 +12,7 @@
                             <h2
                                 class="text-xl font-semibold leading-6 text-slate-500 dark:text-white"
                             >
-                                Deine Bestellung:
+                                {{ __("wizard.step_3.title") }}
                             </h2>
                         </div>
                     </div>

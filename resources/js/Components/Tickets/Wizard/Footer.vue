@@ -33,7 +33,9 @@
                             ></path>
                         </svg>
                         <div class="btn-base text-slate-100 uppercase" v-else>
-                            <span class="">{{ label || __("Continue") }}</span>
+                            <span class="">{{
+                                label || __("labels.continue")
+                            }}</span>
                             <span class="ml-2 text-slate-300 font-extrabold"
                                 >({{ $page.props.team.currency.code }}
                                 {{ cart.total }})
