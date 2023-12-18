@@ -115,15 +115,15 @@
                     <dt
                         class="text-sm font-medium text-gray-500 sm:w-60 sm:flex-shrink-0"
                     >
-                        Dear Goldoni Bogning Fouotsa!
+                        {{
+                            __("wizard.step_6.title", { name: order.user.name })
+                        }}
                     </dt>
                     <dd
                         class="mt-4 text-sm text-slate-500 dark:text-slate-400 sm:col-span-2"
                     >
                         <p>
-                            Thank you for your reservation and your trust. We
-                            are glad that you have found something suitable with
-                            us.
+                            {{ __("wizard.step_6.description") }}
                         </p>
                     </dd>
                 </div>
@@ -142,7 +142,7 @@
                                         <h2
                                             class="text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400"
                                         >
-                                            Deine Bestellung:
+                                            {{ __("wizard.step_6.details") }}
                                             <span class="uppercase">
                                                 ({{ order.total_quantity }}
                                                 {{ __("Items") }})

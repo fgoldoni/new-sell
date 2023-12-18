@@ -13,7 +13,7 @@
                 :class="`absolute bottom-0 bg-${$page.props.team.color}-900 shadow-2xl flex w-full items-center justify-between px-4 py-8`"
             >
                 <div class="text-xl text-white font-extrabold">
-                    Total
+                    {{ __("labels.total") }}
                     <span class="text-slate-200 uppercase"
                         >({{ order.mode }})</span
                     >

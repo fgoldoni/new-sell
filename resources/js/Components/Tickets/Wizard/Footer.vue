@@ -106,7 +106,8 @@
                             class="flex justify-between items-center w-full text-lg font-bold text-left space-x-2"
                         >
                             <span>
-                                {{ cart.total_quantity }} {{ __("Pakete") }}
+                                {{ cart.total_quantity }}
+                                {{ __("labels.item") }}
                             </span>
                             <ChevronUpIcon
                                 :class="{ 'rotate-180 transform': open }"

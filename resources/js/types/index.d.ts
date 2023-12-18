@@ -4,7 +4,7 @@ export interface User {
     id: number;
     name: string;
     email: string;
-    country_id: number;
+    country_id?: number;
     phone: string;
 }
 
@@ -19,7 +19,7 @@ export interface Order {
     cart_total_conditions: any;
     event: any;
     team: any;
-    user: any;
+    user: User;
     qr_code: string;
 }
 
