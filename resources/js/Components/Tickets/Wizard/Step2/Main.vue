@@ -75,7 +75,7 @@
         </div>
 
         <Footer
-            @submit-action="() => wizard.setComponent('Step3')"
+            @submit-action="submitAction"
             :processing="processing"
             :label="__('wizard.step_2.continue')"
         ></Footer>
@@ -97,7 +97,7 @@ const itemRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const eventStore = useEventStore();
 const cartsStore = useCartsStore();
-const { item, processing } = storeToRefs(cartsStore);
+const { item, processing, cart } = storeToRefs(cartsStore);
 const { event } = storeToRefs(eventStore);
 
 const emit = defineEmits<{
@@ -125,4 +125,10 @@ useMotion(itemRef, {
         },
     },
 });
+
+const submitAction = () => {
+    if (!cart.value.total_quantity) return;
+
+    return wizard.setComponent("Step3");
+};
 </script>

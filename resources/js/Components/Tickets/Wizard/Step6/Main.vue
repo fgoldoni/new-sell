@@ -23,7 +23,7 @@
                         {{ order.currency }} {{ order.total }}
                     </div>
                     <div class="text-slate-200" v-if="order.entry">
-                        {{ __("Entry:") }} {{ order.entry }}
+                        {{ __("labels.entry") }} {{ order.entry }}
                     </div>
                 </div>
             </div>

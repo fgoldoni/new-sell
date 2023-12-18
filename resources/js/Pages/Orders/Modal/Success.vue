@@ -11,10 +11,10 @@
             <h2
                 class="text-center text-white text-xl font-semibold animate-pulse"
             >
-                Loading...
+                {{ __("labels.loading") }}
             </h2>
             <p class="w-1/3 text-center text-white">
-                This may take a few seconds, please don't close this page.
+                {{ __("labels.loading.message") }}
             </p>
         </div>
     </template>
