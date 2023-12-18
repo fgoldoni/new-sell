@@ -13,7 +13,7 @@
                     v-motion-fade
                     class="box-border m-0 text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white border-solid sm:text-3xl uppercase"
                 >
-                    Packages & Lounges
+                    {{ __("labels.lounges", { team: $page.props.team.name }) }}
                 </h2>
             </div>
             <div

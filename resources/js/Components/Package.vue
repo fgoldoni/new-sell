@@ -87,7 +87,7 @@ useMotion(itemRef, {
                 <span v-else-if="item.quantity">
                     {{ item.name }}
                 </span>
-                <span v-else> Leider schon reserviert</span>
+                <span v-else> {{ __("labels.action.sold") }}</span>
             </button>
             <div class="flex items-center justify-between">
                 <div class="text-xl">

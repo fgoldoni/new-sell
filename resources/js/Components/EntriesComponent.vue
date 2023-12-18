@@ -12,7 +12,7 @@
                 <p
                     class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-4xl uppercase"
                 >
-                    1 Person Pass
+                    {{ __("labels.one_person_pass") }}
                 </p>
             </div>
             <div class="relative mt-6">
@@ -63,22 +63,49 @@
                                 <h3
                                     class="text-lg font-semibold leading-8 tracking-tight text-slate-900 dark:text-white"
                                 >
-                                    Discounted
+                                    {{ __("labels.cta_title") }}
                                 </h3>
                                 <p
                                     class="mt-1 text-base leading-7 text-slate-500 dark:text-slate-400"
                                 >
-                                    Dolor dolores repudiandae doloribus. Rerum
-                                    sunt aut eum. Odit omnis non voluptatem sunt
-                                    eos nostrum.
+                                    {{ __("labels.cta_description") }}
                                 </p>
                             </div>
                             <a
-                                href="#"
-                                :class="`rounded-md px-3.5 py-2 text-sm font-semibold leading-6 text-${$page.props.team.color}-600 dark:text-white ring-1 ring-inset ring-${$page.props.team.color}-200 dark:ring-white hover:ring-${$page.props.team.color}-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600`"
-                                >Buy discounted license
-                                <span aria-hidden="true">&rarr;</span></a
+                                v-if="isLoading && event?.collections.length"
+                                @click="openModal"
+                                :class="`rounded-md cursor-pointer px-3.5 py-2 text-sm font-semibold leading-6 text-${$page.props.team.color}-600 dark:text-white ring-1 ring-inset ring-${$page.props.team.color}-200 dark:ring-white hover:ring-${$page.props.team.color}-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${$page.props.team.color}-600`"
                             >
+                                <div
+                                    class="flex items-center justify-center space-x-4"
+                                >
+                                    <svg
+                                        v-if="process"
+                                        :class="`animate-spin h-6 w-6 inline-flex text-${$page.props.team.color}-600`"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <circle
+                                            class="opacity-25"
+                                            cx="12"
+                                            cy="12"
+                                            r="10"
+                                            stroke="currentColor"
+                                            stroke-width="4"
+                                        ></circle>
+                                        <path
+                                            class="opacity-75"
+                                            fill="currentColor"
+                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                        ></path>
+                                    </svg>
+                                    <span v-else
+                                        >{{ __("labels.cta_action") }}
+                                        <span aria-hidden="true">&rarr;</span>
+                                    </span>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -103,15 +130,28 @@ import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { router } from "@inertiajs/vue3";
 import { Ticket } from "@/models/Ticket";
+import { useEventStore } from "@/stores/useEventStore";
 
 const { entries } = storeToRefs(useTicketsStore());
 
 const api = useApi();
 const processing = ref<string | null>(null);
+const process = ref(false);
+
+const eventStore = useEventStore();
+const { event, isLoading } = storeToRefs(eventStore);
 
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { payload } = storeToRefs(cartsStore);
+
+const openModal = async () => {
+    process.value = true;
+    await cartsStore.reset();
+    await wizard.setComponent("Step2");
+    process.value = false;
+    return router.get(route("products.index"), {}, { replace: true });
+};
 
 const open = async (item: Ticket) => {
     if (item.quantity <= 0) return;
