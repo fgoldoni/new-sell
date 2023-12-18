@@ -95,7 +95,7 @@ useMotion(itemRef, {
                         <dt class="font-extrabold text-center">
                             {{ item.attendees }}
                         </dt>
-                        <dd>Personen</dd>
+                        <dd>{{ __("labels.package.places") }}</dd>
                     </dl>
                 </div>
                 <div class="text-xl">
@@ -104,7 +104,7 @@ useMotion(itemRef, {
                             {{ $page.props.team.currency.code }}
                             1000
                         </dt>
-                        <dd>Mindestverzehr</dd>
+                        <dd>{{ __("labels.package.total") }}</dd>
                     </dl>
                 </div>
                 <div class="text-xl">
@@ -112,7 +112,7 @@ useMotion(itemRef, {
                         <dt class="font-extrabold text-center">
                             {{ $page.props.team.currency.code }} 100
                         </dt>
-                        <dd>pro Person</dd>
+                        <dd>{{ __("labels.package.per_place") }}</dd>
                     </dl>
                 </div>
             </div>
