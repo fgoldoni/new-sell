@@ -18,12 +18,12 @@ const { item, payload } = storeToRefs(cartsStore);
                 <h3
                     class="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl text-center"
                 >
-                    Okay, los gehts...
+                    {{ __("wizard.step_1.title") }}
                 </h3>
                 <form class="max-w-xs mx-auto">
                     <label
                         class="block mb-1 text-xl font-medium text-gray-500 dark:text-white"
-                        >Wie viele Personen seid ihr?</label
+                        >{{ __("wizard.step_1.description") }}</label
                     >
                     <Quantity
                         :model-value="payload?.quantity"
@@ -43,7 +43,7 @@ const { item, payload } = storeToRefs(cartsStore);
             <label
                 for="description"
                 class="block text-xl font-medium leading-6 text-center text-gray-500"
-                >Hinweise</label
+                >{{ __("wizard.step_1.message") }}</label
             >
             <div class="mt-2 mb-8">
                 <textarea
@@ -52,7 +52,7 @@ const { item, payload } = storeToRefs(cartsStore);
                     @input="(e) => updatePayload('message', e.target.value)"
                     id="description"
                     name="description"
-                    placeholder="Hinweise für uns..."
+                    :placeholder="__('wizard.step_1.message_us')"
                     rows="4"
                     :class="`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-${$page.props.team.color}-500 focus:border-${$page.props.team.color}-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-${$page.props.team.color}-500 dark:focus:border-${$page.props.team.color}-500`"
                 />

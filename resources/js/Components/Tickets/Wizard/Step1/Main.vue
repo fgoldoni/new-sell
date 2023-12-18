@@ -73,7 +73,11 @@
             </div>
         </div>
 
-        <Footer @submit-action="nextAction" :processing="processing"></Footer>
+        <Footer
+            @submit-action="nextAction"
+            :processing="processing"
+            :label="__('wizard.step_1.continue')"
+        ></Footer>
     </div>
 </template>
 <script setup lang="ts">

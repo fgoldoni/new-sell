@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center justify-center">
             <h2 class="text-xl font-medium leading-6 text-gray-500 py-4">
-                Und wann plant ihr ca. zu kommen?
+                {{ __("wizard.step_1.coming") }}
             </h2>
         </div>
 

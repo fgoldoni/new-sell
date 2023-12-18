@@ -12,7 +12,11 @@
                 <p
                     class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-4xl uppercase"
                 >
-                    {{ __("labels.one_person_pass") }}
+                    {{
+                        __("labels.one_person_pass", {
+                            team: $page.props.team.name,
+                        })
+                    }}
                 </p>
             </div>
             <div class="relative mt-6">

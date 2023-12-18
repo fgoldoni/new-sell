@@ -104,7 +104,9 @@ useMotion(itemRef, {
                             {{ $page.props.team.currency.code }}
                             1000
                         </dt>
-                        <dd>{{ __("labels.package.total") }}</dd>
+                        <dd class="text-center">
+                            {{ __("labels.package.total") }}
+                        </dd>
                     </dl>
                 </div>
                 <div class="text-xl">
