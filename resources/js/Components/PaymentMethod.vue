@@ -3,7 +3,7 @@
         :model-value="selectedValue"
         @update:modelValue="(value) => emit('update:modelValue', value?.id)"
     >
-        <div class="mt-4 grid grid-cols-2 gap-4">
+        <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <RadioGroupOption
                 as="template"
                 v-for="paiement in paiements"

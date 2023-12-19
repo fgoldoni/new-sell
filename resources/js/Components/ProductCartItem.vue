@@ -66,14 +66,12 @@ const update = async (value: number) => {
                     </span>
                     <div class="ml-4 truncate">
                         <p
-                            class="truncate text-sm font-medium text-slate-900 dark:text-white"
+                            class="text-sm font-medium text-slate-900 dark:text-white"
                         >
                             {{ $page.props.team.currency.symbol }}
                             {{ item.price }}
                         </p>
-                        <p
-                            class="truncate text-sm text-slate-500 dark:text-slate-400"
-                        >
+                        <p class="text-sm text-slate-500 dark:text-slate-400">
                             {{ item.name }}
                         </p>
                     </div>

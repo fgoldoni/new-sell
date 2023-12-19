@@ -42,6 +42,7 @@
             <PackagesComponent></PackagesComponent>
             <PartnersComponent></PartnersComponent>
             <ContentComponent></ContentComponent>
+            <GuestComponent></GuestComponent>
             <FooterComponent></FooterComponent>
         </div>
     </div>
@@ -59,6 +60,7 @@ import PackagesComponent from "@/Components/PackagesComponent.vue";
 import PartnersComponent from "@/Components/PartnersComponent.vue";
 import FooterComponent from "@/Components/FooterComponent.vue";
 import ContentComponent from "@/Components/ContentComponent.vue";
+import GuestComponent from "@/Components/GuestComponent.vue";
 
 const eventStore = useEventStore();
 const { event, isLoading } = storeToRefs(eventStore);
