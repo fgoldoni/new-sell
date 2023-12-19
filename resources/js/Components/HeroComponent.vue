@@ -40,6 +40,9 @@
             <HeroFeatureComponent></HeroFeatureComponent>
             <EntriesComponent></EntriesComponent>
             <PackagesComponent></PackagesComponent>
+            <PartnersComponent></PartnersComponent>
+            <ContentComponent></ContentComponent>
+            <FooterComponent></FooterComponent>
         </div>
     </div>
 </template>
@@ -53,6 +56,9 @@ import Countdown from "@/Components/Countdown.vue";
 import TypingEffect from "@/Components/TypingEffect.vue";
 import EntriesComponent from "@/Components/EntriesComponent.vue";
 import PackagesComponent from "@/Components/PackagesComponent.vue";
+import PartnersComponent from "@/Components/PartnersComponent.vue";
+import FooterComponent from "@/Components/FooterComponent.vue";
+import ContentComponent from "@/Components/ContentComponent.vue";
 
 const eventStore = useEventStore();
 const { event, isLoading } = storeToRefs(eventStore);
