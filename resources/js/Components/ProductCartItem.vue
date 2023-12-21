@@ -12,7 +12,7 @@
         }"
         class="col-span-1 flex flex-col rounded-lg text-center shadow-2xl btn-title"
     >
-        <div class="flex flex-1 flex-col p-8">
+        <div class="flex flex-1 flex-col p-4">
             <img
                 class="mx-auto h-32 w-32 sm:h-44 sm:w-44 flex-shrink-0 rounded-full"
                 :src="item.avatar"
