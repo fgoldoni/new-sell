@@ -137,12 +137,8 @@ onMounted(async () => {
 
     await ticketsStore.get();
 
-    if (!isLoading.value) {
-        await ticketsStore.get();
-    }
-    if (!isEventLoading.value) {
-        await eventStore.get();
-    }
+    await eventStore.get();
+
     if (countries.value.length === 0) {
         await countriesStore.get();
     }
