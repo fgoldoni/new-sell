@@ -1,3 +1,44 @@
+<template>
+    <li
+        v-motion
+        :initial="{ opacity: 0, y: 100 }"
+        :enter="{
+            y: 0,
+            opacity: 1,
+            transition: {
+                delay: 100 * index,
+                duration: 1000 * index,
+            },
+        }"
+        class="col-span-1 flex flex-col rounded-lg text-center shadow-2xl btn-title"
+    >
+        <div class="flex flex-1 flex-col p-8">
+            <img
+                class="mx-auto h-32 w-32 sm:h-44 sm:w-44 flex-shrink-0 rounded-full"
+                :src="item.avatar"
+                :alt="item.name"
+            />
+            <h3 class="mt-6 text-sm font-medium text-slate-900 dark:text-white">
+                {{ $page.props.team.currency.symbol }}
+                {{ item.price }}
+            </h3>
+            <dl class="mt-1 flex flex-grow flex-col justify-between">
+                <dt class="sr-only">name</dt>
+                <dd class="text-sm text-gray-500">
+                    {{ item.name }}
+                </dd>
+                <dt class="sr-only">quantity</dt>
+                <dd class="mt-3">
+                    <Quantity
+                        :model-value="quantity"
+                        @update:model-value="update"
+                    ></Quantity>
+                </dd>
+            </dl>
+        </div>
+    </li>
+</template>
+
 <script setup lang="ts">
 import { Product } from "@/types";
 import Quantity from "@/Components/Quantity.vue";
@@ -27,64 +68,44 @@ const update = async (value: number) => {
     if (value === 0) await cartsStore.destroy("product-" + props.item.id);
     if (value > 0) return await cartsStore.store(payload);
 };
+
+const people = [
+    {
+        name: "Jane Cooper",
+        title: "Paradigm Representative",
+        role: "Admin",
+        email: "janecooper@example.com",
+        telephone: "+1-202-555-0170",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    },
+    {
+        name: "Jane Cooper",
+        title: "Paradigm Representative",
+        role: "Admin",
+        email: "janecooper@example.com",
+        telephone: "+1-202-555-0170",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    },
+    {
+        name: "Jane Cooper",
+        title: "Paradigm Representative",
+        role: "Admin",
+        email: "janecooper@example.com",
+        telephone: "+1-202-555-0170",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    },
+    {
+        name: "Jane Cooper",
+        title: "Paradigm Representative",
+        role: "Admin",
+        email: "janecooper@example.com",
+        telephone: "+1-202-555-0170",
+        imageUrl:
+            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    },
+    // More people...
+];
 </script>
-
-<template>
-    <li
-        v-motion
-        :initial="{ opacity: 0, y: 100 }"
-        :enter="{
-            y: 0,
-            opacity: 1,
-            transition: {
-                delay: 100 * index,
-                duration: 500 * index,
-            },
-        }"
-        :delay="200"
-    >
-        <div class="group relative flex items-center px-5 py-6">
-            <a href="javascript:;" class="-m-1 block flex-1 p-1">
-                <div
-                    class="absolute inset-0 group-hover:bg-slate-200 dark:group-hover:bg-slate-900"
-                    aria-hidden="true"
-                />
-                <div class="relative flex min-w-0 flex-1 items-center">
-                    <span class="relative inline-block flex-shrink-0">
-                        <img
-                            class="h-10 w-10 rounded-full"
-                            :src="item.avatar"
-                            alt=""
-                        />
-                        <span
-                            :class="[
-                                true ? 'bg-green-400' : 'bg-gray-300',
-                                'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white',
-                            ]"
-                            aria-hidden="true"
-                        />
-                    </span>
-                    <div class="ml-4 truncate">
-                        <p
-                            class="text-sm font-medium text-slate-900 dark:text-white"
-                        >
-                            {{ $page.props.team.currency.symbol }}
-                            {{ item.price }}
-                        </p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400">
-                            {{ item.name }}
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <div class="relative ml-2 inline-block flex-shrink-0 text-left">
-                <Quantity
-                    :model-value="quantity"
-                    @update:model-value="update"
-                ></Quantity>
-            </div>
-        </div>
-    </li>
-</template>
-
-<style scoped></style>
