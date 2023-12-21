@@ -59,8 +59,8 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useCartsStore } from "@/stores/useCartsStore.js";
-import ProductCartItem from "@/Components/Tickets/Wizard/Step3/ProductCartItem.vue";
 import TicketCartItem from "@/Components/Tickets/Wizard/Step3/TicketCartItem.vue";
+import ProductCartItem from "@/Components/Tickets/Wizard/Step3/ProductCartItem.vue";
 
 const cartsStore = useCartsStore();
 const { item, cart } = storeToRefs(cartsStore);

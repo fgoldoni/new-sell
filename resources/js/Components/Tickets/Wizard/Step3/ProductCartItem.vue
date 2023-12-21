@@ -74,7 +74,7 @@ const update = async (value: number) => {
                             aria-hidden="true"
                         />
                     </span>
-                    <div class="ml-4 truncate">
+                    <div class="pl-4 truncate">
                         <p
                             class="truncate text-sm font-medium text-slate-900 dark:text-white"
                         >

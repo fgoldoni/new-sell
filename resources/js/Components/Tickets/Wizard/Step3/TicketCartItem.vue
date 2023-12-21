@@ -65,7 +65,7 @@ const update = async (value: number) => {
                         <img
                             class="h-10 w-10 rounded-full"
                             :src="item.attributes.item.avatar_url"
-                            alt=""
+                            :alt="item.name"
                         />
                         <span
                             :class="[
@@ -83,7 +83,7 @@ const update = async (value: number) => {
                             {{ item.price }}
                         </p>
                         <p
-                            class="truncate text-sm text-slate-500 dark:text-slate-400"
+                            class="truncate text-sm text-slate-500 dark:text-slate-400 uppercase"
                         >
                             {{ item.name }}
                         </p>

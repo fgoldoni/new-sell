@@ -24,7 +24,7 @@
             </h3>
             <dl class="mt-1 flex flex-grow flex-col justify-between">
                 <dt class="sr-only">name</dt>
-                <dd class="text-sm text-gray-500">
+                <dd class="text-sm text-gray-500 uppercase">
                     {{ item.name }}
                 </dd>
                 <dt class="sr-only">quantity</dt>
