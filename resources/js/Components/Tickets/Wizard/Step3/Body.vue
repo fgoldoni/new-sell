@@ -19,7 +19,7 @@
                 </div>
                 <ul
                     role="list"
-                    class="overflow-auto h-72 relative divide-y divide-slate-200 dark:divide-slate-600 h-72 overflow-y-auto"
+                    class="overflow-auto h-72 relative dark:divide-slate-600 h-72 overflow-y-auto"
                 >
                     <template
                         v-for="(item, index) in cart?.items"
