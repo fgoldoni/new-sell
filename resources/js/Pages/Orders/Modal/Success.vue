@@ -13,7 +13,7 @@
             >
                 {{ __("labels.loading") }}
             </h2>
-            <p class="w-1/3 text-center text-white">
+            <p class="w-full text-center text-white">
                 {{ __("labels.loading.message") }}
             </p>
         </div>

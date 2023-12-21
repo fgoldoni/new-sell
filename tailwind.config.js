@@ -23,6 +23,8 @@ for (const key in colors) {
         colorSaveList.push(`ring-${key}-${colorValue}`);
         colorSaveList.push(`dark:ring-${key}-${colorValue}`);
         colorSaveList.push(`focus:ring-${key}-${colorValue}`);
+        colorSaveList.push(`peer-focus:dark:text-${key}-${colorValue}`);
+        colorSaveList.push(`peer-focus:text-${key}-${colorValue}`);
         colorSaveList.push(`focus:border-${key}-${colorValue}`);
         colorSaveList.push(`focus-within:ring-${key}-${colorValue}`);
         colorSaveList.push(`border-${key}-${colorValue}`);
