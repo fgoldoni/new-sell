@@ -66,13 +66,6 @@ const update = async (value: number) => {
                             :src="item.attributes.item.avatar_url"
                             alt=""
                         />
-                        <span
-                            :class="[
-                                true ? 'bg-green-400' : 'bg-gray-300',
-                                'absolute top-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white',
-                            ]"
-                            aria-hidden="true"
-                        />
                     </span>
                     <div class="pl-4 truncate">
                         <p

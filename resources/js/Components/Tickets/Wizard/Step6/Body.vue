@@ -153,7 +153,7 @@
                             </div>
                             <ul
                                 role="list"
-                                class="overflow-auto h-64 relative divide-y divide-slate-200 dark:divide-slate-600 overflow-y-auto"
+                                class="relative divide-y divide-slate-200 dark:divide-slate-600"
                             >
                                 <template
                                     v-for="(item, key, index) in order?.items"
