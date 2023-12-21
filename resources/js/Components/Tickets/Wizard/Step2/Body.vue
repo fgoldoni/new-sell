@@ -41,7 +41,7 @@
                     <ul
                         v-if="currentTab?.id === collection.id"
                         role="list"
-                        class="grid grid-cols-2 gap-6"
+                        class="grid grid-cols-1 gap-6 sm:grid-cols-2"
                     >
                         <ProductCartItem
                             v-for="product in collection?.products"
