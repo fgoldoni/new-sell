@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-4"
+                                        class="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-slate-800 px-6 pb-4"
                                     >
                                         <nav class="flex flex-1 flex-col mt-4">
                                             <ul
@@ -91,18 +91,18 @@
                                                                 "
                                                                 :class="[
                                                                     item.current
-                                                                        ? 'bg-gray-50 text-' +
+                                                                        ? 'bg-slate-50 dark:bg-slate-900 text-' +
                                                                           $page
                                                                               .props
                                                                               .team
                                                                               .color +
                                                                           '-600'
-                                                                        : 'text-gray-700 hover:text-' +
+                                                                        : 'text-slate-500 dark:text-slate-400 hover:text-' +
                                                                           $page
                                                                               .props
                                                                               .team
                                                                               .color +
-                                                                          '-600 hover:bg-gray-50',
+                                                                          '-600 hover:bg-slate-50 dark:hover:bg-slate-900',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                                                                 ]"
                                                             >
@@ -118,7 +118,7 @@
                                                                                   .team
                                                                                   .color +
                                                                               '-600'
-                                                                            : 'text-gray-400 group-hover:text-' +
+                                                                            : 'text-slate-400 group-hover:text-' +
                                                                               $page
                                                                                   .props
                                                                                   .team
@@ -135,7 +135,7 @@
                                                 </li>
                                                 <li>
                                                     <div
-                                                        class="text-xs font-semibold leading-6 text-gray-400"
+                                                        class="text-xs font-semibold leading-6 text-slate-400"
                                                     >
                                                         {{ __("Home") }}
                                                     </div>
@@ -153,18 +153,18 @@
                                                                 "
                                                                 :class="[
                                                                     team.current
-                                                                        ? 'bg-gray-50 text-' +
+                                                                        ? 'bg-slate-50 dark:bg-slate-900 text-' +
                                                                           $page
                                                                               .props
                                                                               .team
                                                                               .color +
                                                                           '-600'
-                                                                        : 'text-gray-700 hover:text-' +
+                                                                        : 'text-slate-500 dark:text-slate-400 hover:text-' +
                                                                           $page
                                                                               .props
                                                                               .team
                                                                               .color +
-                                                                          '-600 hover:bg-gray-50',
+                                                                          '-600 hover:bg-slate-50 dark:hover:bg-slate-900',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                                                                 ]"
                                                             >
@@ -182,7 +182,7 @@
                                                                                   .team
                                                                                   .color +
                                                                               '-600'
-                                                                            : 'text-gray-400 border-gray-200 group-hover:border-' +
+                                                                            : 'text-slate-400 border-slate-200 group-hover:border-' +
                                                                               $page
                                                                                   .props
                                                                                   .team
@@ -212,7 +212,7 @@
                                                 <li class="mt-auto">
                                                     <a
                                                         href="#"
-                                                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-rose-700 hover:bg-rose-50 hover:text-rose-600"
+                                                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-rose-700 hover:bg-rose-50 dark:hover:bg-slate-900 hover:text-rose-600"
                                                     >
                                                         <ArrowRightOnRectangleIcon
                                                             class="h-6 w-6 shrink-0 text-rose-400 group-hover:text-rose-600"
