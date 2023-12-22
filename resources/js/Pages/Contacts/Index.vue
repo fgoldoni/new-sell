@@ -89,24 +89,26 @@
                                 </div>
                             </div>
                             <h2
-                                class="text-3xl font-bold tracking-tight text-white"
+                                class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white"
                             >
                                 Get in touch
                             </h2>
-                            <p class="mt-6 text-lg leading-8 text-gray-300">
+                            <p
+                                class="mt-6 text-lg leading-8 text-slate-500 dark:text-slate-400"
+                            >
                                 Proin volutpat consequat porttitor cras nullam
                                 gravida at. Orci molestie a eu arcu. Sed ut
                                 tincidunt integer elementum id sem. Arcu sed
                                 malesuada et magna.
                             </p>
                             <dl
-                                class="mt-10 space-y-4 text-base leading-7 text-gray-300"
+                                class="mt-10 space-y-4 text-base leading-7 text-slate-500 dark:text-slate-400"
                             >
                                 <div class="flex gap-x-4">
                                     <dt class="flex-none">
                                         <span class="sr-only">Address</span>
                                         <BuildingOffice2Icon
-                                            class="h-7 w-6 text-gray-400"
+                                            class="h-7 w-6 text-slate-500 dark:text-slate-400"
                                             aria-hidden="true"
                                         />
                                     </dt>
@@ -118,7 +120,7 @@
                                     <dt class="flex-none">
                                         <span class="sr-only">Telephone</span>
                                         <PhoneIcon
-                                            class="h-7 w-6 text-gray-400"
+                                            class="h-7 w-6 text-slate-500 dark:text-slate-400"
                                             aria-hidden="true"
                                         />
                                     </dt>
@@ -134,7 +136,7 @@
                                     <dt class="flex-none">
                                         <span class="sr-only">Email</span>
                                         <EnvelopeIcon
-                                            class="h-7 w-6 text-gray-400"
+                                            class="h-7 w-6 text-slate-500 dark:text-slate-400"
                                             aria-hidden="true"
                                         />
                                     </dt>
@@ -161,7 +163,7 @@
                                 <div>
                                     <label
                                         for="first-name"
-                                        class="block text-sm font-semibold leading-6 text-white"
+                                        class="block text-sm font-semibold leading-6 text-slate-500 dark:text-slate-400"
                                         >First name</label
                                     >
                                     <div class="mt-2.5">
