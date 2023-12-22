@@ -18,7 +18,8 @@
                 <h2
                     class="text-2xl font-bold dark:text-white text-slate-800 uppercase"
                 >
-                    {{ $page.props.team.name }} {{ __("Presents") }}<br />
+                    {{ $page.props.team.name }} {{ __("labels.presents")
+                    }}<br />
                     <TypingEffect
                         :items="$page.props.team.event?.artist.split('&')"
                     ></TypingEffect
@@ -29,8 +30,8 @@
                 </p>
             </div>
             <a
-                href="javascript:;"
-                :class="`btn-title px-8 py-4 mt-8 w-full text-center underline text-2xl inline-block text-slate-500 dark:text-white`"
+                :href="`tel:${$page.props.team.phone}`"
+                :class="`btn-title px-8 py-4 mt-8 w-full text-center hover:underline text-lg sm:text-xl inline-block text-slate-500 dark:text-white`"
             >
                 {{ $page.props.team.phone }}
             </a>

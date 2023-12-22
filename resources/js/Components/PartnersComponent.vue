@@ -11,16 +11,8 @@
                     <h2
                         class="relative text-4xl font-extrabold tracking-tight sm:text-5xl"
                     >
-                        Say Hello to the Team 👋
+                        {{ __("labels.partners") }} 👋
                     </h2>
-                    <p class="text-xl text-gray-500">
-                        These are the amazing individuals who help to make us
-                        the top in our game. Are you interested in working with
-                        us? Check out our available position at our
-                        <a href="#_" class="font-medium text-blue-500 underline"
-                            >career page</a
-                        >.
-                    </p>
                 </div>
                 <div
                     class="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"

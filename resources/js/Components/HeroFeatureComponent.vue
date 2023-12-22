@@ -22,7 +22,7 @@
                         {{ item.name }}
                     </p>
                     <p class="mt-2 text-xl text-gray-500 uppercase">
-                        {{ item.title }}
+                        {{ __(item.title) }}
                     </p>
                 </div>
             </div>
@@ -69,7 +69,7 @@ import {
 } from "@heroicons/vue/24/outline";
 import parseISO from "date-fns/parseISO";
 import format from "date-fns/format";
-import { enUS, fr } from "date-fns/locale";
+import { de, enUS, fr } from "date-fns/locale";
 import { router, usePage } from "@inertiajs/vue3";
 import Tags from "@/Components/Tags.vue";
 import { storeToRefs } from "pinia";
@@ -82,7 +82,12 @@ const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const processing = ref(false);
 
-const locale = () => (usePage().props.locale === "fr" ? fr : enUS);
+const locale = () =>
+    usePage().props.team.locale === "fr"
+        ? fr
+        : usePage().props.team.locale === "de"
+          ? de
+          : enUS;
 
 const eventStore = useEventStore();
 const { event, isLoading } = storeToRefs(eventStore);
