@@ -115,9 +115,8 @@ const openMenuSidebar = ref(false);
 
 const navigation = [
     { name: "Tickets", href: "tickets.index", current: true },
-    { name: "Media & Pics", href: "home", current: false },
-    { name: "FAQ", href: "home", current: false },
-    { name: "Kontakt", href: "home", current: false },
+    { name: "FAQ", href: "faqs.index", current: false },
+    { name: "Kontakt", href: "contacts.index", current: false },
 ];
 
 const onScroll = () => {

@@ -274,9 +274,14 @@ const teams = [
         initial: "T",
         current: false,
     },
-    { id: 2, name: "Media & Pics", href: "home", initial: "M", current: false },
-    { id: 3, name: "FAQ", href: "home", initial: "F", current: false },
-    { id: 4, name: "Kontakt", href: "home", initial: "K", current: false },
+    { id: 3, name: "FAQ", href: "faqs.index", initial: "F", current: false },
+    {
+        id: 4,
+        name: "Kontakt",
+        href: "contacts.index",
+        initial: "K",
+        current: false,
+    },
 ];
 
 const props = defineProps({
