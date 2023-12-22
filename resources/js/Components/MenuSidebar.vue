@@ -269,7 +269,7 @@ const navigation = [
 const teams = [
     {
         id: 1,
-        name: "Events & Tickets",
+        name: "Tickets",
         href: "tickets.index",
         initial: "T",
         current: false,
