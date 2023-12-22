@@ -32,6 +32,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('tickets/{id}', [\App\Http\Controllers\TicketsController::class, 'show'])->name('tickets.show');
+Route::get('tickets', [\App\Http\Controllers\TicketsController::class, 'index'])->name('tickets.index');
 Route::get('orders/cancel', [\App\Http\Controllers\OrdersController::class, 'cancel'])->name('orders.cancel');
 Route::get('orders/{id}', [\App\Http\Controllers\OrdersController::class, 'show'])->name('orders.show');
 Route::get('orders/success/{id}', [\App\Http\Controllers\OrdersController::class, 'success'])->name('orders.success');

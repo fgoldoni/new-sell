@@ -23,19 +23,8 @@ class TicketsController extends Controller
         SEOTools::opengraph()->addImage(EnsureTeamMiddleware::team()->event->avatar, ['height' => 300, 'width' => 300]);
         SEOTools::jsonLd()->addImage(EnsureTeamMiddleware::team()->avatar);
 
-        Inertia::modal([
-            'module' => 'Tickets',
-            'component' => 'Index',
-        ]);
 
-        Inertia::basePageRoute(
-            route(
-                'home',
-                $request->all()
-            )
-        );
-
-        return Inertia::render('Welcome');
+        return Inertia::render('Tickets/Index');
     }
 
     public function show(TicketRequest $request, string $id)

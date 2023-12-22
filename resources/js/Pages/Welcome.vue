@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Head } from "@inertiajs/vue3";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import HeroComponent from "@/Components/HeroComponent.vue";
 
@@ -7,8 +6,6 @@ defineProps<{}>();
 </script>
 
 <template>
-    <Head title="Welcome" />
-
     <AppLayout>
         <HeroComponent></HeroComponent>
     </AppLayout>

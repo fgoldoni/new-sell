@@ -39,12 +39,12 @@
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
-                                <a
+                                <Link
                                     v-for="item in navigation"
                                     :key="item.name"
-                                    :href="item.href"
+                                    :href="route(item.href)"
                                     :class="[
-                                        item.current
+                                        route().current(item.href)
                                             ? 'bg-' +
                                               $page.props.team.color +
                                               '-700 text-white'
@@ -54,10 +54,12 @@
                                         'rounded-md px-3 py-2 text-sm font-medium',
                                     ]"
                                     :aria-current="
-                                        item.current ? 'page' : undefined
+                                        route().current(item.href)
+                                            ? 'page'
+                                            : undefined
                                     "
-                                    >{{ item.name }}</a
-                                >
+                                    >{{ item.name }}
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -110,8 +112,10 @@ const scrolledFromTop = ref(false);
 const openMenuSidebar = ref(false);
 
 const navigation = [
-    { name: "Tickets", href: "#", current: true },
-    { name: "Media & Pics", href: "#", current: false },
+    { name: "Tickets", href: "tickets.index", current: true },
+    { name: "Media & Pics", href: "home", current: false },
+    { name: "FAQ", href: "home", current: false },
+    { name: "Kontakt", href: "home", current: false },
 ];
 
 const onScroll = () => {

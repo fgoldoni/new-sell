@@ -147,12 +147,16 @@
                                                             v-for="team in teams"
                                                             :key="team.name"
                                                         >
-                                                            <a
+                                                            <Link
                                                                 :href="
-                                                                    team.href
+                                                                    route(
+                                                                        team.href,
+                                                                    )
                                                                 "
                                                                 :class="[
-                                                                    team.current
+                                                                    route().current(
+                                                                        team.href,
+                                                                    )
                                                                         ? 'bg-slate-50 dark:bg-slate-900 text-' +
                                                                           $page
                                                                               .props
@@ -170,7 +174,9 @@
                                                             >
                                                                 <span
                                                                     :class="[
-                                                                        team.current
+                                                                        route().current(
+                                                                            team.href,
+                                                                        )
                                                                             ? 'text-' +
                                                                               $page
                                                                                   .props
@@ -205,7 +211,7 @@
                                                                         team.name
                                                                     }}</span
                                                                 >
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -235,7 +241,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import {
     Dialog,
     DialogPanel,
@@ -265,20 +270,14 @@ const teams = [
     {
         id: 1,
         name: "Events & Tickets",
-        href: "#",
+        href: "tickets.index",
         initial: "T",
         current: false,
     },
-    { id: 2, name: "Media & Pics", href: "#", initial: "M", current: false },
-    { id: 3, name: "FAQ", href: "#", initial: "F", current: false },
-    { id: 4, name: "Kontakt", href: "#", initial: "K", current: false },
+    { id: 2, name: "Media & Pics", href: "home", initial: "M", current: false },
+    { id: 3, name: "FAQ", href: "home", initial: "F", current: false },
+    { id: 4, name: "Kontakt", href: "home", initial: "K", current: false },
 ];
-const userNavigation = [
-    { name: "Your profile", href: "#" },
-    { name: "Sign out", href: "#" },
-];
-
-const sidebarOpen = ref(false);
 
 const props = defineProps({
     scrolledFromTop: {
