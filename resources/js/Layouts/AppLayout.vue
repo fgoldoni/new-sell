@@ -1,4 +1,10 @@
 <template>
+    <MenuSidebar
+        class="block md:hidden"
+        :show="openMenuSidebar"
+        :scrolled-from-top="scrolledFromTop"
+        @close="() => (openMenuSidebar = false)"
+    ></MenuSidebar>
     <div
         class="min-h-full bg-white dark:bg-slate-900 text-gray-600 text-slate-500 dark:text-slate-400"
     >
@@ -29,7 +35,6 @@
                                     'scale-75': scrolledFromTop,
                                 }"
                                 :src="$page.props.team.avatar"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                                 :alt="$page.props.team.name"
                             />
                         </div>
@@ -60,30 +65,17 @@
                     <div class="ml-6 flex space-x-4 items-center">
                         <ThemeSwitcherTheme />
                         <button
+                            @click="openMenuSidebar = true"
                             type="button"
                             :class="[
-                                scrolledFromTop ? 'scale-80' : 'scale-100',
-                                'text-white bg-' +
+                                scrolledFromTop ? 'scale-75' : 'scale-100',
+                                'block md:hidden transition duration-700 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:hover:bg-slate-800 hover:bg-' +
                                     $page.props.team.color +
-                                    '-700 hover:bg-' +
-                                    $page.props.team.color +
-                                    '-800 focus:ring-4 focus:outline-none focus:ring-' +
-                                    $page.props.team.color +
-                                    '-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-' +
-                                    $page.props.team.color +
-                                    '-600 dark:hover:bg-' +
-                                    $page.props.team.color +
-                                    '-700 dark:focus:ring-' +
-                                    $page.props.team.color +
-                                    '-800',
+                                    '-700 hover:text-white focus:outline-none`',
                             ]"
                         >
-                            <ShoppingBagIcon
-                                class="h-5 w-5"
-                                :class="{
-                                    'scale-100': !scrolledFromTop,
-                                    'scale-80': scrolledFromTop,
-                                }"
+                            <Bars3Icon
+                                class="block h-5 w-5 text-white"
                                 aria-hidden="true"
                             />
                         </button>
@@ -102,21 +94,21 @@
 
 <script setup lang="ts">
 import { Disclosure } from "@headlessui/vue";
-import { ShoppingBagIcon } from "@heroicons/vue/24/outline";
+import { Bars3Icon } from "@heroicons/vue/24/outline";
 import { onMounted, onUnmounted, ref } from "vue";
 import ThemeSwitcherTheme from "@/Components/ThemeSwitcherTheme.vue";
 import { useTicketsStore } from "@/stores/useTicketsStore";
 import { storeToRefs } from "pinia";
 import { useCountriesStore } from "@/stores/useCountriesStore";
 import { useEventStore } from "@/stores/useEventStore";
+import MenuSidebar from "@/Components/MenuSidebar.vue";
 
 const ticketsStore = useTicketsStore();
 const eventStore = useEventStore();
 const countriesStore = useCountriesStore();
 const { countries } = storeToRefs(countriesStore);
-const { isLoading } = storeToRefs(ticketsStore);
-const { isLoading: isEventLoading } = storeToRefs(eventStore);
 const scrolledFromTop = ref(false);
+const openMenuSidebar = ref(false);
 
 const navigation = [
     { name: "Tickets", href: "#", current: true },

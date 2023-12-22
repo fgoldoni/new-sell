@@ -3,7 +3,7 @@ import { ArrowLongLeftIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { DialogTitle } from "@headlessui/vue";
 import parseISO from "date-fns/parseISO";
 import format from "date-fns/format";
-import { enUS, fr } from "date-fns/locale";
+import { de, enUS, fr } from "date-fns/locale";
 import { usePage } from "@inertiajs/vue3";
 
 interface Props {
@@ -19,7 +19,12 @@ const emit = defineEmits<{
     previous: [value: any];
 }>();
 
-const locale = () => (usePage().props.locale === "fr" ? fr : enUS);
+const locale = () =>
+    usePage().props.team.locale === "fr"
+        ? fr
+        : usePage().props.team.locale === "de"
+          ? de
+          : enUS;
 
 const close = () => {
     emit("close", false);
