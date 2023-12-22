@@ -91,8 +91,18 @@
                                                                 "
                                                                 :class="[
                                                                     item.current
-                                                                        ? 'bg-gray-50 text-indigo-600'
-                                                                        : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                                                                        ? 'bg-gray-50 text-' +
+                                                                          $page
+                                                                              .props
+                                                                              .team
+                                                                              .color +
+                                                                          '-600'
+                                                                        : 'text-gray-700 hover:text-' +
+                                                                          $page
+                                                                              .props
+                                                                              .team
+                                                                              .color +
+                                                                          '-600 hover:bg-gray-50',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                                                                 ]"
                                                             >
@@ -102,8 +112,18 @@
                                                                     "
                                                                     :class="[
                                                                         item.current
-                                                                            ? 'text-indigo-600'
-                                                                            : 'text-gray-400 group-hover:text-indigo-600',
+                                                                            ? 'text-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600'
+                                                                            : 'text-gray-400 group-hover:text-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600',
                                                                         'h-6 w-6 shrink-0',
                                                                     ]"
                                                                     aria-hidden="true"
@@ -117,7 +137,7 @@
                                                     <div
                                                         class="text-xs font-semibold leading-6 text-gray-400"
                                                     >
-                                                        Your teams
+                                                        {{ __("Home") }}
                                                     </div>
                                                     <ul
                                                         role="list"
@@ -133,16 +153,46 @@
                                                                 "
                                                                 :class="[
                                                                     team.current
-                                                                        ? 'bg-gray-50 text-indigo-600'
-                                                                        : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                                                                        ? 'bg-gray-50 text-' +
+                                                                          $page
+                                                                              .props
+                                                                              .team
+                                                                              .color +
+                                                                          '-600'
+                                                                        : 'text-gray-700 hover:text-' +
+                                                                          $page
+                                                                              .props
+                                                                              .team
+                                                                              .color +
+                                                                          '-600 hover:bg-gray-50',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
                                                                 ]"
                                                             >
                                                                 <span
                                                                     :class="[
                                                                         team.current
-                                                                            ? 'text-indigo-600 border-indigo-600'
-                                                                            : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600',
+                                                                            ? 'text-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600 border-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600'
+                                                                            : 'text-gray-400 border-gray-200 group-hover:border-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600 group-hover:text-' +
+                                                                              $page
+                                                                                  .props
+                                                                                  .team
+                                                                                  .color +
+                                                                              '-600',
                                                                         'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white',
                                                                     ]"
                                                                     >{{
@@ -162,13 +212,13 @@
                                                 <li class="mt-auto">
                                                     <a
                                                         href="#"
-                                                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-rose-700 hover:bg-rose-50 hover:text-rose-600"
                                                     >
-                                                        <Cog6ToothIcon
-                                                            class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                                                        <ArrowRightOnRectangleIcon
+                                                            class="h-6 w-6 shrink-0 text-rose-400 group-hover:text-rose-600"
                                                             aria-hidden="true"
                                                         />
-                                                        Settings
+                                                        {{ __("Log Out") }}
                                                     </a>
                                                 </li>
                                             </ul>
@@ -194,33 +244,34 @@ import {
     TransitionRoot,
 } from "@headlessui/vue";
 import {
-    CalendarIcon,
-    ChartPieIcon,
+    ArrowRightOnRectangleIcon,
     Cog6ToothIcon,
-    DocumentDuplicateIcon,
-    FolderIcon,
-    HomeIcon,
-    UsersIcon,
+    ShoppingCartIcon,
+    UserCircleIcon,
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
 
 const navigation = [
-    { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-    { name: "Team", href: "#", icon: UsersIcon, current: false },
-    { name: "Projects", href: "#", icon: FolderIcon, current: false },
-    { name: "Calendar", href: "#", icon: CalendarIcon, current: false },
+    { name: "Goldoni Fouotsa", href: "#", icon: UserCircleIcon, current: true },
     {
-        name: "Documents",
+        name: "Meine Bestellungen",
         href: "#",
-        icon: DocumentDuplicateIcon,
+        icon: ShoppingCartIcon,
         current: false,
     },
-    { name: "Reports", href: "#", icon: ChartPieIcon, current: false },
+    { name: "Einstellungen", href: "#", icon: Cog6ToothIcon, current: false },
 ];
 const teams = [
-    { id: 1, name: "Heroicons", href: "#", initial: "H", current: false },
-    { id: 2, name: "Tailwind Labs", href: "#", initial: "T", current: false },
-    { id: 3, name: "Workcation", href: "#", initial: "W", current: false },
+    {
+        id: 1,
+        name: "Events & Tickets",
+        href: "#",
+        initial: "T",
+        current: false,
+    },
+    { id: 2, name: "Media & Pics", href: "#", initial: "M", current: false },
+    { id: 3, name: "FAQ", href: "#", initial: "F", current: false },
+    { id: 4, name: "Kontakt", href: "#", initial: "K", current: false },
 ];
 const userNavigation = [
     { name: "Your profile", href: "#" },
