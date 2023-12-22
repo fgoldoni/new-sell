@@ -45,7 +45,7 @@
                 </svg>
             </div>
         </div>
-        <div class="flow-root bg-slate-50 dark:bg-slate-800 pb-14 sm:pb-24">
+        <div :class="`flow-root bg-slate-50 ${bgColor} pb-14 sm:pb-24`">
             <div class="-mt-80">
                 <div class="mx-auto max-w-7xl px-6 lg:px-8">
                     <div
@@ -148,6 +148,13 @@ const { event, isLoading } = storeToRefs(eventStore);
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { payload } = storeToRefs(cartsStore);
+
+const props = defineProps({
+    bgColor: {
+        type: String,
+        default: "bg-slate-50 dark:bg-slate-800",
+    },
+});
 
 const openModal = async () => {
     process.value = true;

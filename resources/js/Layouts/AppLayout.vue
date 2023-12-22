@@ -27,15 +27,17 @@
                 >
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img
-                                class="h-8 w-auto transform origin-left transition duration-700"
-                                :class="{
-                                    'scale-100': !scrolledFromTop,
-                                    'scale-75': scrolledFromTop,
-                                }"
-                                :src="$page.props.team.avatar"
-                                :alt="$page.props.team.name"
-                            />
+                            <Link :href="route('home')">
+                                <img
+                                    class="h-8 w-auto transform origin-left transition duration-700"
+                                    :class="{
+                                        'scale-100': !scrolledFromTop,
+                                        'scale-75': scrolledFromTop,
+                                    }"
+                                    :src="$page.props.team.avatar"
+                                    :alt="$page.props.team.name"
+                                />
+                            </Link>
                         </div>
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
