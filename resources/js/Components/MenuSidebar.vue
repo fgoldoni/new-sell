@@ -74,7 +74,7 @@
                                         <nav class="flex flex-1 flex-col mt-4">
                                             <div
                                                 v-if="isAuthenticated"
-                                                class="relative flex mb-4 items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+                                                class="btn-title relative flex mb-4 items-center space-x-3 rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-900 px-6 py-5 shadow-lg hover:border-slate-400"
                                             >
                                                 <div class="flex-shrink-0">
                                                     <img
@@ -93,12 +93,12 @@
                                                             aria-hidden="true"
                                                         />
                                                         <p
-                                                            class="text-sm font-medium text-gray-900"
+                                                            class="text-sm font-medium text-slate-900 dark:text-white"
                                                         >
                                                             {{ user.name }}
                                                         </p>
                                                         <p
-                                                            class="truncate text-sm text-gray-500"
+                                                            class="truncate text-sm text-slate-500 dark:text-slate-400"
                                                         >
                                                             {{ user.email }}
                                                         </p>
@@ -168,14 +168,9 @@
                                                     </ul>
                                                 </li>
                                                 <li>
-                                                    <div
-                                                        class="text-xs font-semibold leading-6 text-slate-400"
-                                                    >
-                                                        {{ __("Home") }}
-                                                    </div>
                                                     <ul
                                                         role="list"
-                                                        class="-mx-2 mt-2 space-y-1"
+                                                        class="-mx-2 space-y-1"
                                                     >
                                                         <li
                                                             v-for="team in teams"
@@ -251,14 +246,43 @@
                                                 </li>
                                                 <li class="mt-auto">
                                                     <a
-                                                        href="#"
+                                                        v-if="isAuthenticated"
+                                                        @click="logout"
+                                                        href="javascript:;"
                                                         class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-rose-700 hover:bg-rose-50 dark:hover:bg-slate-900 hover:text-rose-600"
                                                     >
+                                                        <svg
+                                                            v-if="processing"
+                                                            class="animate-spin h-5 w-5 inline-flex text-white"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <circle
+                                                                class="opacity-25"
+                                                                cx="12"
+                                                                cy="12"
+                                                                r="10"
+                                                                stroke="currentColor"
+                                                                stroke-width="4"
+                                                            ></circle>
+                                                            <path
+                                                                class="opacity-75"
+                                                                fill="currentColor"
+                                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                            ></path>
+                                                        </svg>
                                                         <ArrowRightOnRectangleIcon
+                                                            v-if="!processing"
                                                             class="h-6 w-6 shrink-0 text-rose-400 group-hover:text-rose-600"
                                                             aria-hidden="true"
                                                         />
-                                                        {{ __("Log Out") }}
+                                                        <span
+                                                            v-if="!processing"
+                                                            >{{
+                                                                __("Log Out")
+                                                            }}</span
+                                                        >
                                                     </a>
                                                 </li>
                                             </ul>
@@ -290,12 +314,14 @@ import {
 } from "@heroicons/vue/24/outline";
 import { useAuthStore } from "@/stores/useAuthStore.js";
 import { storeToRefs } from "pinia";
+import ApiError from "@/models/ApiError";
+import { ref } from "vue";
+import { router } from "@inertiajs/vue3";
+import { setCookie } from "@/composable/useCookie";
 
 const authStore = useAuthStore();
 const { isAuthenticated, user } = storeToRefs(authStore);
-
-const imageUrl =
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
+const processing = ref(false);
 
 const navigation = [
     {
@@ -339,5 +365,28 @@ const emit = defineEmits(["close"]);
 
 const close = () => {
     emit("close", false);
+};
+
+const logout = async () => {
+    try {
+        processing.value = true;
+
+        await authStore
+            .logout()
+            .then(async () => {
+                await authStore.reset();
+                setCookie("accessToken", "", -1);
+
+                return router.get(route("home"));
+            })
+            .catch((error: any) => {
+                throw new ApiError(error);
+            })
+            .finally(() => {
+                processing.value = false;
+            });
+    } catch (error) {
+        throw new ApiError(error);
+    }
 };
 </script>

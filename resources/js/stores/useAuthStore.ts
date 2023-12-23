@@ -42,14 +42,28 @@ export const useAuthStore = defineStore(
             );
         };
 
+        async function logout(): Promise<any> {
+            return await api.authentication.logout();
+        }
+
+        async function reset(): Promise<any> {
+            if (isAuthenticated.value === false) {
+                return;
+            }
+
+            user.value = null;
+        }
+
         return {
             user,
             token,
             isAuthenticated,
+            reset,
             post,
             fetchUser,
             setToken,
             setAuth,
+            logout,
         };
     },
     {

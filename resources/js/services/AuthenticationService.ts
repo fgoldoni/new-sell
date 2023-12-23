@@ -32,4 +32,8 @@ export default class AuthenticationService extends ApiServiceBase {
     async user(): Promise<User> {
         return await this.call("/user");
     }
+
+    async logout(): Promise<any> {
+        return await this.call("/users/logout", { method: "post" });
+    }
 }
