@@ -73,13 +73,14 @@
                                     >
                                         <nav class="flex flex-1 flex-col mt-4">
                                             <div
-                                                class="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+                                                v-if="isAuthenticated"
+                                                class="relative flex mb-4 items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
                                             >
                                                 <div class="flex-shrink-0">
                                                     <img
                                                         class="h-10 w-10 rounded-full"
-                                                        :src="imageUrl"
-                                                        alt=""
+                                                        :src="user.avatar_url"
+                                                        :alt="user.name"
                                                     />
                                                 </div>
                                                 <div class="min-w-0 flex-1">
@@ -94,26 +95,23 @@
                                                         <p
                                                             class="text-sm font-medium text-gray-900"
                                                         >
-                                                            {{
-                                                                __(
-                                                                    "Goldoni Fouotsa",
-                                                                )
-                                                            }}
+                                                            {{ user.name }}
                                                         </p>
                                                         <p
                                                             class="truncate text-sm text-gray-500"
                                                         >
-                                                            fotsa.goldoni@yahoo.fr
+                                                            {{ user.email }}
                                                         </p>
                                                     </a>
                                                 </div>
                                             </div>
                                             <ul
                                                 role="list"
-                                                class="flex flex-1 flex-col gap-y-7 mt-4"
+                                                class="flex flex-1 flex-col gap-y-7"
                                             >
                                                 <li>
                                                     <ul
+                                                        v-if="isAuthenticated"
                                                         role="list"
                                                         class="-mx-2 space-y-1"
                                                     >
@@ -276,7 +274,7 @@
     </TransitionRoot>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
     Dialog,
     DialogPanel,
@@ -290,19 +288,14 @@ import {
     ShoppingCartIcon,
     XMarkIcon,
 } from "@heroicons/vue/24/outline";
+import { useAuthStore } from "@/stores/useAuthStore.js";
+import { storeToRefs } from "pinia";
+
+const authStore = useAuthStore();
+const { isAuthenticated, user } = storeToRefs(authStore);
 
 const imageUrl =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80";
-const people = [
-    {
-        name: "Leslie Alexander",
-        email: "leslie.alexander@example.com",
-        role: "Co-Founder / CEO",
-        imageUrl:
-            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-    // More people...
-];
 
 const navigation = [
     {

@@ -6,6 +6,7 @@ export interface User {
     email: string;
     country_id?: number;
     phone: string;
+    avatar_url: string;
 }
 
 export interface Order {
