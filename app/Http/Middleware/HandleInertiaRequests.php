@@ -41,6 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'terminal' => !is_null($team->terminal) ? base64_decode($team->terminal->terminal_secret) : null,
                 'notch_pay' => !is_null($team->notchPay) ? base64_decode($team->notchPay->notch_pay_id) : null,
                 'transfer' => !is_null($team->transfer),
+                'domains' => $team->domains,
             ],
             'cart' =>  [
                 'id' => EnsureTeamMiddleware::cartId(),

@@ -66,7 +66,12 @@
                         </div>
                     </div>
                     <div class="ml-6 flex space-x-4 items-center">
-                        <ThemeSwitcherTheme />
+                        <LanguageSwitcherComponent
+                            :scrolled-from-top="scrolledFromTop"
+                        />
+                        <ThemeSwitcherTheme
+                            :scrolled-from-top="scrolledFromTop"
+                        />
                         <button
                             @click="openMenuSidebar = true"
                             type="button"
@@ -105,6 +110,7 @@ import { storeToRefs } from "pinia";
 import { useCountriesStore } from "@/stores/useCountriesStore";
 import { useEventStore } from "@/stores/useEventStore";
 import MenuSidebar from "@/Components/MenuSidebar.vue";
+import LanguageSwitcherComponent from "@/Components/LanguageSwitcherComponent.vue";
 
 const ticketsStore = useTicketsStore();
 const eventStore = useEventStore();
