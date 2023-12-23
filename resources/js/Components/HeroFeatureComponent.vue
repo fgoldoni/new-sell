@@ -77,7 +77,6 @@ import { useEventStore } from "@/stores/useEventStore";
 import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { ref } from "vue";
-import { useTicketsStore } from "@/stores/useTicketsStore";
 
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
@@ -91,16 +90,14 @@ const locale = () =>
           : enUS;
 
 const eventStore = useEventStore();
-const ticketsStore = useTicketsStore();
 const { event, isLoading } = storeToRefs(eventStore);
 
 const openModal = async () => {
     processing.value = true;
     await cartsStore.reset();
-    await ticketsStore.get();
-    await wizard.setComponent("Step1");
+    await wizard.setComponent("Step2");
     processing.value = false;
-    return router.get(route("tickets.index"), {}, { replace: true });
+    return router.get(route("products.index"), {}, { replace: true });
 };
 
 const items = [
