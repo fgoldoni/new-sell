@@ -119,12 +119,16 @@
                                                             v-for="item in navigation"
                                                             :key="item.name"
                                                         >
-                                                            <a
+                                                            <Link
                                                                 :href="
-                                                                    item.href
+                                                                    route(
+                                                                        item.href,
+                                                                    )
                                                                 "
                                                                 :class="[
-                                                                    item.current
+                                                                    route().current(
+                                                                        item.href,
+                                                                    )
                                                                         ? 'bg-slate-50 dark:bg-slate-900 text-' +
                                                                           $page
                                                                               .props
@@ -145,7 +149,9 @@
                                                                         item.icon
                                                                     "
                                                                     :class="[
-                                                                        item.current
+                                                                        route().current(
+                                                                            item.href,
+                                                                        )
                                                                             ? 'text-' +
                                                                               $page
                                                                                   .props
@@ -163,7 +169,7 @@
                                                                     aria-hidden="true"
                                                                 />
                                                                 {{ item.name }}
-                                                            </a>
+                                                            </Link>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -326,11 +332,16 @@ const processing = ref(false);
 const navigation = [
     {
         name: "Meine Bestellungen",
-        href: "#",
+        href: "orders.index",
         icon: ShoppingCartIcon,
         current: false,
     },
-    { name: "Einstellungen", href: "#", icon: Cog6ToothIcon, current: false },
+    {
+        name: "Einstellungen",
+        href: "home",
+        icon: Cog6ToothIcon,
+        current: false,
+    },
 ];
 const teams = [
     {

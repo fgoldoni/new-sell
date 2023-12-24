@@ -3,19 +3,32 @@ import { ref } from "vue";
 import { Order } from "@/types";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
-import { useCartsStore } from "@/stores/useCartsStore";
-import { useTicketsStore } from "@/stores/useTicketsStore";
 
 export const useOrdersStore = defineStore(
     "orders",
     () => {
-        const cartsStore = useCartsStore();
-        const ticketsStore = useTicketsStore();
+        const processing = ref(false);
         const api = useApi();
         const order = ref<Order>();
         const orders = ref<Order[]>();
 
         const reset = async () => (order.value = null);
+
+        const get = async (): Promise<any> => {
+            processing.value = true;
+
+            await api.orders
+                .get()
+                .then(async (response: any) => {
+                    orders.value = response.data as Order[];
+                })
+                .catch((error: any) => {
+                    throw new ApiError(error);
+                })
+                .finally(() => {
+                    processing.value = false;
+                });
+        };
 
         const store = async (
             id: string,
@@ -25,6 +38,8 @@ export const useOrdersStore = defineStore(
             reference: string,
             status: string,
         ): Promise<any> => {
+            processing.value = true;
+
             await api.orders
                 .store(id, mode, currency, total, reference, status)
                 .then(async (response: any) => {
@@ -32,13 +47,18 @@ export const useOrdersStore = defineStore(
                 })
                 .catch((error: any) => {
                     throw new ApiError(error);
+                })
+                .finally(() => {
+                    processing.value = false;
                 });
         };
 
         return {
             order,
+            processing,
             orders,
             reset,
+            get,
             store,
         };
     },

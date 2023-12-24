@@ -12,7 +12,26 @@ use Inertia\Response;
 
 class OrdersController extends Controller
 {
-    public function show(OrderRequest $request, string $id)
+
+    public function index(): Response
+    {
+        SEOTools::setTitle(
+            EnsureTeamMiddleware::team()?->name.' - '.EnsureTeamMiddleware::team()?->event?->artist,
+            false
+        );
+        SEOTools::setDescription(EnsureTeamMiddleware::team()?->event?->name);
+        SEOTools::opengraph()->setUrl(route('home'));
+        SEOMeta::addKeyword(EnsureTeamMiddleware::team()?->event?->tags);
+        SEOTools::setCanonical(route('home'));
+        SEOTools::opengraph()->addProperty('type', 'website');
+        SEOTools::opengraph()->addProperty('locale', app()->getLocale());
+        SEOTools::opengraph()->addImage(EnsureTeamMiddleware::team()->event->avatar, ['height' => 300, 'width' => 300]);
+        SEOTools::jsonLd()->addImage(EnsureTeamMiddleware::team()->avatar);
+
+
+        return Inertia::render('Orders/Index');
+    }
+    public function show(OrderRequest $request, string $id): Response
     {
         SEOTools::setTitle(
             EnsureTeamMiddleware::team()?->name.' - '.EnsureTeamMiddleware::team()?->event?->artist,

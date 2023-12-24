@@ -1,6 +1,10 @@
 import { ApiServiceBase } from "@/services/ApiServiceBase";
 
 export default class OrdersService extends ApiServiceBase {
+    async get(): Promise<any> {
+        return await this.call<any>(`/orders`);
+    }
+
     async store(
         id: string,
         mode: string,

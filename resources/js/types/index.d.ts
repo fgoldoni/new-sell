@@ -18,6 +18,8 @@ export interface Order {
     total: number;
     cart_sub_total_conditions: any;
     cart_total_conditions: any;
+    download_url: any;
+    status: any;
     event: any;
     team: any;
     user: User;
