@@ -31,9 +31,15 @@
             </div>
             <a
                 :href="`tel:${$page.props.team.phone}`"
-                :class="`btn-title px-8 py-4 mt-8 w-full text-center hover:underline text-lg sm:text-xl inline-block text-slate-500 dark:text-white`"
+                :class="`btn-title px-8 py-4 mt-8 w-full text-center hover:underline text-lg sm:text-xl inline-block text-slate-500 dark:text-slate-400`"
             >
-                {{ $page.props.team.phone }}
+                <span>
+                    <PhoneArrowUpRightIcon
+                        class="-ml-0.5 mr-2 inline-flex h-5 w-5"
+                        aria-hidden="true"
+                    />
+                    {{ $page.props.team.phone }}
+                </span>
             </a>
             <div class="flex justify-center items-center mt-4">
                 <Countdown></Countdown>
@@ -52,8 +58,6 @@
 <script setup lang="ts">
 import HeroFeatureComponent from "@/Components/HeroFeatureComponent.vue";
 import { onMounted } from "vue";
-import { useEventStore } from "@/stores/useEventStore";
-import { storeToRefs } from "pinia";
 import Countdown from "@/Components/Countdown.vue";
 import TypingEffect from "@/Components/TypingEffect.vue";
 import EntriesComponent from "@/Components/EntriesComponent.vue";
@@ -62,9 +66,7 @@ import PartnersComponent from "@/Components/PartnersComponent.vue";
 import FooterComponent from "@/Components/FooterComponent.vue";
 import ContentComponent from "@/Components/ContentComponent.vue";
 import GuestComponent from "@/Components/GuestComponent.vue";
-
-const eventStore = useEventStore();
-const { event, isLoading } = storeToRefs(eventStore);
+import { PhoneArrowUpRightIcon } from "@heroicons/vue/20/solid";
 
 onMounted(async () => {});
 </script>
