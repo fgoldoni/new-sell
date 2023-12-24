@@ -3,23 +3,21 @@
 <template>
     <!-- Section 1 -->
     <section class="w-full py-16 lg:py-24">
-        <div class="px-12 mx-auto text-center max-w-7xl">
-            <div class="space-y-12 md:text-left">
+        <div class="px-4 mx-auto text-center max-w-7xl">
+            <div class="space-y-12">
                 <div
                     class="mb-20 space-y-5 sm:mx-auto sm:max-w-xl md:max-w-2xl sm:space-y-4 lg:max-w-5xl"
                 >
                     <h2
-                        class="relative text-4xl font-extrabold tracking-tight sm:text-5xl"
+                        class="relative text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-3xl uppercase"
                     >
-                        {{ __("labels.partners") }} 👋
+                        {{ __("labels.partners") }}
                     </h2>
                 </div>
-                <div
-                    class="mx-auto space-y-16 sm:grid sm:grid-cols-2 sm:gap-16 sm:space-y-0 lg:grid-cols-3 lg:max-w-5xl"
-                >
+                <div class="mx-auto grid grid-cols-2 gap-16">
                     <div class="space-y-6 text-center lg:ml-0 md:ml-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
@@ -81,7 +79,7 @@
 
                     <div class="space-y-6 text-center lg:mr-0 md:mr-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
@@ -143,7 +141,7 @@
 
                     <div class="space-y-6 text-center lg:ml-0 md:ml-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
@@ -205,7 +203,7 @@
 
                     <div class="space-y-6 text-center lg:mr-0 md:mr-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
@@ -267,7 +265,7 @@
 
                     <div class="space-y-6 text-center lg:ml-0 md:ml-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
@@ -329,7 +327,7 @@
 
                     <div class="space-y-6 text-center lg:mr-0 md:mr-10">
                         <div
-                            class="relative w-48 h-48 p-2 mx-auto md:w-56 md:h-56"
+                            class="relative w-32 h-32 p-2 mx-auto md:w-56 md:h-56"
                         >
                             <img
                                 class="relative z-20 w-full h-full rounded-xl"
