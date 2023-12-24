@@ -127,15 +127,13 @@
                         </p>
                     </dd>
                 </div>
-                <div
-                    class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-8 w-full p-4 sm:p-0"
-                >
-                    <div class="col-span-3">
+                <div class="grid grid-cols-1 w-full">
+                    <div class="col-span-1">
                         <div class="flex h-full flex-col">
                             <div
                                 class="border-b border-slate-200 dark:border-slate-600"
                             >
-                                <div class="p-6">
+                                <div class="py-6 sm:p-6">
                                     <div
                                         class="flex items-start justify-between"
                                     >

@@ -24,7 +24,7 @@ defineProps<Props>();
         }"
         :delay="200"
     >
-        <div class="group relative flex items-center px-5 py-6">
+        <div class="group relative flex items-center sm:px-5 py-6">
             <a href="javascript:;" class="-m-1 block flex-1 p-1">
                 <div
                     class="absolute inset-0 group-hover:bg-slate-200 dark:group-hover:bg-slate-900"
@@ -47,7 +47,7 @@ defineProps<Props>();
                 </div>
             </a>
             <div
-                :class="`relative ml-2 inline-block flex-shrink-0 text-left text-${$page.props.team.color}-500 dark:text-${$page.props.team.color}-400`"
+                :class="`relative ml-1 inline-block flex-shrink-0 text-left text-${$page.props.team.color}-500 dark:text-${$page.props.team.color}-400`"
             >
                 {{ item.quantity }} * {{ item.attributes.item.attendees }} PL.
             </div>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
+        class="flex h-full flex-col divide-y divide-slate-200 bg-white dark:bg-slate-900 shadow-xl"
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header
@@ -13,10 +13,10 @@
                 <Stepper>
                     <template v-slot:step-1>
                         <li
-                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-slate-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-slate-700"
                         >
                             <span
-                                :class="`flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500`"
+                                :class="`flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-slate-200 dark:after:text-slate-500`"
                             >
                                 <span
                                     :class="`ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-${$page.props.team.color}-600 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-${$page.props.team.color}-500`"
@@ -29,10 +29,10 @@
                     </template>
                     <template v-slot:step-2>
                         <li
-                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-slate-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-slate-700"
                         >
                             <span
-                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-slate-200 dark:after:text-slate-500"
                             >
                                 <span
                                     class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"
@@ -45,10 +45,10 @@
                     </template>
                     <template v-slot:step-3>
                         <li
-                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
+                            class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-slate-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-slate-700"
                         >
                             <span
-                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-slate-200 dark:after:text-slate-500"
                             >
                                 <span
                                     class="ml-auto w-9 min-w-max whitespace-nowrap rounded-full px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-slate-900 dark:text-white ring-1 ring-inset ring-slate-200 dark:ring-slate-700"

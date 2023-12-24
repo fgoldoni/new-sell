@@ -10,7 +10,7 @@
                 duration: 1000 * index,
             },
         }"
-        class="col-span-1 flex flex-col rounded-lg text-center shadow-2xl btn-title"
+        class="col-span-1 flex flex-col rounded-lg text-center bg-white dark:bg-slate-900 btn-title"
     >
         <div class="flex flex-1 flex-col p-4">
             <img

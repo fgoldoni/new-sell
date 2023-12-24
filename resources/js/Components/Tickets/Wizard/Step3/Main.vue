@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex h-full flex-col divide-y divide-gray-200 bg-white dark:bg-slate-900 shadow-xl"
+        class="flex h-full flex-col divide-y divide-slate-200 bg-white dark:bg-slate-900 shadow-xl"
     >
         <div class="flex min-h-0 flex-1 flex-col overflow-y-scroll">
             <Header

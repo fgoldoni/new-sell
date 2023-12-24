@@ -75,7 +75,7 @@
                 >
                     <div class="col-span-3">
                         <div
-                            class="flex h-full flex-col bg-slate-50 dark:bg-slate-800 shadow-xl"
+                            class="flex h-full flex-col bg-slate-100 dark:bg-slate-800"
                         >
                             <div
                                 class="border-b border-slate-200 dark:border-slate-600"
