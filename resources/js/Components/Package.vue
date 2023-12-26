@@ -59,7 +59,7 @@ useMotion(itemRef, {
                 :class="[
                     item.quantity
                         ? 'btn-base bg-' + $page.props.team.color + '-900'
-                        : 'bg-rose-900',
+                        : 'bg-rose-600 hover:bg-rose-500',
                     'inline-block text-md font-extrabold shadow-xl absolute top-0 -mt-5 rounded px-4 py-2 uppercase text-white',
                 ]"
             >
@@ -90,7 +90,7 @@ useMotion(itemRef, {
                 <span v-else> {{ __("labels.action.sold") }}</span>
             </button>
             <div class="flex items-center justify-between">
-                <div class="text-xl">
+                <div class="text-xs sm:text-sm">
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ item.attendees }}
@@ -98,7 +98,7 @@ useMotion(itemRef, {
                         <dd>{{ __("labels.package.places") }}</dd>
                     </dl>
                 </div>
-                <div class="text-xl">
+                <div class="text-xs sm:text-sm">
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ $page.props.team.currency.code }}
@@ -109,7 +109,7 @@ useMotion(itemRef, {
                         </dd>
                     </dl>
                 </div>
-                <div class="text-xl">
+                <div class="text-xs sm:text-sm">
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ $page.props.team.currency.code }} 100
