@@ -48,7 +48,9 @@ export const useAuthStore = defineStore(
         };
 
         async function logout(): Promise<any> {
-            return await api.authentication.logout();
+            // return await api.authentication.logout();
+
+            return;
         }
 
         async function reset(): Promise<any> {
