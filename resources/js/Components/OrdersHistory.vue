@@ -49,7 +49,7 @@
                                     >{{ __("Details") }}
                                 </Link>
                                 <div
-                                    class="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6"
+                                    class="ml-4 border-l border-slate-300 dark:border-slate-600 pl-4 sm:ml-6 sm:pl-6"
                                 >
                                     <a
                                         :href="order.download_url"
@@ -64,7 +64,7 @@
                     </div>
 
                     <div
-                        class="-mb-6 mt-6 flow-root divide-y divide-gray-200 border-t border-gray-200"
+                        class="-mb-6 mt-6 flow-root divide-y divide-slate-300 dark:divide-slate-700 border-t border-gray-300 dark:border-gray-700"
                     >
                         <template
                             v-for="(product, key, index) in order?.items"
