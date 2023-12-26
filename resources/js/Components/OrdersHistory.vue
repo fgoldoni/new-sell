@@ -96,10 +96,14 @@
                                         <p
                                             class="truncate text-sm text-slate-500 dark:text-slate-400"
                                         >
-                                            <span>{{
-                                                product.attributes.item
-                                                    .description
-                                            }}</span>
+                                            <span
+                                                >{{ product.quantity }} *
+                                                {{
+                                                    product.attributes.item
+                                                        .attendees
+                                                }}
+                                                {{ __("Pl.") }}</span
+                                            >
                                         </p>
                                         <p
                                             class="mt-1 font-medium text-slate-900 dark:text-white"
@@ -108,18 +112,6 @@
                                             {{ product.price }}
                                         </p>
                                     </div>
-                                </div>
-                                <div
-                                    class="mt-6 space-y-4 sm:ml-6 sm:mt-0 sm:w-40 sm:flex-none"
-                                >
-                                    <button
-                                        type="button"
-                                        :class="`flex w-full items-center justify-center rounded-md border border-transparent bg-${$page.props.team.color}-600 px-2.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none focus:ring-2 focus:ring-${$page.props.team.color}-500 focus:ring-offset-2 sm:w-full sm:flex-grow-0`"
-                                    >
-                                        {{ product.quantity }} *
-                                        {{ product.attributes.item.attendees }}
-                                        {{ __("Pl.") }}
-                                    </button>
                                 </div>
                             </div>
                         </template>
