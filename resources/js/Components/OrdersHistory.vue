@@ -90,26 +90,27 @@
                                         >
                                             <a href="javascript:;">
                                                 {{ product.quantity }} *
-                                                {{ product.name }}
+                                                {{ product.name }} ({{
+                                                    product.quantity
+                                                }}
+                                                *
+                                                {{
+                                                    product.attributes.item
+                                                        .attendees
+                                                }}
+                                                {{ __("Pl.") }})
                                             </a>
                                         </h3>
                                         <p
                                             class="truncate text-sm text-slate-500 dark:text-slate-400"
                                         >
                                             <span
-                                                >{{ product.quantity }} *
-                                                {{
-                                                    product.attributes.item
-                                                        .attendees
+                                                >{{
+                                                    $page.props.team.currency
+                                                        .code
                                                 }}
-                                                {{ __("Pl.") }}</span
+                                                {{ product.price }}</span
                                             >
-                                        </p>
-                                        <p
-                                            class="mt-1 font-medium text-slate-900 dark:text-white"
-                                        >
-                                            {{ $page.props.team.currency.code }}
-                                            {{ product.price }}
                                         </p>
                                     </div>
                                 </div>
@@ -151,9 +152,9 @@
                                                 </a>
                                             </h3>
                                             <p
-                                                class="mt-1 font-medium text-slate-900 dark:text-white"
+                                                class="truncate text-sm text-slate-500 dark:text-slate-400"
                                             >
-                                                {{ __("Inkl.") }}
+                                                <span>{{ __("Inkl.") }}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -191,16 +192,13 @@
                                         <p
                                             class="truncate text-sm text-slate-500 dark:text-slate-400"
                                         >
-                                            <span>{{
-                                                product.attributes.item
-                                                    .description
-                                            }}</span>
-                                        </p>
-                                        <p
-                                            class="mt-1 font-medium text-slate-900 dark:text-white"
-                                        >
-                                            {{ $page.props.team.currency.code }}
-                                            {{ product.price }}
+                                            <span>
+                                                {{
+                                                    $page.props.team.currency
+                                                        .code
+                                                }}
+                                                {{ product.price }}</span
+                                            >
                                         </p>
                                     </div>
                                 </div>
