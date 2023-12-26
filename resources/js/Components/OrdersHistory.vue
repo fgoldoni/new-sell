@@ -6,11 +6,14 @@
                     id="your-orders-heading"
                     class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white"
                 >
-                    Your Orders
+                    {{ __("Your Orders") }}
                 </h1>
                 <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                    Check the status of recent orders, manage returns, and
-                    discover similar products.
+                    {{
+                        __(
+                            "Check the status of recent orders, manage returns, and discover similar products.",
+                        )
+                    }}
                 </p>
             </div>
 
@@ -25,14 +28,16 @@
                     >
                         <h2
                             :id="`${order.id}-heading`"
-                            class="text-lg font-medium text-gray-900 md:flex-shrink-0"
+                            class="text-lg font-medium text-slate-900 dark:text-white md:flex-shrink-0"
                         >
-                            Order #{{ order.id }}
+                            {{ __("Number") }} #{{ order.id }}
                         </h2>
                         <div
                             class="space-y-5 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 md:min-w-0 md:flex-1"
                         >
-                            <p class="text-sm font-medium text-gray-500">
+                            <p
+                                class="text-sm font-medium text-slate-500 dark:text-slate-400"
+                            >
                                 {{ order.status }}
                             </p>
                             <div class="flex text-sm font-medium">
@@ -40,17 +45,18 @@
                                     :href="
                                         route('orders.show', { id: order.id })
                                     "
-                                    class="text-indigo-600 hover:text-indigo-500"
-                                    >Manage order
+                                    :class="`btn-title text-${$page.props.team.color}-600 hover:text-${$page.props.team.color}-500`"
+                                    >{{ __("Details") }}
                                 </Link>
                                 <div
                                     class="ml-4 border-l border-gray-200 pl-4 sm:ml-6 sm:pl-6"
                                 >
                                     <a
                                         :href="order.download_url"
+                                        target="_blank"
                                         download
-                                        class="text-indigo-600 hover:text-indigo-500"
-                                        >View Invoice</a
+                                        :class="`btn-title text-${$page.props.team.color}-600 hover:text-${$page.props.team.color}-500`"
+                                        >{{ __("Download") }}</a
                                     >
                                 </div>
                             </div>
@@ -60,60 +66,60 @@
                     <div
                         class="-mb-6 mt-6 flow-root divide-y divide-gray-200 border-t border-gray-200"
                     >
-                        <div
-                            v-for="product in order.items"
+                        <template
+                            v-for="(product, key, index) in order?.items"
                             :key="product.id"
-                            class="py-6 sm:flex"
                         >
                             <div
-                                class="flex space-x-4 sm:min-w-0 sm:flex-1 sm:space-x-6 lg:space-x-8"
+                                v-if="product.attributes.type === 'ticket'"
+                                class="py-6 sm:flex"
                             >
-                                <img
-                                    :src="product.attributes.item.avatar_url"
-                                    :alt="product.name"
-                                    class="h-20 w-20 flex-none rounded-md object-cover object-center sm:h-48 sm:w-48"
-                                />
-                                <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">
-                                    <h3
-                                        class="text-sm font-medium text-gray-900"
-                                    >
-                                        <a :href="product.download_url">{{
-                                            product.name
-                                        }}</a>
-                                    </h3>
-                                    <p class="truncate text-sm text-gray-500">
-                                        <span>{{ product.name }}</span>
-                                        {{ " " }}
-                                        <span
-                                            class="mx-1 text-gray-400"
-                                            aria-hidden="true"
-                                            >&middot;</span
+                                <div
+                                    class="flex space-x-4 sm:min-w-0 sm:flex-1 sm:space-x-6 lg:space-x-8"
+                                >
+                                    <img
+                                        :src="
+                                            product.attributes.item.avatar_url
+                                        "
+                                        :alt="product.name"
+                                        class="btn-base cursor-pointer h-20 w-20 flex-none rounded-md object-cover object-center sm:h-48 sm:w-48"
+                                    />
+                                    <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">
+                                        <h3
+                                            class="text-sm font-medium text-slate-900 dark:text-white uppercase"
                                         >
-                                        {{ " " }}
-                                        <span>{{ product.name }}</span>
-                                    </p>
-                                    <p class="mt-1 font-medium text-gray-900">
-                                        {{ product.price }}
-                                    </p>
+                                            <a :href="product.download_url">
+                                                {{ product.quantity }} *
+                                                {{ product.name }}
+                                            </a>
+                                        </h3>
+                                        <p
+                                            class="truncate text-sm text-slate-500 dark:text-slate-400"
+                                        >
+                                            <span>{{ product.name }}</span>
+                                        </p>
+                                        <p
+                                            class="mt-1 font-medium text-slate-900 dark:text-white"
+                                        >
+                                            {{ $page.props.team.currency.code }}
+                                            {{ product.price }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="mt-6 space-y-4 sm:ml-6 sm:mt-0 sm:w-40 sm:flex-none"
+                                >
+                                    <button
+                                        type="button"
+                                        :class="`flex w-full items-center justify-center rounded-md border border-transparent bg-${$page.props.team.color}-600 px-2.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-${$page.props.team.color}-700 focus:outline-none focus:ring-2 focus:ring-${$page.props.team.color}-500 focus:ring-offset-2 sm:w-full sm:flex-grow-0`"
+                                    >
+                                        {{ product.quantity }} *
+                                        {{ product.attributes.item.attendees }}
+                                        {{ __("Pl.") }}
+                                    </button>
                                 </div>
                             </div>
-                            <div
-                                class="mt-6 space-y-4 sm:ml-6 sm:mt-0 sm:w-40 sm:flex-none"
-                            >
-                                <button
-                                    type="button"
-                                    class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-2.5 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-full sm:flex-grow-0"
-                                >
-                                    Buy again
-                                </button>
-                                <button
-                                    type="button"
-                                    class="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-2.5 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-full sm:flex-grow-0"
-                                >
-                                    Shop similar
-                                </button>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </section>
             </div>
