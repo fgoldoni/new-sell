@@ -1,5 +1,6 @@
 <template>
-    <Siderbar :show="true" @close="close"></Siderbar>
+    <Loading v-if="processing"></Loading>
+    <Siderbar :show="true" @close="close" v-else></Siderbar>
 </template>
 <script setup lang="ts">
 import { router, usePage } from "@inertiajs/vue3";
@@ -9,11 +10,12 @@ import { useWizardStore } from "@/stores/useWizardStore";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { useOrdersStore } from "@/stores/useOrdersStore";
 import { storeToRefs } from "pinia";
+import Loading from "@/Components/Loading.vue";
 
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const ordersStore = useOrdersStore();
-const { order } = storeToRefs(ordersStore);
+const { order, processing } = storeToRefs(ordersStore);
 
 interface Props {
     id: string;
@@ -34,7 +36,9 @@ const close = (value: boolean) => {
 };
 onMounted(async () => {
     try {
+        await wizard.setComponent(null);
         await cartsStore.reset();
+        await ordersStore.find(props.id);
 
         if (order.value?.id === props.id) {
             await wizard.setComponent("Step6");
@@ -42,9 +46,7 @@ onMounted(async () => {
             return;
         }
 
-        await cartsStore.reset();
         await ordersStore.reset();
-        await wizard.setComponent(null);
 
         return router.get(route("home"), {}, { replace: true });
     } catch (error) {

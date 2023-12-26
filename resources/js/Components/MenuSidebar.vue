@@ -158,12 +158,7 @@
                                                                                   .team
                                                                                   .color +
                                                                               '-600'
-                                                                            : 'text-slate-400 group-hover:text-' +
-                                                                              $page
-                                                                                  .props
-                                                                                  .team
-                                                                                  .color +
-                                                                              '-600',
+                                                                            : 'text-slate-400',
                                                                         'h-6 w-6 shrink-0',
                                                                     ]"
                                                                     aria-hidden="true"

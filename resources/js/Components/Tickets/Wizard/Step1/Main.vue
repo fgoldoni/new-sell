@@ -6,7 +6,7 @@
             <Header
                 @close="emit('close', false)"
                 :has-previous="false"
-                :title="item.name"
+                :title="item?.name"
             />
             <div ref="itemRef" class="container mx-auto sm:px-6 lg:px-8">
                 <Stepper>

@@ -88,7 +88,7 @@
                                         <h3
                                             class="text-sm font-medium text-slate-900 dark:text-white uppercase"
                                         >
-                                            <a :href="product.download_url">
+                                            <a href="javascript:;">
                                                 {{ product.quantity }} *
                                                 {{ product.name }}
                                             </a>
@@ -121,6 +121,51 @@
                             :key="product.id"
                         >
                             <div
+                                v-if="
+                                    product.attributes.type === 'ticket' &&
+                                    product.attributes.products?.length
+                                "
+                            >
+                                <div
+                                    v-for="(item, key, index) in product
+                                        .attributes.products"
+                                    class="py-6 sm:flex"
+                                >
+                                    <div
+                                        class="flex space-x-4 sm:min-w-0 sm:flex-1 sm:space-x-6 lg:space-x-8"
+                                    >
+                                        <img
+                                            :src="item.avatar_url"
+                                            :alt="item.name"
+                                            class="btn-base cursor-pointer h-20 w-20 flex-none rounded-md object-cover object-center sm:h-48 sm:w-48"
+                                        />
+                                        <div
+                                            class="min-w-0 flex-1 pt-1.5 sm:pt-0"
+                                        >
+                                            <h3
+                                                class="text-sm font-medium text-slate-900 dark:text-white uppercase"
+                                            >
+                                                <a href="javascript:;">
+                                                    {{ item.quantity }} *
+                                                    {{ item.name }}
+                                                </a>
+                                            </h3>
+                                            <p
+                                                class="mt-1 font-medium text-slate-900 dark:text-white"
+                                            >
+                                                {{ __("Inkl.") }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template
+                            v-for="(product, key, index) in order?.items"
+                            :key="product.id"
+                        >
+                            <div
                                 v-if="product.attributes.type === 'product'"
                                 class="py-6 sm:flex"
                             >
@@ -138,7 +183,7 @@
                                         <h3
                                             class="text-sm font-medium text-slate-900 dark:text-white uppercase"
                                         >
-                                            <a :href="product.download_url">
+                                            <a href="javascript:;">
                                                 {{ product.quantity }} *
                                                 {{ product.name }}
                                             </a>

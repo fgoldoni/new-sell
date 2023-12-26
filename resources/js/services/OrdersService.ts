@@ -1,4 +1,5 @@
 import { ApiServiceBase } from "@/services/ApiServiceBase";
+import { Order } from "@/types";
 
 export default class OrdersService extends ApiServiceBase {
     async get(): Promise<any> {
@@ -24,5 +25,9 @@ export default class OrdersService extends ApiServiceBase {
                 status: status,
             },
         });
+    }
+
+    async find(id: string): Promise<Order> {
+        return await this.call<any>(`/orders/${id}`);
     }
 }

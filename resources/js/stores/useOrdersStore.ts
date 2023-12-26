@@ -53,10 +53,25 @@ export const useOrdersStore = defineStore(
                 });
         };
 
+        const find = async (id: string): Promise<any> => {
+            processing.value = true;
+
+            await api.orders
+                .find(id)
+                .then(async (response: Order) => (order.value = response))
+                .catch((error: any) => {
+                    throw new ApiError(error);
+                })
+                .finally(() => {
+                    processing.value = false;
+                });
+        };
+
         return {
             order,
             processing,
             orders,
+            find,
             reset,
             get,
             store,
