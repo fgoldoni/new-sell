@@ -4,7 +4,7 @@
             <div class="max-w-xl">
                 <h1
                     id="your-orders-heading"
-                    class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white"
+                    class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white uppercase"
                 >
                     {{ __("Your Orders") }}
                 </h1>
@@ -28,7 +28,7 @@
                     >
                         <h2
                             :id="`${order.id}-heading`"
-                            class="text-lg font-medium text-slate-900 dark:text-white md:flex-shrink-0"
+                            class="text-lg font-medium text-slate-900 dark:text-white md:flex-shrink-0 uppercase"
                         >
                             {{ __("Number") }} #{{ order.id }}
                         </h2>
@@ -38,7 +38,7 @@
                             <p
                                 class="text-sm font-medium text-slate-500 dark:text-slate-400"
                             >
-                                {{ order.status }}
+                                {{ __(order.status) }}
                             </p>
                             <div class="flex text-sm font-medium">
                                 <Link
@@ -96,7 +96,10 @@
                                         <p
                                             class="truncate text-sm text-slate-500 dark:text-slate-400"
                                         >
-                                            <span>{{ product.name }}</span>
+                                            <span>{{
+                                                product.attributes.item
+                                                    .description
+                                            }}</span>
                                         </p>
                                         <p
                                             class="mt-1 font-medium text-slate-900 dark:text-white"
@@ -117,6 +120,52 @@
                                         {{ product.attributes.item.attendees }}
                                         {{ __("Pl.") }}
                                     </button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template
+                            v-for="(product, key, index) in order?.items"
+                            :key="product.id"
+                        >
+                            <div
+                                v-if="product.attributes.type === 'product'"
+                                class="py-6 sm:flex"
+                            >
+                                <div
+                                    class="flex space-x-4 sm:min-w-0 sm:flex-1 sm:space-x-6 lg:space-x-8"
+                                >
+                                    <img
+                                        :src="
+                                            product.attributes.item.avatar_url
+                                        "
+                                        :alt="product.name"
+                                        class="btn-base cursor-pointer h-20 w-20 flex-none rounded-md object-cover object-center sm:h-48 sm:w-48"
+                                    />
+                                    <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">
+                                        <h3
+                                            class="text-sm font-medium text-slate-900 dark:text-white uppercase"
+                                        >
+                                            <a :href="product.download_url">
+                                                {{ product.quantity }} *
+                                                {{ product.name }}
+                                            </a>
+                                        </h3>
+                                        <p
+                                            class="truncate text-sm text-slate-500 dark:text-slate-400"
+                                        >
+                                            <span>{{
+                                                product.attributes.item
+                                                    .description
+                                            }}</span>
+                                        </p>
+                                        <p
+                                            class="mt-1 font-medium text-slate-900 dark:text-white"
+                                        >
+                                            {{ $page.props.team.currency.code }}
+                                            {{ product.price }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </template>

@@ -1,7 +1,8 @@
 <template>
     <AppLayout>
-        <div>
-            <OrdersHistory :items="orders" v-if="!processing"></OrdersHistory>
+        <Loading v-if="processing"></Loading>
+        <div v-else>
+            <OrdersHistory :items="orders"></OrdersHistory>
             <FooterComponent></FooterComponent>
         </div>
     </AppLayout>
@@ -16,6 +17,7 @@ import { useOrdersStore } from "@/stores/useOrdersStore";
 
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
+import Loading from "@/Components/Loading.vue";
 
 const ordersStore = useOrdersStore();
 const { orders, processing } = storeToRefs(ordersStore);
