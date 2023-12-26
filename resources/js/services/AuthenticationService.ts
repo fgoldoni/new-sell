@@ -1,5 +1,6 @@
 import { ApiServiceBase } from "@/services/ApiServiceBase";
 import { User } from "@/types";
+import Application from "@/models/Application";
 
 export default class AuthenticationService extends ApiServiceBase {
     async post(
@@ -34,6 +35,7 @@ export default class AuthenticationService extends ApiServiceBase {
     }
 
     async logout(): Promise<any> {
-        return await this.call("/users/logout", { method: "post" });
+        // return await this.call("/users/logout", { method: "post" });
+        return await this.call<Application>("/");
     }
 }

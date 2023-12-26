@@ -2,6 +2,8 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { User } from "@/types";
 import { useApi } from "@/composable/useApi";
+import { setCookie } from "@/composable/useCookie";
+import { COOKIE_MAX_AGE_1_YEAR } from "@/utils/constants";
 
 export const useAuthStore = defineStore(
     "useAuthStore",
@@ -15,7 +17,10 @@ export const useAuthStore = defineStore(
             user.value = await api.authentication.user();
         };
 
-        const setToken = (bearerToken = null) => (token.value = bearerToken);
+        const setToken = (bearerToken: string) => {
+            token.value = bearerToken;
+            setCookie("accessToken", bearerToken, COOKIE_MAX_AGE_1_YEAR);
+        };
         const setAuth = (auth: User) => (user.value = auth);
 
         const post = async (

@@ -6,16 +6,6 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     SEOTools::setTitle(EnsureTeamMiddleware::team()?->name . ' - ' . EnsureTeamMiddleware::team()?->event?->artist, false);
@@ -44,5 +34,6 @@ Route::get('orders/notch-pay/{id}', [\App\Http\Controllers\OrdersController::cla
 Route::get('orders/paypal/{id}', [\App\Http\Controllers\OrdersController::class, 'paypal'])->name('orders.paypal');
 Route::post('stripe/terminal/connection', [\App\Http\Controllers\StripeTerminalController::class, 'connection'])->name('stripe.terminal.connection');
 Route::get('products', [\App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+Route::get('hash/{hash}', [\App\Http\Controllers\HashController::class, 'index'])->name('hash.index');
 
 

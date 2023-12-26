@@ -238,8 +238,6 @@ import ApiError from "@/models/ApiError";
 import Comboboxes from "@/Components/Comboboxes.vue";
 import { useCountriesStore } from "@/stores/useCountriesStore";
 import InputError from "@/Components/InputError.vue";
-import { setCookie } from "@/composable/useCookie";
-import { COOKIE_MAX_AGE_1_YEAR } from "@/utils/constants";
 
 const itemRef = ref<HTMLElement>();
 const processing = ref<boolean>(false);
@@ -287,7 +285,6 @@ const submit = async () => {
                 form.terms,
             )
             .then(async (response: any) => {
-                setCookie("accessToken", response.token, COOKIE_MAX_AGE_1_YEAR);
                 authStore.setToken(response.token);
                 authStore.setAuth(response.user);
                 await wizard.setComponent("Step5");
