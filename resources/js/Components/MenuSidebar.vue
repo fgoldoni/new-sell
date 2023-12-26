@@ -32,19 +32,25 @@
                                             <DialogTitle
                                                 class="text-base font-semibold leading-6 text-white"
                                             >
-                                                <img
-                                                    class="h-8 w-auto transform origin-left transition duration-700"
-                                                    :class="{
-                                                        'scale-100':
-                                                            !scrolledFromTop,
-                                                        'scale-75':
-                                                            scrolledFromTop,
-                                                    }"
-                                                    :src="
-                                                        $page.props.team.avatar
-                                                    "
-                                                    :alt="$page.props.team.name"
-                                                />
+                                                <Link :href="route('home')">
+                                                    <img
+                                                        class="h-8 w-auto transform origin-left transition duration-700"
+                                                        :class="{
+                                                            'scale-100':
+                                                                !scrolledFromTop,
+                                                            'scale-75':
+                                                                scrolledFromTop,
+                                                        }"
+                                                        :src="
+                                                            $page.props.team
+                                                                .avatar
+                                                        "
+                                                        :alt="
+                                                            $page.props.team
+                                                                .name
+                                                        "
+                                                    />
+                                                </Link>
                                             </DialogTitle>
                                             <div
                                                 class="ml-3 flex h-7 items-center"
