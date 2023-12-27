@@ -94,7 +94,7 @@
                             type="button"
                             :class="[
                                 scrolledFromTop ? 'scale-75' : 'scale-100',
-                                'md:hidden transition duration-700 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:hover:bg-slate-800 hover:bg-' +
+                                'transition duration-700 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:hover:bg-slate-800 hover:bg-' +
                                     $page.props.team.color +
                                     '-700 hover:text-white focus:outline-none`',
                             ]"
