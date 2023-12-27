@@ -183,7 +183,11 @@
                                                                     ]"
                                                                     aria-hidden="true"
                                                                 />
-                                                                {{ item.name }}
+                                                                {{
+                                                                    __(
+                                                                        item.name,
+                                                                    )
+                                                                }}
                                                             </Link>
                                                         </li>
                                                     </ul>
@@ -346,13 +350,13 @@ const processing = ref(false);
 
 const navigation = [
     {
-        name: "Meine Bestellungen",
+        name: "My orders",
         href: "orders.index",
         icon: ShoppingCartIcon,
         current: false,
     },
     {
-        name: "Einstellungen",
+        name: "Settings",
         href: "home",
         icon: Cog6ToothIcon,
         current: false,

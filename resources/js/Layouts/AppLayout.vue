@@ -42,6 +42,27 @@
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <Link
+                                    v-if="isAuthenticated"
+                                    :href="route('orders.index')"
+                                    :class="[
+                                        scrolledFromTop ? 'py-1' : 'py-1.5',
+                                        route().current('orders.index')
+                                            ? 'bg-' +
+                                              $page.props.team.color +
+                                              '-700 text-white'
+                                            : 'text-white hover:bg-' +
+                                              $page.props.team.color +
+                                              '-500 hover:bg-opacity-75',
+                                        'uppercase rounded-md px-3 text-xs font-medium',
+                                    ]"
+                                    :aria-current="
+                                        route().current('orders.index')
+                                            ? 'page'
+                                            : undefined
+                                    "
+                                    >{{ __("My orders") }}
+                                </Link>
+                                <Link
                                     v-for="item in navigation"
                                     :key="item.name"
                                     :href="route(item.href)"
@@ -54,7 +75,7 @@
                                             : 'text-white hover:bg-' +
                                               $page.props.team.color +
                                               '-500 hover:bg-opacity-75',
-                                        'rounded-md px-3 text-xs font-medium',
+                                        'uppercase rounded-md px-3 text-xs font-medium',
                                     ]"
                                     :aria-current="
                                         route().current(item.href)
