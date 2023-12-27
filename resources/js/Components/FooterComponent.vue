@@ -65,7 +65,7 @@ const teams = [
                 >
                     <li v-for="team in teams" :key="team.name">
                         <Link
-                            :href="team.href"
+                            :href="route(team.href)"
                             class="px-4 text-gray-500 hover:text-white uppercase"
                             v-text="team.name"
                         ></Link>
