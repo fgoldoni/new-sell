@@ -204,9 +204,7 @@ const submit = async () => {
         </div>
         <div
             class="top-0 bottom-0 right-0 hidden bg-cover lg:block lg:absolute lg:w-3/6"
-            style="
-                background-image: url(&quot;https://cdn.devdojo.com/images/august2021/form-bg.jpeg&quot;);
-            "
+            :style="`background-image: url(&quot;${$page.props.team.event.avatar}&quot;); `"
         ></div>
     </section>
 </template>
