@@ -24,7 +24,7 @@ const submit = async () => {
     try {
         processing.value = true;
         await authStore
-            .login(form.email, form.terms)
+            .login(form.email, form.to, form.terms)
             .then(async (response: any) => {
                 debugger;
                 authStore.setToken(response.token);
