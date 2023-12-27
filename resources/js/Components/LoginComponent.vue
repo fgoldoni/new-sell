@@ -5,7 +5,7 @@ import InputError from "@/Components/InputError.vue";
 import ApiError from "@/models/ApiError";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { storeToRefs } from "pinia";
-import { ExclamationTriangleIcon } from "@heroicons/vue/20/solid";
+import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 
 const authStore = useAuthStore();
 const { isAuthenticated } = storeToRefs(authStore);
@@ -103,17 +103,17 @@ const submit = async () => {
                         >
                             <div
                                 v-if="message"
-                                class="border-l-4 border-yellow-400 bg-yellow-50 p-4"
+                                class="border-l-4 border-green-400 bg-green-50 p-4"
                             >
                                 <div class="flex">
                                     <div class="flex-shrink-0">
-                                        <ExclamationTriangleIcon
-                                            class="h-5 w-5 text-yellow-400"
+                                        <CheckCircleIcon
+                                            class="h-5 w-5 text-green-400"
                                             aria-hidden="true"
                                         />
                                     </div>
                                     <div class="ml-3">
-                                        <p class="text-sm text-yellow-700">
+                                        <p class="text-sm text-green-700">
                                             {{
                                                 __(
                                                     "You have received a connection link at the following email address",
@@ -122,7 +122,7 @@ const submit = async () => {
                                             {{ " " }}
                                             <a
                                                 href="javascript:;"
-                                                class="font-medium text-yellow-700 underline hover:text-yellow-600"
+                                                class="font-medium text-green-700 underline hover:text-green-600"
                                                 >{{ form.email }}</a
                                             >
                                         </p>
