@@ -46,7 +46,7 @@ export const useBrandsStore = defineStore(
             }
         };
 
-        return { brands, get, sponsors, blogs };
+        return { brands, get, sponsors, blogs, artists };
     },
     {
         persist: true,
