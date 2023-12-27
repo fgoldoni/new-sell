@@ -16,8 +16,8 @@ export class Errors {
     }
 
     clear(field) {
-        if (this.errors !== undefined && this.errors[field])
-            delete this.errors[field];
+        if (this.errors !== undefined && this.errors[field.target.name])
+            delete this.errors[field.target.name];
     }
 
     drop() {

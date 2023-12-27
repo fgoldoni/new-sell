@@ -5,11 +5,13 @@ import InputError from "@/Components/InputError.vue";
 import ApiError from "@/models/ApiError";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { storeToRefs } from "pinia";
+import { ExclamationTriangleIcon } from "@heroicons/vue/20/solid";
 
 const authStore = useAuthStore();
 const { isAuthenticated } = storeToRefs(authStore);
 
 const processing = ref(false);
+const message = ref(false);
 
 const form = reactive({
     email: "",
@@ -26,9 +28,7 @@ const submit = async () => {
         await authStore
             .login(form.email, form.to, form.terms)
             .then(async (response: any) => {
-                debugger;
-                authStore.setToken(response.token);
-                authStore.setAuth(response.user);
+                message.value = true;
             })
             .catch((error: any) => {
                 form.errors.onFailed(error);
@@ -102,6 +102,34 @@ const submit = async () => {
                             @keydown="(value) => form.errors.clear(value)"
                         >
                             <div
+                                v-if="message"
+                                class="border-l-4 border-yellow-400 bg-yellow-50 p-4"
+                            >
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <ExclamationTriangleIcon
+                                            class="h-5 w-5 text-yellow-400"
+                                            aria-hidden="true"
+                                        />
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm text-yellow-700">
+                                            {{
+                                                __(
+                                                    "You have received a connection link at the following email address",
+                                                )
+                                            }}:
+                                            {{ " " }}
+                                            <a
+                                                href="javascript:;"
+                                                class="font-medium text-yellow-700 underline hover:text-yellow-600"
+                                                >{{ form.email }}</a
+                                            >
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
                                 class="relative z-0 w-full mb-5 mt-8 group text-left"
                             >
                                 <input
@@ -129,6 +157,7 @@ const submit = async () => {
                                     type="checkbox"
                                     v-model="form.terms"
                                     id="terms"
+                                    name="terms"
                                 />
                                 <span class="text-xs text-slate-500 text-left">
                                     {{
@@ -138,10 +167,35 @@ const submit = async () => {
                                     }}
                                 </span>
                             </label>
+                            <InputError
+                                :message="form.errors.get('terms')"
+                                class="text-left"
+                            />
                             <button
                                 :class="`w-full px-8 py-3 mt-8 font-bold text-white uppercase bg-${$page.props.team.color}-700 rounded-md md:mt-5 hover:bg-${$page.props.team.color}-600 font-heading`"
                             >
-                                {{ __("Login") }}
+                                <svg
+                                    v-if="processing"
+                                    class="animate-spin h-5 w-5 inline-flex text-white"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        class="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        stroke-width="4"
+                                    ></circle>
+                                    <path
+                                        class="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    ></path>
+                                </svg>
+                                <span v-else>{{ __("Login") }}</span>
                             </button>
                         </form>
                     </div>
