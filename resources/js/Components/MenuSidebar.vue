@@ -161,7 +161,7 @@
                                                                               .team
                                                                               .color +
                                                                           '-600 hover:bg-slate-50 dark:hover:bg-slate-900',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold uppercase',
                                                                 ]"
                                                             >
                                                                 <component
@@ -223,7 +223,7 @@
                                                                               .team
                                                                               .color +
                                                                           '-600 hover:bg-slate-50 dark:hover:bg-slate-900',
-                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+                                                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold uppercase',
                                                                 ]"
                                                             >
                                                                 <span
