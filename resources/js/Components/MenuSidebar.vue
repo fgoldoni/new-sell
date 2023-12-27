@@ -113,7 +113,7 @@
                                             </div>
                                             <a
                                                 v-if="!isAuthenticated"
-                                                :href="route('home')"
+                                                :href="route('login.index')"
                                                 :class="[
                                                     'uppercase rounded-md bg-' +
                                                         $page.props.team.color +

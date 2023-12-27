@@ -9,7 +9,7 @@ use Inertia\Inertia;
 
 class LoginController extends Controller
 {
-    public function hash(string $hash): \Inertia\Response
+    public function index(): \Inertia\Response
     {
         SEOTools::setTitle(EnsureTeamMiddleware::team()?->name . ' - ' . EnsureTeamMiddleware::team()?->event?->artist, false);
         SEOTools::setDescription(EnsureTeamMiddleware::team()?->event?->name);
@@ -22,8 +22,6 @@ class LoginController extends Controller
         SEOTools::jsonLd()->addImage(EnsureTeamMiddleware::team()->avatar);
 
 
-        return Inertia::render('Login/Hash', [
-            'hash' => $hash
-        ]);
+        return Inertia::render('Login/Index');
     }
 }

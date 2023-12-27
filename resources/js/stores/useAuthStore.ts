@@ -53,6 +53,10 @@ export const useAuthStore = defineStore(
             return;
         }
 
+        async function login(email: string, terms: boolean): Promise<any> {
+            return await api.authentication.login(email, terms);
+        }
+
         async function reset(): Promise<any> {
             if (isAuthenticated.value === false) {
                 return;
@@ -65,6 +69,7 @@ export const useAuthStore = defineStore(
             user,
             token,
             isAuthenticated,
+            login,
             reset,
             post,
             fetchUser,

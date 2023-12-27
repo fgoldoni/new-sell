@@ -75,7 +75,7 @@
                         />
                         <a
                             v-if="!isAuthenticated"
-                            :href="route('home')"
+                            :href="route('login.index')"
                             :class="[
                                 scrolledFromTop ? 'py-1' : 'py-1.5',
                                 'uppercase rounded-md bg-' +
