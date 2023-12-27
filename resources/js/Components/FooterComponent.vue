@@ -1,4 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const teams = [
+    {
+        id: 1,
+        name: "Tickets",
+        href: "tickets.index",
+        initial: "T",
+        current: false,
+    },
+    { id: 3, name: "FAQ", href: "faqs.index", initial: "F", current: false },
+    {
+        id: 4,
+        name: "Kontakt",
+        href: "contacts.index",
+        initial: "K",
+        current: false,
+    },
+];
+</script>
 
 <template>
     <!-- Section 1 -->
@@ -72,33 +90,17 @@
                 <p
                     class="order-last text-sm leading-tight text-gray-500 md:order-first"
                 >
-                    Crafted with
-                    <a href="https://devdojo.com/tails" class="text-white"
-                        >Tails</a
-                    >. Built with ❤️ by our team.
+                    © 2023 SellFirst Lab. All rights reserved.
                 </p>
                 <ul
                     class="flex flex-row justify-center pb-3 -ml-4 -mr-4 text-sm"
                 >
-                    <li>
-                        <a href="#_" class="px-4 text-gray-500 hover:text-white"
-                            >Contact</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#_" class="px-4 text-gray-500 hover:text-white"
-                            >About US</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#_" class="px-4 text-gray-500 hover:text-white"
-                            >FAQ's</a
-                        >
-                    </li>
-                    <li>
-                        <a href="#_" class="px-4 text-gray-500 hover:text-white"
-                            >Terms</a
-                        >
+                    <li v-for="team in teams" :key="team.name">
+                        <Link
+                            :href="team.href"
+                            class="px-4 text-gray-500 hover:text-white uppercase"
+                            v-text="team.name"
+                        ></Link>
                     </li>
                 </ul>
             </div>
