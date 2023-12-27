@@ -46,14 +46,15 @@
                                     :key="item.name"
                                     :href="route(item.href)"
                                     :class="[
+                                        scrolledFromTop ? 'py-1' : 'py-1.5',
                                         route().current(item.href)
-                                            ? 'bg-' +
+                                            ? 'uppercase bg-' +
                                               $page.props.team.color +
                                               '-700 text-white'
                                             : 'text-white hover:bg-' +
                                               $page.props.team.color +
                                               '-500 hover:bg-opacity-75',
-                                        'rounded-md px-3 py-2 text-sm font-medium',
+                                        'rounded-md px-3 text-xs font-medium',
                                     ]"
                                     :aria-current="
                                         route().current(item.href)
@@ -72,12 +73,27 @@
                         <ThemeSwitcherTheme
                             :scrolled-from-top="scrolledFromTop"
                         />
+                        <a
+                            v-if="!isAuthenticated"
+                            :href="route('home')"
+                            :class="[
+                                scrolledFromTop ? 'py-1' : 'py-1.5',
+                                'uppercase rounded-md bg-' +
+                                    $page.props.team.color +
+                                    '-700 px-3 text-xs font-semibold text-white shadow-sm hover:bg-' +
+                                    $page.props.team.color +
+                                    '-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-' +
+                                    $page.props.team.color +
+                                    '-600',
+                            ]"
+                            >{{ __("Login") }}</a
+                        >
                         <button
                             @click="openMenuSidebar = true"
                             type="button"
                             :class="[
                                 scrolledFromTop ? 'scale-75' : 'scale-100',
-                                'transition duration-700 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:hover:bg-slate-800 hover:bg-' +
+                                'md:hidden transition duration-700 inline-flex items-center justify-center rounded-md p-2 text-gray-400 dark:hover:bg-slate-800 hover:bg-' +
                                     $page.props.team.color +
                                     '-700 hover:text-white focus:outline-none`',
                             ]"
@@ -111,11 +127,14 @@ import { useCountriesStore } from "@/stores/useCountriesStore";
 import { useEventStore } from "@/stores/useEventStore";
 import MenuSidebar from "@/Components/MenuSidebar.vue";
 import LanguageSwitcherComponent from "@/Components/LanguageSwitcherComponent.vue";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 const ticketsStore = useTicketsStore();
 const eventStore = useEventStore();
+const authStore = useAuthStore();
 const countriesStore = useCountriesStore();
 const { countries } = storeToRefs(countriesStore);
+const { isAuthenticated } = storeToRefs(authStore);
 const scrolledFromTop = ref(false);
 const openMenuSidebar = ref(false);
 

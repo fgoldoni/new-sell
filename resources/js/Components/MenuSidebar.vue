@@ -111,6 +111,20 @@
                                                     </a>
                                                 </div>
                                             </div>
+                                            <a
+                                                v-if="!isAuthenticated"
+                                                :href="route('home')"
+                                                :class="[
+                                                    'uppercase rounded-md bg-' +
+                                                        $page.props.team.color +
+                                                        '-700 px-3 py-2 text-sm text-center font-semibold text-white shadow-sm hover:bg-' +
+                                                        $page.props.team.color +
+                                                        '-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-' +
+                                                        $page.props.team.color +
+                                                        '-600',
+                                                ]"
+                                                >{{ __("Login") }}</a
+                                            >
                                             <ul
                                                 role="list"
                                                 class="flex flex-1 flex-col gap-y-7"

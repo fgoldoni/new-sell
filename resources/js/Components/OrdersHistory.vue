@@ -4,7 +4,7 @@
             <div class="max-w-xl">
                 <h1
                     id="your-orders-heading"
-                    class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white uppercase"
+                    class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white uppercase"
                 >
                     {{ __("Your Orders") }}
                 </h1>
