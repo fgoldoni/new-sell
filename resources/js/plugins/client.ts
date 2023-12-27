@@ -9,6 +9,7 @@ import CountriesService from "@/services/CountriesService";
 import OrdersService from "@/services/OrdersService";
 import NotchPayService from "@/services/NotchPayService";
 import TerminalService from "@/services/TerminalService";
+import BrandsService from "@/services/BrandsService";
 
 export const container = () => {
     const client: any = $api;
@@ -23,6 +24,7 @@ export const container = () => {
         orders: new OrdersService(client),
         notchPay: new NotchPayService(client),
         terminal: new TerminalService(client),
+        brands: new BrandsService(client),
     };
 
     return api as ApiServiceContainer;

@@ -150,47 +150,23 @@ import { useEventStore } from "@/stores/useEventStore";
 import MenuSidebar from "@/Components/MenuSidebar.vue";
 import LanguageSwitcherComponent from "@/Components/LanguageSwitcherComponent.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { setCookie } from "@/composable/useCookie";
-import { router } from "@inertiajs/vue3";
-import ApiError from "@/models/ApiError";
+import { useBrandsStore } from "@/stores/useBrandsStore";
 
 const ticketsStore = useTicketsStore();
 const eventStore = useEventStore();
 const authStore = useAuthStore();
 const countriesStore = useCountriesStore();
+const brandsStore = useBrandsStore();
 const { countries } = storeToRefs(countriesStore);
 const { isAuthenticated } = storeToRefs(authStore);
 const scrolledFromTop = ref(false);
 const openMenuSidebar = ref(false);
-const processing = ref(false);
 
 const navigation = [
     { name: "Tickets", href: "tickets.index", current: true },
     { name: "FAQ", href: "faqs.index", current: false },
     { name: "Kontakt", href: "contacts.index", current: false },
 ];
-const logout = async () => {
-    try {
-        processing.value = true;
-
-        await authStore
-            .logout()
-            .then(async () => {
-                await authStore.reset();
-                setCookie("accessToken", "", -1);
-
-                return router.get(route("home"));
-            })
-            .catch((error: any) => {
-                throw new ApiError(error);
-            })
-            .finally(() => {
-                processing.value = false;
-            });
-    } catch (error) {
-        throw new ApiError(error);
-    }
-};
 
 const onScroll = () => {
     window.pageYOffset >= 50
@@ -207,6 +183,8 @@ onMounted(async () => {
     await ticketsStore.get();
 
     await eventStore.get();
+
+    await brandsStore.get();
 
     if (countries.value.length === 0) {
         await countriesStore.get();

@@ -57,6 +57,22 @@ export interface Cart {
     cart_total_conditions: any;
 }
 
+export interface Brand {
+    id: string;
+    name: string;
+    title: string;
+    url: string;
+    action: string;
+    avatar_url: string;
+    type: string;
+    description: string;
+    facebook: string;
+    twitter: string;
+    tiktok: string;
+    site: string;
+    position: string;
+}
+
 export const enum Mode {
     CARD = "card",
     KLARNA = "klarna",
