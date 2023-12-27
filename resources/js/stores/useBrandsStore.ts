@@ -19,6 +19,11 @@ export const useBrandsStore = defineStore(
         const sponsors = computed(() =>
             filter(brands.value, (s) => s.type === "sponsor"),
         );
+
+        const blogs = computed(() =>
+            filter(brands.value, (s) => s.type === "blog"),
+        );
+
         const artists = computed(() =>
             filter(brands.value, (s) => s.type === "artist"),
         );
@@ -41,7 +46,7 @@ export const useBrandsStore = defineStore(
             }
         };
 
-        return { brands, get, sponsors };
+        return { brands, get, sponsors, blogs };
     },
     {
         persist: true,
