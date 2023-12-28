@@ -117,7 +117,7 @@ useMotion(itemRef, {
                             v-if="item.attendees > 0"
                         >
                             {{ $page.props.team.currency.code }}
-                            {{ item.price / item.attendees }}
+                            {{ item.pp }}
                         </dt>
                         <dd>{{ __("labels.package.per_place") }}</dd>
                     </dl>
