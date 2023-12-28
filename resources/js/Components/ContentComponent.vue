@@ -12,7 +12,7 @@ const { blogs } = storeToRefs(brandsStore);
         <div class="py-10 mx-auto max-w-7xl md:px-8">
             <div
                 v-if="blogs.length > 0"
-                class="flex flex-col items-center w-full overflow-hidden bg-white md:rounded-xl md:flex-row"
+                class="flex flex-col items-center w-full overflow-hidden text-slate-900 dark:text-white md:rounded-xl md:flex-row"
             >
                 <div
                     class="flex flex-col w-full p-10 mt-4 text-center md:w-1/2 md:mt-0"
@@ -59,7 +59,7 @@ const { blogs } = storeToRefs(brandsStore);
                 class="flex flex-col mt-10 md:flex-row md:mt-8 md:space-x-8"
             >
                 <div
-                    class="flex flex-col items-center justify-center flex-1 overflow-hidden text-center bg-white md:rounded-xl"
+                    class="flex flex-col items-center justify-center flex-1 overflow-hidden text-center text-slate-900 dark:text-white md:rounded-xl"
                 >
                     <div
                         class="flex flex-col px-10 pb-5 space-y-6 pt-14 md:px-8"
@@ -100,7 +100,7 @@ const { blogs } = storeToRefs(brandsStore);
                 </div>
                 <div
                     v-if="blogs.length > 2"
-                    class="relative flex flex-col items-center justify-center flex-1 py-32 mt-10 overflow-hidden text-center bg-white md:rounded-xl md:mt-0"
+                    class="relative flex flex-col items-center justify-center flex-1 py-32 mt-10 overflow-hidden text-center text-slate-900 dark:text-white md:rounded-xl md:mt-0"
                 >
                     <img :src="blogs[2].avatar_url" class="w-20 h-auto" />
                     <div class="flex flex-col px-10 space-y-6 md:px-8">
