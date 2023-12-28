@@ -16,7 +16,7 @@ export const useTicketsStore = defineStore(
         const entries = computed(() =>
             orderBy(
                 filter(tickets.value, (t: any) => t.type === "entry"),
-                ["price"],
+                ["position"],
                 ["asc"],
             ),
         );
