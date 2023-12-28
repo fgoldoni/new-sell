@@ -8,7 +8,7 @@ const { sponsors } = storeToRefs(brandsStore);
 
 <template>
     <!-- Section 1 -->
-    <section class="w-full py-16 lg:py-24">
+    <section class="w-full py-16 lg:py-24" v-if="sponsors.length">
         <div class="px-4 mx-auto text-center max-w-7xl">
             <div class="space-y-12">
                 <div

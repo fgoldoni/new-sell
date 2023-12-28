@@ -58,7 +58,7 @@ const teams = [
                 <p
                     class="order-last text-sm leading-tight text-gray-500 md:order-first"
                 >
-                    © 2023 SellFirst Lab. All rights reserved.
+                    © 2024 Sell First. All rights reserved.
                 </p>
                 <ul
                     class="flex flex-row justify-center pb-3 -ml-4 -mr-4 text-sm"

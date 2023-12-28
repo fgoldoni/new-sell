@@ -1,5 +1,5 @@
 <template>
-    <div class="py-24 sm:py-32">
+    <div class="py-24 sm:py-32" v-if="artists.length">
         <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
             <div class="mx-auto max-w-2xl">
                 <h2
@@ -65,31 +65,4 @@ import { storeToRefs } from "pinia";
 
 const brandsStore = useBrandsStore();
 const { artists } = storeToRefs(brandsStore);
-const people = [
-    {
-        name: "Leonard Krasner",
-        role: "Senior Designer",
-        imageUrl:
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-        twitterUrl: "#",
-        linkedinUrl: "#",
-    },
-    {
-        name: "Leonard Krasner",
-        role: "Senior Designer",
-        imageUrl:
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-        twitterUrl: "#",
-        linkedinUrl: "#",
-    },
-    {
-        name: "Leonard Krasner",
-        role: "Senior Designer",
-        imageUrl:
-            "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-        twitterUrl: "#",
-        linkedinUrl: "#",
-    },
-    // More people...
-];
 </script>
