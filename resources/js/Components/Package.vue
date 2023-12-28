@@ -2,6 +2,7 @@
 import { Ticket } from "@/models/Ticket";
 import { useMotion } from "@vueuse/motion";
 import { ref } from "vue";
+import { upperCase } from "lodash";
 
 interface Props {
     item: Ticket;
@@ -130,7 +131,9 @@ useMotion(itemRef, {
                 <div v-for="product in item.products" :key="product.id">
                     <div
                         class="avatar indicator cursor-pointer tooltip"
-                        :data-tip="product.name"
+                        :data-tip="
+                            product.quantity + ' * ' + upperCase(product.name)
+                        "
                     >
                         <span class="indicator-item badge badge-default">
                             {{ product.quantity }}
