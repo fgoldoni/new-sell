@@ -91,7 +91,7 @@ useMotion(itemRef, {
                 <span v-else> {{ __("labels.action.sold") }}</span>
             </button>
             <div class="flex items-center justify-between">
-                <div class="text-lg sm:text-xl">
+                <div class="text-md sm:text-xl">
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ item.attendees }}
@@ -99,7 +99,7 @@ useMotion(itemRef, {
                         <dd>{{ __("labels.package.places") }}</dd>
                     </dl>
                 </div>
-                <div class="text-lg sm:text-xl">
+                <div class="text-md sm:text-xl">
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ $page.props.team.currency.code }}
@@ -110,7 +110,7 @@ useMotion(itemRef, {
                         </dd>
                     </dl>
                 </div>
-                <div class="text-lg sm:text-xl">
+                <div class="text-md sm:text-xl">
                     <dl>
                         <dt
                             class="font-extrabold text-center"
