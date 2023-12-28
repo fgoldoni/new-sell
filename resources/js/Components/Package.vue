@@ -102,7 +102,7 @@ useMotion(itemRef, {
                     <dl>
                         <dt class="font-extrabold text-center">
                             {{ $page.props.team.currency.code }}
-                            1000
+                            {{ item.price }}
                         </dt>
                         <dd class="text-center">
                             {{ __("labels.package.total") }}
@@ -111,8 +111,12 @@ useMotion(itemRef, {
                 </div>
                 <div class="text-lg sm:text-xl">
                     <dl>
-                        <dt class="font-extrabold text-center">
-                            {{ $page.props.team.currency.code }} 100
+                        <dt
+                            class="font-extrabold text-center"
+                            v-if="item.attendees > 0"
+                        >
+                            {{ $page.props.team.currency.code }}
+                            {{ item.price / item.attendees }}
                         </dt>
                         <dd>{{ __("labels.package.per_place") }}</dd>
                     </dl>
@@ -124,7 +128,10 @@ useMotion(itemRef, {
         >
             <div class="grid grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
                 <div v-for="product in item.products" :key="product.id">
-                    <div class="avatar indicator cursor-pointer">
+                    <div
+                        class="avatar indicator cursor-pointer tooltip"
+                        :data-tip="product.name"
+                    >
                         <span class="indicator-item badge badge-default">
                             {{ product.quantity }}
                         </span>
