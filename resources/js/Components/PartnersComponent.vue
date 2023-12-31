@@ -47,10 +47,14 @@ const { sponsors } = storeToRefs(brandsStore);
                         </div>
                         <div class="space-y-2">
                             <div
-                                class="space-y-1 text-lg font-medium leading-6"
+                                class="space-y-1 text-xs sm:text-sm font-medium leading-6 uppercase"
                             >
-                                <h3>{{ sponsor.name }}</h3>
-                                <p class="text-green-500">
+                                <h3 class="text-slate-500 dark:text-slate-400">
+                                    {{ sponsor.name }}
+                                </h3>
+                                <p
+                                    :class="`text-${$page.props.team.color}-500`"
+                                >
                                     {{ sponsor.title }}
                                 </p>
                             </div>

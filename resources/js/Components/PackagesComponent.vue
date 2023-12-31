@@ -1,6 +1,7 @@
 <template>
     <!-- Section 1 -->
     <section
+        v-if="packages.length"
         class="box-border leading-7 border-0 border-slate-200 border-solid sm:py-2 md:py-16 lg:py-14"
     >
         <div
