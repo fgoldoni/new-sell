@@ -151,12 +151,14 @@ import MenuSidebar from "@/Components/MenuSidebar.vue";
 import LanguageSwitcherComponent from "@/Components/LanguageSwitcherComponent.vue";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useBrandsStore } from "@/stores/useBrandsStore";
+import { useFaqsStore } from "@/stores/useFaqsStore";
 
 const ticketsStore = useTicketsStore();
 const eventStore = useEventStore();
 const authStore = useAuthStore();
 const countriesStore = useCountriesStore();
 const brandsStore = useBrandsStore();
+const faqsStore = useFaqsStore();
 const { countries } = storeToRefs(countriesStore);
 const { isAuthenticated } = storeToRefs(authStore);
 const scrolledFromTop = ref(false);
@@ -185,6 +187,8 @@ onMounted(async () => {
     await eventStore.get();
 
     await brandsStore.get();
+
+    await faqsStore.get();
 
     if (countries.value.length === 0) {
         await countriesStore.get();

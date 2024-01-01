@@ -47,7 +47,7 @@ const { sponsors } = storeToRefs(brandsStore);
                         </div>
                         <div class="space-y-2">
                             <div
-                                class="space-y-1 text-xs sm:text-sm font-medium leading-6 uppercase"
+                                class="space-y-1 text-xs sm:text-sm font-medium leading-6"
                             >
                                 <h3 class="text-slate-500 dark:text-slate-400">
                                     {{ sponsor.name }}

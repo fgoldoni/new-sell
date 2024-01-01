@@ -19,7 +19,7 @@
                     <h2
                         class="text-2xl font-bold leading-10 tracking-tight text-slate-900 dark:text-white"
                     >
-                        Frequently asked questions
+                        {{ __("labels.faqs") }}
                     </h2>
                     <dl class="mt-10 space-y-6 divide-y divide-gray-900/10">
                         <Disclosure
@@ -71,12 +71,9 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/vue/24/outline";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import FooterComponent from "@/Components/FooterComponent.vue";
+import { useFaqsStore } from "@/stores/useFaqsStore";
+import { storeToRefs } from "pinia";
 
-const faqs = [
-    {
-        question: "What's the best thing about Switzerland?",
-        answer: "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-    },
-    // More questions...
-];
+const faqsStore = useFaqsStore();
+const { faqs } = storeToRefs(faqsStore);
 </script>
