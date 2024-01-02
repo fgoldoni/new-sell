@@ -29,7 +29,6 @@ const { blogs } = storeToRefs(brandsStore);
                     <a
                         v-if="blogs[0].url && blogs[0].action"
                         :href="blogs[0].url"
-                        target="_blank"
                         :class="`flex items-center w-auto mx-auto text-lg leading-tight text-center text-${$page.props.team.color}-600 hover:underline`"
                     >
                         <span>{{ blogs[0].action }}</span>
@@ -76,7 +75,6 @@ const { blogs } = storeToRefs(brandsStore);
                         <a
                             v-if="blogs[1].url && blogs[1].action"
                             :href="blogs[1].url"
-                            target="_blank"
                             :class="`flex items-center w-auto mx-auto text-lg leading-tight text-center text-${$page.props.team.color}-600 hover:underline`"
                         >
                             <span>{{ blogs[1].action }}</span>
@@ -116,7 +114,6 @@ const { blogs } = storeToRefs(brandsStore);
                         <a
                             v-if="blogs[2].url && blogs[2].action"
                             :href="blogs[2].url"
-                            target="_blank"
                             :class="`flex items-center w-auto mx-auto text-lg leading-tight text-center text-${$page.props.team.color}-600 hover:underline`"
                         >
                             <span>{{ blogs[2].action }}</span>
