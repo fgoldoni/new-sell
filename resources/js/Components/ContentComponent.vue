@@ -70,7 +70,7 @@ const { blogs } = storeToRefs(brandsStore);
                             {{ blogs[1].name }}
                         </h3>
                         <p
-                            class="text-xl font-light text-gray-800 line-clamp-2"
+                            class="text-xl font-light line-clamp-2"
                             v-html="blogs[1].description"
                         />
                         <a
@@ -110,7 +110,7 @@ const { blogs } = storeToRefs(brandsStore);
                             {{ blogs[2].name }}
                         </h3>
                         <p
-                            class="text-xl font-light text-gray-800 line-clamp-2"
+                            class="text-xl font-light line-clamp-2"
                             v-html="blogs[2].description"
                         />
                         <a
