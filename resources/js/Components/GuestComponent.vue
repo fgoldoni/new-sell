@@ -23,12 +23,12 @@
                         :alt="person.name"
                     />
                     <h3
-                        class="mt-6 text-base font-semibold leading-7 tracking-tight text-white uppercase line-clamp-1"
+                        class="mt-6 text-base font-semibold leading-7 tracking-tight text-slate-900 dark:text-white uppercase line-clamp-1"
                     >
                         {{ person.name }}
                     </h3>
                     <p
-                        class="text-sm leading-6 text-gray-400 uppercase line-clamp-1"
+                        class="text-sm leading-6 text-slate-500 dark:text-slate-400 uppercase line-clamp-1"
                     >
                         {{ person.title }}
                     </p>
