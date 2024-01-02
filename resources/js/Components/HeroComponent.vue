@@ -50,6 +50,7 @@
             <PartnersComponent></PartnersComponent>
             <ContentComponent></ContentComponent>
             <GuestComponent></GuestComponent>
+            <MapComponent v-if="$page.props.team.event.iframe">></MapComponent>
             <FooterComponent></FooterComponent>
         </div>
     </div>
@@ -67,6 +68,7 @@ import FooterComponent from "@/Components/FooterComponent.vue";
 import ContentComponent from "@/Components/ContentComponent.vue";
 import GuestComponent from "@/Components/GuestComponent.vue";
 import { PhoneArrowUpRightIcon } from "@heroicons/vue/20/solid";
+import MapComponent from "@/Components/MapComponent.vue";
 
 onMounted(async () => {});
 </script>
