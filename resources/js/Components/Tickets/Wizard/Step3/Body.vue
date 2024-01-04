@@ -61,5 +61,5 @@ import TicketCartItem from "@/Components/Tickets/Wizard/Step3/TicketCartItem.vue
 import ProductCartItem from "@/Components/Tickets/Wizard/Step3/ProductCartItem.vue";
 
 const cartsStore = useCartsStore();
-const { item, cart } = storeToRefs(cartsStore);
+const { cart } = storeToRefs(cartsStore);
 </script>

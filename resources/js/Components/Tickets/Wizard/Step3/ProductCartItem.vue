@@ -75,7 +75,7 @@ const update = async (value: number) => {
                             {{ item.price }}
                         </p>
                         <p
-                            class="truncate text-sm text-slate-500 dark:text-slate-400"
+                            class="truncate text-xs uppercase text-slate-500 dark:text-slate-400"
                         >
                             {{ item.name }}
                         </p>

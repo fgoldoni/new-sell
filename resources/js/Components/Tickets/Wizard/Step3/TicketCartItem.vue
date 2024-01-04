@@ -2,6 +2,7 @@
 import { CartItem, CartPayload } from "@/types/carts";
 import { useCartsStore } from "@/stores/useCartsStore";
 import Quantity from "@/Components/Quantity.vue";
+import { InformationCircleIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 import IncludeItem from "@/Components/Tickets/Wizard/Step3/IncludeItem.vue";
 
@@ -104,6 +105,20 @@ const update = async (value: number) => {
                     :quantity="quantity"
                     :index="index"
                 ></IncludeItem>
+            </template>
+            <template
+                v-for="(tag, index) in item.attributes.item.tags"
+                :key="tag"
+            >
+                <div
+                    class="flex items-center justify-between text-xs uppercase"
+                >
+                    <InformationCircleIcon
+                        :class="`h-6 w-5 flex-none text-${$page.props.team.color}-600`"
+                        aria-hidden="true"
+                    />
+                    {{ tag }}
+                </div>
             </template>
         </div>
     </li>

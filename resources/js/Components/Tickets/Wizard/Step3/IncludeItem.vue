@@ -32,11 +32,16 @@ const rest = computed(() => {
 </script>
 
 <template>
-    <div class="flex items-center justify-between">
-        <div class="text-slate-500 text-xs uppercase flex-1 truncate">
-            {{ quantity }} * {{ item.quantity }}
-            {{ item.name }}
+    <div class="flex items-center justify-between text-xs">
+        <div class="flex -space-x-1 overflow-hidden">
+            <img
+                v-for="i in quantity * item.quantity"
+                class="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                :src="item.avatar_url"
+                :alt="item.name"
+            />
         </div>
+        {{ quantity }} * {{ item.quantity }} {{ item.name }}
     </div>
 </template>
 

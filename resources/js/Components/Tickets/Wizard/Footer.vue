@@ -152,20 +152,24 @@
                         class="relative bg-white dark:bg-slate-800 px-4 py-6 sm:px-6"
                     >
                         <dl class="mx-auto max-w-lg space-y-6">
-                            <div class="flex items-center justify-between">
-                                <dt class="text-gray-600">Subtotal</dt>
-                                <dd>$320.00</dd>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <dt class="text-gray-600">Shipping</dt>
-                                <dd>$15.00</dd>
-                            </div>
-
-                            <div class="flex items-center justify-between">
-                                <dt class="text-gray-600">Taxes</dt>
-                                <dd>$26.80</dd>
-                            </div>
+                            <template
+                                v-for="item in cart?.items"
+                                :key="item.id"
+                            >
+                                <div
+                                    class="flex items-center justify-between uppercase"
+                                >
+                                    <dt
+                                        class="text-slate-500 dark:text-slate-400"
+                                    >
+                                        {{ item.quantity }} * {{ item.name }}
+                                    </dt>
+                                    <dd>
+                                        {{ $page.props.team.currency.symbol }}
+                                        {{ item.price_sum }}
+                                    </dd>
+                                </div>
+                            </template>
                         </dl>
                     </PopoverPanel>
                 </TransitionChild>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { CartItem } from "@/types/carts";
 import IncludeItem from "@/Components/Tickets/Wizard/Step3/IncludeItem.vue";
+import { InformationCircleIcon } from "@heroicons/vue/24/outline";
 
 interface Props {
     item: CartItem;
@@ -55,7 +56,10 @@ defineProps<Props>();
 
         <div
             class="ml-4 p-2 space-y-2"
-            v-if="item.attributes?.products?.length"
+            v-if="
+                item.attributes?.products?.length ||
+                item.attributes.item.tags?.length
+            "
         >
             <template
                 v-for="(product, index) in item.attributes.products"
@@ -66,6 +70,18 @@ defineProps<Props>();
                     :quantity="item.quantity"
                     :index="index"
                 ></IncludeItem>
+            </template>
+
+            <template v-for="tag in item.attributes.item.tags" :key="tag">
+                <div
+                    class="flex items-center justify-between text-xs uppercase"
+                >
+                    <InformationCircleIcon
+                        :class="`h-6 w-5 flex-none text-${$page.props.team.color}-600`"
+                        aria-hidden="true"
+                    />
+                    {{ tag }}
+                </div>
             </template>
         </div>
     </li>
