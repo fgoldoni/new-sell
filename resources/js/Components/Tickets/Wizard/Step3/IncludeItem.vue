@@ -19,24 +19,16 @@ const limit = computed(() => {
         return total;
     }
 });
-
-const rest = computed(() => {
-    let total = props.item?.quantity * props.quantity;
-
-    if (total > 2) {
-        return total - 2;
-    } else {
-        return 0;
-    }
-});
 </script>
 
 <template>
-    <div class="flex items-center justify-between text-xs">
+    <div
+        class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400"
+    >
         <div class="flex -space-x-1 overflow-hidden">
             <img
                 v-for="i in quantity * item.quantity"
-                class="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                class="inline-block h-6 w-6 rounded-full ring-2 ring-white dark:ring-slate-600"
                 :src="item.avatar_url"
                 :alt="item.name"
             />

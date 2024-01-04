@@ -54,7 +54,7 @@ const rest = computed(() => {
                     <div class="isolate flex -space-x-1">
                         <img
                             v-for="l in limit"
-                            class="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+                            class="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-slate-600"
                             :src="item.attributes.item.avatar_url"
                             :alt="item.name"
                         />

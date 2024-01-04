@@ -12,18 +12,9 @@ export const useCartsStore = defineStore(
     () => {
         const api = useApi();
 
-        const cart = ref<Cart>({
-            cart_sub_total_conditions: undefined,
-            cart_total_conditions: undefined,
-            id: "",
-            items: [],
-            price_sum: 0,
-            sub_total: 0,
-            total: 0,
-            total_quantity: 0,
-        });
+        const cart = ref<Cart | {}>({});
 
-        const item = ref<Ticket>(null);
+        const item = ref<Ticket | {}>({});
         const processing = ref<boolean>(false);
         const paiements = computed(() => {
             let data = [];

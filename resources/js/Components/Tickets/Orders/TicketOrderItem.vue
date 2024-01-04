@@ -74,7 +74,7 @@ defineProps<Props>();
 
             <template v-for="tag in item.attributes.item.tags" :key="tag">
                 <div
-                    class="flex items-center justify-between text-xs uppercase"
+                    class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 uppercase"
                 >
                     <InformationCircleIcon
                         :class="`h-6 w-5 flex-none text-${$page.props.team.color}-600`"
