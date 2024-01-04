@@ -38,7 +38,7 @@
                             }}</span>
                             <span class="ml-2 text-slate-300 font-extrabold"
                                 >({{ $page.props.team.currency.code }}
-                                {{ cart.total }})
+                                {{ cart?.total }})
                             </span>
                         </div>
                     </button>
@@ -153,8 +153,13 @@
                     >
                         <dl class="mx-auto max-w-lg space-y-6">
                             <template
-                                v-for="item in cart?.items"
-                                :key="item.id"
+                                v-for="{
+                                    id,
+                                    quantity,
+                                    name,
+                                    price_sum,
+                                } in cart.items"
+                                :key="id"
                             >
                                 <div
                                     class="flex items-center justify-between uppercase"
@@ -162,11 +167,11 @@
                                     <dt
                                         class="text-slate-500 dark:text-slate-400"
                                     >
-                                        {{ item.quantity }} * {{ item.name }}
+                                        {{ quantity }} * {{ name }}
                                     </dt>
                                     <dd>
                                         {{ $page.props.team.currency.symbol }}
-                                        {{ item.price_sum }}
+                                        {{ price_sum }}
                                     </dd>
                                 </div>
                             </template>
