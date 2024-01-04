@@ -70,7 +70,11 @@ useMotion(itemRef, {
                 role="list"
                 class="mt-10 space-y-4 text-sm leading-6 text-gray-600"
             >
-                <li v-for="tag in item.tags" :key="tag" class="flex gap-x-3">
+                <li
+                    v-for="tag in item.tags"
+                    :key="tag"
+                    class="flex gap-x-3 uppercase"
+                >
                     <svg
                         :class="`h-6 w-5 flex-none text-${$page.props.team.color}-600`"
                         viewBox="0 0 20 20"
@@ -84,6 +88,18 @@ useMotion(itemRef, {
                         />
                     </svg>
                     {{ tag }}
+                </li>
+                <li
+                    v-for="product in item.products"
+                    :key="product.id"
+                    class="flex gap-x-3 uppercase"
+                >
+                    <img
+                        class="inline-block h-6 w-6 rounded-full flex-none"
+                        :src="product.avatar"
+                        :alt="product.name"
+                    />
+                    {{ product.name }}
                 </li>
             </ul>
         </div>

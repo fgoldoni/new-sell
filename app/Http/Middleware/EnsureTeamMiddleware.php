@@ -112,7 +112,7 @@ class EnsureTeamMiddleware
     public static function getSubDomain(): ?string
     {
         if (str_contains(url('/'), 'localhost') || str_contains(url('/'), '://sell-first.com')) {
-            return "demo";
+            return "lebalafon";
         }
 
         preg_match('/(?:http[s]*\:\/\/)*(.*?)\.(?=[^\/]*\..{2,5})/i', url('/'), $match);
