@@ -149,7 +149,7 @@ const wizard = useWizardStore();
 const cartsStore = useCartsStore();
 const { payload } = storeToRefs(cartsStore);
 
-const props = defineProps({
+defineProps({
     bgColor: {
         type: String,
         default: "bg-slate-50 dark:bg-slate-800",
