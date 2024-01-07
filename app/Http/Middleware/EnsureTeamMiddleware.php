@@ -40,8 +40,6 @@ class EnsureTeamMiddleware
     public function handle(Request $request, Closure $next)
     {
         try {
-            Cache::flush();
-
             if ($subDomain = self::getSubDomain()) {
                 $team = Cache::remember(static::getCacheKey($subDomain), now()->addDay(), function () use ($subDomain, $request) {
                     $location = self::location($request);
