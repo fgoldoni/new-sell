@@ -27,6 +27,7 @@ Route::get('faqs', [\App\Http\Controllers\FaqsController::class, 'index'])->name
 Route::get('contacts', [\App\Http\Controllers\ContactsController::class, 'index'])->name('contacts.index');
 Route::get('orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders.index');
 Route::get('orders/cancel', [\App\Http\Controllers\OrdersController::class, 'cancel'])->name('orders.cancel');
+Route::get('orders/transfer', [\App\Http\Controllers\OrdersController::class, 'transfer'])->name('orders.transfer');
 Route::get('orders/{id}', [\App\Http\Controllers\OrdersController::class, 'show'])->name('orders.show');
 Route::get('orders/success/{id}', [\App\Http\Controllers\OrdersController::class, 'success'])->name('orders.success');
 Route::get('orders/card/{id}', [\App\Http\Controllers\OrdersController::class, 'card'])->name('orders.card');

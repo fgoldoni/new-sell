@@ -39,6 +39,7 @@ class EnsureTeamMiddleware
 
     public function handle(Request $request, Closure $next)
     {
+        Cache::flush();
         try {
             if ($subDomain = self::getSubDomain()) {
                 $team = Cache::remember(static::getCacheKey($subDomain), now()->addDay(), function () use ($subDomain, $request) {
@@ -110,7 +111,7 @@ class EnsureTeamMiddleware
     public static function getSubDomain(): ?string
     {
         if (str_contains(url('/'), 'localhost') || str_contains(url('/'), '://sell-first.com')) {
-            return "lebalafon";
+            return "demo";
         }
 
         preg_match('/(?:http[s]*\:\/\/)*(.*?)\.(?=[^\/]*\..{2,5})/i', url('/'), $match);

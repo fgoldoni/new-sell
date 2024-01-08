@@ -57,6 +57,12 @@ export interface Cart {
     cart_total_conditions: any;
 }
 
+export interface Paiement {
+    id: string;
+    title: string;
+    image: string[];
+}
+
 export interface Brand {
     id: string;
     name: string;

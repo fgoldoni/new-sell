@@ -24,7 +24,7 @@
                             <RadioGroupLabel
                                 as="span"
                                 class="block text-md font-medium text-slate-500 dark:text-slate-400"
-                                >{{ paiement.title }}</RadioGroupLabel
+                                >{{ __(paiement.title) }}</RadioGroupLabel
                             >
                             <RadioGroupDescription
                                 as="div"

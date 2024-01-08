@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ComputedRef, ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
-import { Cart, CartItem, CartPayload } from "@/types/carts";
+import { Cart, CartItem, CartPayload, Paiement } from "@/types/carts";
 import { Ticket } from "@/models/Ticket";
 import { find } from "lodash";
 import { usePage } from "@inertiajs/vue3";
@@ -16,8 +16,8 @@ export const useCartsStore = defineStore(
 
         const item = ref<Ticket | {}>({});
         const processing = ref<boolean>(false);
-        const paiements = computed(() => {
-            let data = [];
+        const paiements: ComputedRef<Paiement[]> = computed(() => {
+            let data: Paiement[] = [];
 
             if (usePage().props.team.stripe) {
                 data.push({
@@ -55,6 +55,14 @@ export const useCartsStore = defineStore(
                         "/images/payments/cm.orange.png",
                         "/images/payments/cm.mtn.png",
                     ],
+                });
+            }
+
+            if (usePage().props.team.transfer) {
+                data.push({
+                    id: "transfer",
+                    title: "Transfer",
+                    images: ["/images/payments/card.svg"],
                 });
             }
 

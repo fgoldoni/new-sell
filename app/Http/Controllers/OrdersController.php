@@ -112,6 +112,23 @@ class OrdersController extends Controller
         return Inertia::render('Welcome', ['id' => $id]);
     }
 
+    public function transfer(Request $request): Response
+    {
+        Inertia::modal([
+            'module' => 'Orders',
+            'component' => 'Transfer',
+        ]);
+
+        Inertia::basePageRoute(
+            route(
+                'home',
+                $request->all()
+            )
+        );
+
+        return Inertia::render('Welcome');
+    }
+
     public function notchPay(OrderRequest $request, string $id): Response
     {
         Inertia::modal([

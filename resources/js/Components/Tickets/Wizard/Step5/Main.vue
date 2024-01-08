@@ -197,6 +197,9 @@ const submitAction = () => {
         case "terminal":
             payment.onStripeTerminal(cart.value);
             break;
+        case "transfer":
+            payment.onTransfer(cart.value);
+            break;
         default:
             console.log(`Sorry, we are out of ${form.payment}.`);
     }

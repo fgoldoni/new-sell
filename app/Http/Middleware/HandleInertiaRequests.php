@@ -41,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'klarna' => !is_null($team->klarna) ? base64_decode($team->klarna->klarna_secret) : null,
                 'terminal' => !is_null($team->terminal) ? base64_decode($team->terminal->terminal_secret) : null,
                 'notch_pay' => !is_null($team->notchPay) ? base64_decode($team->notchPay->notch_pay_id) : null,
-                'transfer' => !is_null($team->transfer),
+                'transfer' => !is_null($team->transfer) ? $team->transfer : null,
                 'domains' => array_filter($team->domains, fn($d) => $d->locale != app()->getLocale()),
             ],
             'cart' =>  [

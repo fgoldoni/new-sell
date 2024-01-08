@@ -6,6 +6,7 @@ import { useStripeTerminalStore } from "@/stores/useStripeTerminalStore";
 import { storeToRefs } from "pinia";
 import { Errors } from "@/plugins/errors";
 import ApiError from "@/models/ApiError";
+import { router } from "@inertiajs/vue3";
 
 const enum Mode {
     CARD = "card",
@@ -94,11 +95,25 @@ export const usePayment = () => {
         }
     };
 
+    const onTransfer = async (cart: Cart) => {
+        try {
+            if (!isAuthenticated.value) return;
+
+            return router.get(route("orders.transfer"), {}, { replace: true });
+        } catch (error) {
+            errors.onFailed(error);
+            console.error(error);
+            throw new ApiError(error);
+        } finally {
+        }
+    };
+
     return {
         onStripe,
         onSofort,
         onKlarna,
         onNotchPay,
         onStripeTerminal,
+        onTransfer,
     };
 };
