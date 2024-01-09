@@ -37,9 +37,23 @@
                     <div>
                         <div class="flex items-center">
                             <h3
-                                class="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl"
+                                class="flex items-center space-x-4 text-xl font-bold text-slate-900 dark:text-white sm:text-2xl"
                             >
-                                {{ order?.team.currency + " " + order.total }}
+                                <span>{{
+                                    order?.team.currency + " " + order.total
+                                }}</span>
+                                <span
+                                    v-if="order?.status === 'pending'"
+                                    class="uppercase rounded-md bg-rose-50 px-2 py-1 text-xs font-medium text-rose-600 ring-1 ring-inset ring-rose-600/20"
+                                >
+                                    {{ __(order.status) }}
+                                </span>
+                                <span
+                                    v-else
+                                    class="uppercase rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20"
+                                >
+                                    {{ __(order.status) }}
+                                </span>
                             </h3>
                         </div>
                         <p class="text-sm text-gray-500">
