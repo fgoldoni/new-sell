@@ -15,10 +15,10 @@
                 <li
                     v-for="dj in djs"
                     :key="dj.name"
-                    class="rounded-2xl bg-slate-800 dark:bg-slate-900 px-8 py-10"
+                    class="cursor-pointer rounded-2xl bg-slate-800 dark:bg-slate-900 px-8 py-10"
                 >
                     <img
-                        class="mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
+                        class="btn-base mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
                         :src="dj.avatar_url"
                         :alt="dj.name"
                     />

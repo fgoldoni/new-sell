@@ -8,31 +8,31 @@ const { sponsors } = storeToRefs(brandsStore);
 </script>
 
 <template>
-    <!-- Section 1 -->
-    <section class="w-full py-16 lg:py-24" v-if="sponsors.length">
-        <div class="px-4 mx-auto text-center max-w-7xl">
-            <div class="space-y-12">
-                <div
-                    class="mb-20 space-y-5 sm:mx-auto sm:max-w-xl md:max-w-2xl sm:space-y-4 lg:max-w-5xl"
+    <div class="py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto max-w-2xl lg:mx-0">
+                <h2
+                    class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl"
                 >
-                    <h2
-                        class="relative text-2xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-3xl uppercase"
-                    >
-                        {{ __("labels.partners") }}
-                    </h2>
-                </div>
-                <div class="mx-auto grid grid-cols-2 gap-16">
-                    <PartnerComponent
-                        v-for="(item, index) in sponsors"
-                        :key="item.id"
-                        :index="index"
-                        :item="item"
-                    >
-                    </PartnerComponent>
-                </div>
+                    {{ __("labels.partners") }}
+                </h2>
+                <p
+                    class="mt-6 text-lg leading-8 text-slate-500 dark:text-slate-400"
+                >
+                    {{ __("Associate your image with this event") }}
+                </p>
             </div>
+            <ul
+                role="list"
+                class="cursor-pointer mx-auto mt-20 grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
+            >
+                <template
+                    v-for="(sponsor, index) in sponsors"
+                    :key="sponsor.name"
+                >
+                    <PartnerComponent :item="sponsor" :index="index" />
+                </template>
+            </ul>
         </div>
-    </section>
+    </div>
 </template>
-
-<style scoped></style>
