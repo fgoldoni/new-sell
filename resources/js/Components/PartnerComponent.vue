@@ -14,13 +14,13 @@ const itemRef = ref<HTMLElement>();
 useMotion(itemRef, {
     initial: {
         opacity: 0,
-        y: 100,
+        scale: 0,
     },
     visibleOnce: {
         opacity: 1,
-        y: 0,
+        scale: 1,
         transition: {
-            delay: 100 * props.index,
+            delay: 500 * props.index,
             duration: 500,
         },
     },

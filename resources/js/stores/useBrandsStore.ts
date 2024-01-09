@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { computed, ComputedRef, ref } from "vue";
 import { useApi } from "@/composable/useApi";
 import ApiError from "@/models/ApiError";
 import { filter } from "lodash";
@@ -14,6 +14,10 @@ export const useBrandsStore = defineStore(
 
         const podiums = computed(() =>
             filter(brands.value, (s) => s.type === "podium"),
+        );
+
+        const mcs: ComputedRef<Brand[]> = computed(() =>
+            filter(brands.value, (b: Brand) => b.type === "mc"),
         );
 
         const sponsors = computed(() =>
@@ -46,7 +50,7 @@ export const useBrandsStore = defineStore(
             }
         };
 
-        return { brands, get, sponsors, blogs, artists };
+        return { brands, get, sponsors, blogs, artists, djs, mcs };
     },
     {
         persist: true,

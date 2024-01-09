@@ -37,13 +37,13 @@
                         >
                             <p
                                 v-if="order?.status === 'pending'"
-                                class="uppercase rounded-md bg-rose-50 px-2 py-1 text-xs font-medium text-rose-600 ring-1 ring-inset ring-rose-600/20"
+                                class="inline-block uppercase rounded-md bg-rose-50 px-2 py-1 text-xs font-medium text-rose-600 ring-1 ring-inset ring-rose-600/20"
                             >
                                 {{ __(order.status) }}
                             </p>
                             <p
                                 v-else
-                                class="uppercase rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20"
+                                class="inline-block uppercase rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20"
                             >
                                 {{ __(order.status) }}
                             </p>

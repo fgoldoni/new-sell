@@ -46,11 +46,12 @@
             </div>
             <HeroFeatureComponent></HeroFeatureComponent>
             <EntriesComponent></EntriesComponent>
+            <DjsComponent></DjsComponent>
             <PackagesComponent></PackagesComponent>
             <PartnersComponent></PartnersComponent>
             <ContentComponent></ContentComponent>
-            <GuestComponent></GuestComponent>
-            <MapComponent v-if="$page.props.team.event.iframe">></MapComponent>
+            <McsComponent></McsComponent>
+            <MapComponent v-if="$page.props.team.event.iframe"></MapComponent>
             <FooterComponent></FooterComponent>
         </div>
     </div>
@@ -66,9 +67,10 @@ import PackagesComponent from "@/Components/PackagesComponent.vue";
 import PartnersComponent from "@/Components/PartnersComponent.vue";
 import FooterComponent from "@/Components/FooterComponent.vue";
 import ContentComponent from "@/Components/ContentComponent.vue";
-import GuestComponent from "@/Components/GuestComponent.vue";
 import { PhoneArrowUpRightIcon } from "@heroicons/vue/20/solid";
 import MapComponent from "@/Components/MapComponent.vue";
+import DjsComponent from "@/Components/DjsComponent.vue";
+import McsComponent from "@/Components/McsComponent.vue";
 
 onMounted(async () => {});
 </script>
