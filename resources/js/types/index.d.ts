@@ -19,11 +19,12 @@ export interface Order {
     cart_sub_total_conditions: any;
     cart_total_conditions: any;
     download_url: any;
-    status: any;
+    status: string;
     event: any;
     team: any;
     user: User;
     qr_code: string;
+    created_at: string;
 }
 
 export interface Country {

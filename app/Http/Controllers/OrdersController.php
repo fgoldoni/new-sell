@@ -55,7 +55,7 @@ class OrdersController extends Controller
 
         Inertia::basePageRoute(
             route(
-                'home',
+                'orders.index',
                 $request->all()
             )
         );

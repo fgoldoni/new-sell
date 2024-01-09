@@ -18,7 +18,15 @@
                         <div
                             class="inline-flex overflow-hidden rounded-lg border-4 border-white"
                         >
+                            <div v-if="order?.status === 'pending'">
+                                <img
+                                    class="h-24 w-24 flex-shrink-0 sm:h-40 sm:w-40 lg:h-48 lg:w-48"
+                                    src="https://ui-avatars.com/api/?name=No&color=7F9CF5&background=EBF4FF"
+                                    :alt="order?.status"
+                                />
+                            </div>
                             <div
+                                v-else
                                 class="h-24 w-24 flex-shrink-0 sm:h-40 sm:w-40 lg:h-48 lg:w-48"
                                 v-html="order.qr_code"
                             ></div>
@@ -31,7 +39,7 @@
                             <h3
                                 class="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl"
                             >
-                                {{ order.team.currency + " " + order.total }}
+                                {{ order?.team.currency + " " + order.total }}
                             </h3>
                         </div>
                         <p class="text-sm text-gray-500">
@@ -120,12 +128,77 @@
                         }}
                     </dt>
                     <dd
-                        class="mt-4 text-sm text-slate-500 dark:text-slate-400 sm:col-span-2"
+                        :class="[
+                            order?.status === 'pending'
+                                ? 'text-rose-500'
+                                : 'text-slate-500 dark:text-slate-400',
+                            'mt-4 text-sm sm:col-span-2',
+                        ]"
                     >
-                        <p>
+                        <p v-if="order?.status === 'pending'">
+                            {{
+                                __("wizard.step_6.pending_description", {
+                                    total:
+                                        order?.team.currency +
+                                        " " +
+                                        order?.total,
+                                    date: format(
+                                        addDays(
+                                            parseISO(order?.created_at),
+                                            $page.props?.team.transfer.until,
+                                        ),
+                                        "dd MMM yyyy",
+                                        { locale: locale() },
+                                    ),
+                                })
+                            }}
+                        </p>
+                        <p v-else>
                             {{ __("wizard.step_6.description") }}
                         </p>
                     </dd>
+                    <dl
+                        v-if="order?.status === 'pending'"
+                        class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2"
+                    >
+                        <div
+                            class="uppercase mt-6 border-t border-gray-900/5 pt-6 sm:pr-4"
+                        >
+                            <dt
+                                class="font-semibold text-gray-900"
+                                v-text="$page.props.team.transfer.bank_name"
+                            ></dt>
+                            <dd class="mt-2 text-gray-500">
+                                <span
+                                    class="font-medium text-gray-900"
+                                    v-text="$page.props.team.transfer.name"
+                                />
+                                <br />
+                                {{ $page.props.team.transfer.iban }}
+                                <br />
+                                {{ $page.props.team.transfer.bic }}
+                                <br />
+                                {{ order.team.currency }} {{ order.total }}
+                                <br />
+                                Reason: {{ order?.id }} -
+                                {{ order.user.name }}
+                            </dd>
+                        </div>
+                        <div
+                            class="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6"
+                            v-if="$page.props.team.transfer.paypal"
+                        >
+                            <dt class="font-semibold text-gray-900">PAYPAL</dt>
+                            <dd class="mt-2 text-gray-500">
+                                <span
+                                    class="lowercase font-medium text-gray-900"
+                                    >{{
+                                        $page.props.team.transfer.paypal
+                                    }}</span
+                                >
+                            </dd>
+                        </div>
+                    </dl>
                 </div>
                 <div class="grid grid-cols-1 w-full">
                     <div class="col-span-1">
@@ -192,7 +265,19 @@ import { useOrdersStore } from "@/stores/useOrdersStore";
 import { storeToRefs } from "pinia";
 import TicketOrderItem from "@/Components/Tickets/Orders/TicketOrderItem.vue";
 import ProductOrderItem from "@/Components/Tickets/Orders/ProductOrderItem.vue";
+import parseISO from "date-fns/parseISO";
+import format from "date-fns/format";
+import addDays from "date-fns/addDays";
+import { de, enUS, fr } from "date-fns/locale";
+import { usePage } from "@inertiajs/vue3";
 
 const ordersStore = useOrdersStore();
 const { order } = storeToRefs(ordersStore);
+
+const locale = () =>
+    usePage().props.team.locale === "fr"
+        ? fr
+        : usePage().props.team.locale === "de"
+          ? de
+          : enUS;
 </script>

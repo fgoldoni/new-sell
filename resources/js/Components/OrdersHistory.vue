@@ -36,7 +36,14 @@
                             class="space-y-5 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 md:min-w-0 md:flex-1"
                         >
                             <p
-                                class="text-sm font-medium text-slate-500 dark:text-slate-400"
+                                v-if="order?.status === 'pending'"
+                                class="uppercase rounded-md bg-rose-50 px-2 py-1 text-xs font-medium text-rose-600 ring-1 ring-inset ring-rose-600/20"
+                            >
+                                {{ __(order.status) }}
+                            </p>
+                            <p
+                                v-else
+                                class="uppercase rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20"
                             >
                                 {{ __(order.status) }}
                             </p>
@@ -52,6 +59,7 @@
                                     class="ml-4 border-l border-slate-300 dark:border-slate-600 pl-4 sm:ml-6 sm:pl-6"
                                 >
                                     <a
+                                        v-if="order?.status !== 'pending'"
                                         :href="order.download_url"
                                         target="_blank"
                                         download
