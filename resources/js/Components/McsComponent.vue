@@ -1,5 +1,5 @@
 <template>
-    <div class="dark:bg-slate-900 bg-white py-24 sm:py-32" v-if="mcs.length">
+    <div class="py-24 sm:py-32" v-if="mcs.length">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl lg:mx-0">
                 <h2
