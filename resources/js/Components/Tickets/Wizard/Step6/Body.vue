@@ -176,10 +176,10 @@
                         class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2"
                     >
                         <div
-                            class="uppercase mt-6 border-t border-gray-900/5 pt-6 sm:pr-4"
+                            class="uppercase mt-6 border-t border-gray-900/5 dark:border-slate-700 pt-6 sm:pr-4"
                         >
                             <dt
-                                class="font-semibold text-slate-900 dark:text-white0"
+                                class="font-semibold text-slate-900 dark:text-white"
                                 v-text="$page.props.team.transfer.bank_name"
                             ></dt>
                             <dd class="mt-2 text-slate-500 dark:text-slate-400">
@@ -199,13 +199,17 @@
                             </dd>
                         </div>
                         <div
-                            class="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 sm:pl-4 sm:pt-6"
+                            class="mt-8 sm:mt-6 sm:border-t sm:border-gray-900/5 dark:border-slate-700 sm:pl-4 sm:pt-6"
                             v-if="$page.props.team.transfer.paypal"
                         >
-                            <dt class="font-semibold text-gray-900">PAYPAL</dt>
+                            <dt
+                                class="font-semibold text-slate-900 dark:text-white"
+                            >
+                                PAYPAL
+                            </dt>
                             <dd class="mt-2 text-gray-500">
                                 <span
-                                    class="lowercase font-medium text-gray-900"
+                                    class="lowercase font-medium text-slate-900 dark:text-white"
                                     >{{
                                         $page.props.team.transfer.paypal
                                     }}</span
