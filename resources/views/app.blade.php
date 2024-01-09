@@ -9,6 +9,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet"/>
 
     {!! SEO::generate(true) !!}
+    
     @if(str_contains(request()->getHost(), 'sell-first.com'))
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJL7N46CXH"></script>
         <script>

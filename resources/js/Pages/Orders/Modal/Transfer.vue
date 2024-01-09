@@ -35,7 +35,7 @@ onMounted(async () => {
                 usePage().props.team.currency.code,
                 String(cart.value?.total),
                 "transfer",
-                "completed",
+                "pending",
             );
 
             wizard.reset();
