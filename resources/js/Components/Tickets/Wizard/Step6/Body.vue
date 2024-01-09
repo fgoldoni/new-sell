@@ -179,12 +179,12 @@
                             class="uppercase mt-6 border-t border-gray-900/5 pt-6 sm:pr-4"
                         >
                             <dt
-                                class="font-semibold text-gray-900"
+                                class="font-semibold text-slate-900 dark:text-white0"
                                 v-text="$page.props.team.transfer.bank_name"
                             ></dt>
-                            <dd class="mt-2 text-gray-500">
+                            <dd class="mt-2 text-slate-500 dark:text-slate-400">
                                 <span
-                                    class="font-medium text-gray-900"
+                                    class="font-medium text-slate-900 dark:text-white"
                                     v-text="$page.props.team.transfer.name"
                                 />
                                 <br />
