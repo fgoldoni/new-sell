@@ -159,7 +159,8 @@
                                     date: format(
                                         addDays(
                                             parseISO(order?.created_at),
-                                            $page.props?.team.transfer.until,
+                                            $page.props?.team.transfer?.until ||
+                                                5,
                                         ),
                                         "dd MMM yyyy",
                                         { locale: locale() },
@@ -172,7 +173,10 @@
                         </p>
                     </dd>
                     <dl
-                        v-if="order?.status === 'pending'"
+                        v-if="
+                            order?.status === 'pending' &&
+                            $page.props?.team.transfer
+                        "
                         class="mt-6 grid grid-cols-1 text-sm leading-6 sm:grid-cols-2"
                     >
                         <div
