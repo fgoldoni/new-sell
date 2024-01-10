@@ -1,21 +1,6 @@
 <script setup lang="ts">
 const teams = [
     {
-        id: 1,
-        name: "Tickets",
-        href: "tickets.index",
-        initial: "T",
-        current: false,
-    },
-    { id: 3, name: "FAQ", href: "faqs.index", initial: "F", current: false },
-    {
-        id: 4,
-        name: "Kontakt",
-        href: "contacts.index",
-        initial: "K",
-        current: false,
-    },
-    {
         id: 5,
         name: "Terms",
         href: "pages.terms",
