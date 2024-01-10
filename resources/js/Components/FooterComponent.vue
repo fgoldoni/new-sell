@@ -15,6 +15,27 @@ const teams = [
         initial: "K",
         current: false,
     },
+    {
+        id: 5,
+        name: "Terms",
+        href: "pages.terms",
+        initial: "K",
+        current: false,
+    },
+    {
+        id: 6,
+        name: "Protection",
+        href: "pages.protection",
+        initial: "K",
+        current: false,
+    },
+    {
+        id: 6,
+        name: "Impressum",
+        href: "pages.impressum",
+        initial: "K",
+        current: false,
+    },
 ];
 </script>
 

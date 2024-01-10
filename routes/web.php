@@ -37,5 +37,9 @@ Route::post('stripe/terminal/connection', [\App\Http\Controllers\StripeTerminalC
 Route::get('products', [\App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
 Route::get('hash/{hash}', [\App\Http\Controllers\HashController::class, 'index'])->name('hash.index');
 Route::get('login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
+Route::get('/terms', [\App\Http\Controllers\PagesController::class, 'terms'])->name('pages.terms');
+Route::get('/protection', [\App\Http\Controllers\PagesController::class, 'protection'])->name('pages.protection');
+Route::get('/impressum', [\App\Http\Controllers\PagesController::class, 'impressum'])->name('pages.impressum');
+
 
 
