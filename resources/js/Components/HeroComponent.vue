@@ -46,6 +46,7 @@
             </div>
             <HeroFeatureComponent></HeroFeatureComponent>
             <EntriesComponent></EntriesComponent>
+            <TeamComponent></TeamComponent>
             <DjsComponent></DjsComponent>
             <PackagesComponent></PackagesComponent>
             <PartnersComponent></PartnersComponent>
@@ -71,6 +72,7 @@ import { PhoneArrowUpRightIcon } from "@heroicons/vue/20/solid";
 import MapComponent from "@/Components/MapComponent.vue";
 import DjsComponent from "@/Components/DjsComponent.vue";
 import McsComponent from "@/Components/McsComponent.vue";
+import TeamComponent from "@/Components/TeamComponent.vue";
 
 onMounted(async () => {});
 </script>

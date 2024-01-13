@@ -15,7 +15,7 @@
                 <li
                     v-for="dj in djs"
                     :key="dj.name"
-                    class="cursor-pointer rounded-2xl bg-slate-800 dark:bg-slate-900 px-8 py-10"
+                    class="cursor-pointer rounded-2xl bg-white dark:bg-slate-900 px-8 py-10"
                 >
                     <img
                         class="btn-base mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
@@ -23,11 +23,13 @@
                         :alt="dj.name"
                     />
                     <h3
-                        class="mt-6 text-base font-semibold leading-7 tracking-tight text-white"
+                        class="mt-6 text-base font-semibold leading-7 tracking-tight text-slate-900 dark:text-white"
                     >
                         {{ dj.name }}
                     </h3>
-                    <p class="text-sm leading-6 text-gray-400">
+                    <p
+                        class="text-sm leading-6 text-slate-500 dark:text-slate-400"
+                    >
                         {{ dj.title }}
                     </p>
                     <ul role="list" class="mt-6 flex justify-center gap-x-6">

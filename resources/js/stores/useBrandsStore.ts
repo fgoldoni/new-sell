@@ -40,6 +40,10 @@ export const useBrandsStore = defineStore(
             filter(brands.value, (b: Brand) => b.type === "dj"),
         );
 
+        const teams: ComputedRef<Brand[]> = computed(() =>
+            filter(brands.value, (b: Brand) => b.type === "team"),
+        );
+
         const get = async () => {
             try {
                 await api.brands
@@ -55,7 +59,7 @@ export const useBrandsStore = defineStore(
             }
         };
 
-        return { brands, get, sponsors, blogs, artists, djs, mcs };
+        return { brands, get, sponsors, blogs, artists, djs, mcs, teams };
     },
     {
         persist: true,
