@@ -17,11 +17,17 @@
         <div
             class="relative px-16 mx-auto max-w-7xl text-slate-500 dark:text-slate-400"
         >
-            <p class="mb-10 font-medium tracking-wide uppercase">
-                {{ __("labels.our_team") }}
-            </p>
             <div
-                class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-10 lg:grid-cols-3"
+                class="mb-20 space-y-5 sm:mx-auto sm:max-w-xl md:max-w-2xl sm:space-y-4 lg:max-w-5xl"
+            >
+                <h2
+                    class="relative text-4xl font-extrabold tracking-tight sm:text-5xl text-slate-900 dark:text-white"
+                >
+                    {{ __("labels.our_team") }}
+                </h2>
+            </div>
+            <div
+                class="grid w-full grid-cols-1 gap-4 sm:gap-10 sm:grid-cols-2 lg:grid-cols-3"
             >
                 <div
                     v-for="team in teams"
@@ -30,7 +36,7 @@
                 >
                     <div class="relative p-5">
                         <div
-                            :class="`absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-${$page.props.team.color}-50`"
+                            :class="`absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-${$page.props.team.color}-500`"
                         ></div>
                         <img
                             class="relative z-20 btn-base mx-auto h-48 w-48 rounded-full md:h-56 md:w-56"
@@ -39,7 +45,9 @@
                         />
                     </div>
                     <div class="mt-3 space-y-2 text-center">
-                        <div class="space-y-1 text-lg font-medium leading-6">
+                        <div
+                            class="uppercase space-y-1 text-lg font-medium leading-6"
+                        >
                             <h3>{{ team.name }}</h3>
                             <p :class="`text-${$page.props.team.color}-600`">
                                 {{ team.title }}
