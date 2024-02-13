@@ -17,7 +17,7 @@ class Translations extends Component
         //
     }
 
-    
+
     public function render(): \Illuminate\Contracts\View\View|\Closure|string
     {
         $locale = App::getLocale();
@@ -45,7 +45,7 @@ class Translations extends Component
             }
 
             if ($db['data']) {
-                $dbTranslations = collect($db['data'])->flatMap(fn ($line) => Arr::dot($line))->toArray();
+                $dbTranslations = $db['data'];
             }
 
             return array_merge($phpTranslations, $jsonTranslations, $dbTranslations);
