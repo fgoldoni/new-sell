@@ -73,7 +73,7 @@ useMotion(itemRef, {
                 <li
                     v-for="tag in item.tags"
                     :key="tag"
-                    class="flex gap-x-3 uppercase"
+                    class="flex gap-x-3 justify-between  uppercase"
                 >
                     <svg
                         :class="`h-6 w-5 flex-none text-${$page.props.team.color}-600`"
@@ -87,19 +87,20 @@ useMotion(itemRef, {
                             clip-rule="evenodd"
                         />
                     </svg>
-                    {{ tag }}
+                    <span>{{ tag }}</span>
                 </li>
                 <li
                     v-for="product in item.products"
                     :key="product.id"
-                    class="flex gap-x-3 uppercase"
+                    class="flex justify-between gap-x-3 uppercase"
                 >
-                    <img
-                        class="inline-block h-6 w-6 rounded-full flex-none"
-                        :src="product.avatar"
-                        :alt="product.name"
-                    />
-                    {{ product.name }}
+                    <div class="flex -space-x-1 overflow-hidden">
+                        <img v-for="i in product.quantity" :key="i" class="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                             :src="product.avatar"
+                             :alt="product.name"
+                        />
+                    </div>
+                    <span> {{ product.quantity }} * {{ product.name }}</span>
                 </li>
             </ul>
         </div>
