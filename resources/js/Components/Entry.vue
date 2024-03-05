@@ -94,8 +94,8 @@ useMotion(itemRef, {
                     :key="product.id"
                     class="flex justify-between gap-x-3 uppercase"
                 >
-                    <div class="flex -space-x-1 overflow-hidden">
-                        <img v-for="i in product.quantity" :key="i" class="inline-block h-6 w-6 rounded-full ring-2 ring-white"
+                    <div class="flex -space-x-1">
+                        <img v-for="i in product.quantity" :key="i" class="inline-block h-6 w-6 rounded-full ring-2 ring-slate-200 dark:ring-slate-700"
                              :src="product.avatar"
                              :alt="product.name"
                         />
