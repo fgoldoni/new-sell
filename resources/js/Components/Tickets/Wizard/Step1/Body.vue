@@ -4,6 +4,7 @@ import ReservationComponent from "@/Components/Tickets/Wizard/Step1/ReservationC
 import Quantity from "@/Components/Quantity.vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
+import {usePage} from "@inertiajs/vue3";
 
 const cartsStore = useCartsStore();
 const { updatePayload, updateQuantity } = cartsStore;
@@ -39,7 +40,7 @@ const options = [
             </div>
         </div>
 
-        <div class="col-span-3"  v-if="item.reservation">
+        <div class="col-span-3"  v-if="item.reservation && $page.props.team.transfer">
             <div class="flex flex-col items-center justify-center space-y-2">
                 <div class="mx-auto">
                     <ReservationComponent
