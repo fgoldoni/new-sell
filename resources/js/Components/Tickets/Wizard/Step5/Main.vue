@@ -163,7 +163,6 @@ const { item, cart, paiements } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
 const { isAuthenticated } = storeToRefs(authStore);
 const paypalStore = usePaypalStore();
-
 const payment = usePayment();
 
 const emit = defineEmits<{

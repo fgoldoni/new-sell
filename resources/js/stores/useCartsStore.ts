@@ -82,6 +82,7 @@ export const useCartsStore = defineStore(
             model: "",
             quantity: 1,
             message: "",
+            reservation: false,
             entry: "",
             reset: false,
         });
@@ -95,6 +96,7 @@ export const useCartsStore = defineStore(
                 message: "",
                 entry: "",
                 reset: false,
+                reservation: false,
             };
             await handle();
         };

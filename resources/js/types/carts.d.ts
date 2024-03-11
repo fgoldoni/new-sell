@@ -6,6 +6,7 @@ export interface CartPayload {
     product_id?: string;
     quantity?: number;
     reset?: boolean;
+    reservation?: boolean;
 }
 
 export interface CartAttributes {

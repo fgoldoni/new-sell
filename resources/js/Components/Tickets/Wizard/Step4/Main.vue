@@ -238,17 +238,21 @@ import ApiError from "@/models/ApiError";
 import Comboboxes from "@/Components/Comboboxes.vue";
 import { useCountriesStore } from "@/stores/useCountriesStore";
 import InputError from "@/Components/InputError.vue";
+import {useOrdersStore} from "@/stores/useOrdersStore";
+import {usePayment} from "@/composable/usePayment";
 
 const itemRef = ref<HTMLElement>();
 const processing = ref<boolean>(false);
 const submitRef = ref<HTMLElement>();
 const wizard = useWizardStore();
 const cartsStore = useCartsStore();
-const { item } = storeToRefs(cartsStore);
+const { cart, item } = storeToRefs(cartsStore);
 const authStore = useAuthStore();
 const { isAuthenticated, user } = storeToRefs(authStore);
 const countriesStore = useCountriesStore();
 const { countries } = storeToRefs(countriesStore);
+const ordersStore = useOrdersStore();
+const payment = usePayment();
 
 const emit = defineEmits<{
     close: [value: boolean];
@@ -287,7 +291,13 @@ const submit = async () => {
             .then(async (response: any) => {
                 authStore.setToken(response.token);
                 authStore.setAuth(response.user);
-                await wizard.setComponent("Step5");
+
+                if (cart.value.properties?.reservation) {
+                    await payment.onTransfer(cart.value);
+                } else {
+                    await wizard.setComponent("Step5");
+                }
+
             })
             .catch((error: any) => {
                 form.errors.onFailed(error);
