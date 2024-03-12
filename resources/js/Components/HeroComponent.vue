@@ -47,11 +47,11 @@
             <HeroFeatureComponent></HeroFeatureComponent>
             <EntriesComponent></EntriesComponent>
             <TeamComponent></TeamComponent>
+            <McsComponent></McsComponent>
             <DjsComponent></DjsComponent>
             <PackagesComponent></PackagesComponent>
             <PartnersComponent></PartnersComponent>
             <ContentComponent></ContentComponent>
-            <McsComponent></McsComponent>
             <MapComponent v-if="$page.props.team.event.iframe"></MapComponent>
             <FooterComponent></FooterComponent>
         </div>
