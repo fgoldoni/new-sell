@@ -56,7 +56,7 @@ useMotion(itemRef, {
             </h3>
             <div class="mt-4 flex items-baseline gap-x-2">
                 <span
-                    class="text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
+                    class="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"
                 >
                     {{ $page.props.team.currency.code }}
                     {{ item.price }}
