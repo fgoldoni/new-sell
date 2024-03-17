@@ -40,18 +40,6 @@ const options = [
             </div>
         </div>
 
-        <div class="col-span-3"  v-if="item.reservation && $page.props.team.transfer">
-            <div class="flex flex-col items-center justify-center space-y-2">
-                <div class="mx-auto">
-                    <ReservationComponent
-                        :options="options"
-                        :model-value="payload?.reservation"
-                        :team="$page.props.team"
-                        @update:model-value="updatePayload"
-                    ></ReservationComponent>
-                </div>
-            </div>
-        </div>
 
         <div class="col-span-3" v-if="item?.entries">
             <Entries
