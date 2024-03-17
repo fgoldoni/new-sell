@@ -12,8 +12,9 @@
         class="mt-2"
     >
         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
-            <RadioGroupOption as="template" v-for="mailingList in options" :key="mailingList.id" :value="mailingList.id" v-slot="{ active, checked }">
+            <RadioGroupOption as="template" v-for="mailingList in options" :key="mailingList.name" :value="mailingList.name" :disabled="mailingList.disabled" v-slot="{ active, checked }">
                 <div :class="[
+                    mailingList.disabled ? 'cursor-not-allowed opacity-25' : 'cursor-pointer focus:outline-none',
                     active
                     ? `border-${team.color}-600 ring-2 ring-${team.color}-600`
                     : 'border-slate-400 dark:border-slate-600',
@@ -21,7 +22,7 @@
                      ]">
           <span class="flex flex-1">
             <span class="flex flex-col">
-              <RadioGroupLabel as="span" class="block text-sm font-medium uppercase">{{ __(mailingList.title) }}</RadioGroupLabel>
+              <RadioGroupLabel as="span" class="block text-sm font-medium uppercase">{{ __(mailingList.label) }}</RadioGroupLabel>
             </span>
           </span>
                     <CheckCircleIcon :class="[!checked ? 'invisible' : '', `h-5 w-5 text-${team.color}-600`]" aria-hidden="true" />

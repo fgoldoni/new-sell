@@ -292,7 +292,7 @@ const submit = async () => {
                 authStore.setToken(response.token);
                 authStore.setAuth(response.user);
 
-                if (cart.value.properties?.reservation && usePage().props.team.transfer) {
+                if ((cart.value.properties?.reservation === 'after') && usePage().props.team.transfer) {
                     await payment.onTransfer(cart.value);
                 } else {
                     await wizard.setComponent("Step5");

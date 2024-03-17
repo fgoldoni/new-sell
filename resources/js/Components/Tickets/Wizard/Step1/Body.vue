@@ -10,10 +10,6 @@ const cartsStore = useCartsStore();
 const { updatePayload, updateQuantity } = cartsStore;
 const { item, payload } = storeToRefs(cartsStore);
 
-const options = [
-    { id: false, title: 'wizard.step_1.reservation_yes' },
-    { id: true, title: 'wizard.step_1.reservation_no' },
-]
 </script>
 
 <template>
@@ -40,6 +36,18 @@ const options = [
             </div>
         </div>
 
+        <div class="col-span-3">
+            <div class="flex flex-col items-center justify-center space-y-2">
+                <div class="mx-auto">
+                    <ReservationComponent
+                        :options="item.reservation_options"
+                        :model-value="payload?.reservation"
+                        :team="$page.props.team"
+                        @update:model-value="updatePayload"
+                    ></ReservationComponent>
+                </div>
+            </div>
+        </div>
 
         <div class="col-span-3" v-if="item?.entries">
             <Entries

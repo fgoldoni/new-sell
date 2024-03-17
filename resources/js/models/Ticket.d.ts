@@ -9,6 +9,7 @@ export interface Ticket {
     description: string | null;
     tags: string[] | [];
     entries: string[] | [];
+    reservation_options: any;
     collections: Collection[] | [];
 }
 

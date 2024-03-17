@@ -185,7 +185,7 @@ const open = async (item: Ticket) => {
                     cartsStore.updatePayload("id", item.id);
                     cartsStore.updatePayload("quantity", 1);
                     cartsStore.updatePayload("entry", "");
-                    cartsStore.updatePayload("reservation", false);
+                    cartsStore.updatePayload("reservation", item.reservation_options[0]?.name);
                     reset.value = true;
                     cartsStore.updatePayload("model", response.data.model);
                     cartsStore.updatePayload("message", "");
