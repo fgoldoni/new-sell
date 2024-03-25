@@ -4,7 +4,6 @@ import ReservationComponent from "@/Components/Tickets/Wizard/Step1/ReservationC
 import Quantity from "@/Components/Quantity.vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
-import {usePage} from "@inertiajs/vue3";
 
 const cartsStore = useCartsStore();
 const { updatePayload, updateQuantity } = cartsStore;

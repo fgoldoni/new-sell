@@ -23,7 +23,7 @@ const limit = computed(() => {
 
 <template>
     <div
-        class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400"
+        class="uppercase flex items-center justify-between text-xs text-slate-500 dark:text-slate-400"
     >
         <div class="flex -space-x-1 overflow-hidden">
             <img
