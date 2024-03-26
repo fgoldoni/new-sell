@@ -43,19 +43,18 @@ useMotion(itemRef, {
         ]"
     >
         <div>
-            <div class="flex items-center justify-between gap-x-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <h3
-                    id="tier-hobby"
                     :class="[
                     item.quantity > 0
                         ? `text-${$page.props.team.color}-600 dark:text-${$page.props.team.color}-400`
                         : 'text-rose-600',
-                    `text-base font-semibold leading-7 uppercase`,
+                    `col-span-2 text-base font-semibold leading-7 uppercase`,
                 ]"
                 >
                     {{ item.name }}
                 </h3>
-                <p v-if="item.quantity > 0 && item.quantity < 5" class="uppercase animate-pulse rounded-full bg-rose-600/50 px-2.5 py-1 text-xs font-semibold leading-5 text-white">
+                <p v-if="item.quantity > 0 && item.quantity < 5" class="text-center uppercase animate-pulse rounded-full  ring-1 ring-inset ring-rose-600 px-2.5 py-1 text-xs font-semibold leading-5 text-rose-600">
                     {{ item.quantity }}  {{ __("labels.action.left") }}
                 </p>
             </div>
