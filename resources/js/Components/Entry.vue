@@ -92,7 +92,7 @@ useMotion(itemRef, {
                             clip-rule="evenodd"
                         />
                     </svg>
-                    <span>{{ tag }}</span>
+                    <span class="truncate">{{ tag }}</span>
                 </li>
                 <li
                     v-for="product in item.products"
