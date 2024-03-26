@@ -4,10 +4,18 @@ import ReservationComponent from "@/Components/Tickets/Wizard/Step1/ReservationC
 import Quantity from "@/Components/Quantity.vue";
 import { useCartsStore } from "@/stores/useCartsStore";
 import { storeToRefs } from "pinia";
+import {computed} from "vue";
 
 const cartsStore = useCartsStore();
 const { updatePayload, updateQuantity } = cartsStore;
 const { item, payload } = storeToRefs(cartsStore);
+
+const quantity = computed(
+    () =>  cartsStore.findItem(
+            item.value.model.split('\\').reverse()[0].toLowerCase(),
+            item.value.id,
+        )?.quantity || 0,
+);
 
 </script>
 
@@ -28,7 +36,7 @@ const { item, payload } = storeToRefs(cartsStore);
                         >{{ __("wizard.step_1.description") }}</label
                     >
                     <Quantity
-                        :model-value="payload?.quantity"
+                        :model-value="quantity"
                         @update:model-value="updateQuantity"
                     ></Quantity>
                 </form>

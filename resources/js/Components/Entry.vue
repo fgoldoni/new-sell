@@ -43,17 +43,23 @@ useMotion(itemRef, {
         ]"
     >
         <div>
-            <h3
-                id="tier-hobby"
-                :class="[
+            <div class="flex items-center justify-between gap-x-4">
+                <h3
+                    id="tier-hobby"
+                    :class="[
                     item.quantity > 0
                         ? `text-${$page.props.team.color}-600 dark:text-${$page.props.team.color}-400`
                         : 'text-rose-600',
                     `text-base font-semibold leading-7 uppercase`,
                 ]"
-            >
-                {{ item.name }}
-            </h3>
+                >
+                    {{ item.name }}
+                </h3>
+                <p v-if="item.quantity > 0 && item.quantity < 5" class="uppercase animate-pulse rounded-full bg-rose-600/50 px-2.5 py-1 text-xs font-semibold leading-5 text-white">
+                    {{ item.quantity }}  {{ __("labels.action.left") }}
+                </p>
+            </div>
+
             <div class="mt-4 flex items-baseline gap-x-2">
                 <span
                     class="text-4xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white"

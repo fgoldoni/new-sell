@@ -167,7 +167,7 @@ export const useCartsStore = defineStore(
 
         const updateQuantity = async (quantity: number) => {
             if (quantity <= 0) {
-                updatePayload("quantity", quantity);
+                updatePayload("quantity", 0);
                 await destroy("ticket-" + item.value?.id);
             }
             if (quantity > 0) {

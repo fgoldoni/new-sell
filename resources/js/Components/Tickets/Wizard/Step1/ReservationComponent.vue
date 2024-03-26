@@ -37,8 +37,8 @@
 import { RadioGroup, RadioGroupDescription, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { CheckCircleIcon } from '@heroicons/vue/20/solid'
 
-const props = defineProps<{
-    modelValue: boolean;
+defineProps<{
+    modelValue: string;
     team: Object;
     options: string[];
 }>();
