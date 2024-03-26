@@ -105,7 +105,7 @@ useMotion(itemRef, {
                              :alt="product.name"
                         />
                     </div>
-                    <span> {{ product.quantity }} * {{ product.name }}</span>
+                    <span class="truncate"> {{ product.quantity }} * {{ product.name }}</span>
                 </li>
             </ul>
         </div>
